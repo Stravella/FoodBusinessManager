@@ -134,7 +134,6 @@ Public Class AccesoDAL
         par.Add(AccesoDAL.ObtenerInstancia.CrearParametro("@PKfield", PKfield))
         par.Add(AccesoDAL.ObtenerInstancia.CrearParametro("@Tablename", Tablename))
         Dim dt = AccesoDAL.ObtenerInstancia.LeerBD("GetNextID", par)
-        'Ver que pasa si no tengo registros
         Return dt.Rows(0)(0)
     End Function
 End Class

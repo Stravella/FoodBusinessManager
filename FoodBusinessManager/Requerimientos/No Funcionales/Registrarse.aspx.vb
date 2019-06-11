@@ -28,7 +28,8 @@ Public Class Registrarse
             Else
                 usuario = UsuarioBLL.ObtenerInstancia.AgregarUsuario(usuario)
                 GestorMailBLL.ObtenerInstancia.EnviarMail(usuario, False)
-                'Mostrar un modal que diga que se envio la contraseña provisoria y al aceptar vuelva al Login
+                'TODO: Mostrar un modal 
+                Response.Redirect("LogIn.aspx")
             End If
         End If
 

@@ -33,6 +33,7 @@ Public Class UsuarioDAL
                 params.Add(.CrearParametro("@id_perfil", usuario.perfil.id_permiso))
                 params.Add(.CrearParametro("@mail", usuario.mail))
                 params.Add(.CrearParametro("@id_usuario", usuario.id))
+                params.Add(.CrearParametro("SALT", usuario.SALT))
             End With
         Catch ex As Exception
 
@@ -72,8 +73,9 @@ Public Class UsuarioDAL
                                               .intentos = row("intentos"),
                                               .mail = row("mail"),
                                               .id = row("id_usuario"),
-                                              .idioma = New IdiomaDTO With {.id_idioma = row("ID_IDIOMA")},
-                                              .perfil = New PerfilCompuesto With {.id_permiso = row("id_perfil")}
+                                              .SALT = row("SALT"),
+                                              .idioma = IdiomaDAL.ObtenerInstancia.ObtenerIdioma(New IdiomaDTO With {.id_idioma = row("id_idioma")}),
+                                              .perfil = PermisoDAL.ObtenerInstancia.Obtener(row("id_perfil"))
             }
             lsUsuarios.Add(oUsuario)
         Next

@@ -49,8 +49,8 @@ Public Class IdiomaDAL
     'Listar
     Public Function ListarIdiomas() As List(Of IdiomaDTO)
         Dim lsIdiomas As New List(Of IdiomaDTO)
-        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_Listar").Rows
-            Dim oIdioma As New IdiomaDTO With {.id_idioma = row("id"),
+        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_listar").Rows
+            Dim oIdioma As New IdiomaDTO With {.id_idioma = row("id_idioma"),
                                               .nombre = row("nombre")
                                               }
 

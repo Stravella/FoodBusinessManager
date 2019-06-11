@@ -20,7 +20,7 @@ Public Class IdiomaBLL
 
         End Try
     End Sub
-
+    'Obtiene el idioma y las traducciones
     Public Function Obtener(idioma As IdiomaDTO) As IdiomaDTO
         Return IdiomaDAL.ObtenerInstancia.ObtenerIdioma(idioma)
     End Function

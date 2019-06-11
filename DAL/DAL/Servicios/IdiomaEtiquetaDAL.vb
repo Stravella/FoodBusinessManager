@@ -15,27 +15,27 @@ Public Class IdiomaEtiquetaDAL
     End Function
 #End Region
 
+#Region "Etiquetas"
 
-    '#Region "Etiquetas"
-    '    'Obtener por id
-    '    Public Function ObtenerEtiqueta(ByVal id_etiqueta As Integer) As String
-    '        Dim ls As List(Of EtiquetaDTO) = Me.ListarEtiquetas()
-    '        Dim oEtiqueta As EtiquetaDTO = ls.Find(Function(x) x.id_etiqueta = id_etiqueta)
-    '        Return oEtiqueta.nombre
-    '    End Function
+    'Obtener por id
+    Public Function ObtenerEtiqueta(ByVal id_etiqueta As Integer) As String
+        Dim ls As List(Of IdiomaEtiquetaDTO) = Me.ListarEtiquetas()
+        Dim oEtiqueta As IdiomaEtiquetaDTO = ls.Find(Function(x) x.id_etiqueta = id_etiqueta)
+        Return oEtiqueta.etiqueta
+    End Function
 
-    '    'Listar
-    '    Public Function ListarEtiquetas() As List(Of EtiquetaDTO)
-    '        Dim lsEtiquetas As New List(Of EtiquetaDTO)
-    '        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_Etiquetas_Listar").Rows
-    '            Dim oEtiqueta As New EtiquetaDTO With {.id_etiqueta = row("id_etiqueta"),
-    '                                                    .nombre = row("nombre")}
-    '            lsEtiquetas.Add(oEtiqueta)
-    '        Next
-    '        Return lsEtiquetas
-    '    End Function
+    'Listar
+    Public Function ListarEtiquetas() As List(Of IdiomaEtiquetaDTO)
+        Dim lsEtiquetas As New List(Of IdiomaEtiquetaDTO)
+        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_Etiquetas_Listar").Rows
+            Dim oEtiqueta As New IdiomaEtiquetaDTO With {.id_etiqueta = row("id_etiqueta"),
+                                                        .etiqueta = row("nombre")}
+            lsEtiquetas.Add(oEtiqueta)
+        Next
+        Return lsEtiquetas
+    End Function
 
-    '#End Region
+#End Region
 
 #Region "Idioma_etiquetas"
     'La tupla idioma_etiqueta son mis traducciones
@@ -70,9 +70,11 @@ Public Class IdiomaEtiquetaDAL
                 params.Add(.CrearParametro("@id_idioma", Idioma.id_idioma))
             End With
             For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_Etiquetas_ListarPorIdioma", params).Rows
-                Dim oEtiqueta As New IdiomaEtiquetaDTO With {.etiqueta = row("etiqueta"),
-                                              .traduccion = row("traduccion")
-                                              }
+                Dim oEtiqueta As New IdiomaEtiquetaDTO With {
+                                                    .id_etiqueta = row("id_etiqueta"),
+                                                    .etiqueta = row("etiqueta"),
+                                                    .traduccion = row("traduccion")
+                                                    }
                 lsEtiquetas.Add(oEtiqueta)
             Next
             Return lsEtiquetas
@@ -81,11 +83,10 @@ Public Class IdiomaEtiquetaDAL
         End Try
     End Function
 
+
     Public Sub Modificar(Idioma As IdiomaDTO, IdiomaEtiqueta As IdiomaEtiquetaDTO)
         AccesoDAL.ObtenerInstancia.EjecutarSP("Idioma_Etiquetas_Modificar", CrearParametros(Idioma, IdiomaEtiqueta))
     End Sub
-
-
 
 #End Region
 

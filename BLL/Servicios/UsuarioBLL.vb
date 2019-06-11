@@ -26,20 +26,22 @@ Public Class UsuarioBLL
         Try
             usuario.id = UsuarioDAL.ObtenerInstancia.GetNextID
             usuario.intentos = 0
-            'Crearlo en bloqueado para que genere su nueva contraseña
+            'Se crea en bloqueado para que genere su nueva contraseña
             usuario.bloqueado = 1
             usuario.fechaCreacion = DateTime.Now
             'Guardo la password sin encriptar para enviarla por mail
             usuario.password = Me.GenerarToken
             Dim passwordDesencriptada As String = usuario.password
-            usuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password)
+            'Genero el SALT
+            usuario.SALT = DigitoVerificadorBLL.ObtenerInstancia.ObtenerSALT
+            usuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuario.SALT)
             usuario.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuario)
             UsuarioDAL.ObtenerInstancia.AgregarUsuario(usuario)
             'seteo la vieja password al usuario para enviarla por mail
             usuario.password = passwordDesencriptada
+            'TODO: chequear que esto funcione
             DigitoVerificadorBLL.ObtenerInstancia.ActualizarDVV("usuarios")
             Return usuario
-            'La conversión del tipo 'DBNull' en el tipo 'Integer' no es válida
         Catch ex As Exception
             Return Nothing
         End Try
@@ -56,7 +58,7 @@ Public Class UsuarioBLL
         Try
             Dim oUsuario As UsuarioDTO = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)
             'Password se mantiene encriptada
-            If oUsuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password) Then
+            If oUsuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & oUsuario.SALT) Then
                 Return oUsuario
             Else
                 If oUsuario.bloqueado = False Then
@@ -94,10 +96,9 @@ Public Class UsuarioBLL
     Public Function CambiarContraseña(usuario As UsuarioDTO) As UsuarioDTO
         Try
             Dim usuarioObtenido = ObtenerUsuario(usuario)
-            usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password)
+            usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuarioObtenido.SALT)
             usuarioObtenido.bloqueado = 0
-            'Encriptar la nueva  contraseña (si la encripto el token tiene que devolverse antes)
-            usuarioObtenido.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(DigitoVerificadorBLL.ObtenerInstancia.CrearParametros(usuarioObtenido))
+            usuarioObtenido.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuarioObtenido)
             ModificarUsuario(usuarioObtenido)
             DigitoVerificadorBLL.ObtenerInstancia.ActualizarDVV("usuarios")
             Return usuarioObtenido
@@ -159,8 +160,6 @@ Public Class UsuarioBLL
 
         End Try
     End Function
-
-
 
 End Class ' UsuarioBLL
 

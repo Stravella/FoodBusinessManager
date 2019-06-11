@@ -13,51 +13,49 @@ Public Class DigitoVerificadorBLL
         Return _instancia
     End Function
 
-
-    'Devuelve un string con las propiedades del objeto
-    Public Function CrearParametros(ByVal Elemento As Object) As List(Of String)
-        Dim listaParam As New List(Of String)
+    'Devuelve una lista de strings con los valores de las propiedades de un objeto
+    'sí se encuentra con un objeto child, devuelve solo su id
+    Public Function convertirObjeto(ByVal Elemento As Object) As List(Of String)
         Try
+            Dim lista As New List(Of String)
             Dim tipo As Type = Elemento.GetType()
             Dim propiedades() As PropertyInfo = tipo.GetProperties()
-            'recorro las propiedades del elemento
             For Each propiedad As PropertyInfo In propiedades
+                'Sí es otro elemento, solo me quedo con el id
                 If propiedad.PropertyType.FullName.Contains("Entidades.") Then
-                    'Si no es una colleccion, obtengo sus propiedades
                     If Not propiedad.PropertyType.FullName.Contains("Collections.") Then
                         If propiedad.PropertyType.GetProperties.Count > 0 Then
-                            For Each propiedad2 As PropertyInfo In propiedad.PropertyType.GetProperties
-                                Dim Objeto As Object = propiedad.GetValue(Elemento, Nothing)
-                                If propiedad2.Name.Contains("ID") Then
-                                    If IsNothing(Objeto) Then
-                                        listaParam.Add(DBNull.Value.ToString)
+                            For Each propiedadChild As PropertyInfo In propiedad.PropertyType.GetProperties
+                                Dim ObjetoChild As Object = propiedad.GetValue(Elemento, Nothing)
+                                If propiedadChild.Name.Contains("id") Then
+                                    If IsNothing(ObjetoChild) Then
+                                        lista.Add(DBNull.Value.ToString)
                                     Else
-                                        listaParam.Add(propiedad.GetValue(Objeto, Nothing).ToString)
+                                        lista.Add(propiedadChild.GetValue(ObjetoChild, Nothing))
                                     End If
-
+                                    'Si ya encontré el id salgo del FOR
                                     Exit For
                                 End If
                             Next
-                        Else
-                            listaParam.Add(propiedad.GetValue(Elemento, Nothing))
                         End If
                     End If
                 Else
-                    listaParam.Add(propiedad.GetValue(Elemento, Nothing))
+                    If Not propiedad.Name.Contains("DVH") Then
+                        lista.Add(propiedad.GetValue(Elemento, Nothing))
+                    End If
                 End If
             Next
-            Return listaParam
+
+            Return lista
         Catch ex As Exception
 
         End Try
     End Function
 
-
-
     Public Function CalcularDVH(ByVal Elemento As Object) As String
         Try
 
-            Dim Parametros As List(Of String) = CrearParametros(Elemento)
+            Dim Parametros As List(Of String) = convertirObjeto(Elemento)
             Dim filaParametros As String = ""
             For Each Param In Parametros
                 filaParametros += Param
@@ -72,16 +70,14 @@ Public Class DigitoVerificadorBLL
     End Function
 
 
-    Public Function Encriptar(ByRef filaParametros As String) As String
+    Public Function Encriptar(ByRef input As String) As String
         Try
-            Dim UE As New UnicodeEncoding
-            Dim bHash As Byte()
-            Dim bString() As Byte = UE.GetBytes(filaParametros)
-            Dim ServicioSHA As New SHA1CryptoServiceProvider
-            bHash = ServicioSHA.ComputeHash(bString)
-            Dim StringEncriptado As String
-            StringEncriptado = Convert.ToBase64String(bHash)
-            Return StringEncriptado
+            Dim SHA256 As SHA256 = SHA256Managed.Create
+            Dim valorHash As Byte()
+            Dim objUTF8 As UTF8Encoding = New UTF8Encoding
+            valorHash = SHA256.ComputeHash(objUTF8.GetBytes(input))
+            Dim output As String = Convert.ToBase64String(valorHash)
+            Return output
         Catch ex As Exception
 
         End Try
@@ -173,5 +169,11 @@ Public Class DigitoVerificadorBLL
         End Try
     End Function
 
+
+    Public Function ObtenerSALT() As String
+        Dim miGUID As System.Guid = System.Guid.NewGuid()
+        Dim sGUID As String = miGUID.ToString()
+        Return sGUID
+    End Function
 
 End Class

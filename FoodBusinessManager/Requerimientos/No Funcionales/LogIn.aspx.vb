@@ -33,22 +33,23 @@ Public Class LogIn
                 Else
                     If usuarioLogeado.bloqueado = True Then
                         dvMensaje.Visible = True
-                        Response.Redirect("NuevaContraseña.aspx")
+                        Response.Redirect("NuevaContraseña.aspx", False)
+                    Else
+                        'Camino feliz
+                        'Grabo Bitacora - Suceso Login = 1
+                        Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
+                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
+                                                .usuario = usuarioLogeado,
+                                                .ValorAnterior = "",
+                                                .NuevoValor = "",
+                                                .observaciones = "",
+                                                .DVH = ""}
+                        BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
+
+                        Current.Session("usuario") = usuarioLogeado
+
+                        Response.Redirect("Default.aspx", False)
                     End If
-                    'Camino feliz
-                    'Grabo Bitacora - Suceso Login = 1
-                    Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
-                                            .usuario = usuarioLogeado,
-                                            .ValorAnterior = "",
-                                            .NuevoValor = "",
-                                            .observaciones = "",
-                                            .DVH = ""}
-                    BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
-
-                    Current.Session("usuario") = usuarioLogeado
-
-                    Response.Redirect("Default.aspx")
                 End If
                 'Si el usuario no existe
             Else

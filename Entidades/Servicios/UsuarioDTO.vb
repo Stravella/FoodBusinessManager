@@ -26,6 +26,7 @@ Public Class UsuarioDTO
     Private _mail As String
     Private _idioma As IdiomaDTO
     Private _perfil As PerfilCompuesto
+    Private _SALT As String
 
 
     Public Property id() As Integer
@@ -136,6 +137,14 @@ Public Class UsuarioDTO
         End Set
     End Property
 
+    Public Property SALT() As String
+        Get
+            Return _SALT
+        End Get
+        Set(ByVal Value As String)
+            _SALT = Value
+        End Set
+    End Property
 
 End Class ' UsuarioDTO
 

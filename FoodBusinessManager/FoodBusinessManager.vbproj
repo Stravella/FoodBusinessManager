@@ -100,11 +100,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Default.aspx" />
+    <Content Include="Requerimientos\No Funcionales\Default.aspx" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
     <Content Include="EmailTemplates\SignUp.html" />
     <Content Include="Estilos\LogIn.css" />
+    <Content Include="Global.asax" />
     <Content Include="Imagenes\pot.png" />
+    <Content Include="Requerimientos\No Funcionales\Idiomas.aspx" />
     <Content Include="Requerimientos\No Funcionales\LogIn.aspx" />
     <Content Include="Requerimientos\No Funcionales\NuevaContraseña.aspx" />
     <Content Include="Requerimientos\No Funcionales\OlvidoContraseña.aspx" />
@@ -150,11 +152,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Default.aspx.designer.vb">
+    <Compile Include="Requerimientos\No Funcionales\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.vb">
+    <Compile Include="Requerimientos\No Funcionales\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Requerimientos\No Funcionales\Idiomas.aspx.designer.vb">
+      <DependentUpon>Idiomas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Requerimientos\No Funcionales\Idiomas.aspx.vb">
+      <DependentUpon>Idiomas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Requerimientos\No Funcionales\LogIn.aspx.designer.vb">

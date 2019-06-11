@@ -87,9 +87,11 @@ Public Class PermisoDAL
 
     Public Function Obtener(id As Integer) As PermisoComponente
         Try
-            Dim oPermiso As PermisoComponente = ConvertirPermiso(AccesoDAL.ObtenerInstancia.LeerBD("Perfil_Obtener").Rows(0))
+            Dim params As New List(Of SqlParameter)
+            params.Add(AccesoDAL.ObtenerInstancia.CrearParametro("@id_perfil", id))
+            Dim oPermiso As PermisoComponente = ConvertirPermiso(AccesoDAL.ObtenerInstancia.LeerBD("Perfil_Obtener", params).Rows(0))
             Return oPermiso
-        Catch
+        Catch ex As Exception
 
         End Try
     End Function
@@ -116,7 +118,6 @@ Public Class PermisoDAL
         oPermiso.url_acceso = row("url")
         oPermiso.substraccion = row("es_substractiva")
         If oPermiso.tieneHijos = True Then
-            Dim lsHijos As List(Of PermisoComponente)
             Dim Params As New List(Of SqlParameter)
             Dim Param As New SqlParameter("@id_perfil", oPermiso.id_permiso)
             Params.Add(Param)
