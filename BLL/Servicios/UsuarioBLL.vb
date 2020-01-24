@@ -21,6 +21,10 @@ Public Class UsuarioBLL
         Return UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)
     End Function
 
+    Public Function ListarUsuarios() As List(Of UsuarioDTO)
+        Return UsuarioDAL.ObtenerInstancia.ListarUsuarios
+    End Function
+
     Public Function AgregarUsuario(usuario As UsuarioDTO) As UsuarioDTO
 
         Try
@@ -81,8 +85,10 @@ Public Class UsuarioBLL
     Public Function RecuperarUsuario(usuario As UsuarioDTO) As UsuarioDTO
         Try
             Dim usuarioObtenido = ObtenerUsuario(usuario)
-            usuarioObtenido.password = GenerarToken()
             usuarioObtenido.bloqueado = 1
+            usuarioObtenido.password = GenerarToken()
+            GestorMailBLL.ObtenerInstancia.EnviarMail(usuarioObtenido, True)
+            usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuarioObtenido.password + usuarioObtenido.SALT)
             'Encriptar la nueva contraseña (si la encripto el token tiene que devolverse antes)
             usuarioObtenido.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuario)
             ModificarUsuario(usuarioObtenido)

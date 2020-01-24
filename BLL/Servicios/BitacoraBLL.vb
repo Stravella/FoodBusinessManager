@@ -24,4 +24,16 @@ Public Class BitacoraBLL
         BitacoraDAL.ObtenerInstancia.Agregar(unaBitacora)
     End Sub
 
+    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As List(Of BitacoraDTO)
+        Return BitacoraDAL.ObtenerInstancia.ListarTodos
+    End Function
+
+    Public Function ListarSucesoBitacora() As List(Of SucesoBitacoraDTO)
+        Return SucesoBitacoraDAL.ObtenerInstancia.Listar
+    End Function
+
+    Public Function ObtenerSucesoBitacora(unTipoSuceso As SucesoBitacoraDTO) As SucesoBitacoraDTO
+        Return SucesoBitacoraDAL.ObtenerInstancia.Obtener(unTipoSuceso)
+    End Function
+
 End Class

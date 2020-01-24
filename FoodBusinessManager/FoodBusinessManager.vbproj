@@ -94,36 +94,47 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bitacora.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Requerimientos\No Funcionales\Default.aspx" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
+    <Content Include="Estilos\Principal.css" />
+    <Content Include="Default.aspx" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
     <Content Include="EmailTemplates\SignUp.html" />
     <Content Include="Estilos\LogIn.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\pot.png" />
-    <Content Include="Requerimientos\No Funcionales\Idiomas.aspx" />
-    <Content Include="Requerimientos\No Funcionales\LogIn.aspx" />
-    <Content Include="Requerimientos\No Funcionales\NuevaContraseña.aspx" />
-    <Content Include="Requerimientos\No Funcionales\OlvidoContraseña.aspx" />
-    <Content Include="Requerimientos\No Funcionales\Permisos.aspx" />
-    <Content Include="Requerimientos\No Funcionales\Registrarse.aspx" />
+    <Content Include="Idiomas.aspx" />
+    <Content Include="LogIn.aspx" />
+    <Content Include="MyTable.ascx" />
+    <Content Include="NuevaContraseña.aspx" />
+    <Content Include="OlvidoContraseña.aspx" />
+    <Content Include="AgegarPermisos.aspx" />
+    <Content Include="Registrarse.aspx" />
+    <Content Include="SeleccionarIdioma.aspx" />
+    <Content Include="MasterPage.Master" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -134,11 +145,31 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.0.0.js" />
-    <Content Include="Scripts\jquery-3.0.0.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -150,45 +181,82 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Requerimientos\No Funcionales\Default.aspx.designer.vb">
+    <Compile Include="Bitacora.aspx.designer.vb">
+      <DependentUpon>Bitacora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bitacora.aspx.vb">
+      <DependentUpon>Bitacora.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="HtmlHelper.vb" />
+    <Compile Include="MasterPage.Master.designer.vb">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage.Master.vb">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Default.aspx.vb">
+    <Compile Include="Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Idiomas.aspx.designer.vb">
+    <Compile Include="Idiomas.aspx.designer.vb">
       <DependentUpon>Idiomas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Idiomas.aspx.vb">
+    <Compile Include="Idiomas.aspx.vb">
       <DependentUpon>Idiomas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\LogIn.aspx.designer.vb">
+    <Compile Include="LogIn.aspx.designer.vb">
       <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\LogIn.aspx.vb">
+    <Compile Include="LogIn.aspx.vb">
       <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Permisos.aspx.designer.vb">
-      <DependentUpon>Permisos.aspx</DependentUpon>
+    <Compile Include="AgegarPermisos.aspx.designer.vb">
+      <DependentUpon>AgegarPermisos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Permisos.aspx.vb">
-      <DependentUpon>Permisos.aspx</DependentUpon>
+    <Compile Include="AgegarPermisos.aspx.vb">
+      <DependentUpon>AgegarPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Site.Master.designer.vb">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="MyTable.ascx.designer.vb">
+      <DependentUpon>MyTable.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Site.Master.vb">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="MyTable.ascx.vb">
+      <DependentUpon>MyTable.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SeleccionarIdioma.aspx.designer.vb">
+      <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionarIdioma.aspx.vb">
+      <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -209,24 +277,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\NuevaContraseña.aspx.designer.vb">
+    <Compile Include="NuevaContraseña.aspx.designer.vb">
       <DependentUpon>NuevaContraseña.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\NuevaContraseña.aspx.vb">
+    <Compile Include="NuevaContraseña.aspx.vb">
       <DependentUpon>NuevaContraseña.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\OlvidoContraseña.aspx.designer.vb">
+    <Compile Include="OlvidoContraseña.aspx.designer.vb">
       <DependentUpon>OlvidoContraseña.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\OlvidoContraseña.aspx.vb">
+    <Compile Include="OlvidoContraseña.aspx.vb">
       <DependentUpon>OlvidoContraseña.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Registrarse.aspx.designer.vb">
+    <Compile Include="Registrarse.aspx.designer.vb">
       <DependentUpon>Registrarse.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Requerimientos\No Funcionales\Registrarse.aspx.vb">
+    <Compile Include="Registrarse.aspx.vb">
       <DependentUpon>Registrarse.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -240,7 +308,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Site.Master" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -251,8 +318,8 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -280,10 +347,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Folder Include="Requerimientos\NoFuncionales\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

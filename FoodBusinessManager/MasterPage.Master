@@ -1,0 +1,68 @@
+﻿<Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPage.Master.vb" Inherits="FoodBusinessManager.Master" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- Scripts (No me funciona cuando uso las dependencias locales)-->
+    <%--<link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>--%>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+<%--    <!-- Modal para mensajes -->
+    <%If Not Session("test") Is Nothing Then%>
+        <% For Each item As Integer In Session("test")%>        
+        <div>
+            <%=item %>
+        </div>
+    <% Next
+            Session.Remove("test")
+        End If %>--%>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Food Business Manager</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seguridad
+                    </a>
+                    <div id="menu_Administracion" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="drop_BackupRestore" class="dropdown-item" href="#">Backup & Restore</a>
+                        <a id="drop_Bitacora" class="dropdown-item" href="Bitacora.aspx">Bitacora</a>
+                        <a id="drop_Idiomas" class="dropdown-item" href="Idiomas.aspx">Administrar Idiomas</a>
+                        <a id="drop_Perfiles "class="dropdown-item" href="AgregarPermisos.aspx">Agregar Perfiles</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <%--Si quiero usar font awesome como hago--%>
+            <li><a href="#"><span class="fas fa-power-off"></span> Logout</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <%=FoodBusinessManager.HtmlHelper.BuildTable(6) %>
+
+        <asp:ContentPlaceHolder ID="Contenido" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    
+</body>
+</html>

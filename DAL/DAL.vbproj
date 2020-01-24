@@ -88,6 +88,7 @@
     <Compile Include="DAL\Servicios\IdiomaDAL.vb" />
     <Compile Include="DAL\Servicios\IdiomaEtiquetaDAL.vb" />
     <Compile Include="DAL\Servicios\PermisoDAL.vb" />
+    <Compile Include="DAL\Servicios\SucesoBitacoraDAL.vb" />
     <Compile Include="DAL\Servicios\UsuarioDAL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

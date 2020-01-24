@@ -20,6 +20,7 @@ Public Class DigitoVerificadorDAL
     Public Function ListarTodos() As DataTable
         Try
             Dim DT As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("select * from DVV")
+            Return DT
         Catch ex As Exception
 
         End Try
@@ -40,7 +41,7 @@ Public Class DigitoVerificadorDAL
 
     Public Sub Agregar(unaTabla As String, dvv As String)
         Try
-            AccesoDAL.ObtenerInstancia.EscribirBD("INSERT INTO DVV(tabla, dvv) VALUES(" & unaTabla & ", " & dvv & ")")
+            AccesoDAL.ObtenerInstancia.EscribirBD("INSERT INTO DVV(tabla, dvv) VALUES('" & unaTabla & "', '" & dvv & "')")
         Catch ex As Exception
 
         End Try
@@ -48,7 +49,7 @@ Public Class DigitoVerificadorDAL
 
     Public Sub Modificar(unaTabla As String, dvv As String)
         Try
-            AccesoDAL.ObtenerInstancia.EscribirBD("UPDATE DVV SET dvv= " & dvv & " where tabla=" & unaTabla & ")")
+            AccesoDAL.ObtenerInstancia.EscribirBD("UPDATE DVV SET dvv='" & dvv & "' where tabla='" & unaTabla & "'")
         Catch ex As Exception
 
         End Try
@@ -56,17 +57,20 @@ Public Class DigitoVerificadorDAL
 
     Public Function ObtenerTodoDVH(unaTabla As String) As DataTable
         Try
-            Dim DT As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT dvh FROM" + unaTabla)
+            Dim DT As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT dvh FROM " + unaTabla)
             Return DT
         Catch ex As Exception
 
         End Try
     End Function
 
-    Public Function TieneRegistros(unaTabla As String) As Integer
+    Public Function TieneRegistros(unaTabla As String) As Boolean
         Try
-            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT COUNT(dvv) FROM" + unaTabla)
-            Return Convert.ToInt32(dt.Rows(0))
+            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT COUNT(dvv) FROM dvv WHERE tabla ='" + unaTabla + "'")
+            Dim cantidadRegistros As Integer = dt.Rows(0)(0)
+            If cantidadRegistros > 0 Then
+                Return True
+            End If
         Catch ex As Exception
 
         End Try
@@ -74,7 +78,7 @@ Public Class DigitoVerificadorDAL
 
     Public Function ObtenerTabla(unaTabla As String) As DataTable
         Try
-            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT * FROM" + unaTabla)
+            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT * FROM WHERE tabla ='" + unaTabla + "'")
             Return dt
         Catch ex As Exception
 

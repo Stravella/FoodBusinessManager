@@ -25,34 +25,58 @@ Public Class BitacoraDAL
         End With
     End Sub
 
-    'Public Overloads Function ListarTodos(ByVal Usuario As UsuarioBE, ByVal Desde As DateTime, ByVal Hasta As DateTime) As List(Of BitacoraBE)
-    '    UsuariosLst = MapperUsuario.GetInstancia.ListarUsuarios
-    '    TipoSucesosLST = MapperTipoSuceso.ObtenerInstancia.ListarTodos
-    '    Dim lsReturn As New List(Of BitacoraBE)
-    '    Dim params As New List(Of SqlParameter)
-    '    Dim dt As DataTable
-    '    With AccesoDAL.GetInstancia()
-    '        params.Add(.CrearParametro("@Desde", Desde))
-    '        params.Add(.CrearParametro("@Hasta", Hasta))
-    '        If Usuario IsNot Nothing Then
-    '            params.Add(.CrearParametro("@usuario", Usuario.Usuario))
-    '            dt = AccesoDAL.GetInstancia.LeerBD("Bitacora_Listar", params)
-    '        Else
-    '            Dim pars As New List(Of SqlParameter)
-    '            pars.Add(params(0))
-    '            pars.Add(params(1))
-    '            dt = AccesoDAL.GetInstancia.LeerBD("Bitacora_ListarTodosUsers", pars)
-    '        End If
-    '    End With
-    '    For Each r As DataRow In dt.Rows
-    '        Dim oUsuario As UsuarioBE = Me.UsuariosLst.Find(Function(x) x.Usuario = r.Item("Usuario"))
-    '        Dim oTipoSuceso As TipoSucesoBE = Me.TipoSucesosLST.Find(Function(x) x.ID = r.Item("TipoSuceso"))
-    '        Dim Bita As New BitacoraBE With {.Usuario = oUsuario, .FechaHora = r.Item("FechaHora"),
-    '                                         .TipoSuceso = oTipoSuceso, .Observaciones = r.Item("Observacion"), .ID = r("TipoSuceso")}
-    '        lsReturn.Add(Bita)
-    '    Next
-    '    Return lsReturn
-    'End Function
+    Public Function CrearParametros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As DateTime = Nothing, Optional ByVal fechaHasta As DateTime = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As List(Of SqlParameter)
+        Dim params As New List(Of SqlParameter)
+        Try
+            With AccesoDAL.ObtenerInstancia()
+                params.Add(.CrearParametro("@id_usuario", Usuario.id))
+                params.Add(.CrearParametro("@id_tipo_suceso", tipoSuceso.id))
+                params.Add(.CrearParametro("@fechaInicial", fechaDesde))
+                params.Add(.CrearParametro("@fechaFinal", fechaHasta))
+                params.Add(.CrearParametro("@nroPagina", nroPagina))
+                params.Add(.CrearParametro("@rowsPagina", rowsPagina))
+            End With
+        Catch ex As Exception
+
+        End Try
+        Return params
+    End Function
+
+    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As List(Of BitacoraDTO)
+        Try
+
+            Dim query As String
+            query = "SELECT * FROM Bitacora "
+            If Not tipoSuceso Is Nothing Then
+                query += "WHERE id_tipo_Suceso =" + tipoSuceso.id
+            End If
+            If Not Usuario Is Nothing Then
+                query += " AND id_usuario =" + Usuario.id
+            End If
+            query += " AND fecha_Hora >=" + fechaDesde
+            query += " AND fecha_Hora <=" + fechaHasta
+            query += "ORDER BY fecha_Hora"
+            query += " OFFSET (" + nroPagina + " * ISNULL(" + rowsPagina + ",10) ) ROWS"
+            query += " FETCH NEXT ISNULL(" + rowsPagina + ",10) ROWS ONLY"
+
+            Dim lsBitacoras As New List(Of BitacoraDTO)
+            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD(query).Rows
+                Dim oBitacora As New BitacoraDTO With {
+                    .id = Row("id_bitacora"),
+                    .FechaHora = Row("fecha_Hora"),
+                    .tipoSuceso = SucesoBitacoraDAL.ObtenerInstancia.Obtener(New SucesoBitacoraDTO With {.id = Row("id_tipo_Suceso")}),
+                    .usuario = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.id = Row("id_usuario")}),
+                    .ValorAnterior = Row("valorAnterior"),
+                    .NuevoValor = Row("valorNuevo"),
+                    .observaciones = Row("observaciones"),
+                    .DVH = Row("DVH")
+                }
+            Next
+            Return lsBitacoras
+        Catch ex As Exception
+
+        End Try
+    End Function
 
     Public Function GetNextID() As Integer
         Return AccesoDAL.ObtenerInstancia.GetNextID("id_bitacora", "Bitacora")

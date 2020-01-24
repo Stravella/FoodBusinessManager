@@ -68,7 +68,7 @@ Public Class AccesoDAL
     End Function
 
 
-        Public Overloads Function LeerBD(ByVal cmdText As String) As DataTable
+    Public Overloads Function LeerBD(ByVal cmdText As String) As DataTable
         Try
             If CX.State = ConnectionState.Closed Then
                 CX.Open()
@@ -86,7 +86,7 @@ Public Class AccesoDAL
         End Try
     End Function
 
-        Public Sub EscribirBD(ByVal cmdText As String)
+    Public Sub EscribirBD(ByVal cmdText As String)
         If CX.State = ConnectionState.Closed Then
             CX.Open()
         End If
@@ -104,30 +104,30 @@ Public Class AccesoDAL
 
     End Sub
 
-        Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vNum As Integer) As SqlParameter
-            Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vNum, .DbType = DbType.Int32}
-            Return par
-        End Function
+    Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vNum As Integer) As SqlParameter
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vNum, .DbType = DbType.Int32}
+        Return par
+    End Function
 
-        Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vText As String) As SqlParameter
-            Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vText, .DbType = DbType.String}
-            Return par
-        End Function
+    Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vText As String) As SqlParameter
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vText, .DbType = DbType.String}
+        Return par
+    End Function
 
-        Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vFecha As DateTime) As SqlParameter
-            Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vFecha, .DbType = DbType.DateTime2}
-            Return par
-        End Function
+    Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vFecha As DateTime) As SqlParameter
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vFecha, .DbType = DbType.DateTime2}
+        Return par
+    End Function
 
-        Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vValor As Boolean) As SqlParameter
-            Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vValor, .DbType = DbType.Boolean}
-            Return par
-        End Function
+    Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vValor As Boolean) As SqlParameter
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vValor, .DbType = DbType.Boolean}
+        Return par
+    End Function
 
-        Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vDec As Decimal) As SqlParameter
-            Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vDec, .DbType = DbType.Decimal}
-            Return par
-        End Function
+    Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vDec As Decimal) As SqlParameter
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vDec, .DbType = DbType.Decimal}
+        Return par
+    End Function
 
     Public Function GetNextID(ByVal PKfield As String, ByVal Tablename As String) As Integer
         Dim par As New List(Of SqlParameter)
@@ -136,4 +136,14 @@ Public Class AccesoDAL
         Dim dt = AccesoDAL.ObtenerInstancia.LeerBD("GetNextID", par)
         Return dt.Rows(0)(0)
     End Function
+
+    Public Function ObtenerNroPaginas(ByVal unaTabla, ByVal cantidadRegistros) As Integer
+        Try
+            Dim DT As DataTable = AccesoDAL.ObtenerInstancia.LeerBD("SELECT COUNT(*)/" + cantidadRegistros + " FROM " + unaTabla)
+            Return DT.Rows(0)(0)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
 End Class

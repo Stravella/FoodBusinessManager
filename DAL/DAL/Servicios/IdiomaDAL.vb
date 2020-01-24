@@ -68,6 +68,17 @@ Public Class IdiomaDAL
     End Function
 
 
+    Public Function VerificarIdioma(Idioma As IdiomaDTO) As Boolean
+        Dim ls As List(Of IdiomaDTO) = Me.ListarIdiomas()
+        Dim oIdioma As IdiomaDTO = ls.Find(Function(x) x.id_idioma = Idioma.id_idioma)
+        If oIdioma Is Nothing Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
+
 
 
 

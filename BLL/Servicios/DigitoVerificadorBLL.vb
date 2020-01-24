@@ -85,29 +85,30 @@ Public Class DigitoVerificadorBLL
 
     Public Function CalcularDVVTabla(unaTabla As String) As String
         Dim DVV As String
+        Dim ListadoDVH As String
         'Seleccionar todos los DVH de una tabla
         For Each row As DataRow In DigitoVerificadorDAL.ObtenerInstancia.ObtenerTodoDVH(unaTabla).Rows
-            DVV = DVV + row.Item("dvh").ToString
+            ListadoDVH = ListadoDVH + row.Item("dvh").ToString
         Next
         'vovler a hashearlos
-        Return DVV = Encriptar(DVV)
+        DVV = Encriptar(ListadoDVH)
+        Return DVV
     End Function
 
     Public Sub ActualizarDVV(unaTabla As String)
         Try
-            If DigitoVerificadorDAL.ObtenerInstancia.TieneRegistros(unaTabla) = 0 Then
-                DigitoVerificadorDAL.ObtenerInstancia.Agregar(unaTabla, CalcularDVVTabla(unaTabla))
-            Else
+            If DigitoVerificadorDAL.ObtenerInstancia.TieneRegistros(unaTabla) = True Then
                 DigitoVerificadorDAL.ObtenerInstancia.Modificar(unaTabla, CalcularDVVTabla(unaTabla))
+            Else
+                DigitoVerificadorDAL.ObtenerInstancia.Agregar(unaTabla, CalcularDVVTabla(unaTabla))
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 
     Public Function VerificarIntegridad() As List(Of String)
         Try
-            Dim tablasCorruptas As List(Of String)
+            Dim tablasCorruptas As New List(Of String)
             Dim DVVnuevo As String
             For Each row As DataRow In DigitoVerificadorDAL.ObtenerInstancia.ListarTodos.Rows
                 DVVnuevo = CalcularDVVTabla(row.Item("tabla").ToString)

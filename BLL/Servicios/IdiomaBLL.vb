@@ -25,6 +25,10 @@ Public Class IdiomaBLL
         Return IdiomaDAL.ObtenerInstancia.ObtenerIdioma(idioma)
     End Function
 
+    Public Function VerificarExistencia(idioma As IdiomaDTO) As Boolean
+        Return IdiomaDAL.ObtenerInstancia.VerificarIdioma(idioma)
+    End Function
+
     Public Function Listar() As List(Of IdiomaDTO)
         Try
             Return IdiomaDAL.ObtenerInstancia.ListarIdiomas
