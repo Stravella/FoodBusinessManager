@@ -1,39 +1,92 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Bitacora.aspx.vb" Inherits="FoodBusinessManager.Bitacora" %>
+﻿<%@ Page Title="" Language="VB" AutoEventWireup="True" MasterPageFile="~/MasterPage.Master" CodeBehind="Bitacora.aspx.vb" Inherits="FoodBusinessManager.Bitacora" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+
+    <link href="Estilos/Principal.css" rel="stylesheet" />
+
+    <script runat="server">
+        Sub BtnBuscar_OnClick(Source As Object, e As EventArgs)
+            Span1.InnerHtml = Me.Buscar_click()
+        End Sub
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <form id="form1" runat="server">
-    
-        <div>
-            <asp:DropDownList ID="lstUsuarios" runat="server">
-            </asp:DropDownList>
-        </div>
-        <div>
-            <asp:DropDownList ID="lstTipoSuceso" runat="server">
-            </asp:DropDownList>
-        </div>
-        <div>
-            <asp:Calendar ID="Calendar1" runat="server" SelectedDate="1990-01-01"></asp:Calendar>
-            <br />
-        </div>
-        <div>
-            <asp:Calendar ID="Calendar2" runat="server" SelectedDate="2020-01-24"></asp:Calendar>
-            <br />
-        </div>
-        <div>
-            <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" />
-        </div>
-        <div>
-            <asp:Table ID="TablaBitacora" runat="server" Height="349px" Width="759px">
-            </asp:Table>
-            <br />
-        </div>
 
-        <div>
-            <asp:Label ID="PagAnterior" runat="server" Text="Anterior"></asp:Label>
+        <div class="justify-content-center">
+            <div align="center">
+                <table>
+                <tr>
+                    <td>
+                        <asp:Label ID="LblUsuarios" runat="server" Text="Usuarios"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="lstUsuarios" runat="server" Width="100"></asp:DropDownList>
+                    </td>
+                </tr>
+            </table>
+            </div>
+            <p></p>
             
-            <asp:Label ID="PagSiguiente" runat="server" Text="Siguiente"></asp:Label>
+            <div align="center">
+                <table>
+                <tr>
+                    <td>
+                        <asp:Label ID="LblTipoSuceso" runat="server" Text="Tipo Suceso"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="lstTipoSuceso" runat="server" Width="100"></asp:DropDownList>
+                    </td>
+                </tr>
+            </table>
+                
+            </div>
+            <p></p>
+            <div style="text-align: center">
+                <table align="center" width="1000">
+                    <tr>
+                        <td>
+                            <asp:Label ID="LblDesde" runat="server" Text="Desde" style="align-content" CssClass="align-self-md-center"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="LblHasta" runat="server" Text="Hasta" style="align-content"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <asp:Calendar ID="CalendarDesde" runat="server" SelectedDate="1990-01-01" style="align-content"></asp:Calendar>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <asp:Calendar ID="CalendarHasta" runat="server" SelectedDate="2020-01-24" style="align-content"></asp:Calendar>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <p></p>
+            <div align="center">
+                <p>
+                    <button id="BtnBuscar"
+                        onserverclick="BtnBuscar_OnClick"
+                        class="btn"
+                        runat="server">
+                        Buscar
+                    </button>
+                </p>
+            </div>
+
+            <p></p>
+            <%-- Acá meto la tabla --%>
+            <div id="OutputDiv" align="center">
+
+                <span id="Span1" runat="server" />
+
+            </div>
+
         </div>
 
     </form>

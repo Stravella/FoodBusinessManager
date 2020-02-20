@@ -58,7 +58,7 @@
     </nav>
 
     <div>
-        <%=FoodBusinessManager.HtmlHelper.BuildTable(6) %>
+      <%--  <%=FoodBusinessManager.HtmlHelper.BuildTableProto(6) %> --%>
 
         <asp:ContentPlaceHolder ID="Contenido" runat="server">
         </asp:ContentPlaceHolder>

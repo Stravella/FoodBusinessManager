@@ -23,6 +23,15 @@ Partial Public Class Bitacora
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''Control LblUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LblUsuarios As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Control lstUsuarios.
     '''</summary>
     '''<remarks>
@@ -30,6 +39,15 @@ Partial Public Class Bitacora
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Control LblTipoSuceso.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LblTipoSuceso As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Control lstTipoSuceso.
@@ -41,22 +59,40 @@ Partial Public Class Bitacora
     Protected WithEvents lstTipoSuceso As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Control Calendar1.
+    '''Control LblDesde.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Calendar1 As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents LblDesde As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control Calendar2.
+    '''Control LblHasta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Calendar2 As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Control CalendarDesde.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents CalendarDesde As Global.System.Web.UI.WebControls.Calendar
+    
+    '''<summary>
+    '''Control CalendarHasta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents CalendarHasta As Global.System.Web.UI.WebControls.Calendar
     
     '''<summary>
     '''Control BtnBuscar.
@@ -65,32 +101,14 @@ Partial Public Class Bitacora
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtnBuscar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents BtnBuscar As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
-    '''Control TablaBitacora.
+    '''Control Span1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TablaBitacora As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''Control PagAnterior.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents PagAnterior As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Control PagSiguiente.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents PagSiguiente As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Span1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

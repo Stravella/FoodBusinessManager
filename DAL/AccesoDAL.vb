@@ -67,6 +67,29 @@ Public Class AccesoDAL
 
     End Function
 
+    Public Overloads Function LeerBDconParams(ByVal cmdText As String, Optional params As List(Of SqlParameter) = Nothing) As DataTable
+        If CX.State = ConnectionState.Closed Then
+            CX.Open()
+        End If
+        Try
+            Dim DA As New SqlDataAdapter
+            Dim DT As New DataTable
+            Dim cmd As New SqlCommand With {.CommandType = CommandType.Text, .CommandText = cmdText, .Connection = Me.CX}
+            If params IsNot Nothing Then
+                cmd.Parameters.AddRange(params.ToArray)
+            End If
+            DA.SelectCommand = cmd
+
+            DA.Fill(DT)
+
+            Return DT
+        Catch ex As Exception
+
+        Finally
+            CX.Close()
+        End Try
+
+    End Function
 
     Public Overloads Function LeerBD(ByVal cmdText As String) As DataTable
         Try

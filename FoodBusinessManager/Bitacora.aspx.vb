@@ -33,15 +33,17 @@ Public Class Bitacora
         Next
     End Sub
 
-    Protected Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles BtnBuscar.Click
-        Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
-        Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
-        Dim fechaDesde As DateTime = Calendar1.SelectedDate
-        Dim fechaHasta As DateTime = Calendar2.SelectedDate
+    Protected Function Buscar_click() As String
+        If IsPostBack Then
+            Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
+            Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
+            Dim fechaDesde As DateTime = CalendarDesde.SelectedDate
+            Dim fechaHasta As DateTime = CalendarHasta.SelectedDate
 
-        Dim ListaBitacora As New List(Of BitacoraDTO)
-        ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, 1, 10)
+            Dim ListaBitacora As New DataTable
+            ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, 10, 1)
 
-    End Sub
-
+            Return HtmlHelper.BuildTable(ListaBitacora)
+        End If
+    End Function
 End Class

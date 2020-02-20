@@ -42,37 +42,24 @@ Public Class BitacoraDAL
         Return params
     End Function
 
-    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As List(Of BitacoraDTO)
+    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As DataTable
         Try
 
             Dim query As String
-            query = "SELECT * FROM Bitacora "
-            If Not tipoSuceso Is Nothing Then
-                query += "WHERE id_tipo_Suceso =" + tipoSuceso.id
-            End If
-            If Not Usuario Is Nothing Then
-                query += " AND id_usuario =" + Usuario.id
-            End If
-            query += " AND fecha_Hora >=" + fechaDesde
-            query += " AND fecha_Hora <=" + fechaHasta
-            query += "ORDER BY fecha_Hora"
-            query += " OFFSET (" + nroPagina + " * ISNULL(" + rowsPagina + ",10) ) ROWS"
-            query += " FETCH NEXT ISNULL(" + rowsPagina + ",10) ROWS ONLY"
 
-            Dim lsBitacoras As New List(Of BitacoraDTO)
-            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD(query).Rows
-                Dim oBitacora As New BitacoraDTO With {
-                    .id = Row("id_bitacora"),
-                    .FechaHora = Row("fecha_Hora"),
-                    .tipoSuceso = SucesoBitacoraDAL.ObtenerInstancia.Obtener(New SucesoBitacoraDTO With {.id = Row("id_tipo_Suceso")}),
-                    .usuario = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.id = Row("id_usuario")}),
-                    .ValorAnterior = Row("valorAnterior"),
-                    .NuevoValor = Row("valorNuevo"),
-                    .observaciones = Row("observaciones"),
-                    .DVH = Row("DVH")
-                }
-            Next
-            Return lsBitacoras
+            query = "SELECT * FROM Bitacora"
+            query += " WHERE fecha_Hora between isnull(CONVERT(date,@fechaInicial,103), '2019-01-01') and isnull(CONVERT(date,@fechaFinal,103), '2021-01-01')"
+            query += " AND id_tipo_Suceso = isnull(@id_tipo_suceso, id_tipo_suceso)"
+            query += " AND id_usuario = isnull(@id_usuario, id_usuario)"
+            query += " ORDER BY fecha_Hora"
+            query += " OFFSET ( isnull(@nroPagina, 0) * isnull(@rowsPagina, 10) ) ROWS"
+            query += " FETCH NEXT isnull(@rowsPagina, 10) ROWS ONLY"
+
+            Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta, nroPagina, rowsPagina)
+
+            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBDconParams(query, params)
+
+            Return dt
         Catch ex As Exception
 
         End Try
