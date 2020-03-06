@@ -36,4 +36,8 @@ Public Class BitacoraBLL
         Return SucesoBitacoraDAL.ObtenerInstancia.Obtener(unTipoSuceso)
     End Function
 
+    Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer
+        Return BitacoraDAL.ObtenerInstancia.ObtenerCantidadRegistros(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+    End Function
+
 End Class

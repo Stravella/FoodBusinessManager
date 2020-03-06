@@ -6,7 +6,8 @@
 
     <script runat="server">
         Sub BtnBuscar_OnClick(Source As Object, e As EventArgs)
-            Span1.InnerHtml = Me.Buscar_click()
+            Span1.InnerHtml = Me.Buscar_click(20, 1)
+            Span2.InnerHtml = Me.Paginar(20, 1)
         End Sub
     </script>
 
@@ -22,7 +23,7 @@
                         <asp:Label ID="LblUsuarios" runat="server" Text="Usuarios"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="lstUsuarios" runat="server" Width="100"></asp:DropDownList>
+                       <asp:DropDownList ID="lstUsuarios" runat="server" Width="100"></asp:DropDownList>
                     </td>
                 </tr>
             </table>
@@ -84,6 +85,12 @@
             <div id="OutputDiv" align="center">
 
                 <span id="Span1" runat="server" />
+
+            </div>
+            <%--Acá meto el paginado--%>
+            <div id="OutputPagination" align="center">
+
+                <span id ="Span2" runat="server"/>
 
             </div>
 

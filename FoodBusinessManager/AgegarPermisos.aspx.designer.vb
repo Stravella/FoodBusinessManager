@@ -23,6 +23,24 @@ Partial Public Class Permisos
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''Control lblModificarPerfil.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblModificarPerfil As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Control lstPerfiles.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lstPerfiles As Global.System.Web.UI.WebControls.ListBox
+    
+    '''<summary>
     '''Control inputGroupTitle.
     '''</summary>
     '''<remarks>
@@ -57,4 +75,13 @@ Partial Public Class Permisos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnAgregarPerfill As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Control lblRespuesta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblRespuesta As Global.System.Web.UI.WebControls.Label
 End Class

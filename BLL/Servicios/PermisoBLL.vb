@@ -34,6 +34,22 @@ Public Class PermisoBLL
         End Try
     End Function
 
+    Public Function Crear(permiso As PermisoComponente)
+        Try
+            PermisoDAL.ObtenerInstancia.Agregar(permiso)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Function ListarPerfiles() As List(Of PermisoComponente)
+        Try
+            Return PermisoDAL.ObtenerInstancia.ListarPerfiles
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Function PuedeUsar() As Boolean
 
     End Function

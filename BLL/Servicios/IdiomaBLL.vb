@@ -16,6 +16,9 @@ Public Class IdiomaBLL
     Public Sub CrearIdioma(idioma As IdiomaDTO)
         Try
             IdiomaDAL.ObtenerInstancia.Agregar(idioma)
+            For Each Etiqueta As IdiomaEtiquetaDTO In idioma.ListaEtiquetas
+                IdiomaEtiquetaDAL.ObtenerInstancia.CrearTraduccion(idioma, Etiqueta)
+            Next
         Catch ex As Exception
 
         End Try

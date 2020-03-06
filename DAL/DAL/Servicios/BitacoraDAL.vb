@@ -65,6 +65,29 @@ Public Class BitacoraDAL
         End Try
     End Function
 
+
+    Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer
+        Try
+            Dim query As String
+
+            query = "SELECT count(id_Bitacora) FROM Bitacora"
+            query += " WHERE fecha_Hora between isnull(CONVERT(date,@fechaInicial,103), '2019-01-01') and isnull(CONVERT(date,@fechaFinal,103), '2021-01-01')"
+            query += " AND id_tipo_Suceso = isnull(@id_tipo_suceso, id_tipo_suceso)"
+            query += " AND id_usuario = isnull(@id_usuario, id_usuario)"
+
+            Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+
+            Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBDconParams(query, params)
+
+            dt = AccesoDAL.ObtenerInstancia.LeerBDconParams(query, params)
+
+            Return dt(0)(0)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+
     Public Function GetNextID() As Integer
         Return AccesoDAL.ObtenerInstancia.GetNextID("id_bitacora", "Bitacora")
     End Function

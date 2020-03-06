@@ -251,6 +251,7 @@
       <DependentUpon>MyTable.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pager.vb" />
     <Compile Include="SeleccionarIdioma.aspx.designer.vb">
       <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
     </Compile>

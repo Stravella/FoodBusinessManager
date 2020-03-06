@@ -19,7 +19,7 @@ Public Class IdiomaDAL
         Dim params As New List(Of SqlParameter)
         Try
             With AccesoDAL.ObtenerInstancia()
-                params.Add(.CrearParametro("@id", idioma.id_idioma))
+                params.Add(.CrearParametro("@id_idioma", idioma.id_idioma))
                 params.Add(.CrearParametro("@nombre", idioma.nombre))
                 params.Add(.CrearParametro("@DVH", idioma.DVH))
             End With

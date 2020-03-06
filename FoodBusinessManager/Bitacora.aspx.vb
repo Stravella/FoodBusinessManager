@@ -33,17 +33,38 @@ Public Class Bitacora
         Next
     End Sub
 
-    Protected Function Buscar_click() As String
+    Protected Function Buscar_click(CantidadRegistros As Integer, NroPagina As Integer) As String
         If IsPostBack Then
+
             Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
             Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
             Dim fechaDesde As DateTime = CalendarDesde.SelectedDate
             Dim fechaHasta As DateTime = CalendarHasta.SelectedDate
 
             Dim ListaBitacora As New DataTable
-            ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, 10, 1)
+            ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, 20, 1)
 
             Return HtmlHelper.BuildTable(ListaBitacora)
         End If
     End Function
+
+    Protected Function Paginar(RegistrosPorPagina As Integer, NroPagina As Integer) As String
+        If IsPostBack Then
+
+            Dim pager As New Pager(RegistrosPorPagina, NroPagina)
+            Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
+            Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
+            Dim fechaDesde As DateTime = CalendarDesde.SelectedDate
+            Dim fechaHasta As DateTime = CalendarHasta.SelectedDate
+
+            pager.CantidadRegistros = BitacoraBLL.ObtenerInstancia.ObtenerCantidadRegistros(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta)
+
+            pager.CantidadPaginas = Math.Ceiling(pager.CantidadRegistros / RegistrosPorPagina)
+
+
+
+        End If
+    End Function
+
+
 End Class

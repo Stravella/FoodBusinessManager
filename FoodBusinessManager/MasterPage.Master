@@ -46,7 +46,7 @@
                         <a id="drop_BackupRestore" class="dropdown-item" href="#">Backup & Restore</a>
                         <a id="drop_Bitacora" class="dropdown-item" href="Bitacora.aspx">Bitacora</a>
                         <a id="drop_Idiomas" class="dropdown-item" href="Idiomas.aspx">Administrar Idiomas</a>
-                        <a id="drop_Perfiles "class="dropdown-item" href="AgregarPermisos.aspx">Agregar Perfiles</a>
+                        <a id="drop_Perfiles "class="dropdown-item" href="AgegarPermisos.aspx">Agregar Perfiles</a>
                     </div>
                 </li>
             </ul>

@@ -28,7 +28,8 @@ Public Class PermisoDAL
                 params.Add(.CrearParametro("@nombre", permiso.nombre))
                 params.Add(.CrearParametro("@es_substractiva", permiso.substraccion))
                 params.Add(.CrearParametro("@es_permiso", CInt(0)))
-                params.Add(.CrearParametro("@url", permiso.url_acceso))
+                params.Add(.CrearParametro("@url", "FALTA IMPLEMENTAR"))
+                params.Add(.CrearParametro("@DVH", "FALTA IMPLEMENTAR"))
             End With
         Catch ex As Exception
 
@@ -51,11 +52,12 @@ Public Class PermisoDAL
 
     Public Sub Agregar(permiso As PerfilCompuesto)
         Try
+            permiso.id_permiso = GetNextID()
             'Creo el perfil y las relaciones
             If permiso.tieneHijos = True Then
                 AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Crear", CrearParametros(permiso))
                 For Each hijo As PermisoComponente In permiso.Hijos
-                    AccesoDAL.ObtenerInstancia.EjecutarSP("PerfilPermiso_Crear", CrearParametros(permiso, hijo))
+                    AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Crear", CrearParametros(permiso, hijo))
                 Next
             End If
         Catch ex As Exception
@@ -105,6 +107,24 @@ Public Class PermisoDAL
         Next
         Return ls
     End Function
+
+    Public Function ListarPerfiles() As List(Of PermisoComponente)
+        Try
+            Dim ls As New List(Of PermisoComponente)
+            Dim query As String
+
+            query = "SELECT * FROM Perfil WHERE es_permiso = 0"
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBDconParams(query).Rows
+                'Esto es recursivo, deberia chequear de no agregar a los que ya estén?
+                ls.Add(ConvertirPermiso(row))
+            Next
+            Return ls
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
 
     Public Function ConvertirPermiso(row As DataRow) As PermisoComponente
         Dim oPermiso As PermisoComponente

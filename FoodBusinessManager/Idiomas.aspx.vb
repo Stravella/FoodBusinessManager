@@ -34,7 +34,6 @@ Public Class Idiomas
         If IsPostBack Then
             Dim idiomaSeleccionado As New IdiomaDTO With {.id_idioma = lstCulturas.SelectedItem.Value}
             If IdiomaBLL.ObtenerInstancia.VerificarExistencia(idiomaSeleccionado) = True Then
-                'Sí existe el idioma, cargo la grilla con las traducciones
                 CargarGrilla(idiomaSeleccionado)
                 Session.Add("CreandoIdioma", False)
                 lbl_Respuesta.Text = "Usted está modificando un idioma existente"
@@ -50,12 +49,12 @@ Public Class Idiomas
         End If
     End Sub
 
-
     Public Sub CargarGrilla(unIdioma As IdiomaDTO)
         Dim idiomaActual As IdiomaDTO = IdiomaBLL.ObtenerInstancia.Obtener(unIdioma)
         Me.grillaTraduccion.DataSource = idiomaActual.ListaEtiquetas
         Me.grillaTraduccion.DataBind()
     End Sub
+
 
     Protected Sub btnModificarIdioma_Click(sender As Object, e As EventArgs) Handles btn_ModificarIdioma.Click
         'Obtengo la lista de etiquetas
@@ -72,7 +71,8 @@ Public Class Idiomas
         If Session("CreandoIdioma") = True Then
             Dim idiomaNuevo As New IdiomaDTO With {.id_idioma = lstCulturas.SelectedValue,
                                                    .nombre = lstCulturas.SelectedItem.Text,
-                                                   .ListaEtiquetas = lsTraducciones}
+                                                   .ListaEtiquetas = lsTraducciones,
+                                                   .DVH = "PENDIENTE"}
             IdiomaBLL.ObtenerInstancia.CrearIdioma(idiomaNuevo)
         Else 'Modificando
             Dim idiomaSeleccionado As New IdiomaDTO With {.id_idioma = lstCulturas.SelectedItem.Value}
@@ -82,6 +82,7 @@ Public Class Idiomas
                 IdiomaBLL.ObtenerInstancia.ModificarTraduccion(idiomaSeleccionado, traduccion)
             Next
         End If
+        lbl_Respuesta.Text = "Idioma modificado"
         Session.Remove("CreandoIdioma")
     End Sub
 
