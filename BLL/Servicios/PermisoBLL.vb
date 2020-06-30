@@ -42,6 +42,14 @@ Public Class PermisoBLL
         End Try
     End Function
 
+    Public Function Borrar(permiso As PermisoComponente)
+        Try
+            PermisoDAL.ObtenerInstancia.Eliminar(permiso)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Function ListarPerfiles() As List(Of PermisoComponente)
         Try
             Return PermisoDAL.ObtenerInstancia.ListarPerfiles

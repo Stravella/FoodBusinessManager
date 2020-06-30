@@ -49,7 +49,7 @@ Public Class LogIn
 
                         Current.Session("usuario") = usuarioLogeado
 
-                        Response.Redirect("Default.aspx", False)
+                        Response.Redirect("Default1.aspx", False)
                     End If
                 End If
                 'Si el usuario no existe

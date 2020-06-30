@@ -16,8 +16,10 @@ Public Class BitacoraDTO
 
     Private _id As Integer
     Private _usuario As UsuarioDTO
+    Private _usuarioVal As String
     Private _FechaHora As DateTime
     Private _tipoSuceso As SucesoBitacoraDTO
+    Private _tipoSucesoVal As String
     Private _ValorAnterior As String
     Private _NuevoValor As String
     Private _BitacoraError As BitacoraErroresDTO
@@ -43,6 +45,12 @@ Public Class BitacoraDTO
         End Set
     End Property
 
+    Public ReadOnly Property usuarioVal() As String
+        Get
+            Return usuario.username
+        End Get
+    End Property
+
     Public Property FechaHora() As DateTime
             Get
                 Return _FechaHora
@@ -59,6 +67,12 @@ Public Class BitacoraDTO
         Set(ByVal Value As SucesoBitacoraDTO)
             _tipoSuceso = Value
         End Set
+    End Property
+
+    Public ReadOnly Property tipoSucesoVal() As String
+        Get
+            Return _tipoSuceso.descripcion
+        End Get
     End Property
 
     Public Property ValorAnterior() As String

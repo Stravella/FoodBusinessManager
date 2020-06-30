@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Bitacora
+Partial Public Class Bitacora2
     
     '''<summary>
     '''Control form1.
@@ -21,6 +21,15 @@ Partial Public Class Bitacora
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''Control TituloBitacora.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TituloBitacora As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Control LblUsuarios.
@@ -68,15 +77,6 @@ Partial Public Class Bitacora
     Protected WithEvents LblDesde As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control LblHasta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''Control CalendarDesde.
     '''</summary>
     '''<remarks>
@@ -84,6 +84,15 @@ Partial Public Class Bitacora
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents CalendarDesde As Global.System.Web.UI.WebControls.Calendar
+    
+    '''<summary>
+    '''Control LblHasta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Control CalendarHasta.
@@ -95,29 +104,20 @@ Partial Public Class Bitacora
     Protected WithEvents CalendarHasta As Global.System.Web.UI.WebControls.Calendar
     
     '''<summary>
-    '''Control BtnBuscar.
+    '''Control BtnFiltrar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtnBuscar As Global.System.Web.UI.HtmlControls.HtmlButton
+    Protected WithEvents BtnFiltrar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''Control Span1.
+    '''Control gv_Bitacora.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Span1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Control Span2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Span2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents gv_Bitacora As Global.System.Web.UI.WebControls.GridView
 End Class

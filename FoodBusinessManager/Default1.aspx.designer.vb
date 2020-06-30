@@ -11,14 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class _Default
+Partial Public Class Default1
     
     '''<summary>
-    '''Control table.
+    '''Control form1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents table As Global.FoodBusinessManager.MyTable
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 End Class

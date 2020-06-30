@@ -51,9 +51,10 @@ Public Class IdiomaDAL
         Dim lsIdiomas As New List(Of IdiomaDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Idioma_listar").Rows
             Dim oIdioma As New IdiomaDTO With {.id_idioma = row("id_idioma"),
-                                              .nombre = row("nombre")
+                                              .nombre = row("nombre"),
+                                              .DVH = row("DVH")
                                               }
-
+            oIdioma.ListaEtiquetas = IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(oIdioma)
             lsIdiomas.Add(oIdioma)
         Next
         Return lsIdiomas
@@ -62,8 +63,21 @@ Public Class IdiomaDAL
 
     Public Function ObtenerIdioma(Idioma As IdiomaDTO) As IdiomaDTO
         Dim ls As List(Of IdiomaDTO) = Me.ListarIdiomas()
-        Dim oIdioma As IdiomaDTO = ls.Find(Function(x) x.id_idioma = Idioma.id_idioma)
-        oIdioma.ListaEtiquetas = IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(oIdioma)
+        Dim oIdioma As New IdiomaDTO
+        If Idioma.id_idioma = "" Then 'Obtengo por nombre
+            oIdioma = ls.Find(Function(x) x.nombre = Idioma.nombre)
+            oIdioma.ListaEtiquetas = IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(oIdioma)
+        Else 'Obtengo por id
+            oIdioma = ls.Find(Function(x) x.id_idioma = Idioma.id_idioma)
+            oIdioma.ListaEtiquetas = IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(oIdioma)
+        End If
+        Return oIdioma
+    End Function
+
+    Public Function ObtenerId(idioma As IdiomaDTO) As IdiomaDTO
+        Dim ls As List(Of IdiomaDTO) = Me.ListarIdiomas()
+        Dim oIdioma As New IdiomaDTO
+        oIdioma = ls.Find(Function(x) x.nombre = idioma.nombre)
         Return oIdioma
     End Function
 
@@ -77,9 +91,5 @@ Public Class IdiomaDAL
             Return True
         End If
     End Function
-
-
-
-
 
 End Class

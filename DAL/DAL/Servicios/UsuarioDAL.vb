@@ -60,6 +60,22 @@ Public Class UsuarioDAL
         Return oUsuario
     End Function
 
+    Public Function ObtenerPorId(ByVal id As Integer) As UsuarioDTO
+        Try
+            Dim oUsuario As UsuarioDTO
+            'listo todos los usuarios y selecciono por id.
+            Dim ls As List(Of UsuarioDTO) = Me.ListarUsuarios()
+            For Each iUsuario As UsuarioDTO In ls
+                If iUsuario.id = id Then
+                    oUsuario = iUsuario
+                End If
+            Next
+            Return oUsuario
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Function ListarUsuarios() As List(Of UsuarioDTO)
         Dim lsUsuarios As New List(Of UsuarioDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("ListarUsuarios").Rows

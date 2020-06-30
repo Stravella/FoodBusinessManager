@@ -29,14 +29,13 @@ Public Class SucesoBitacoraDAL
         Return lsSucesoBitacora
     End Function
 
-
-    Public Function Obtener(unSucesoBitacora As SucesoBitacoraDTO) As SucesoBitacoraDTO
+    Public Function ObtenerPorId(id As Integer) As SucesoBitacoraDTO
         Try
             Dim ls As New List(Of SucesoBitacoraDTO)
             ls = Me.Listar()
             Dim oSuceso As SucesoBitacoraDTO = Nothing
             For Each Suceso As SucesoBitacoraDTO In ls
-                If Suceso.id = unSucesoBitacora.id Then
+                If Suceso.id = id Then
                     oSuceso = Suceso
                 End If
             Next

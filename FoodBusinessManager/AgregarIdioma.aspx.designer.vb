@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Permisos
+Partial Public Class Idiomas
     
     '''<summary>
     '''Control form1.
@@ -23,38 +23,38 @@ Partial Public Class Permisos
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''Control inputGroupTitle.
+    '''Control lbl_AgregarIdiomaTitulo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents inputGroupTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_AgregarIdiomaTitulo As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control txtNombrePerfil.
+    '''Control lstCulturas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtNombrePerfil As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lstCulturas As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Control TreeViewPermisos.
+    '''Control gv_Etiquetas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TreeViewPermisos As Global.System.Web.UI.WebControls.TreeView
+    Protected WithEvents gv_Etiquetas As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
-    '''Control btnAgregarPerfill.
+    '''Control btn_crearIdioma.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnAgregarPerfill As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btn_crearIdioma As Global.System.Web.UI.WebControls.Button
 End Class

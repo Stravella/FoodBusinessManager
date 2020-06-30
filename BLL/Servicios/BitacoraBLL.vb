@@ -24,8 +24,8 @@ Public Class BitacoraBLL
         BitacoraDAL.ObtenerInstancia.Agregar(unaBitacora)
     End Sub
 
-    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing) As DataTable
-        Return BitacoraDAL.ObtenerInstancia.ListarTodos(tipoSuceso, Usuario, fechaDesde, fechaHasta, rowsPagina, nroPagina)
+    Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As List(Of BitacoraDTO)
+        Return BitacoraDAL.ObtenerInstancia.ListarTodos(tipoSuceso, Usuario, fechaDesde, fechaHasta)
     End Function
 
     Public Function ListarSucesoBitacora() As List(Of SucesoBitacoraDTO)
@@ -33,7 +33,7 @@ Public Class BitacoraBLL
     End Function
 
     Public Function ObtenerSucesoBitacora(unTipoSuceso As SucesoBitacoraDTO) As SucesoBitacoraDTO
-        Return SucesoBitacoraDAL.ObtenerInstancia.Obtener(unTipoSuceso)
+        Return SucesoBitacoraDAL.ObtenerInstancia.ObtenerPorId(unTipoSuceso.id)
     End Function
 
     Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer

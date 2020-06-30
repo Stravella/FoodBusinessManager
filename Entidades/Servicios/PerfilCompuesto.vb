@@ -39,6 +39,22 @@ Public Class PerfilCompuesto
     End Function
 
     Public Overrides Function esValido(nombrePermiso As String) As Boolean
-        Throw New NotImplementedException()
+        Dim tieneUnValido As Boolean = False
+        If nombrePermiso = Me.nombre Then
+            Return True
+        End If
+        For Each p In Me._hijos
+            If p.nombre = nombrePermiso Then
+                Return True
+            Else
+                tieneUnValido = p.esValido(nombrePermiso)
+            End If
+            If tieneUnValido = True Then
+                Exit For
+            Else
+
+            End If
+        Next
+        Return tieneUnValido
     End Function
 End Class

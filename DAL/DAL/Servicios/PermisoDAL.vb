@@ -65,12 +65,10 @@ Public Class PermisoDAL
         End Try
     End Sub
 
+
     Public Sub Modificar(permiso As PermisoComponente)
         Try
-            If permiso.tieneHijos = True Then
-                AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Eliminar", CrearParametros(permiso))
-                Agregar(permiso)
-            End If
+
         Catch ex As Exception
 
         End Try
@@ -79,9 +77,12 @@ Public Class PermisoDAL
     Public Sub Eliminar(permiso As PerfilCompuesto)
         Try
             'Elimina el perfil y todas las relaciones
-            If permiso.tieneHijos = True Then
-                AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Eliminar", CrearParametros(permiso))
-            End If
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add(.CrearParametro("@id_perfil", permiso.id_permiso))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Eliminar", params)
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Eliminar", params)
         Catch ex As Exception
 
         End Try

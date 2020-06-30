@@ -13,16 +13,17 @@ Public Class IdiomaBLL
     End Function
 #End Region
 
-    Public Sub CrearIdioma(idioma As IdiomaDTO)
+    Public Function CrearIdioma(idioma As IdiomaDTO) As Boolean
         Try
             IdiomaDAL.ObtenerInstancia.Agregar(idioma)
             For Each Etiqueta As IdiomaEtiquetaDTO In idioma.ListaEtiquetas
                 IdiomaEtiquetaDAL.ObtenerInstancia.CrearTraduccion(idioma, Etiqueta)
             Next
+            Return True
         Catch ex As Exception
 
         End Try
-    End Sub
+    End Function
     'Obtiene el idioma y las traducciones
     Public Function Obtener(idioma As IdiomaDTO) As IdiomaDTO
         Return IdiomaDAL.ObtenerInstancia.ObtenerIdioma(idioma)
@@ -60,6 +61,9 @@ Public Class IdiomaBLL
 
     Public Function ObtenerTraducciones(Idioma As IdiomaDTO) As List(Of IdiomaEtiquetaDTO)
         Try
+            If Idioma.id_idioma = "" Then
+                Idioma = IdiomaDAL.ObtenerInstancia.ObtenerId(Idioma)
+            End If
             Return IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(Idioma)
         Catch ex As Exception
 

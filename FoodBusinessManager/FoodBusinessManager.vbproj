@@ -115,16 +115,16 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
+    <Content Include="Default1.aspx" />
     <Content Include="Estilos\Principal.css" />
-    <Content Include="Default.aspx" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
     <Content Include="EmailTemplates\SignUp.html" />
     <Content Include="Estilos\LogIn.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\pot.png" />
-    <Content Include="Idiomas.aspx" />
+    <Content Include="AgregarIdioma.aspx" />
     <Content Include="LogIn.aspx" />
-    <Content Include="MyTable.ascx" />
+    <Content Include="ModificarIdioma.aspx" />
     <Content Include="NuevaContraseña.aspx" />
     <Content Include="OlvidoContraseña.aspx" />
     <Content Include="AgegarPermisos.aspx" />
@@ -205,7 +205,15 @@
       <DependentUpon>Bitacora.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="HtmlHelper.vb" />
+    <Compile Include="Default1.aspx.designer.vb">
+      <DependentUpon>Default1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default1.aspx.vb">
+      <DependentUpon>Default1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Helpers\HtmlHelper.vb" />
+    <Compile Include="Helpers\TreeHelper.vb" />
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
@@ -213,21 +221,14 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.vb">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.vb">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Idiomas.aspx.designer.vb">
-      <DependentUpon>Idiomas.aspx</DependentUpon>
+    <Compile Include="AgregarIdioma.aspx.designer.vb">
+      <DependentUpon>AgregarIdioma.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Idiomas.aspx.vb">
-      <DependentUpon>Idiomas.aspx</DependentUpon>
+    <Compile Include="AgregarIdioma.aspx.vb">
+      <DependentUpon>AgregarIdioma.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LogIn.aspx.designer.vb">
@@ -244,14 +245,13 @@
       <DependentUpon>AgegarPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="MyTable.ascx.designer.vb">
-      <DependentUpon>MyTable.ascx</DependentUpon>
+    <Compile Include="ModificarIdioma.aspx.designer.vb">
+      <DependentUpon>ModificarIdioma.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MyTable.ascx.vb">
-      <DependentUpon>MyTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="ModificarIdioma.aspx.vb">
+      <DependentUpon>ModificarIdioma.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Pager.vb" />
     <Compile Include="SeleccionarIdioma.aspx.designer.vb">
       <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Idiomas
+Partial Public Class ModificarIdioma
     
     '''<summary>
     '''Control form1.
@@ -23,47 +23,38 @@ Partial Public Class Idiomas
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''Control lbl_IdiomaTitulo.
+    '''Control lbl_ModificarIdiomaTitulo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lbl_IdiomaTitulo As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_ModificarIdiomaTitulo As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Control lstCulturas.
+    '''Control lstCulturasCreadas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstCulturas As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lstCulturasCreadas As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Control grillaTraduccion.
+    '''Control gv_Etiquetas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents grillaTraduccion As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gv_Etiquetas As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
-    '''Control lbl_Respuesta.
+    '''Control btn_modificarIdioma.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lbl_Respuesta As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Control btn_ModificarIdioma.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btn_ModificarIdioma As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btn_modificarIdioma As Global.System.Web.UI.WebControls.Button
 End Class
