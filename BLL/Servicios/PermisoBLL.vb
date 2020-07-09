@@ -42,9 +42,9 @@ Public Class PermisoBLL
         End Try
     End Function
 
-    Public Function Borrar(permiso As PermisoComponente)
+    Public Function BorrarPerfil(Perfil As PerfilCompuesto)
         Try
-            PermisoDAL.ObtenerInstancia.Eliminar(permiso)
+            PermisoDAL.ObtenerInstancia.Eliminar(Perfil)
         Catch ex As Exception
 
         End Try

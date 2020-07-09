@@ -58,6 +58,14 @@ Public Class UsuarioBLL
 
 #End Region
 
+    Public Function ListarPorPerfil(unPerfil As PerfilCompuesto) As List(Of UsuarioDTO)
+        Try
+            Return UsuarioDAL.ObtenerInstancia.ListarPorPefil(unPerfil)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Function LogIn(usuario As UsuarioDTO) As UsuarioDTO
         Try
             Dim oUsuario As UsuarioDTO = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)

@@ -1,0 +1,39 @@
+﻿
+.label-form{
+    font-weight:bold;
+}
+
+.titulo-panel{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.fondo-panel{
+    background-color: #EEEEEE;
+}
+
+.grid {
+    width: 90%;
+    background-color: white;
+    border: solid 1px #333333;
+}
+    .grid th {
+        color: white;
+        background: #BCCDE0;
+        border-color: black;
+        font-size: 16px;
+        text-align: center;
+        font-weight: bold;
+        height: 25px;
+    }
+
+    .grid td {
+        border-color: black;
+        color: #000000;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .grid tr:hover {
+        background-color: #F5F5F5;
+    }

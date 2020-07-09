@@ -16,6 +16,31 @@ Public Class TreeHelper
     End Function
 #End Region
 
+    Public Sub CargarPefil(ByRef arbol As TreeView, Optional Perfil As PerfilCompuesto = Nothing)
+        Try
+            If arbol.Nodes.Count = 0 Then
+                If IsNothing(Perfil) Then
+                    Dim ls = BLL.PermisoBLL.ObtenerInstancia.Listar()
+                    ArmarNodos(ls, Nothing, arbol)
+                    arbol.CollapseAll()
+                Else
+                    ArmarNodos(Perfil.Hijos, Nothing, arbol)
+                    arbol.CollapseAll()
+                End If
+            Else
+                If IsNothing(Perfil) Then
+                    arbol.Nodes.Clear()
+                    CargarPefil(arbol)
+                Else
+                    arbol.Nodes.Clear()
+                    CargarPefil(arbol, Perfil)
+                End If
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
     Public Sub ArmarNodos(permisos As List(Of PermisoComponente), nodos As TreeNode, arbol As TreeView)
         If IsNothing(nodos) Then
             For Each permiso As PermisoComponente In permisos
@@ -110,6 +135,21 @@ Public Class TreeHelper
         End If
         Return perfil
     End Function
+
+
+    Public Sub CheckearTodos(nodos As TreeNode)
+        Try
+            For Each nodo As TreeNode In nodos.ChildNodes
+                nodo.Checked = True
+                If nodo.ChildNodes.Count > 0 Then
+                    CheckearTodos(nodo)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 
 
 End Class

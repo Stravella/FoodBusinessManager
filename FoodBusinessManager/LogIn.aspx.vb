@@ -26,8 +26,7 @@ Public Class LogIn
 
                 usuarioLogeado = UsuarioBLL.ObtenerInstancia.LogIn(usuario)
 
-                'esto no funciona, da NullReferenceException
-                If usuarioLogeado.username Is Nothing Then 'El usuario existe pero la contraseña no corresponde
+                If usuarioLogeado Is Nothing Then 'El usuario existe pero la contraseña no corresponde
                     dvMensaje.Visible = True
                     lblRespuesta.Text = "La contraseña es incorrecta"
                 Else

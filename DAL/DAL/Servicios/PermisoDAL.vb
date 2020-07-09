@@ -74,12 +74,12 @@ Public Class PermisoDAL
         End Try
     End Sub
 
-    Public Sub Eliminar(permiso As PerfilCompuesto)
+    Public Sub Eliminar(Perfil As PerfilCompuesto)
         Try
             'Elimina el perfil y todas las relaciones
             Dim params As New List(Of SqlParameter)
             With AccesoDAL.ObtenerInstancia()
-                params.Add(.CrearParametro("@id_perfil", permiso.id_permiso))
+                params.Add(.CrearParametro("@id_perfil", Perfil.id_permiso))
             End With
             AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Eliminar", params)
             AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Eliminar", params)

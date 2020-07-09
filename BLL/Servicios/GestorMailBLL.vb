@@ -27,11 +27,12 @@ Public Class GestorMailBLL
             Dim Str As StreamReader
             Dim _mailmsg As New MailMessage
             Dim subject As String
+            'Estos templates hay que actualizarlos segun donde se encuentre el repo.
             If esRecupero = True Then
-                Str = New StreamReader("C:\Users\seba_\source\repos\FoodBusinessManager\FoodBusinessManager\EmailTemplates\RecoverPassword.html")
+                Str = New StreamReader("C:\Users\Seba\Source\Repos\FoodBusinessManager\FoodBusinessManager\EmailTemplates\RecoverPassword.html")
                 subject = "Recupero contraseña - Food Business Manager"
             Else
-                Str = New StreamReader("C:\Users\seba_\source\repos\FoodBusinessManager\FoodBusinessManager\EmailTemplates\SignUp.html")
+                Str = New StreamReader("C:\Users\Seba\Source\Repos\FoodBusinessManager\FoodBusinessManager\EmailTemplates\SignUp.html")
                 subject = "Bienvenido a Food Business Manager!"
             End If
             'Busco el Body    

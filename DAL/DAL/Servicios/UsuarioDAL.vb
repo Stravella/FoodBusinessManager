@@ -76,6 +76,7 @@ Public Class UsuarioDAL
         End Try
     End Function
 
+
     Public Function ListarUsuarios() As List(Of UsuarioDTO)
         Dim lsUsuarios As New List(Of UsuarioDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("ListarUsuarios").Rows
@@ -96,6 +97,22 @@ Public Class UsuarioDAL
             lsUsuarios.Add(oUsuario)
         Next
         Return lsUsuarios
+    End Function
+
+    Public Function ListarPorPefil(ByVal unPerfil As PermisoComponente) As List(Of UsuarioDTO)
+        Try
+            Dim lsUsuarios As New List(Of UsuarioDTO)
+            Dim lsUsuariosPerfil As New List(Of UsuarioDTO)
+            lsUsuarios = ListarUsuarios()
+            For Each Usuario As UsuarioDTO In lsUsuarios
+                If Usuario.perfil.id_permiso = unPerfil.id_permiso Then
+                    lsUsuariosPerfil.Add(Usuario)
+                End If
+            Next
+            Return lsUsuariosPerfil
+        Catch ex As Exception
+
+        End Try
     End Function
 
     'Agregar Usuario

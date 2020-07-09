@@ -20,7 +20,7 @@ Public Class NuevaContraseña
                 oUsuario = UsuarioBLL.ObtenerInstancia.CambiarContraseña(oUsuario)
                 dvMensaje.Visible = True
                 lblRespuesta.Text = "Se modifico la contraseña con exito"
-                Response.Redirect("")
+                Response.Redirect("LogIn.aspx")
             Else
                 dvMensaje.Visible = True
                 lblRespuesta.Text = "El usuario es incorrecto"
