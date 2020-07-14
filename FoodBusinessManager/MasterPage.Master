@@ -68,7 +68,7 @@
                         <a id="item_BitacoraError" class="dropdown-item" href="#">Bitácora Errores</a>
                         <a id="item_AgregarIdiomas" class="dropdown-item" href="AgregarIdioma.aspx">Agregar Idioma</a>
                         <a id="item_ModificarIdiomas" class="dropdown-item" href="ModificarIdioma.aspx">Modificar Idioma</a>                
-                        <a id="item_AgregarPerfiles "class="dropdown-item" href="AgregarPermisos.aspx">Agregar Perfiles</a>
+                        <a id="item_AgregarPerfiles "class="dropdown-item" href="AgegarPermisos.aspx">Agregar Perfiles</a>
                         <a id="item_Perfiles "class="dropdown-item" href="ModificarPermiso.aspx">Modificar Perfiles</a>
                     </div>
                 </li>

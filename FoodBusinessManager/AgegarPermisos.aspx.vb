@@ -77,4 +77,7 @@ Public Class Permisos
         End Try
     End Sub
 
+    Protected Sub txtNombrePerfil_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

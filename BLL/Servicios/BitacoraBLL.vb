@@ -1,9 +1,12 @@
 ﻿Imports Entidades
 Imports DAL
+Imports System.Reflection
+Imports Newtonsoft.Json
 
 
 
 Public Class BitacoraBLL
+    'En esta clase uso una libreria JSON.net para serializar y deserializar en JSON. 
 
 #Region "Singleton"
     Public Sub New()
@@ -38,6 +41,27 @@ Public Class BitacoraBLL
 
     Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer
         Return BitacoraDAL.ObtenerInstancia.ObtenerCantidadRegistros(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+    End Function
+
+    Public Shared Function CompararObjetos(ByVal Objeto As Object, ByVal ObjetoAComparar As Object) As String
+        'El String siempre va a devolver las diferencias entre el Objeto y el Objeto a Comparar
+        Try
+            Dim Diferencias As String
+            Dim propiedades() As PropertyInfo = Objeto.GetType.GetProperties
+            Dim propiedad As PropertyInfo
+            Dim valor1 As Object
+            Dim valor2 As Object
+            For Each propiedad In propiedades
+                valor1 = propiedad.GetValue(Objeto, Nothing)
+                valor2 = propiedad.GetValue(ObjetoAComparar, Nothing)
+                If valor1 <> valor2 Then
+                    Diferencias += propiedad.Name.ToString & ": " & valor1.ToString & "; "
+                End If
+            Next
+            Return Diferencias
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
 End Class

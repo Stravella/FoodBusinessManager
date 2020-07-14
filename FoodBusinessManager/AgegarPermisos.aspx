@@ -13,40 +13,48 @@
             }
         }
     </script>
-
-    <form id="form1" runat="server">
-        <br />
-        <div>
-            <h1>
-                <div class="panel-heading text-center">
-                    Agregar Perfil
-                </div>
-            </h1>
-            <p></p>
-            <div class="panel-content">
-
-                <div class="input-group">
-                    <asp:Label ID="inputGroupTitle" runat="server" Text="Nombre" CssClass="inputGroupTitle"></asp:Label>
-                    <asp:TextBox ID="txtNombrePerfil" runat="server" CssClass="inputGroupTextBox" AutoPostBack="True"></asp:TextBox>
-                </div>
-                <p></p>
-
-                <div>
-                    <asp:TreeView ID="TreeViewPermisos" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
-                        <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                        <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                        <ParentNodeStyle Font-Bold="False" />
-                        <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
-                    </asp:TreeView>
-
-                </div>
-
-            </div>
-            <p></p>
+    <div class="container-fluid">
+        <form id="form1" runat="server">
+            <br />
             <div>
-                <asp:Button ID="btnAgregarPerfill" runat="server" Text="Agregar Perfil" CssClass="btnAgregar" />
+                <div class="row">
+                    <div class="col-sm-121">
+                        <h1>Agregar Perfil
+                        </h1>
+                    </div>
+                </div>
+                <br />
+
+                <div class="panel panel-info">
+                    <div class="panel-body fondo-panel">
+                        <div class="form-group">
+                            <div class="form-group label-form">
+                                <asp:Label ID="lblNombrePerfil" runat="server" Text="Nombre" CssClass="inputGroupTitle"></asp:Label>
+                            </div>
+                            <div class="col-sm-12">
+                                <asp:TextBox ID="txtNombrePerfil" runat="server" CssClass="form control" AutoPostBack="True"></asp:TextBox>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <div>
+                            <asp:TreeView ID="TreeViewPermisos" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                <ParentNodeStyle Font-Bold="False" />
+                                <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                            </asp:TreeView>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-4 col-md-offset-4">
+                    <asp:Button ID="btnAgregarPerfill" runat="server" Text="Agregar Perfil" CssClass="form-control btn btn-warning" />
+                </div>
             </div>
             <p></p>
-        </div>
+    </div>
     </form>
+    </div>
 </asp:Content>

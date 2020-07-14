@@ -43,7 +43,7 @@ Public Class LogIn
                                                 .ValorAnterior = "",
                                                 .NuevoValor = "",
                                                 .observaciones = "",
-                                                .DVH = ""}
+                                                .DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)}
                         BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
 
                         Current.Session("usuario") = usuarioLogeado
@@ -61,5 +61,6 @@ Public Class LogIn
 
         End Try
     End Sub
+
 
 End Class
