@@ -116,10 +116,10 @@ Public Class DigitoVerificadorBLL
                     tablasCorruptas.Add(row.Item("tabla").ToString)
                 End If
             Next
-            'Devuelvo el nombre de las tablas corruptas. Sí es NULL está todo OK
+            'Devuelvo el nombre de las tablas corruptas. Sí es 0 está todo OK
             Return tablasCorruptas
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
 

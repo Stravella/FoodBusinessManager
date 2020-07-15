@@ -13,19 +13,20 @@
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Public Class BitacoraErroresDTO
-
-    Private _id As Integer
+    Inherits BitacoraDTO
+    Private _id_bitacora_error As Integer
     Private _excepcion As String
     Private _stackTrace As String
 
-    Public Property id() As Integer
+    Public Property id_bitacora_error() As Integer
         Get
-            Return _id
+            Return _id_bitacora_error
         End Get
-        Set(ByVal value As Integer)
-            _id = value
+        Set(ByVal Value As Integer)
+            _id_bitacora_error = Value
         End Set
     End Property
+
 
     Public Property excepcion() As String
         Get

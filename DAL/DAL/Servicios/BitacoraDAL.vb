@@ -72,6 +72,27 @@ Public Class BitacoraDAL
         End Try
     End Function
 
+    Public Function ObtenerUltimaBitacora() As BitacoraDTO
+        Try
+            Dim query As String
+            query = "SELECT * FROM Bitacora WHERE id_Bitacora = (SELECT MAX(id_Bitacora) FROM Bitacora"
+            Dim oBitacora As New BitacoraDTO
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD(query).Rows
+                oBitacora.id = row("id_Bitacora")
+                oBitacora.FechaHora = row("fecha_Hora")
+                oBitacora.usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(row("id_usuario"))
+                oBitacora.tipoSuceso = SucesoBitacoraDAL.ObtenerInstancia.ObtenerPorId(row("id_tipo_suceso"))
+                oBitacora.ValorAnterior = row("valorAnterior")
+                oBitacora.NuevoValor = row("valorNuevo")
+                oBitacora.observaciones = row("observaciones")
+                oBitacora.DVH = row("DVH")
+            Next
+            Return oBitacora
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
     Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer
         Try
@@ -96,4 +117,57 @@ Public Class BitacoraDAL
     Public Function GetNextID() As Integer
         Return AccesoDAL.ObtenerInstancia.GetNextID("id_bitacora", "Bitacora")
     End Function
+
+
+    Public Function Agregar(Elemento As BitacoraErroresDTO)
+        Dim params As New List(Of SqlParameter)
+        With AccesoDAL.ObtenerInstancia()
+            params.Add(.CrearParametro("@id", Elemento.id_bitacora_error))
+            params.Add(.CrearParametro("@stackTrace", Elemento.stackTrace))
+            params.Add(.CrearParametro("@exception", Elemento.excepcion))
+            params.Add(.CrearParametro("@id_bitacora", Elemento.id))
+            .EjecutarSP("Bitacora__errores_crear", params)
+        End With
+    End Function
+
+    Public Function GetNextErrorID() As Integer
+        Return AccesoDAL.ObtenerInstancia.GetNextID("id_bitacora_error", "Bitacora_errores")
+    End Function
+
+    Public Function ListarErrores(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As List(Of BitacoraErroresDTO)
+        Try
+            Dim query As String
+
+            query = " SELECT * FROM Bitacora B"
+            query += " INNER JOIN Bitacora_errores BE ON B.id= BE.id_bitacora"
+            query += " WHERE fecha_Hora between isnull(CONVERT(date,@fechaInicial,103), '2019-01-01') and isnull(CONVERT(date,@fechaFinal,103), '2021-01-01')"
+            query += " AND id_tipo_Suceso = isnull(@id_tipo_suceso, id_tipo_suceso)"
+            query += " AND id_usuario = isnull(@id_usuario, id_usuario)"
+            query += " ORDER BY fecha_Hora"
+
+            Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+
+            'Dim dt As DataTable = AccesoDAL.ObtenerInstancia.LeerBDconParams(query, params)
+            Dim lsBitacora As New List(Of BitacoraErroresDTO)
+            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBDconParams(query, params).Rows
+                Dim oBitacora As New BitacoraErroresDTO With {.id = Row("id_bitacora"),
+                                                       .id_bitacora_error = Row("id_bitacora_error"),
+                                                       .FechaHora = Row("fecha_Hora"),
+                                                       .usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(Row("id_usuario")),
+                                                       .tipoSuceso = SucesoBitacoraDAL.ObtenerInstancia.ObtenerPorId(Row("id_tipo_suceso")),
+                                                       .ValorAnterior = Row("valorAnterior"),
+                                                       .NuevoValor = Row("valorNuevo"),
+                                                       .observaciones = Row("observaciones"),
+                                                       .excepcion = Row("exception"),
+                                                       .stackTrace = Row("stackTrace"),
+                                                       .DVH = Row("DVH")}
+                lsBitacora.Add(oBitacora)
+            Next
+            Return lsBitacora
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+
 End Class

@@ -27,9 +27,24 @@ Public Class BitacoraBLL
         BitacoraDAL.ObtenerInstancia.Agregar(unaBitacora)
     End Sub
 
+    Public Sub AgregarError(unaBitacora As BitacoraDTO, unaBitacoraError As BitacoraErroresDTO)
+        unaBitacoraError.id = unaBitacora.id
+        unaBitacoraError.id_bitacora_error = BitacoraDAL.ObtenerInstancia.GetNextErrorID
+        BitacoraDAL.ObtenerInstancia.Agregar(unaBitacoraError)
+    End Sub
+
     Public Function ListarTodos(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As List(Of BitacoraDTO)
         Return BitacoraDAL.ObtenerInstancia.ListarTodos(tipoSuceso, Usuario, fechaDesde, fechaHasta)
     End Function
+
+    Public Function ListarErrores(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As List(Of BitacoraErroresDTO)
+        Try
+            Return BitacoraDAL.ObtenerInstancia.ListarErrores(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+        Catch ex As Exception
+
+        End Try
+    End Function
+
 
     Public Function ListarSucesoBitacora() As List(Of SucesoBitacoraDTO)
         Return SucesoBitacoraDAL.ObtenerInstancia.Listar
@@ -41,6 +56,14 @@ Public Class BitacoraBLL
 
     Public Function ObtenerCantidadRegistros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing) As Integer
         Return BitacoraDAL.ObtenerInstancia.ObtenerCantidadRegistros(tipoSuceso, Usuario, fechaDesde, fechaHasta)
+    End Function
+
+    Public Function ObtenerUltimaBitacora() As BitacoraDTO
+        Try
+            Return BitacoraDAL.ObtenerInstancia.ObtenerUltimaBitacora
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function CompararObjetos(ByVal Objeto As Object, ByVal ObjetoAComparar As Object) As String
