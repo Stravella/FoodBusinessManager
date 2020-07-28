@@ -139,7 +139,7 @@ Public Class BitacoraDAL
             Dim query As String
 
             query = " SELECT * FROM Bitacora B"
-            query += " INNER JOIN Bitacora_errores BE ON B.id= BE.id_bitacora"
+            query += " INNER JOIN Bitacora_errores BE ON B.id_Bitacora= BE.id_bitacora"
             query += " WHERE fecha_Hora between isnull(CONVERT(date,@fechaInicial,103), '2019-01-01') and isnull(CONVERT(date,@fechaFinal,103), '2021-01-01')"
             query += " AND id_tipo_Suceso = isnull(@id_tipo_suceso, id_tipo_suceso)"
             query += " AND id_usuario = isnull(@id_usuario, id_usuario)"

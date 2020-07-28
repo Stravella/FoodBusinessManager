@@ -26,10 +26,8 @@ Public Class PermisoDAL
             With AccesoDAL.ObtenerInstancia()
                 params.Add(.CrearParametro("@id_perfil", permiso.id_permiso))
                 params.Add(.CrearParametro("@nombre", permiso.nombre))
-                params.Add(.CrearParametro("@es_substractiva", permiso.substraccion))
+                params.Add(.CrearParametro("@se_puede_borrar", permiso.se_puede_borrar))
                 params.Add(.CrearParametro("@es_permiso", CInt(0)))
-                params.Add(.CrearParametro("@url", "FALTA IMPLEMENTAR"))
-                params.Add(.CrearParametro("@DVH", "FALTA IMPLEMENTAR"))
             End With
         Catch ex As Exception
 
@@ -101,12 +99,16 @@ Public Class PermisoDAL
 
 
     Public Function Listar() As List(Of PermisoComponente)
-        Dim ls As New List(Of PermisoComponente)
-        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Perfil_Listar").Rows
-            'Esto es recursivo, deberia chequear de no agregar a los que ya estén?
-            ls.Add(ConvertirPermiso(row))
-        Next
-        Return ls
+        Try
+            Dim ls As New List(Of PermisoComponente)
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Perfil_Listar").Rows
+                'Esto es recursivo, deberia chequear de no agregar a los que ya estén?
+                ls.Add(ConvertirPermiso(row))
+            Next
+            Return ls
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Function ListarPerfiles() As List(Of PermisoComponente)
@@ -136,8 +138,12 @@ Public Class PermisoDAL
         End If
         oPermiso.id_permiso = row("id_perfil")
         oPermiso.nombre = row("nombre")
-        oPermiso.url_acceso = row("url")
-        oPermiso.substraccion = row("es_substractiva")
+        If IsDBNull(row("url")) Then
+            oPermiso.url_acceso = ""
+        Else
+            oPermiso.url_acceso = row("url")
+        End If
+        oPermiso.se_puede_borrar = row("se_puede_borrar")
         If oPermiso.tieneHijos = True Then
             Dim Params As New List(Of SqlParameter)
             Dim Param As New SqlParameter("@id_perfil", oPermiso.id_permiso)

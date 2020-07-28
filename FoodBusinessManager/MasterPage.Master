@@ -45,8 +45,9 @@
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <form id="master" runat="server">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
            <img src="Imagenes/FBMLogoNavbar.png" width="60" height="60"/>
             Food Business Manager
@@ -65,12 +66,16 @@
                         <a id="item_Backup" class="dropdown-item" href="#">Backup</a>
                         <a id="item_Restore" class="dropdown-item" href="#">Restore</a>
                         <a id="item_Bitacora" class="dropdown-item" href="Bitacora.aspx">Bitácora Auditoria</a>
-                        <a id="item_BitacoraError" class="dropdown-item" href="#">Bitácora Errores</a>
+                        <a id="item_BitacoraError" class="dropdown-item" href="BitacoraErrores.aspx">Bitácora Errores</a>
                         <a id="item_AgregarIdiomas" class="dropdown-item" href="AgregarIdioma.aspx">Agregar Idioma</a>
-                        <a id="item_ModificarIdiomas" class="dropdown-item" href="ModificarIdioma.aspx">Modificar Idioma</a>                
+                        <a id="item_ModificarIdiomas" class="dropdown-item" href="ModificarIdioma.aspx">Modificar Idioma</a> 
+                        <a id="item_SeleccionarIdioma" class="dropdown-item" href="SeleccionarIdioma.aspx">Seleccionar Idioma</a>
                         <a id="item_AgregarPerfiles "class="dropdown-item" href="AgegarPermisos.aspx">Agregar Perfiles</a>
                         <a id="item_Perfiles "class="dropdown-item" href="ModificarPermiso.aspx">Modificar Perfiles</a>
                     </div>
+                    <div id="menu" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <asp:Menu ID="Menu" runat="server"></asp:Menu>                    
+                    </div>                
                 </li>
             </ul>
         </div>
@@ -80,16 +85,10 @@
         </ul>
     </nav>
 
-    <!-- Div para las alertas -->
-    <div class="messagealert" id="alert_container"></div>
-    
-    <div>
-     <asp:ContentPlaceHolder ID="Contenido" runat="server">
-            
-
+     <asp:ContentPlaceHolder ID="Contenido" runat="server">       
      </asp:ContentPlaceHolder>
     </div>
-
+    </form>
  
 </body>
 </html>

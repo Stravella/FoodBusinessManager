@@ -37,7 +37,7 @@ Public Class LogIn
                     Else
                         'Camino feliz
 
-                        Current.Session("usuario") = usuarioLogeado
+                        Current.Session("Cliente") = usuarioLogeado
 
                         DigitoVerificadorBLL.ObtenerInstancia.VerificarIntegridad()
 

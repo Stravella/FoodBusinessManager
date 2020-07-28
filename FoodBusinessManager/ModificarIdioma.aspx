@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="ModificarIdioma.aspx.vb" Inherits="FoodBusinessManager.ModificarIdioma" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="ModificarIdioma.aspx.vb" Inherits="FoodBusinessManager.ModificarIdioma" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <div class="container-fluid">
-        <form id="form1" runat="server">
             <br />
             <div class="row">
                 <h1>
@@ -67,6 +66,5 @@
                 </div>
             </div>
             <br />
-        </form>
     </div>
 </asp:Content>

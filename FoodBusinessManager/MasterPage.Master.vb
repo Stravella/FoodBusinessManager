@@ -5,4 +5,25 @@
 
     End Sub
 
+#Region "Menu"
+    Public Sub ArmarMenu()
+        Try
+
+            'Me.Menu.Items.Add(New MenuItem("Home", "Home", Nothing, "/Default.aspx"))
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+#End Region
+
+#Region "Traducciones"
+
+#End Region
+
+#Region "Perfiles y permisos"
+
+#End Region
+
+
 End Class

@@ -74,7 +74,7 @@ Public Class ModificarPermiso
             End If
             Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
             Dim PerfilViejo As PerfilCompuesto = perfiles(lstPerfil.SelectedIndex)
-            Dim PerfilNuevo As New PerfilCompuesto With {.nombre = PerfilViejo.nombre}
+            Dim PerfilNuevo As New PerfilCompuesto With {.nombre = PerfilViejo.nombre, .se_puede_borrar = 1}
             PerfilNuevo = TreeHelper.ObtenerInstancia.RecorrerArbol(PerfilNuevo, Nothing, TreeViewPermisoActual)
             'Creo el nuevo
             PerfilNuevo.nombre = PerfilViejo.nombre
@@ -85,11 +85,13 @@ Public Class ModificarPermiso
             End If
             'Actualizo los usuarios
             Dim lsUsuarios As List(Of UsuarioDTO) = Session("UsuariosPerfilSeleccionado")
-            For Each Usuario As UsuarioDTO In lsUsuarios
-                Usuario.perfil = PerfilNuevo
-                UsuarioBLL.ObtenerInstancia.ModificarUsuario(Usuario)
-            Next
-            'Borro el viejo
+            If lsUsuarios.Count > 0 Then
+                For Each Usuario As UsuarioDTO In lsUsuarios
+                    Usuario.perfil = PerfilNuevo
+                    UsuarioBLL.ObtenerInstancia.ModificarUsuario(Usuario)
+                Next
+            End If
+            'TODO: Borro el viejo - Esto no esta pasando
             PermisoBLL.ObtenerInstancia.BorrarPerfil(PerfilViejo)
             MostrarMensaje("Se ha modificado el perfil", "Success")
         Catch ex As Exception

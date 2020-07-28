@@ -53,7 +53,9 @@ Public Class Permisos
                 IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
 
-            Dim Perfil As New PerfilCompuesto With {.nombre = txtNombrePerfil.Text}
+            Dim Perfil As New PerfilCompuesto With {.nombre = txtNombrePerfil.Text,
+                                                    .se_puede_borrar = True,
+                                                    .url_acceso = ""}
             Perfil = TreeHelper.ObtenerInstancia.RecorrerArbol(Perfil, Nothing, TreeViewPermisos)
             If Perfil.Hijos.Count > 0 Then
                 PermisoBLL.ObtenerInstancia.Crear(Perfil)

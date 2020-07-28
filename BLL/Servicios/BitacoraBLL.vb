@@ -28,6 +28,7 @@ Public Class BitacoraBLL
     End Sub
 
     Public Sub AgregarError(unaBitacora As BitacoraDTO, unaBitacoraError As BitacoraErroresDTO)
+        Agregar(unaBitacora)
         unaBitacoraError.id = unaBitacora.id
         unaBitacoraError.id_bitacora_error = BitacoraDAL.ObtenerInstancia.GetNextErrorID
         BitacoraDAL.ObtenerInstancia.Agregar(unaBitacoraError)

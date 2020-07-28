@@ -11,41 +11,41 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SeleccionarIdioma
+Partial Public Class Permisos
 
     '''<summary>
-    '''Control lbl_SeleccionarIdioma.
+    '''Control lblNombrePerfil.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lbl_SeleccionarIdioma As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblNombrePerfil As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblIdioma.
+    '''Control txtNombrePerfil.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblIdioma As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtNombrePerfil As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control lstIdiomas.
+    '''Control TreeViewPermisos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstIdiomas As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents TreeViewPermisos As Global.System.Web.UI.WebControls.TreeView
 
     '''<summary>
-    '''Control btn_seleccionarIdioma.
+    '''Control btnAgregarPerfill.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btn_seleccionarIdioma As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnAgregarPerfill As Global.System.Web.UI.WebControls.Button
 End Class

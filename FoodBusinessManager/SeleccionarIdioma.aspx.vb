@@ -5,20 +5,62 @@ Imports Entidades
 
 Public Class SeleccionarIdioma
     Inherits System.Web.UI.Page
+    Dim usuarioLogeado As UsuarioDTO
+#Region "Mensajes"
+    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
+        'Tipos: Danger,Success,Warning,Info
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    End Sub
+#End Region
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Cargar el idioma del usuario
-        Dim usuarioLogeado As UsuarioDTO = Session("usuario")
-        'mostrar el idioma en el label
-        lbl_IdiomaActual.Text = "Su idioma actual es : " & usuarioLogeado.idioma.nombre
-        'Cargar los idiomas en el drop down
-        drop_ListaIdiomas.DataSource = IdiomaBLL.ObtenerInstancia.Listar()
-        drop_ListaIdiomas.DataBind()
+        If Not IsPostBack Then
+            usuarioLogeado = Current.Session("Cliente")
+            CargarIdiomas()
+        End If
     End Sub
 
-    'Modifico el idioma
-    Private Sub btn_AplicarIdioma_Click(sender As Object, e As EventArgs) Handles btn_AplicarIdioma.Click
+    Public Sub CargarIdiomas()
+        Try
+            'Cargar los idiomas en el drop down
+            lstIdiomas.DataSource = IdiomaBLL.ObtenerInstancia.Listar()
+            lstIdiomas.DataTextField = "nombre"
+            lstIdiomas.DataValueField = "id_idioma"
+            lstIdiomas.DataBind()
+        Catch ex As Exception
 
+        End Try
     End Sub
 
+    Protected Sub btn_seleccionarIdioma_Click(sender As Object, e As EventArgs) Handles btn_seleccionarIdioma.Click
+        Try
+
+            Dim idiomaSeleccionado As New IdiomaDTO With {.id_idioma = CInt(lstIdiomas.SelectedValue)}
+            If Not IsNothing(usuarioLogeado) Then
+                'Modifico el idioma en el usuario
+                usuarioLogeado.idioma = idiomaSeleccionado
+                UsuarioBLL.ObtenerInstancia.ModificarUsuario(usuarioLogeado)
+            Else
+                Current.Session("Idioma") = IdiomaBLL.ObtenerInstancia.Obtener(idiomaSeleccionado)
+            End If
+            MostrarMensaje("Se modifico el idioma", "Success")
+            Response.Redirect("SeleccionarIdioma.aspx")
+        Catch ex As Exception
+            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
+            Dim registroBitacora As New BitacoraDTO With {
+                .FechaHora = Now(),
+                .usuario = usuarioLogeado,
+                .tipoSuceso = New SucesoBitacoraDTO With {.id = 3}, 'Suceso: Seleccion de idioma
+                .ValorAnterior = usuarioLogeado.idioma.nombre,
+                .NuevoValor = lstIdiomas.SelectedValue,
+                .observaciones = "Error traduciendo pagina "
+            }
+            Dim registroError As New BitacoraErroresDTO With {
+                .excepcion = ex.Message,
+                .stackTrace = ex.StackTrace}
+            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+            'TODO: Mostrar mensaje error
+        End Try
+    End Sub
 End Class

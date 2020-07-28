@@ -21,23 +21,31 @@ Public Class IdiomaBLL
             Next
             Return True
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
     'Obtiene el idioma y las traducciones
     Public Function Obtener(idioma As IdiomaDTO) As IdiomaDTO
-        Return IdiomaDAL.ObtenerInstancia.ObtenerIdioma(idioma)
+        Try
+            Return IdiomaDAL.ObtenerInstancia.ObtenerIdioma(idioma)
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Function VerificarExistencia(idioma As IdiomaDTO) As Boolean
-        Return IdiomaDAL.ObtenerInstancia.VerificarIdioma(idioma)
+        Try
+            Return IdiomaDAL.ObtenerInstancia.VerificarIdioma(idioma)
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Function Listar() As List(Of IdiomaDTO)
         Try
             Return IdiomaDAL.ObtenerInstancia.ListarIdiomas
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
 
@@ -47,7 +55,7 @@ Public Class IdiomaBLL
         Try
             IdiomaEtiquetaDAL.ObtenerInstancia.CrearTraduccion(Idioma, Etiqueta)
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Sub
 
@@ -55,7 +63,7 @@ Public Class IdiomaBLL
         Try
             IdiomaEtiquetaDAL.ObtenerInstancia.Modificar(Idioma, Etiqueta)
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Sub
 
@@ -66,7 +74,7 @@ Public Class IdiomaBLL
             End If
             Return IdiomaEtiquetaDAL.ObtenerInstancia.ObtenerTraducciones(Idioma)
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
 

@@ -11,95 +11,104 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ModificarPermiso
+Partial Public Class BitacoraErrores
 
     '''<summary>
-    '''Control form1.
+    '''Control lblTituloBitacoraError.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents lblTituloBitacoraError As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblTituloModificarPerfil.
+    '''Control LblTipoSuceso.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblTituloModificarPerfil As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents LblTipoSuceso As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblPerfil.
+    '''Control lstTipoSuceso.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblPerfil As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lstTipoSuceso As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control lstPerfil.
+    '''Control LblUsuarios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstPerfil As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents LblUsuarios As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblListadoPermisos.
+    '''Control lstUsuarios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblListadoPermisos As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control TreeViewPermisoActual.
+    '''Control LblDesde.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TreeViewPermisoActual As Global.System.Web.UI.WebControls.TreeView
+    Protected WithEvents LblDesde As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control Label1.
+    '''Control CalendarDesde.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents CalendarDesde As Global.System.Web.UI.WebControls.Calendar
 
     '''<summary>
-    '''Control TreeViewNuevosPermisos.
+    '''Control LblHasta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TreeViewNuevosPermisos As Global.System.Web.UI.WebControls.TreeView
+    Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control gv_Perfiles.
+    '''Control CalendarHasta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gv_Perfiles As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents CalendarHasta As Global.System.Web.UI.WebControls.Calendar
 
     '''<summary>
-    '''Control btnModificarPerfil.
+    '''Control BtnFiltrar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnModificarPerfil As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents BtnFiltrar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control gv_BitacoraError.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gv_BitacoraError As Global.System.Web.UI.WebControls.GridView
 End Class

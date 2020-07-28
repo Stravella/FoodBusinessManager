@@ -3,7 +3,7 @@
     Private _id_permiso As Integer
     Private _nombre As String
     Private _url_acceso As String
-    Private _substraccion As Boolean
+    Private _se_puede_borrar As Boolean
 
     Public Property url_acceso() As String
         Get
@@ -32,12 +32,12 @@
         End Set
     End Property
 
-    Public Property substraccion() As Boolean
+    Public Property se_puede_borrar() As Boolean
         Get
-            Return _substraccion
+            Return _se_puede_borrar
         End Get
         Set(ByVal value As Boolean)
-            _substraccion = value
+            _se_puede_borrar = value
         End Set
     End Property
 

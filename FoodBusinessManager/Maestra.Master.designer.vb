@@ -11,7 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Permisos
+Partial Public Class Maestra
+
+    '''<summary>
+    '''Control head.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
     '''Control form1.
@@ -23,38 +32,20 @@ Partial Public Class Permisos
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control lblNombrePerfil.
+    '''Control menu.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblNombrePerfil As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents menu As Global.System.Web.UI.WebControls.Menu
 
     '''<summary>
-    '''Control txtNombrePerfil.
+    '''Control Contenido.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtNombrePerfil As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control TreeViewPermisos.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents TreeViewPermisos As Global.System.Web.UI.WebControls.TreeView
-
-    '''<summary>
-    '''Control btnAgregarPerfill.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnAgregarPerfill As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents Contenido As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class

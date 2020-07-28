@@ -1,0 +1,78 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Maestra.master.vb" Inherits="FoodBusinessManager.Maestra" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="Estilos/MiEstilo.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+
+    <style type="text/css">
+        .messagealert {
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            z-index: 100000;
+            padding: 0;
+            font-size: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        function ShowMessage(message, messagetype) {
+            var cssclass;
+            switch (messagetype) {
+                case 'Success':
+                    cssclass = 'alert-success'
+                    break;
+                case 'Error':
+                    cssclass = 'alert-danger'
+                    break;
+                case 'Warning':
+                    cssclass = 'alert-warning'
+                    break;
+                default:
+                    cssclass = 'alert-info'
+            }
+            $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="fixed-bottom alert ' + cssclass + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + messagetype + '!</strong> <span>' + message + '</span></div>');
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container-fluid">
+        <form id="form1" runat="server">
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+                    <a class="navbar-brand" href="#">
+                        <img src="Imagenes/FBMLogoNavbar.png" width="60" height="60" />
+                        Food Business Manager
+                    </a>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <asp:Menu ID="menu" runat="server" Orientation="horizontal" CssClass="navbar-nav mr-auto" StaticMenuStyle-CssClass="nav-item" StaticSelectedStyle-CssClass="nav-item" StaticSubMenuIndent="16px" DynamicMenuStyle-CssClass="nav-item dropdown-menu" RenderingMode="List" role="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                            <LevelMenuItemStyles>
+                                <asp:MenuItemStyle CssClass="dropdown-item" HorizontalPadding="15px" Height="50px" VerticalPadding="15px" />
+                            </LevelMenuItemStyles>
+                            <LevelSelectedStyles>
+                                <asp:MenuItemStyle CssClass="nav-item active" Font-Underline="False" />
+                            </LevelSelectedStyles>
+                            <StaticHoverStyle Font-Underline="true" />
+                            <StaticSelectedStyle Font-Bold="true" />
+                            <DynamicMenuItemStyle CssClass="dropdown-item" />
+                        </asp:Menu>
+                    </div>
+                </nav>
+
+                <asp:ContentPlaceHolder ID="Contenido" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

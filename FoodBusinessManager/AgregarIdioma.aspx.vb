@@ -34,11 +34,11 @@ Public Class Idiomas
             Dim IdiomaActual As New IdiomaDTO
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
+                IdiomaActual.ListaEtiquetas = IdiomaBLL.ObtenerInstancia.ObtenerTraducciones(IdiomaActual)
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
+                Dim usuarioLogeado As UsuarioDTO = Current.Session("Cliente")
+                IdiomaActual = usuarioLogeado.idioma
             End If
-
-            IdiomaActual.ListaEtiquetas = IdiomaBLL.ObtenerInstancia.ObtenerTraducciones(IdiomaActual)
 
             If IsNothing(IdiomaActual.ListaEtiquetas) Then
                 gv_Etiquetas.DataSource = IdiomaActual.ListaEtiquetas

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="ModificarPermiso.aspx.vb" Inherits="FoodBusinessManager.ModificarPermiso" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="ModificarPerfil.aspx.vb" Inherits="FoodBusinessManager.ModificarPermiso" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
@@ -14,7 +14,6 @@
     </script>
 
     <div class="container-fluid">
-        <form id="form1" runat="server" class="form-horizontal">
             <br />
             <div class="row">
                 <div class="col-sm-121">
@@ -83,7 +82,6 @@
                 <asp:Button ID="btnModificarPerfil" runat="server" Text="Modificar Perfil" CssClass="form-control btn btn-warning" />
             </div>
 
-        </form>
     </div>
 
 </asp:Content>
