@@ -36,7 +36,8 @@ Public Class SeleccionarIdioma
     Protected Sub btn_seleccionarIdioma_Click(sender As Object, e As EventArgs) Handles btn_seleccionarIdioma.Click
         Try
 
-            Dim idiomaSeleccionado As New IdiomaDTO With {.id_idioma = CInt(lstIdiomas.SelectedValue)}
+            Dim idiomaSeleccionado As New IdiomaDTO With {.id_idioma = lstIdiomas.SelectedValue}
+            usuarioLogeado = Current.Session("cliente")
             If Not IsNothing(usuarioLogeado) Then
                 'Modifico el idioma en el usuario
                 usuarioLogeado.idioma = idiomaSeleccionado

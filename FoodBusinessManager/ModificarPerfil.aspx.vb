@@ -24,7 +24,7 @@ Public Class ModificarPermiso
     End Sub
 
     Protected Sub CargarListaPerfiles()
-        listaPerfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfiles()
+        listaPerfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfilesEditables
         Session("Perfiles") = listaPerfiles
         lstPerfil.DataSource = listaPerfiles
         lstPerfil.DataBind()
@@ -74,29 +74,46 @@ Public Class ModificarPermiso
             End If
             Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
             Dim PerfilViejo As PerfilCompuesto = perfiles(lstPerfil.SelectedIndex)
-            Dim PerfilNuevo As New PerfilCompuesto With {.nombre = PerfilViejo.nombre, .se_puede_borrar = 1}
-            PerfilNuevo = TreeHelper.ObtenerInstancia.RecorrerArbol(PerfilNuevo, Nothing, TreeViewPermisoActual)
-            'Creo el nuevo
-            PerfilNuevo.nombre = PerfilViejo.nombre
+            Dim PerfilNuevo As New PerfilCompuesto With {.id_permiso = PerfilViejo.id_permiso, .nombre = PerfilViejo.nombre, .se_puede_borrar = 1}
+            PerfilNuevo = TreeHelper.ObtenerInstancia.RecorrerArbol(PerfilNuevo, Nothing, TreeViewNuevosPermisos)
+            'Modifico el perfil
             If PerfilNuevo.Hijos.Count > 0 Then
-                PermisoBLL.ObtenerInstancia.Crear(PerfilNuevo)
+                PermisoBLL.ObtenerInstancia.ModificarPerfil(PerfilViejo, PerfilNuevo)
+                Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
+                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso 5: Modificacion de perfil
+                                                .usuario = Current.Session("Cliente"),
+                                                .ValorAnterior = PerfilViejo.nombre,
+                                                .NuevoValor = PerfilNuevo.nombre,
+                                                .observaciones = "Se modificaron los permisos del perfil "
+                                                }
+                registroBitacora.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)
+                BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
+                MostrarMensaje("Se ha modificado el perfil", "Success")
             Else
-                MostrarMensaje("Debe seleccionar algún perfil del listado", "Warning")
+                MostrarMensaje("Debe seleccionar algún permiso del listado", "Warning")
             End If
-            'Actualizo los usuarios
-            Dim lsUsuarios As List(Of UsuarioDTO) = Session("UsuariosPerfilSeleccionado")
-            If lsUsuarios.Count > 0 Then
-                For Each Usuario As UsuarioDTO In lsUsuarios
-                    Usuario.perfil = PerfilNuevo
-                    UsuarioBLL.ObtenerInstancia.ModificarUsuario(Usuario)
-                Next
-            End If
-            'TODO: Borro el viejo - Esto no esta pasando
-            PermisoBLL.ObtenerInstancia.BorrarPerfil(PerfilViejo)
-            MostrarMensaje("Se ha modificado el perfil", "Success")
         Catch ex As Exception
-            'TODO: LOGEAR ERROR
+            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
+            Dim registroBitacora As New BitacoraDTO With {
+                .FechaHora = Now(),
+                .usuario = Current.Session("cliente"),
+                .ValorAnterior = lstPerfil.SelectedValue,
+                .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso: Error de sistema
+                .observaciones = "Error modificando perfiles "
+            }
+            Dim registroError As New BitacoraErroresDTO With {
+                .excepcion = ex.Message,
+                .stackTrace = ex.StackTrace}
+            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", "Danger")
+        End Try
+    End Sub
+
+    Private Sub TreeViewNuevosPermisos_TreeNodeCheckChanged(sender As Object, e As TreeNodeEventArgs) Handles TreeViewNuevosPermisos.TreeNodeCheckChanged
+        Try
+            TreeHelper.ObtenerInstancia.CheckearNodosHijo(e.Node)
+        Catch ex As Exception
+            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", "Info")
         End Try
     End Sub
 End Class

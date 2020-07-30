@@ -147,7 +147,7 @@ Public Class UsuarioBLL
                 End If
             Next
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
 

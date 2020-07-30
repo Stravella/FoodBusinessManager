@@ -63,12 +63,14 @@ Public Class PermisoDAL
         End Try
     End Sub
 
-
-    Public Sub Modificar(permiso As PermisoComponente)
+    Public Sub ModificarPerfil(perfil As PerfilCompuesto) 'Solo se modifican las relaciones con los hijos
         Try
-
+            'AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Crear", CrearParametros(perfil))
+            For Each hijo As PermisoComponente In perfil.Hijos
+                AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Crear", CrearParametros(perfil, hijo))
+            Next
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Sub
 
@@ -86,6 +88,18 @@ Public Class PermisoDAL
         End Try
     End Sub
 
+    Public Sub EliminarPermisos(id_perfil As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add(.CrearParametro("@id_perfil", id_perfil))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Eliminar", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
     Public Function Obtener(id As Integer) As PermisoComponente
         Try
             Dim params As New List(Of SqlParameter)
@@ -97,12 +111,20 @@ Public Class PermisoDAL
         End Try
     End Function
 
+    Public Function ObtenerPorNombre(permiso As PermisoComponente) As PermisoComponente
+        Try
+            Dim ls As List(Of PermisoComponente) = Me.Listar
+            Dim oPermiso As PermisoComponente = ls.Find(Function(x) x.nombre = permiso.nombre)
+            Return oPermiso
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
     Public Function Listar() As List(Of PermisoComponente)
         Try
             Dim ls As New List(Of PermisoComponente)
             For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Perfil_Listar").Rows
-                'Esto es recursivo, deberia chequear de no agregar a los que ya estén?
                 ls.Add(ConvertirPermiso(row))
             Next
             Return ls

@@ -67,8 +67,8 @@
             <%-- Acá va la tabla  --%>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <asp:GridView ID="gv_Perfiles" runat="server" CssClass="grid" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="10" RowStyle-Height="40px">
+                    <div class="table table-hover table-bordered table-success">
+                        <asp:GridView ID="gv_Perfiles" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="10" RowStyle-Height="40px">
                             <Columns>
                                 <asp:BoundField DataField="username" HeaderText="Usuarios con el perfil seleccionado" />
                             </Columns>

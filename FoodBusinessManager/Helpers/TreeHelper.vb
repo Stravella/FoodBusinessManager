@@ -96,6 +96,7 @@ Public Class TreeHelper
                         If Not perfil.esValido(p.nombre) Then
                             perfil.agregarHijo(p)
                         Else
+                            'TODO: Para modificaciones, cuando cae el padre limpio a los hijos.
                             p.Hijos.Clear()
                         End If
                     Else
