@@ -115,6 +115,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Default1.aspx" />
+    <Content Include="EliminarPerfil.aspx" />
     <Content Include="Estilos\MiEstilo.css" />
     <Content Include="Estilos\Principal.css" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
@@ -219,6 +220,13 @@
     </Compile>
     <Compile Include="Default1.aspx.vb">
       <DependentUpon>Default1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EliminarPerfil.aspx.designer.vb">
+      <DependentUpon>EliminarPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarPerfil.aspx.vb">
+      <DependentUpon>EliminarPerfil.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Helpers\HtmlHelper.vb" />

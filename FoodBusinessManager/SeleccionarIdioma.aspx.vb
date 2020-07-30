@@ -45,7 +45,7 @@ Public Class SeleccionarIdioma
             Else
                 Current.Session("Idioma") = IdiomaBLL.ObtenerInstancia.Obtener(idiomaSeleccionado)
             End If
-            MostrarMensaje("Se modifico el idioma", "Success")
+            MostrarMensaje("Se m odifico el idioma", "Success")
             Response.Redirect("SeleccionarIdioma.aspx")
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")

@@ -84,7 +84,7 @@ Public Class PermisoDAL
             AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Permisos_Eliminar", params)
             AccesoDAL.ObtenerInstancia.EjecutarSP("Perfil_Eliminar", params)
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Sub
 

@@ -126,7 +126,7 @@ Public Class BitacoraDAL
             params.Add(.CrearParametro("@stackTrace", Elemento.stackTrace))
             params.Add(.CrearParametro("@exception", Elemento.excepcion))
             params.Add(.CrearParametro("@id_bitacora", Elemento.id))
-            .EjecutarSP("Bitacora__errores_crear", params)
+            .EjecutarSP("Bitacora_errores_crear", params)
         End With
     End Function
 

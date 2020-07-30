@@ -38,6 +38,7 @@ Public Class AccesoDAL
             i = -1
         Finally
             CX.Close()
+            cmd.Parameters.Clear()
         End Try
 
         Return i

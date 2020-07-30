@@ -1,7 +1,8 @@
 ﻿Imports System.Web.HttpContext
-Imports Entidades
 Imports BLL
-Public Class ModificarPermiso
+Imports Entidades
+
+Public Class EliminarPerfil
     Inherits System.Web.UI.Page
     Dim ls As List(Of PermisoComponente)
     Dim listaPerfiles As List(Of PermisoComponente)
@@ -12,13 +13,11 @@ Public Class ModificarPermiso
     End Sub
 #End Region
 
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ls = PermisoBLL.ObtenerInstancia.Listar
             Dim nodo As New TreeNode
-            TreeViewNuevosPermisos.Attributes.Add("onclick", "forcePostBack()")
-            TreeViewNuevosPermisos.Nodes.Clear()
-            TreeHelper.ObtenerInstancia.ArmarNodos(ls, Nothing, TreeViewNuevosPermisos)
             CargarListaPerfiles()
         End If
     End Sub
@@ -45,14 +44,13 @@ Public Class ModificarPermiso
             For Each nodo As TreeNode In TreeViewPermisoActual.Nodes
                 TreeHelper.ObtenerInstancia.CheckearTodos(nodo)
             Next
-            TreeViewNuevosPermisos.CollapseAll()
-            Dim lsUsuarios As New List(Of UsuarioDTO)
-            lsUsuarios = BLL.UsuarioBLL.ObtenerInstancia.ListarPorPerfil(perfiles(lstPerfil.SelectedIndex))
-            Session("UsuariosPerfilSeleccionado") = lsUsuarios
-            If lsUsuarios.Count = 0 Then
+            Dim listaUsuarios As New List(Of UsuarioDTO)
+            listaUsuarios = BLL.UsuarioBLL.ObtenerInstancia.ListarPorPerfil(perfiles(lstPerfil.SelectedIndex))
+            Session("UsuariosPerfilSeleccionado") = listaUsuarios
+            If listaUsuarios.Count = 0 Then
                 MostrarMensaje("No hay usuarios con el perfil seleccionado", "Info")
             Else
-                gv_Perfiles.DataSource = lsUsuarios
+                gv_Perfiles.DataSource = listaUsuarios
                 gv_Perfiles.DataBind()
                 'TODO: CAMBIAR NOMBRE DEL HEADER DE LA GRILLA
             End If
@@ -62,9 +60,7 @@ Public Class ModificarPermiso
         End Try
     End Sub
 
-
-    'TODO: Volver a probar esto más adelante: cuando tenga el ABM Usuarios
-    Private Sub btnModificarPerfil_Click(sender As Object, e As EventArgs) Handles btnModificarPerfil.Click
+    Private Sub btnEliminarPerfil_Click(sender As Object, e As EventArgs) Handles btnEliminarPerfil.Click
         Try
             Dim IdiomaActual As New IdiomaDTO
             If IsNothing(Current.Session("Cliente")) Then
@@ -72,25 +68,25 @@ Public Class ModificarPermiso
             Else
                 IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
-            Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
-            Dim PerfilViejo As PerfilCompuesto = perfiles(lstPerfil.SelectedIndex)
-            Dim PerfilNuevo As New PerfilCompuesto With {.id_permiso = PerfilViejo.id_permiso, .nombre = PerfilViejo.nombre, .se_puede_borrar = 1}
-            PerfilNuevo = TreeHelper.ObtenerInstancia.RecorrerArbol(PerfilNuevo, Nothing, TreeViewNuevosPermisos)
-            'Modifico el perfil
-            If PerfilNuevo.Hijos.Count > 0 Then
-                PermisoBLL.ObtenerInstancia.ModificarPerfil(PerfilViejo, PerfilNuevo)
+            listaPerfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfilesEditables
+            Dim perfilSeleccionado As PerfilCompuesto = listaPerfiles(lstPerfil.SelectedIndex)
+            Dim listaUsuarios As New List(Of UsuarioDTO)
+            listaUsuarios = BLL.UsuarioBLL.ObtenerInstancia.ListarPorPerfil(perfilSeleccionado)
+            If listaUsuarios.Count = 0 Then
+                PermisoBLL.ObtenerInstancia.BorrarPerfil(perfilSeleccionado)
                 Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso 5: Modificacion de perfil
+                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 6}, 'Suceso 6: Borrado de perfil
                                                 .usuario = Current.Session("Cliente"),
-                                                .ValorAnterior = PerfilViejo.nombre,
-                                                .NuevoValor = PerfilNuevo.nombre,
-                                                .observaciones = "Se modificaron los permisos del perfil "
+                                                .ValorAnterior = lstPerfil.SelectedValue,
+                                                .NuevoValor = "",
+                                                .observaciones = "Se elimino el perfil"
                                                 }
                 registroBitacora.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
                 MostrarMensaje("Se ha modificado el perfil", "Success")
+                Response.Redirect("EliminarPerfil.aspx")
             Else
-                MostrarMensaje("Debe seleccionar algún permiso del listado", "Warning")
+                MostrarMensaje("No se puede eliminar un perfil que es utilizado por usuarios. Primero re asigne un nuevo perfil a los usuarios", "Danger")
             End If
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
@@ -98,8 +94,8 @@ Public Class ModificarPermiso
                 .FechaHora = Now(),
                 .usuario = Current.Session("cliente"),
                 .ValorAnterior = lstPerfil.SelectedValue,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso 5: Modificacion de perfil
-                .observaciones = "Error modificando perfiles "
+                .tipoSuceso = New SucesoBitacoraDTO With {.id = 6}, 'Suceso 6: Borrado de perfil
+                .observaciones = "Error eliminando perfil "
             }
             Dim registroError As New BitacoraErroresDTO With {
                 .excepcion = ex.Message,
@@ -109,11 +105,4 @@ Public Class ModificarPermiso
         End Try
     End Sub
 
-    Private Sub TreeViewNuevosPermisos_TreeNodeCheckChanged(sender As Object, e As TreeNodeEventArgs) Handles TreeViewNuevosPermisos.TreeNodeCheckChanged
-        Try
-            TreeHelper.ObtenerInstancia.CheckearNodosHijo(e.Node)
-        Catch ex As Exception
-            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", "Info")
-        End Try
-    End Sub
 End Class
