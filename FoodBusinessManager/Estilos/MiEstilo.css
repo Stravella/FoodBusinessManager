@@ -12,6 +12,10 @@
     background-color: #EEEEEE;
 }
 
+.validador-requerido {
+    color: red;
+}
+
 .grid {
     width: 90%;
     background-color: white;
