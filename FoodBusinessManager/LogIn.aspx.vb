@@ -39,41 +39,18 @@ Public Class LogIn
 
                         Current.Session("Cliente") = usuarioLogeado
 
-                        DigitoVerificadorBLL.ObtenerInstancia.VerificarIntegridad()
-
-                        Dim tablasCorruptas As List(Of String) = DigitoVerificadorBLL.ObtenerInstancia.VerificarIntegridad()
-                        If tablasCorruptas.Count > 0 Then
-                            Dim msg As String
-                            For Each tabla As String In tablasCorruptas
-                                msg += "Tabla: " & tabla
-                                For Each fila As String In DigitoVerificadorBLL.ObtenerInstancia.VerificarFilas(tabla)
-                                    msg += "Fila: " & fila & ";"
-                                Next
-                            Next
-                            'Grabo Bitacora - Suceso Login = 1
-                            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
-                                                .usuario = usuarioLogeado,
-                                                .ValorAnterior = "",
-                                                .NuevoValor = "",
-                                                .observaciones = msg,
-                                                .DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)}
-                            BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
-
-                        Else
-                            'Grabo Bitacora - Suceso Login = 1
-                            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
+                        'Grabo Bitacora - Suceso Login = 1
+                        Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
                                                 .usuario = usuarioLogeado,
                                                 .ValorAnterior = "",
                                                 .NuevoValor = "",
                                                 .observaciones = ""
                                                 }
-                            registroBitacora.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)
-                            BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
+                        BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
 
-                            Response.Redirect("Default1.aspx", False)
-                        End If
+                        Response.Redirect("Default1.aspx", False)
+
                     End If
                 End If
                 'Si el usuario no existe

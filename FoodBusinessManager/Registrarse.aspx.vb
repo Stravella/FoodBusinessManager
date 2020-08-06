@@ -13,7 +13,12 @@ Public Class Registrarse
                                             .apellido = txtApellido.Text,
                                             .username = txtUsuario.Text,
                                             .mail = txtMail.Text,
-                                            .perfil = New PerfilCompuesto With {.id_permiso = 1},
+                                            .intentos = 0,
+                                            .bloqueado = 1,
+                                            .fechaCreacion = Now(),
+                                            .password = UsuarioBLL.ObtenerInstancia.GenerarToken(),
+                                            .SALT = DigitoVerificadorBLL.ObtenerInstancia.ObtenerSALT(),
+                                            .perfil = New PerfilCompuesto With {.id_permiso = 18}, 'TODO: ¿Con qué perfil lo inicio? Esta en Admin por defeault
                                             .idioma = New IdiomaDTO With {.id_idioma = "es-AR"}
                                             }
         'Chequeo que el usuario no exista
@@ -21,12 +26,18 @@ Public Class Registrarse
             dvMensaje.Visible = True
             lblRespuesta.Text = "El nombre de usuario ya está siendo utilizado"
         Else
+            'Guardo la password sin encriptar para enviar por mail
+            Dim passwordDesencriptada As String = usuario.password
+            usuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuario.SALT)
+            'TODO: Activar esta validacion para cuando terminen las pruebas
             'Chequeo que el mail no exista
             'If UsuarioBLL.ObtenerInstancia.ChequearExistenciaMail(usuario) = True Then
             '    dvMensaje.Visible = True
             '    lblRespuesta.Text = "El mail ya está siendo utilizado"
             'Else
             usuario = UsuarioBLL.ObtenerInstancia.AgregarUsuario(usuario)
+            'Seteo la pwd vieja para enviar por mail
+            usuario.password = passwordDesencriptada
             GestorMailBLL.ObtenerInstancia.EnviarMail(usuario, False)
             'TODO: Mostrar un modal 
             Response.Redirect("LogIn.aspx")

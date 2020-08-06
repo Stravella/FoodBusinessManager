@@ -25,7 +25,6 @@ Public Class UsuarioDAL
                 params.Add(.CrearParametro("@Apellido", usuario.apellido))
                 params.Add(.CrearParametro("@username", usuario.username))
                 params.Add(.CrearParametro("@password", usuario.password))
-                params.Add(.CrearParametro("@DVH", usuario.DVH))
                 params.Add(.CrearParametro("@fecha_Creacion", usuario.fechaCreacion))
                 params.Add(.CrearParametro("@intentos", usuario.intentos))
                 params.Add(.CrearParametro("@bloqueado", usuario.bloqueado))
@@ -88,7 +87,6 @@ Public Class UsuarioDAL
                                               .apellido = row("apellido"),
                                               .username = row("username"),
                                               .password = row("password"),
-                                              .DVH = row("DVH"),
                                               .fechaCreacion = row("fecha_Creacion"),
                                               .bloqueado = row("bloqueado"),
                                               .intentos = row("intentos"),

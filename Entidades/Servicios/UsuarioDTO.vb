@@ -20,7 +20,6 @@ Public Class UsuarioDTO
     Private _nombre As String
     Private _apellido As String
     Private _fechaCreacion As DateTime
-    Private _DVH As String
     Private _intentos As Integer
     Private _bloqueado As Boolean
     Private _mail As String
@@ -92,23 +91,14 @@ Public Class UsuarioDTO
             End Set
         End Property
 
-        Public Property DVH() As String
-            Get
-                Return _DVH
-            End Get
-            Set(ByVal Value As String)
-                _DVH = Value
-            End Set
-        End Property
-
-        Public Property intentos() As Integer
-            Get
-                Return _intentos
-            End Get
-            Set(ByVal Value As Integer)
-                _intentos = Value
-            End Set
-        End Property
+    Public Property intentos() As Integer
+        Get
+            Return _intentos
+        End Get
+        Set(ByVal Value As Integer)
+            _intentos = Value
+        End Set
+    End Property
 
     Public Property mail() As String
         Get

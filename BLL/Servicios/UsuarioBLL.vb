@@ -29,27 +29,11 @@ Public Class UsuarioBLL
 
         Try
             usuario.id = UsuarioDAL.ObtenerInstancia.GetNextID
-            usuario.intentos = 0
-            'Se crea en bloqueado para que genere su nueva contraseña
-            usuario.bloqueado = 1
-            usuario.fechaCreacion = DateTime.Now
-            'Guardo la password sin encriptar para enviarla por mail
-            usuario.password = Me.GenerarToken
-            Dim passwordDesencriptada As String = usuario.password
-            'Genero el SALT
-            usuario.SALT = DigitoVerificadorBLL.ObtenerInstancia.ObtenerSALT
-            usuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuario.SALT)
-            usuario.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuario)
             UsuarioDAL.ObtenerInstancia.AgregarUsuario(usuario)
-            'seteo la vieja password al usuario para enviarla por mail
-            usuario.password = passwordDesencriptada
-            'TODO: chequear que esto funcione
-            DigitoVerificadorBLL.ObtenerInstancia.ActualizarDVV("usuarios")
             Return usuario
         Catch ex As Exception
             Return Nothing
         End Try
-
     End Function
 
     Public Sub ModificarUsuario(usuario As UsuarioDTO)
@@ -102,7 +86,6 @@ Public Class UsuarioBLL
             GestorMailBLL.ObtenerInstancia.EnviarMail(usuarioObtenido, True)
             usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuarioObtenido.password + usuarioObtenido.SALT)
             'Encriptar la nueva contraseña (si la encripto el token tiene que devolverse antes)
-            usuarioObtenido.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuario)
             ModificarUsuario(usuarioObtenido)
             Return usuarioObtenido
         Catch ex As Exception
@@ -116,7 +99,6 @@ Public Class UsuarioBLL
             Dim usuarioObtenido = ObtenerUsuario(usuario)
             usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuarioObtenido.SALT)
             usuarioObtenido.bloqueado = 0
-            usuarioObtenido.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(usuarioObtenido)
             ModificarUsuario(usuarioObtenido)
             DigitoVerificadorBLL.ObtenerInstancia.ActualizarDVV("usuarios")
             Return usuarioObtenido

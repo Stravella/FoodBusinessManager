@@ -20,7 +20,6 @@ Public Class BitacoraDAL
             params.Add(.CrearParametro("@valorAnterior", Elemento.ValorAnterior))
             params.Add(.CrearParametro("@valorNuevo", Elemento.NuevoValor))
             params.Add(.CrearParametro("@obs", Elemento.observaciones))
-            params.Add(.CrearParametro("DVH", Elemento.DVH))
             .EjecutarSP("Bitacora_Crear", params)
         End With
     End Sub
@@ -62,8 +61,8 @@ Public Class BitacoraDAL
                                                        .tipoSuceso = SucesoBitacoraDAL.ObtenerInstancia.ObtenerPorId(Row("id_tipo_suceso")),
                                                        .ValorAnterior = Row("valorAnterior"),
                                                        .NuevoValor = Row("valorNuevo"),
-                                                       .observaciones = Row("observaciones"),
-                                                       .DVH = Row("DVH")}
+                                                       .observaciones = Row("observaciones")
+                                                       }
                 lsBitacora.Add(oBitacora)
             Next
             Return lsBitacora
@@ -85,7 +84,6 @@ Public Class BitacoraDAL
                 oBitacora.ValorAnterior = row("valorAnterior")
                 oBitacora.NuevoValor = row("valorNuevo")
                 oBitacora.observaciones = row("observaciones")
-                oBitacora.DVH = row("DVH")
             Next
             Return oBitacora
         Catch ex As Exception
@@ -159,8 +157,8 @@ Public Class BitacoraDAL
                                                        .NuevoValor = Row("valorNuevo"),
                                                        .observaciones = Row("observaciones"),
                                                        .excepcion = Row("exception"),
-                                                       .stackTrace = Row("stackTrace"),
-                                                       .DVH = Row("DVH")}
+                                                       .stackTrace = Row("stackTrace")
+                                                       }
                 lsBitacora.Add(oBitacora)
             Next
             Return lsBitacora

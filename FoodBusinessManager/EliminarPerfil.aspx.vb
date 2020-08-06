@@ -81,7 +81,6 @@ Public Class EliminarPerfil
                                                 .NuevoValor = "",
                                                 .observaciones = "Se elimino el perfil"
                                                 }
-                registroBitacora.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
                 MostrarMensaje("Se ha modificado el perfil", "Success")
                 Response.Redirect("EliminarPerfil.aspx")

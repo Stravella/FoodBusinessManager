@@ -36,6 +36,8 @@ Public Class AgregarUsuario
         perfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfiles
         Session("Perfiles") = perfiles
         lstPerfil.DataSource = perfiles
+        lstPerfil.DataTextField = "nombre"
+        lstPerfil.DataValueField = "id_permiso"
         lstPerfil.DataBind()
         lstPerfil.SelectedIndex = 0
     End Sub
@@ -48,6 +50,7 @@ Public Class AgregarUsuario
             Else
                 IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
+            'validar que el usuario exista
             Dim usuario As New UsuarioDTO With {.nombre = txtNombre.Text,
                  .apellido = txtApellido.Text,
                  .username = txtUsuario.Text,
@@ -59,17 +62,20 @@ Public Class AgregarUsuario
                  .idioma = New IdiomaDTO With {.id_idioma = lstIdioma.SelectedValue},
                  .perfil = New PerfilCompuesto With {.id_permiso = lstPerfil.SelectedValue}
             }
-            UsuarioBLL.ObtenerInstancia.AgregarUsuario(usuario)
-            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 7}, 'Suceso 7: Creacion de usuario
-                                                .usuario = Current.Session("Cliente"),
-                                                .ValorAnterior = "",
-                                                .NuevoValor = usuario.username,
-                                                .observaciones = "Se creo el usuario " & usuario.username
-                                                }
-            registroBitacora.DVH = DigitoVerificadorBLL.ObtenerInstancia.CalcularDVH(registroBitacora)
-            BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
-            MostrarMensaje("Se ha creado el usuario", "Success")
+            If UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) = False Then
+                UsuarioBLL.ObtenerInstancia.AgregarUsuario(usuario)
+                Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
+                                                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 7}, 'Suceso 7: Creacion de usuario
+                                                    .usuario = Current.Session("Cliente"),
+                                                    .ValorAnterior = "",
+                                                    .NuevoValor = usuario.username,
+                                                    .observaciones = "Se creo el usuario " & usuario.username
+                                                    }
+                BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
+                MostrarMensaje("Se ha creado el usuario", "Success")
+            Else
+
+            End If
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
             Dim registroBitacora As New BitacoraDTO With {

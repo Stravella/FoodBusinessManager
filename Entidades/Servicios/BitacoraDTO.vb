@@ -24,7 +24,6 @@ Public Class BitacoraDTO
     Private _NuevoValor As String
     Private _BitacoraError As BitacoraErroresDTO
     Private _observaciones As String
-    Private _DVH As String
 
 
     Public Property id() As Integer
@@ -108,15 +107,6 @@ Public Class BitacoraDTO
         End Get
         Set(ByVal value As String)
             _observaciones = value
-        End Set
-    End Property
-
-    Public Property DVH() As String
-        Get
-            Return _DVH
-        End Get
-        Set(ByVal value As String)
-            _DVH = value
         End Set
     End Property
 
