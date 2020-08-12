@@ -44,6 +44,14 @@ Public Class UsuarioBLL
         End Try
     End Sub
 
+    Public Sub EliminarUsuario(usuario As UsuarioDTO)
+        Try
+            UsuarioDAL.ObtenerInstancia.EliminarUsuario(usuario)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
 #End Region
 
     Public Function ListarPorPerfil(unPerfil As PerfilCompuesto) As List(Of UsuarioDTO)

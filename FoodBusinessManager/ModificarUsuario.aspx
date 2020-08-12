@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="AgregarUsuario.aspx.vb" Inherits="FoodBusinessManager.AgregarUsuario" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="ModificarUsuario.aspx.vb" Inherits="FoodBusinessManager.ModificarUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,18 +8,30 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>
-                    <asp:Label ID="lblAgregarUsuario" runat="server" Text="Agregar usuario"> </asp:Label>
+                    <asp:Label ID="lblModificarUsuario" runat="server" Text="Modificar usuario"> </asp:Label>
                 </h1>
             </div>
         </div>
         <br />
 
         <div class="panel panel-info fondo-panel">
+            <div class="form-group label-form">
+                <asp:Label ID="lblUsuarios" runat="server" Text="Usuarios"></asp:Label>
+            </div>
+            <div class="col-md-12">
+                <div class="dropdown">
+                    <asp:ListBox ID="lstUsuarios" runat="server" CssClass="form-control" AutoPostBack="true"></asp:ListBox>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="fondo panel-info fondo-panel">
             <div class="form-group">
                 <div class="form-group label-form">
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="input-group">
                         <asp:TextBox ID="txtNombre" runat="server" class="form-control"></asp:TextBox>
                     </div>
@@ -32,7 +44,7 @@
                 <div class="form-group label-form">
                     <asp:Label ID="lblApellido" runat="server" Text="Apellido"></asp:Label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="input-group">
                         <asp:TextBox ID="txtApellido" runat="server" class="form-control"></asp:TextBox>
                     </div>
@@ -45,7 +57,7 @@
                 <div class="form-group label-form">
                     <asp:Label ID="lblUsuario" runat="server" Text="Usuario"></asp:Label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="input-group">
                         <asp:TextBox ID="txtUsuario" runat="server" class="form-control"></asp:TextBox>
                     </div>
@@ -58,7 +70,7 @@
                 <div class="form-group label-form">
                     <asp:Label ID="lblContraseña" runat="server" Text="Contraseña"></asp:Label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="input-group">
                         <asp:TextBox ID="txtContraseña" runat="server" class="form-control"></asp:TextBox>
                     </div>
@@ -71,7 +83,7 @@
                 <div class="form-group label-form">
                     <asp:Label ID="lblMail" runat="server" Text="EMail"></asp:Label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="input-group">
                         <asp:TextBox ID="txtMail" runat="server" class="form-control"></asp:TextBox>
                     </div>
@@ -101,14 +113,16 @@
                     <asp:ListBox ID="lstIdioma" runat="server" CssClass="form-control" AutoPostBack="true"></asp:ListBox>
                 </div>
             </div>
-
-
             <br />
-            <br />
-            <div class="row">
-                <div class="form-group">
-                    <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-block btn-success" />
-                </div>
+            <div class="form-check">
+                <asp:CheckBox ID="chkBloqueado" CssClass="form-check-input" Text="Bloqueado" runat="server"/>             
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-block btn-warning" />
             </div>
         </div>
     </div>

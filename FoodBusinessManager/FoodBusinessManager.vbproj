@@ -117,6 +117,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Default1.aspx" />
     <Content Include="EliminarPerfil.aspx" />
+    <Content Include="EliminarUsuario.aspx" />
     <Content Include="Estilos\MiEstilo.css" />
     <Content Include="Estilos\Principal.css" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
@@ -128,6 +129,7 @@
     <Content Include="LogIn.aspx" />
     <Content Include="ModificarIdioma.aspx" />
     <Content Include="ModificarPerfil.aspx" />
+    <Content Include="ModificarUsuario.aspx" />
     <Content Include="NuevaContraseña.aspx" />
     <Content Include="OlvidoContraseña.aspx" />
     <Content Include="AgregarPerfil.aspx" />
@@ -237,6 +239,13 @@
       <DependentUpon>EliminarPerfil.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EliminarUsuario.aspx.designer.vb">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarUsuario.aspx.vb">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Helpers\HtmlHelper.vb" />
     <Compile Include="Helpers\TreeHelper.vb" />
     <Compile Include="Maestra.Master.designer.vb">
@@ -289,6 +298,13 @@
     </Compile>
     <Compile Include="ModificarPerfil.aspx.vb">
       <DependentUpon>ModificarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ModificarUsuario.aspx.designer.vb">
+      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarUsuario.aspx.vb">
+      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="SeleccionarIdioma.aspx.designer.vb">

@@ -11,16 +11,34 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class AgregarUsuario
+Partial Public Class ModificarUsuario
 
     '''<summary>
-    '''Control lblAgregarUsuario.
+    '''Control lblModificarUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblAgregarUsuario As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblModificarUsuario As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblUsuarios As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lstUsuarios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.ListBox
 
     '''<summary>
     '''Control lblNombre.
@@ -203,11 +221,20 @@ Partial Public Class AgregarUsuario
     Protected WithEvents lstIdioma As Global.System.Web.UI.WebControls.ListBox
 
     '''<summary>
-    '''Control btnAgregar.
+    '''Control chkBloqueado.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnAgregar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents chkBloqueado As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control btnModificar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.Button
 End Class

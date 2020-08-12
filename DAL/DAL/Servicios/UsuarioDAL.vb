@@ -131,4 +131,12 @@ Public Class UsuarioDAL
         AccesoDAL.ObtenerInstancia.EjecutarSP("Usuarios_Modificar", CrearParametros(usuario))
     End Sub
 
+    'Eliminar Usuario
+    Public Sub EliminarUsuario(ByVal usuario As UsuarioDTO)
+        Dim params As New List(Of SqlParameter)
+        With AccesoDAL.ObtenerInstancia()
+            params.Add((.CrearParametro("@id_usuario", usuario.id)))
+        End With
+        AccesoDAL.ObtenerInstancia.EjecutarSP("Usuarios_Eliminar", params)
+    End Sub
 End Class
