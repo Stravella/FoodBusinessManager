@@ -11,59 +11,50 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class OlvidoContraseña
-    
+Partial Public Class Contactenos
+
     '''<summary>
-    '''Control form1.
+    '''Control lblTitContactenos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+    Protected WithEvents lblTitContactenos As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtUsuario.
+    '''Control lblAffiniti.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblAffiniti As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtMail.
+    '''Control lblTelContacto.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtMail As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblTelContacto As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control btnRecuperarContraseña.
+    '''Control lblMailContacto.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnRecuperarContraseña As Global.System.Web.UI.WebControls.Button
-    
+    Protected WithEvents lblMailContacto As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control dvMensaje.
+    '''Control lblDireccionContacto.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents dvMensaje As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Control lblRespuesta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblRespuesta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblDireccionContacto As Global.System.Web.UI.WebControls.Label
 End Class

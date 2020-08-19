@@ -11,59 +11,68 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LogIn
-    
+Partial Public Class OlvidoContraseña1
+
     '''<summary>
-    '''Control form1.
+    '''Control lblCambiarContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+    Protected WithEvents lblCambiarContraseña As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtUser.
+    '''Control lblDescripcionCambioContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUser As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblDescripcionCambioContraseña As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtPassword.
+    '''Control lblMail.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblMail As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control btnSubmit.
+    '''Control txtMail.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
-    
+    Protected WithEvents txtMail As Global.System.Web.UI.WebControls.TextBox
+
     '''<summary>
-    '''Control dvMensaje.
+    '''Control reqMail.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents dvMensaje As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+    Protected WithEvents reqMail As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
     '''<summary>
-    '''Control lblRespuesta.
+    '''Control formatMail.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblRespuesta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents formatMail As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control btnEnviarMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnEnviarMail As Global.System.Web.UI.WebControls.Button
 End Class

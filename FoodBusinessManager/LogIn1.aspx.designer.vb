@@ -11,95 +11,113 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Maestra
+Partial Public Class LogIn1
 
     '''<summary>
-    '''Control head.
+    '''Control lblLoginUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblLoginUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control form1.
+    '''Control lblUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control menu.
+    '''Control txtUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents menu As Global.System.Web.UI.WebControls.Menu
+    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control Mensaje.
+    '''Control reqUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Mensaje As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents reqUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control labelMensaje.
+    '''Control cantUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents labelMensaje As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents cantUsuario As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
-    '''Control Contenido.
+    '''Control lblContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Contenido As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblContraseña As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control linkAboutUs.
+    '''Control txtContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents linkAboutUs As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents txtContraseña As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control linkTerminosYCondiciones.
+    '''Control reqContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents linkTerminosYCondiciones As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents reqContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control linkFAQS.
+    '''Control cantContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents linkFAQS As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
-    '''Control linkContactenos.
+    '''Control btnLogin.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents linkContactenos As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnRegistrarse.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnRegistrarse As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control linkOlvidoContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkOlvidoContraseña As Global.System.Web.UI.WebControls.HyperLink
 End Class

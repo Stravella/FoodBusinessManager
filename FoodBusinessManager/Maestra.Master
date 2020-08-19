@@ -2,9 +2,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link href="Estilos/MiEstilo.css" rel="stylesheet" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
@@ -12,37 +13,19 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
 
-    <style type="text/css">
-        .messagealert {
-            width: 100%;
-            position: fixed;
-            top: 0px;
-            z-index: 100000;
-            padding: 0;
-            font-size: 15px;
-        }
-    </style>
-    <script type="text/javascript">
-        function ShowMessage(message, messagetype) {
-            var cssclass;
-            switch (messagetype) {
-                case 'Success':
-                    cssclass = 'alert-success'
-                    break;
-                case 'Error':
-                    cssclass = 'alert-danger'
-                    break;
-                case 'Warning':
-                    cssclass = 'alert-warning'
-                    break;
-                default:
-                    cssclass = 'alert-info'
-            }
-            $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="fixed-bottom alert ' + cssclass + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + messagetype + '!</strong> <span>' + message + '</span></div>');
-        }
+    <script>
+        $(document).ready(function () {
+            window.setTimeout(function () {
+                $(".alert").fadeTo(1500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+        });
     </script>
+
+
     <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+     </asp:ContentPlaceHolder>
 </head>
 <body>
     <div class="container-fluid">
@@ -68,9 +51,36 @@
                         </asp:Menu>
                     </div>
                 </nav>
+                <%--Mensajes--%>
+                <div class="MensajePanelDiv">
+                    <asp:Panel ID="Mensaje" runat="server" Visible="False">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <asp:Label ID="labelMensaje" runat="server" />
+                    </asp:Panel>
+                </div>
+
 
                 <asp:ContentPlaceHolder ID="Contenido" runat="server">
                 </asp:ContentPlaceHolder>
+                <hr />
+                <footer class="">
+                    <div class="container-fluid text-center text-md-left">
+                        <div class="row fondo-panel">
+                            <div class="col-md-3 mb-md-0 mb-3">
+                                <asp:HyperLink ID="linkAboutUs" runat="server" href="/AboutUs.aspx" Text="¿Quienes somos?"></asp:HyperLink>
+                                <br />
+                                <asp:HyperLink ID="linkTerminosYCondiciones" runat="server" href="/TerminosYCondiciones.aspx" Text="Terminos y Condiciones"></asp:HyperLink>
+                                <br />
+                                <asp:HyperLink ID="linkFAQS" runat="server" href="/FAQS.aspx" Text="FAQS"></asp:HyperLink>
+                                <br />
+                                <asp:HyperLink ID="linkContactenos" runat="server" href="/Contactenos.aspx" Text="Contáctenos"></asp:HyperLink>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright text-center py-3">
+                        © UAI - Trabajo final de Ingenieria - Sebastian Travella                          
+                    </div>
+                </footer>
             </div>
         </form>
     </div>

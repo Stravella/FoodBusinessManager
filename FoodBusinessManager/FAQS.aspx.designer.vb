@@ -11,77 +11,104 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Registrarse
-    
+Partial Public Class FAQS
+
     '''<summary>
-    '''Control form1.
+    '''Control lblFAQS.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+    Protected WithEvents lblFAQS As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtNombre.
+    '''Control lblTitAdquirirServicio.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblTitAdquirirServicio As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtApellido.
+    '''Control lblAdquirirServicio.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtApellido As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblAdquirirServicio As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtMail.
+    '''Control lblTitAdquirirPais.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtMail As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblTitAdquirirPais As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtUsuario.
+    '''Control lblAdquirirPais.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblAdquirirPais As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control btnRegisterConfirm.
+    '''Control lblTitCuantoTiempoInstalacion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnRegisterConfirm As Global.System.Web.UI.WebControls.Button
-    
+    Protected WithEvents lblTitCuantoTiempoInstalacion As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control dvMensaje.
+    '''Control lblCuantoTiempoInstalacion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents dvMensaje As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+    Protected WithEvents lblCuantoTiempoInstalacion As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control lblRespuesta.
+    '''Control lblTitBajaServicio.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblRespuesta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTitBajaServicio As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblBajaServicio.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblBajaServicio As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblTitRequisitosInstalacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTitRequisitosInstalacion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblRequisitosInstalacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblRequisitosInstalacion As Global.System.Web.UI.WebControls.Label
 End Class

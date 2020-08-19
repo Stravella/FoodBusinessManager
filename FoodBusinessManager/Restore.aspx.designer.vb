@@ -11,23 +11,23 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MaterPage
-    
+Partial Public Class Restore
+
     '''<summary>
-    '''Control Head.
+    '''Control lblRestore.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Head As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    
+    Protected WithEvents lblRestore As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control Contenido.
+    '''Control btnRestore.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Contenido As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents btnRestore As Global.System.Web.UI.WebControls.TextBox
 End Class

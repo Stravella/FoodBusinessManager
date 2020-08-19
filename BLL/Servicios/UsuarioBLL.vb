@@ -107,8 +107,8 @@ Public Class UsuarioBLL
             Dim usuarioObtenido = ObtenerUsuario(usuario)
             usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuarioObtenido.SALT)
             usuarioObtenido.bloqueado = 0
+            usuarioObtenido.intentos = 0
             ModificarUsuario(usuarioObtenido)
-            DigitoVerificadorBLL.ObtenerInstancia.ActualizarDVV("usuarios")
             Return usuarioObtenido
         Catch ex As Exception
 
@@ -152,6 +152,22 @@ Public Class UsuarioBLL
             Next
         Catch ex As Exception
 
+        End Try
+    End Function
+
+    Public Function ObtenerPorMail(usuario As UsuarioDTO) As UsuarioDTO
+        Try
+            Dim usuarioRetorno As New UsuarioDTO
+            Dim lsUsuarios As List(Of UsuarioDTO) = UsuarioDAL.ObtenerInstancia.ListarUsuarios
+            For Each oUsuario As UsuarioDTO In lsUsuarios
+                If oUsuario.mail = usuario.mail Then
+                    usuarioRetorno = oUsuario
+                    Exit For
+                End If
+            Next
+            Return usuarioRetorno
+        Catch ex As Exception
+            Throw ex
         End Try
     End Function
 

@@ -16,8 +16,8 @@ Public Class Maestra
     Public Sub ArmarMenu()
         Try
             Me.menu.Items.Add(New MenuItem("Administración del Sistema", "AdminSist"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/backup.aspx"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/restore.aspx"))
+            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/Backup.aspx"))
+            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/Restore.aspx"))
             Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Auditoria", "BitacoraAuditoria", Nothing, "/Bitacora.aspx"))
             Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Errores", "BitacoraErrores", Nothing, "/BitacoraErrores.aspx"))
             Me.menu.Items.Add(New MenuItem("Administración Usuarios", "AdminUsu"))

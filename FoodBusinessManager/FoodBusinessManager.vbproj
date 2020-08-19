@@ -51,6 +51,9 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -92,9 +95,12 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AboutUs.aspx" />
     <Content Include="AgregarUsuario.aspx" />
+    <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
     <Content Include="BitacoraErrores.aspx" />
+    <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -123,19 +129,22 @@
     <Content Include="EmailTemplates\RecoverPassword.html" />
     <Content Include="EmailTemplates\SignUp.html" />
     <Content Include="Estilos\LogIn.css" />
+    <Content Include="FAQS.aspx" />
     <Content Include="Global.asax" />
     <Content Include="AgregarIdioma.aspx" />
     <Content Include="Imagenes\FBMLogoNavbar.png" />
-    <Content Include="LogIn.aspx" />
+    <Content Include="Imagenes\UserImage.png" />
+    <Content Include="LogIn1.aspx" />
+    <Content Include="ModificarContraseña.aspx" />
     <Content Include="ModificarIdioma.aspx" />
     <Content Include="ModificarPerfil.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="NuevaContraseña.aspx" />
-    <Content Include="OlvidoContraseña.aspx" />
     <Content Include="AgregarPerfil.aspx" />
-    <Content Include="Registrarse.aspx" />
+    <Content Include="OlvidoContraseña1.aspx" />
+    <Content Include="Registrarse1.aspx" />
+    <Content Include="Restore.aspx" />
     <Content Include="SeleccionarIdioma.aspx" />
-    <Content Include="MasterPage.Master" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -184,6 +193,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="TerminosYCondiciones.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -204,11 +214,25 @@
     <Content Include="webfonts\fa-brands-400.eot" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutUs.aspx.designer.vb">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AboutUs.aspx.vb">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="AgregarUsuario.aspx.designer.vb">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarUsuario.aspx.vb">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Backup.aspx.designer.vb">
+      <DependentUpon>Backup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backup.aspx.vb">
+      <DependentUpon>Backup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Bitacora.aspx.designer.vb">
@@ -223,6 +247,13 @@
     </Compile>
     <Compile Include="BitacoraErrores.aspx.vb">
       <DependentUpon>BitacoraErrores.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Contactenos.aspx.designer.vb">
+      <DependentUpon>Contactenos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contactenos.aspx.vb">
+      <DependentUpon>Contactenos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Default1.aspx.designer.vb">
@@ -246,20 +277,27 @@
       <DependentUpon>EliminarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="FAQS.aspx.designer.vb">
+      <DependentUpon>FAQS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQS.aspx.vb">
+      <DependentUpon>FAQS.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Helpers\HtmlHelper.vb" />
     <Compile Include="Helpers\TreeHelper.vb" />
+    <Compile Include="LogIn1.aspx.designer.vb">
+      <DependentUpon>LogIn1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn1.aspx.vb">
+      <DependentUpon>LogIn1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Maestra.Master.designer.vb">
       <DependentUpon>Maestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Maestra.Master.vb">
       <DependentUpon>Maestra.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPage.Master.designer.vb">
-      <DependentUpon>MasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="MasterPage.Master.vb">
-      <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
@@ -272,18 +310,18 @@
       <DependentUpon>AgregarIdioma.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="LogIn.aspx.designer.vb">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LogIn.aspx.vb">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AgregarPerfil.aspx.designer.vb">
       <DependentUpon>AgregarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarPerfil.aspx.vb">
       <DependentUpon>AgregarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ModificarContraseña.aspx.designer.vb">
+      <DependentUpon>ModificarContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarContraseña.aspx.vb">
+      <DependentUpon>ModificarContraseña.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ModificarIdioma.aspx.designer.vb">
@@ -305,6 +343,27 @@
     </Compile>
     <Compile Include="ModificarUsuario.aspx.vb">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="OlvidoContraseña1.aspx.designer.vb">
+      <DependentUpon>OlvidoContraseña1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OlvidoContraseña1.aspx.vb">
+      <DependentUpon>OlvidoContraseña1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Registrarse1.aspx.designer.vb">
+      <DependentUpon>Registrarse1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registrarse1.aspx.vb">
+      <DependentUpon>Registrarse1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Restore.aspx.designer.vb">
+      <DependentUpon>Restore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Restore.aspx.vb">
+      <DependentUpon>Restore.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="SeleccionarIdioma.aspx.designer.vb">
@@ -340,18 +399,11 @@
       <DependentUpon>NuevaContraseña.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="OlvidoContraseña.aspx.designer.vb">
-      <DependentUpon>OlvidoContraseña.aspx</DependentUpon>
+    <Compile Include="TerminosYCondiciones.aspx.designer.vb">
+      <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OlvidoContraseña.aspx.vb">
-      <DependentUpon>OlvidoContraseña.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Registrarse.aspx.designer.vb">
-      <DependentUpon>Registrarse.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Registrarse.aspx.vb">
-      <DependentUpon>Registrarse.aspx</DependentUpon>
+    <Compile Include="TerminosYCondiciones.aspx.vb">
+      <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

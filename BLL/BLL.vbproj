@@ -84,6 +84,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
     <Compile Include="Servicios\DigitoVerificadorBLL.vb" />
     <Compile Include="Servicios\GestorMailBLL.vb" />
