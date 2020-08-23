@@ -32,13 +32,58 @@ Partial Public Class Maestra
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control menu.
+    '''Control MenuSuperior.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents menu As Global.System.Web.UI.WebControls.Menu
+    Protected WithEvents MenuSuperior As Global.System.Web.UI.WebControls.Menu
+
+    '''<summary>
+    '''Control linkIniciarSesion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkIniciarSesion As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control linkRegistrarse.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkRegistrarse As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control linkUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkUsuario As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control linkLogOut.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkLogOut As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control MenuLateral.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents MenuLateral As Global.System.Web.UI.WebControls.Menu
 
     '''<summary>
     '''Control Mensaje.

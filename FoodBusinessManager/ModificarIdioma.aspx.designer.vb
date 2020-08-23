@@ -23,13 +23,13 @@ Partial Public Class ModificarIdioma
     Protected WithEvents lbl_ModificarIdiomaTitulo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblCultura.
+    '''Control lblSeleccioneCultura.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblCultura As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSeleccioneCultura As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lstCulturasCreadas.

@@ -23,13 +23,13 @@ Partial Public Class SeleccionarIdioma
     Protected WithEvents lbl_SeleccionarIdioma As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblIdioma.
+    '''Control lblSeleccioneIdioma.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblIdioma As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSeleccioneIdioma As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lstIdiomas.

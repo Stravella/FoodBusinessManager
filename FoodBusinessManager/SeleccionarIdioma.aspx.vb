@@ -7,9 +7,21 @@ Public Class SeleccionarIdioma
     Inherits System.Web.UI.Page
     Dim usuarioLogeado As UsuarioDTO
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
 #End Region
 
@@ -45,7 +57,7 @@ Public Class SeleccionarIdioma
             Else
                 Current.Session("Idioma") = IdiomaBLL.ObtenerInstancia.Obtener(idiomaSeleccionado)
             End If
-            MostrarMensaje("Se m odifico el idioma", "Success")
+            MostrarMensaje("Se m odifico el idioma", TipoAlerta.Success)
             Response.Redirect("SeleccionarIdioma.aspx")
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
@@ -61,7 +73,7 @@ Public Class SeleccionarIdioma
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
             BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
-            'TODO: Mostrar mensaje error
+            MostrarMensaje("Ocurrio un error al cambiar el idioma", TipoAlerta.Danger)
         End Try
     End Sub
 End Class

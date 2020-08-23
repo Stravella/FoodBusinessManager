@@ -7,10 +7,25 @@ Public Class EliminarUsuario
     Dim usuarios As List(Of UsuarioDTO)
 
 
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+#Region "Mensajes"
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
+#End Region
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -64,7 +79,7 @@ Public Class EliminarUsuario
                                         }
             BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal('hide');", True)
-            MostrarMensaje("Se ha eliminado el usuario", "Success")
+            MostrarMensaje("Se ha eliminado el usuario", TipoAlerta.Success)
             Response.Redirect("EliminarUsuario.aspx")
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
@@ -80,7 +95,7 @@ Public Class EliminarUsuario
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
             BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
-            MostrarMensaje("Lo siento! Ocurrió un error inesperado", "Danger")
+            MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub
 End Class

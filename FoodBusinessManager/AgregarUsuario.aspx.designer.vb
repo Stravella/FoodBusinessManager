@@ -182,7 +182,7 @@ Partial Public Class AgregarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstPerfil As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents lstPerfil As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control lblIdioma.
@@ -200,7 +200,34 @@ Partial Public Class AgregarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstIdioma As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents lstIdioma As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control chkTyC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkTyC As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control linkTyC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkTyC As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''Control chkNovedades.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkNovedades As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
     '''Control btnAgregar.

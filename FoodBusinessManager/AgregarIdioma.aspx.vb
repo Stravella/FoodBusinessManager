@@ -7,9 +7,21 @@ Public Class Idiomas
     Inherits System.Web.UI.Page
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
 #End Region
 
@@ -66,7 +78,7 @@ Public Class Idiomas
                 Idioma.ListaEtiquetas.Add(etiquetaTraducida)
             Next
         Catch ex As Exception
-            'TODO: IMPLEMENTAR MENSAJE DE ERROR
+            MostrarMensaje("Ocurrio un error al cargar el idioma", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -90,7 +102,7 @@ Public Class Idiomas
             Next
             Current.Session("Traducciones") = traduccionesNuevas
         Catch ex As Exception
-            'TODO: IMPLEMENTAR MENSAJE DE ERROR
+            MostrarMensaje("Ocurrio un error al guardar las traducciones", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -207,9 +219,9 @@ Public Class Idiomas
                     If IdiomaBLL.ObtenerInstancia.CrearIdioma(Idioma) Then
                         Dim clienteLogeado As UsuarioDTO = Current.Session("cliente")
                         'TODO: Guardar en Bitacora que se creo el idioma correctamente
-                        MostrarMensaje("Se creo el idioma", "Success")
+                        MostrarMensaje("Se creo el idioma", TipoAlerta.Success)
                     Else
-                        MostrarMensaje("Ocurrio un error al guardar la acción, contacte al administrador", "Danger")
+                        MostrarMensaje("Ocurrio un error al guardar la acción, contacte al administrador", TipoAlerta.Success)
                     End If
                 End If
             Else
@@ -218,7 +230,7 @@ Public Class Idiomas
 
 
         Catch ex As Exception
-            'TODO: Logear Error y Mostrar Mensaje
+            MostrarMensaje("Ocurrio un error al crear el idioma", TipoAlerta.Danger)
         End Try
     End Sub
 End Class

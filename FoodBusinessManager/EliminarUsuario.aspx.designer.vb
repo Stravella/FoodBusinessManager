@@ -32,13 +32,13 @@ Partial Public Class EliminarUsuario
     Protected WithEvents lblEliminarUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblUsuarios.
+    '''Control lblSeleccionUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblUsuarios As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSeleccionUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lstUsuarios.
@@ -47,7 +47,7 @@ Partial Public Class EliminarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnEliminar.

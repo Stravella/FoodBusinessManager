@@ -59,40 +59,40 @@ Partial Public Class BitacoraErrores
     Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control LblDesde.
+    '''Control Label3.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LblDesde As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control CalendarDesde.
+    '''Control txtDesde.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CalendarDesde As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents txtDesde As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control LblHasta.
+    '''Control Label4.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control CalendarHasta.
+    '''Control txtHasta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CalendarHasta As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents txtHasta As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control BtnFiltrar.

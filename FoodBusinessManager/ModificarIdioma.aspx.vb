@@ -8,9 +8,21 @@ Public Class ModificarIdioma
     Dim Idiomas As List(Of IdiomaDTO)
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
 #End Region
 
@@ -28,7 +40,7 @@ Public Class ModificarIdioma
             lstCulturasCreadas.DataSource = Idiomas
             lstCulturasCreadas.DataBind()
         Catch ex As Exception
-            MostrarMensaje("Error al cargar la lista de idiomas", "Danger")
+            MostrarMensaje("Error al cargar la lista de idiomas", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -124,7 +136,7 @@ Public Class ModificarIdioma
             Next
             Current.Session("Traducciones") = traduccionesNuevas
         Catch ex As Exception
-            'TODO: IMPLEMENTAR MENSAJE DE ERROR
+            MostrarMensaje("Error al guardar las traducciones", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -143,7 +155,7 @@ Public Class ModificarIdioma
                 End If
             Next
         Catch ex As Exception
-            'TODO: IMPLEMENTAR MENSAJE DE ERROR
+            MostrarMensaje("Error al cargar las traducciones", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -204,9 +216,9 @@ Public Class ModificarIdioma
 
             Else
             End If
-            MostrarMensaje("Se modifico el idioma!", "Success")
+            MostrarMensaje("Se modifico el idioma!", TipoAlerta.Success)
         Catch ex As Exception
-            MostrarMensaje("Ocurrio un error!", "Danger")
+            MostrarMensaje("Ocurrio un error!", TipoAlerta.Danger)
         End Try
     End Sub
 

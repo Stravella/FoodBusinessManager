@@ -5,33 +5,57 @@ Public Class Maestra
     Inherits System.Web.UI.MasterPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack() Then
+            ArmarMenuSuperior()
+        End If
+
         If Not IsNothing(Current.Session("Cliente")) Then
+            'Perfil y traducciones
             Dim usuarioLogeado As UsuarioDTO = Current.Session("Cliente")
             CargarPerfil(usuarioLogeado)
             TraducirPagina(usuarioLogeado.idioma)
+            'Manejo de navbar
+            linkIniciarSesion.Visible = False
+            linkRegistrarse.Visible = False
+            linkLogOut.Visible = True
+            linkUsuario.Visible = True
+        Else
+            linkIniciarSesion.Visible = True
+            linkRegistrarse.Visible = True
+            linkLogOut.Visible = False
+            linkUsuario.Visible = False
         End If
+
     End Sub
 
 #Region "Menu"
-    Public Sub ArmarMenu()
+
+    Public Sub ArmarMenuSuperior()
         Try
-            Me.menu.Items.Add(New MenuItem("Administración del Sistema", "AdminSist"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/Backup.aspx"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/Restore.aspx"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Auditoria", "BitacoraAuditoria", Nothing, "/Bitacora.aspx"))
-            Me.menu.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Errores", "BitacoraErrores", Nothing, "/BitacoraErrores.aspx"))
-            Me.menu.Items.Add(New MenuItem("Administración Usuarios", "AdminUsu"))
-            Me.menu.Items.Item(1).ChildItems.Add(New MenuItem("Agregar Usuario", "AgregarUsuario", Nothing, "/AgregarUsuario.aspx"))
-            Me.menu.Items.Item(1).ChildItems.Add(New MenuItem("Modificar Usuario", "ModificarUsuario", Nothing, "/ModificarUsuario.aspx"))
-            Me.menu.Items.Item(1).ChildItems.Add(New MenuItem("Eliminar Usuario", "EliminarUsuario", Nothing, "/EliminarUsuario.aspx"))
-            Me.menu.Items.Add(New MenuItem("Administración Perfiles", "AdminPer"))
-            Me.menu.Items.Item(2).ChildItems.Add(New MenuItem("Crear Perfil", "CrearPerfil", Nothing, "/AgregarPerfil.aspx"))
-            Me.menu.Items.Item(2).ChildItems.Add(New MenuItem("Modificar Perfil", "ModificarPerfil", Nothing, "/ModificarPerfil.aspx"))
-            Me.menu.Items.Item(2).ChildItems.Add(New MenuItem("Eliminar Perfil", "EliminarPerfil", Nothing, "/EliminarPerfil.aspx"))
-            Me.menu.Items.Add(New MenuItem("Administración Idiomas", "AdminIdi"))
-            Me.menu.Items.Item(3).ChildItems.Add(New MenuItem("Crear Idioma", "AgregarIdioma", Nothing, "/AgregarIdioma.aspx"))
-            Me.menu.Items.Item(3).ChildItems.Add(New MenuItem("Modificar Idioma", "ModificarIdioma", Nothing, "/ModificarIdioma.aspx"))
-            Me.menu.Items.Item(3).ChildItems.Add(New MenuItem("Seleccionar Idioma", "SeleccionarIdioma", Nothing, "/SeleccionarIdioma.aspx"))
+            Me.MenuSuperior.Items.Add(New MenuItem("Servicios", "Serv"))
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Sub ArmarMenuLateral()
+        Try
+            Me.MenuLateral.Items.Add(New MenuItem("Administración del Sistema", "AdminSist"))
+            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/Backup.aspx"))
+            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/Restore.aspx"))
+            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Auditoria", "BitacoraAuditoria", Nothing, "/Bitacora.aspx"))
+            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Errores", "BitacoraErrores", Nothing, "/BitacoraErrores.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Administración Usuarios", "AdminUsu"))
+            Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Agregar Usuario", "AgregarUsuario", Nothing, "/AgregarUsuario.aspx"))
+            Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Modificar Usuario", "ModificarUsuario", Nothing, "/ModificarUsuario.aspx"))
+            Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Eliminar Usuario", "EliminarUsuario", Nothing, "/EliminarUsuario.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Administración Perfiles", "AdminPer"))
+            Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Crear Perfil", "CrearPerfil", Nothing, "/AgregarPerfil.aspx"))
+            Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Modificar Perfil", "ModificarPerfil", Nothing, "/ModificarPerfil.aspx"))
+            Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Eliminar Perfil", "EliminarPerfil", Nothing, "/EliminarPerfil.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Administración Idiomas", "AdminIdi"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Crear Idioma", "AgregarIdioma", Nothing, "/AgregarIdioma.aspx"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Modificar Idioma", "ModificarIdioma", Nothing, "/ModificarIdioma.aspx"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Seleccionar Idioma", "SeleccionarIdioma", Nothing, "/SeleccionarIdioma.aspx"))
         Catch ex As Exception
 
         End Try
@@ -111,7 +135,7 @@ Public Class Maestra
 
     Private Sub TraducirMenu(ByVal idioma As IdiomaDTO)
         Try
-            Dim menu As Menu = Me.FindControl("Menu")
+            Dim menu As Menu = Me.FindControl("MenuLateral")
             If menu.Items.Count > 0 Then
                 TraducirSubMenu(menu.Items, idioma)
             End If
@@ -213,11 +237,11 @@ Public Class Maestra
 #Region "Perfiles y permisos"
     Private Sub CargarPerfil(usuario As UsuarioDTO)
         Try
-            Me.menu.Items.Clear()
-            ArmarMenu()
+            Me.MenuLateral.Items.Clear()
+            ArmarMenuLateral()
             'Armo la lista de paginas a remover del menu
             Dim listaaRemover As New List(Of MenuItem)
-            For Each pagina As MenuItem In menu.Items
+            For Each pagina As MenuItem In MenuLateral.Items
                 If pagina.ChildItems.Count > 0 Then
                     RecorrerMenu(pagina, usuario, listaaRemover)
                 Else
@@ -228,8 +252,8 @@ Public Class Maestra
             Next
             'Remuevo las paginas del menu
             For Each item As MenuItem In listaaRemover
-                menu.Items.Remove(item)
-                For Each subnivel As MenuItem In menu.Items
+                MenuLateral.Items.Remove(item)
+                For Each subnivel As MenuItem In MenuLateral.Items
                     subnivel.ChildItems.Remove(item)
                 Next
             Next
@@ -255,6 +279,21 @@ Public Class Maestra
             listaaRemover.Add(pagina)
         End If
     End Sub
+
+    Private Sub linkIniciarSesion_Click(sender As Object, e As EventArgs) Handles linkIniciarSesion.Click
+        Response.Redirect("/Login1.aspx")
+    End Sub
+
+    Private Sub linkRegistrarse_Click(sender As Object, e As EventArgs) Handles linkRegistrarse.Click
+        Response.Redirect("/Registrarse1.aspx")
+    End Sub
+
+    Private Sub linkLogOut_Click(sender As Object, e As EventArgs) Handles linkLogOut.Click
+        Current.Session("Cliente") = Nothing
+        Response.Redirect("/Login1.aspx")
+    End Sub
+
+
 
 #End Region
 

@@ -68,13 +68,13 @@ Partial Public Class Bitacora2
     Protected WithEvents LblDesde As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control CalendarDesde.
+    '''Control txtDesde.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CalendarDesde As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents txtDesde As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control LblHasta.
@@ -86,13 +86,13 @@ Partial Public Class Bitacora2
     Protected WithEvents LblHasta As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control CalendarHasta.
+    '''Control txtHasta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CalendarHasta As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents txtHasta As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control BtnFiltrar.

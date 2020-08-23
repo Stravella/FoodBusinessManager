@@ -23,13 +23,13 @@ Partial Public Class ModificarUsuario
     Protected WithEvents lblModificarUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblUsuarios.
+    '''Control lblSeleccionarUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblUsuarios As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSeleccionarUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lstUsuarios.
@@ -38,61 +38,7 @@ Partial Public Class ModificarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.ListBox
-
-    '''<summary>
-    '''Control lblNombre.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNombre As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtNombre.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control valRequerido1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents valRequerido1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''Control lblApellido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblApellido As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtApellido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtApellido As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control valRequerido2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents valRequerido2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control lblUsuario.
@@ -149,6 +95,60 @@ Partial Public Class ModificarUsuario
     Protected WithEvents valRequerido4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''Control lblNombre.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNombre As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtNombre.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control valRequerido1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents valRequerido1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control lblApellido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblApellido As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtApellido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtApellido As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control valRequerido2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents valRequerido2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Control lblMail.
     '''</summary>
     '''<remarks>
@@ -200,7 +200,7 @@ Partial Public Class ModificarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstPerfil As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents lstPerfil As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control lblIdioma.
@@ -218,7 +218,7 @@ Partial Public Class ModificarUsuario
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstIdioma As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents lstIdioma As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control chkBloqueado.
@@ -228,6 +228,24 @@ Partial Public Class ModificarUsuario
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents chkBloqueado As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkTyC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkTyC As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkNovedades.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkNovedades As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
     '''Control btnModificar.

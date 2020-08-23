@@ -8,10 +8,23 @@ Public Class ModificarUsuario
     Dim usuarios As List(Of UsuarioDTO)
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -31,7 +44,7 @@ Public Class ModificarUsuario
             lstIdioma.DataSource = idiomas
             lstIdioma.DataBind()
         Catch ex As Exception
-            MostrarMensaje("Error al cargar la lista de idiomas", "Danger")
+            MostrarMensaje("Error al cargar la lista de idiomas", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -55,7 +68,7 @@ Public Class ModificarUsuario
             lstUsuarios.DataBind()
             lstUsuarios.SelectedIndex = 0
         Catch ex As Exception
-            MostrarMensaje("Error al cargar usuarios", "Danger")
+            MostrarMensaje("Error al cargar usuarios", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -85,7 +98,7 @@ Public Class ModificarUsuario
                 lstPerfil.SelectedValue = usuarioSeleccionado.perfil.id_permiso
             End If
         Catch ex As Exception
-            MostrarMensaje("Error al seleccionar usuario", "Danger")
+            MostrarMensaje("Error al seleccionar usuario", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -128,7 +141,7 @@ Public Class ModificarUsuario
                                                     .observaciones = "Se modifico el usuario " & usuarioModificado.username
                                                     }
             BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
-            MostrarMensaje("Se ha creado el usuario", "Success")
+            MostrarMensaje("Se ha creado el usuario", TipoAlerta.Success)
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
             Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
@@ -143,7 +156,7 @@ Public Class ModificarUsuario
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
             BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
-            MostrarMensaje("Lo siento! Ocurrió un error inesperado", "Danger")
+            MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub
 

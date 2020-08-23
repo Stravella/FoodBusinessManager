@@ -14,10 +14,23 @@ Public Class Bitacora2
     End Sub
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Alert, Warning, Info, Success
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
 #End Region
 
     Protected Sub cargarUsuarios()
@@ -45,8 +58,21 @@ Public Class Bitacora2
     Private Sub CargarBitacoras()
         Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
         Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
-        Dim fechaDesde As DateTime = CalendarDesde.SelectedDate
-        Dim fechaHasta As DateTime = CalendarHasta.SelectedDate
+
+        Dim fechaDesde As DateTime
+        If txtDesde.Text = "" Then
+            fechaDesde = New DateTime(2010, 1, 1)
+        Else
+            fechaDesde = txtDesde.Text.Trim()
+        End If
+
+        Dim fechaHasta As DateTime
+        If txtDesde.Text = "" Then
+            fechaHasta = DateTime.Today
+        Else
+            fechaHasta = txtHasta.Text.Trim()
+        End If
+
 
         Dim ListaBitacora As New List(Of BitacoraDTO)
         ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta)
@@ -84,7 +110,8 @@ Public Class Bitacora2
                 If IsNothing(Current.Session("Cliente")) Then
                     IdiomaActual = Application("Español")
                 Else
-                    IdiomaActual = Application(TryCast(Current.Session("Cliente"), Entidades.IdiomaDTO).nombre)
+                    Dim usuarioLogueado As UsuarioDTO = Current.Session("Cliente")
+                    IdiomaActual = usuarioLogueado.idioma
                 End If
                 'Con esto cambio el nombre de los rows de acuerdo al idioma del usuario
                 'TODO: Implementar cuando tenga multidioma
