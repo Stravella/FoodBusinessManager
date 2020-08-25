@@ -59,13 +59,13 @@ Partial Public Class ModificarPermiso
     Protected WithEvents TreeViewPermisoActual As Global.System.Web.UI.WebControls.TreeView
 
     '''<summary>
-    '''Control Label1.
+    '''Control lblNuevosPermisos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblNuevosPermisos As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control TreeViewNuevosPermisos.

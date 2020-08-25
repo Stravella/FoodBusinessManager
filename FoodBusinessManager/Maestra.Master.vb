@@ -32,7 +32,10 @@ Public Class Maestra
 
     Public Sub ArmarMenuSuperior()
         Try
+            Me.MenuSuperior.Items.Add(New MenuItem("Soluciones", "Sol"))
+            Me.MenuSuperior.Items.Add(New MenuItem("Caracteristicas", "Carac"))
             Me.MenuSuperior.Items.Add(New MenuItem("Servicios", "Serv"))
+            Me.MenuSuperior.Items.Add(New MenuItem("Contáctenos", "Contac"))
         Catch ex As Exception
         End Try
     End Sub

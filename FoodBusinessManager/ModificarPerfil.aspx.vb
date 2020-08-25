@@ -5,11 +5,25 @@ Public Class ModificarPermiso
     Inherits System.Web.UI.Page
     Dim ls As List(Of PermisoComponente)
     Dim listaPerfiles As List(Of PermisoComponente)
+
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -50,7 +64,7 @@ Public Class ModificarPermiso
             lsUsuarios = BLL.UsuarioBLL.ObtenerInstancia.ListarPorPerfil(perfiles(lstPerfil.SelectedIndex))
             Session("UsuariosPerfilSeleccionado") = lsUsuarios
             If lsUsuarios.Count = 0 Then
-                MostrarMensaje("No hay usuarios con el perfil seleccionado", "Info")
+                MostrarMensaje("No hay usuarios con el perfil seleccionado", TipoAlerta.Info)
             Else
                 gv_Perfiles.DataSource = lsUsuarios
                 gv_Perfiles.DataBind()
@@ -58,7 +72,7 @@ Public Class ModificarPermiso
             End If
         Catch ex As Exception
             'TODO: LOGEAR ERROR
-            MostrarMensaje("Lo siento! Ocurrió un error inesperado", "Danger")
+            MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -87,9 +101,9 @@ Public Class ModificarPermiso
                                                 .observaciones = "Se modificaron los permisos del perfil "
                                                 }
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
-                MostrarMensaje("Se ha modificado el perfil", "Success")
+                MostrarMensaje("Se ha modificado el perfil", TipoAlerta.Success)
             Else
-                MostrarMensaje("Debe seleccionar algún permiso del listado", "Warning")
+                MostrarMensaje("Debe seleccionar algún permiso del listado", TipoAlerta.Warning)
             End If
         Catch ex As Exception
             Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
@@ -104,7 +118,7 @@ Public Class ModificarPermiso
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
             BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
-            MostrarMensaje("Lo siento! Ocurrió un error inesperado", "Danger")
+            MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -112,7 +126,7 @@ Public Class ModificarPermiso
         Try
             TreeHelper.ObtenerInstancia.CheckearNodosHijo(e.Node)
         Catch ex As Exception
-            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", "Info")
+            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", TipoAlerta.Info)
         End Try
     End Sub
 End Class

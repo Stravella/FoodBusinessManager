@@ -23,7 +23,15 @@
             }, 3000);
         });
     </script>
+    <script type="text/javascript"> 
+        function resizeText(multiplier) {
+            if (document.body.style.fontSize == "") {
+                document.body.style.fontSize = "1.4em";
+            }
+            document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+        }
 
+    </script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -38,7 +46,18 @@
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <asp:Menu ID="MenuSuperior" runat="server" Orientation="vertical" CssClass="navbar-nav mr-auto" StaticMenuStyle-CssClass="nav navbar-nav" StaticSelectedStyle-CssClass="nav-item" StaticSubMenuIndent="16px" DynamicMenuStyle-CssClass="nav-item dropdown-menu" RenderingMode="List" role="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                    <asp:Menu ID="MenuSuperior"
+                        runat="server"
+                        Orientation="vertical"
+                        CssClass="navbar-nav mr-auto"
+                        StaticMenuStyle-CssClass="nav navbar-nav"
+                        StaticSelectedStyle-CssClass="nav-item"
+                        DynamicMenuStyle-CssClass="nav-item dropdown-menu"
+                        RenderingMode="List"
+                        role="menu"
+                        SkipLinkText=""
+                        itemscope="itemscope"
+                        itemtype="http://schema.org/SiteNavigationElement">
                         <LevelMenuItemStyles>
                             <asp:MenuItemStyle CssClass="dropdown-item" HorizontalPadding="15px" Height="50px" VerticalPadding="15px" />
                         </LevelMenuItemStyles>
@@ -76,7 +95,11 @@
                 <div class="col-sm-auto text-sm-left barra-lateral border-right pr-1 pl-1">
 
                     <nav class="nav justify-content-md-start flex-column">
-                        <asp:Menu ID="MenuLateral" runat="server" Orientation="Vertical" RenderingMode="Default" StaticDisplayLevels="2">
+                        <asp:Menu ID="MenuLateral"
+                            runat="server"
+                            Orientation="Vertical"
+                            RenderingMode="Default"
+                            StaticDisplayLevels="2">
                             <LevelMenuItemStyles>
                                 <asp:MenuItemStyle CssClass="nav-item text-primary" />
                                 <asp:MenuItemStyle CssClass="btn btn-outline-light text-left" />
@@ -103,11 +126,11 @@
         </div>
         <%-- Footer --%>
         <hr />
-        <footer class="">
-            <div class="container-fluid text-center text-md-left">
-                <div class="row fondo-panel">
-                    <div class="col-md-3 mb-md-0 mb-3">
-                        <asp:HyperLink ID="linkAboutUs" runat="server" href="/AboutUs.aspx" Text="¿Quienes somos?"></asp:HyperLink>
+        <footer>
+            <div class="container-fluid text-center text-md-left fondo-gris">
+                <div class="row">
+                    <div class="col-md-10">
+                        <asp:HyperLink ID="linkAboutUs" CssClass="footerlinks" runat="server" href="/AboutUs.aspx" Text="¿Quienes somos?"></asp:HyperLink>
                         <br />
                         <asp:HyperLink ID="linkTerminosYCondiciones" runat="server" href="/TerminosYCondiciones.aspx" Text="Terminos y Condiciones"></asp:HyperLink>
                         <br />
@@ -115,13 +138,28 @@
                         <br />
                         <asp:HyperLink ID="linkContactenos" runat="server" href="/Contactenos.aspx" Text="Contáctenos"></asp:HyperLink>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <asp:TextBox ID="txtSearch" onkeypress="return BuscarKP(event);" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" CausesValidation="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="#" onclick="resizeText(-1)">
+                            <label style="font-size: 15px; color: black;">A-</label></a>
+                        <a href="#" onclick="resizeText(1)">
+                            <label style="font-size: 20px; color: black;">A+</label></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-copyright text-center py-3">
                 © UAI - Trabajo final de Ingenieria - Sebastian Travella                          
             </div>
         </footer>
-
     </form>
 </body>
 </html>

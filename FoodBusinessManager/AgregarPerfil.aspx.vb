@@ -10,10 +10,23 @@ Public Class Permisos
     Dim nodos As TreeNodeCollection
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Danger,Success,Warning,Info
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -60,12 +73,12 @@ Public Class Permisos
             If Perfil.Hijos.Count > 0 Then
                 PermisoBLL.ObtenerInstancia.Crear(Perfil)
                 'Grabar en bitacora 
-                MostrarMensaje("Permiso creado!", "Success")
+                MostrarMensaje("Permiso creado!", TipoAlerta.Success)
             Else
-                MostrarMensaje("No se seleccionaron permisos", "Danger")
+                MostrarMensaje("No se seleccionaron permisos", TipoAlerta.Danger)
             End If
         Catch ex As Exception
-            MostrarMensaje("No se pudo crear el permiso, intente nuevamente y en caso de persistir, contacte al administrador.", "Danger")
+            MostrarMensaje("No se pudo crear el permiso, intente nuevamente y en caso de persistir, contacte al administrador.", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -75,7 +88,7 @@ Public Class Permisos
         Try
             TreeHelper.ObtenerInstancia.CheckearNodosHijo(e.Node)
         Catch ex As Exception
-            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", "Info")
+            MostrarMensaje("No se pudo chequear el nodo, intente nuevamente y en caso de persistir, contacte al administrador.", TipoAlerta.Danger)
         End Try
     End Sub
 

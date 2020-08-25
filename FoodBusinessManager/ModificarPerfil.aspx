@@ -13,75 +13,91 @@
         }
     </script>
 
-    <div class="container-fluid">
-            <br />
-            <div class="row">
-                <div class="col-sm-121">
-                    <h1>
-                        <asp:Label ID="lblTituloModificarPerfil" runat="server" Text="Modificar Perfil" Font-Bold="true"></asp:Label>
-                    </h1>
-                </div>
-               
-            </div>
-            <div class="form-group label-form">
-                <asp:Label ID="lblPerfil" runat="server" Text="Perfil :" CssClass="control-label col-sm-4"></asp:Label>
-            </div>
+    <div class="container">
+        <br />
+        <div class="row">
             <div class="col-md-12">
-                <div class="dropdown">
-                    <asp:DropDownList ID="lstPerfil" runat="server" CssClass="form-control" AutoPostBack="true" DataValueField="ID_Permiso" DataTextField="Nombre"></asp:DropDownList>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h2>
+                                    <asp:Label ID="lblTituloModificarPerfil" runat="server" Text="Modificar Perfil"></asp:Label>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <asp:Label ID="lblPerfil" runat="server" Text="Perfil :"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:DropDownList ID="lstPerfil" runat="server" CssClass="form-control" AutoPostBack="true" DataValueField="ID_Permiso" DataTextField="Nombre"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <asp:Label ID="lblListadoPermisos" runat="server" Text="Permisos Actuales"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:TreeView ID="TreeViewPermisoActual" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
+                                        <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                        <NodeStyle Font-Names="Tahoma" Font-Size="11pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                        <ParentNodeStyle Font-Bold="False" />
+                                        <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                    </asp:TreeView>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <asp:Label ID="lblNuevosPermisos" runat="server" Text="Nuevos Permisos"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:TreeView ID="TreeViewNuevosPermisos" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
+                                        <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                        <NodeStyle Font-Names="Tahoma" Font-Size="11pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                        <ParentNodeStyle Font-Bold="False" />
+                                        <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                    </asp:TreeView>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <div class="table table-hover table-bordered table-success">
+                                    <asp:GridView ID="gv_Perfiles" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="10" RowStyle-Height="40px">
+                                        <Columns>
+                                            <asp:BoundField DataField="username" HeaderText="Usuarios con el perfil seleccionado" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <asp:Button ID="btnModificarPerfil" runat="server" Text="Modificar Perfil" CssClass="btn btn-block btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="panel-group">
-                <div class="panel panel-warning">
-                    <div class="panel-heading text-center titulo-panel">
-                        <asp:Label ID="lblListadoPermisos" runat="server" Text="Permisos Actuales"></asp:Label>
-                    </div>
-                    <div class="panel-body fondo-panel">
-                        <asp:TreeView ID="TreeViewPermisoActual" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
-                            <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                            <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                            <ParentNodeStyle Font-Bold="False" />
-                            <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
-                        </asp:TreeView>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="panel-group">
-                <div class="panel panel-success">
-                    <div class="panel-heading text-center titulo-panel">
-                        <asp:Label ID="Label1" runat="server" Text="Nuevos Permisos"></asp:Label>
-                    </div>
-                    <div class="panel-body fondo-panel">
-                        <asp:TreeView ID="TreeViewNuevosPermisos" runat="server" ImageSet="Arrows" ShowCheckBoxes="All">
-                            <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                            <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                            <ParentNodeStyle Font-Bold="False" />
-                            <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
-                        </asp:TreeView>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <%-- Acá va la tabla  --%>
-            <div class="form-group">
-                <div class="row">
-                    <div class="table table-hover table-bordered table-success">
-                        <asp:GridView ID="gv_Perfiles" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="10" RowStyle-Height="40px">
-                            <Columns>
-                                <asp:BoundField DataField="username" HeaderText="Usuarios con el perfil seleccionado" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                </div>
-            </div>
-            <br />
-
-            <div class="form-control">
-                <asp:Button ID="btnModificarPerfil" runat="server" Text="Modificar Perfil" CssClass="form-control btn btn-warning" />
-            </div>
-
+        </div>
+        <br />
     </div>
-
 </asp:Content>

@@ -137,6 +137,8 @@
     <Content Include="AgregarIdioma.aspx" />
     <Content Include="Imagenes\AffinitiLogo.png" />
     <Content Include="Imagenes\FBMLogoNavbar.png" />
+    <Content Include="Imagenes\NewSearch.png" />
+    <Content Include="Imagenes\Search.png" />
     <Content Include="Imagenes\UserImage.png" />
     <Content Include="LogIn1.aspx" />
     <Content Include="ModificarContraseña.aspx" />
