@@ -28,11 +28,11 @@ Public Class UsuarioDAL
                 params.Add(.CrearParametro("@fecha_Creacion", usuario.fechaCreacion))
                 params.Add(.CrearParametro("@intentos", usuario.intentos))
                 params.Add(.CrearParametro("@bloqueado", usuario.bloqueado))
-                params.Add(.CrearParametro("@id_idioma", usuario.idioma.id_idioma))
+                'params.Add(.CrearParametro("@id_idioma", usuario.idioma.id_idioma))
                 params.Add(.CrearParametro("@id_perfil", usuario.perfil.id_permiso))
                 params.Add(.CrearParametro("@mail", usuario.mail))
                 params.Add(.CrearParametro("@id_usuario", usuario.id))
-                params.Add(.CrearParametro("SALT", usuario.SALT))
+                params.Add(.CrearParametro("@DNI", usuario.dni))
             End With
         Catch ex As Exception
 
@@ -92,10 +92,10 @@ Public Class UsuarioDAL
                                               .intentos = row("intentos"),
                                               .mail = row("mail"),
                                               .id = row("id_usuario"),
-                                              .SALT = row("SALT"),
-                                              .idioma = IdiomaDAL.ObtenerInstancia.ObtenerIdioma(New IdiomaDTO With {.id_idioma = row("id_idioma")}),
-                                              .perfil = PermisoDAL.ObtenerInstancia.Obtener(row("id_perfil"))
-            }
+                                              .perfil = PermisoDAL.ObtenerInstancia.Obtener(row("id_perfil")),
+                                              .dni = row("DNI")}
+            '.idioma = IdiomaDAL.ObtenerInstancia.ObtenerIdioma(New IdiomaDTO With {.id_idioma = row("id_idioma")})
+
             lsUsuarios.Add(oUsuario)
         Next
         Return lsUsuarios

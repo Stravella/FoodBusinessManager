@@ -11,104 +11,122 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class BitacoraErrores
+Partial Public Class PoliticasSeguridad
 
     '''<summary>
-    '''Control lblTituloBitacoraError.
+    '''Control titPoliticas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblTituloBitacoraError As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents titPoliticas As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control LblTipoSuceso.
+    '''Control titConfidencialidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LblTipoSuceso As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents titConfidencialidad As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lstTipoSuceso.
+    '''Control lblConfidencialidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstTipoSuceso As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblConfidencialidad As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control LblUsuarios.
+    '''Control titCompraSegura.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LblUsuarios As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents titCompraSegura As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lstUsuarios.
+    '''Control lblCompraSegura.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lstUsuarios As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblCompraSegura As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control Label3.
+    '''Control titDeclaracionPrivacidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents titDeclaracionPrivacidad As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control txtDesde.
+    '''Control lblDeclaracionPrivacidad.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtDesde As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblDeclaracionPrivacidad As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control Label4.
+    '''Control titInformacionRequerida.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents titInformacionRequerida As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control txtHasta.
+    '''Control lblInformacionRequerida.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtHasta As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblInformacionRequerida As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control BtnFiltrar.
+    '''Control titLinksOtrosSitios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents BtnFiltrar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents titLinksOtrosSitios As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control gv_BitacoraError.
+    '''Control lblLinksOtrosSitios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gv_BitacoraError As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents lblLinksOtrosSitios As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control titDatosPersonales.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents titDatosPersonales As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblDatosPersonales.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblDatosPersonales As Global.System.Web.UI.WebControls.Label
 End Class

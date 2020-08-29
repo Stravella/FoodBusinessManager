@@ -62,7 +62,6 @@ Public Class AgregarUsuario
                 If IsNothing(Current.Session("Cliente")) Then
                     IdiomaActual.nombre = "Español"
                 Else
-                    IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
                 End If
                 Dim usuario As New UsuarioDTO With {.nombre = txtNombre.Text,
                      .apellido = txtApellido.Text,
@@ -71,8 +70,7 @@ Public Class AgregarUsuario
                      .mail = txtMail.Text,
                      .bloqueado = False,
                      .fechaCreacion = Now(),
-                     .SALT = DigitoVerificadorBLL.ObtenerInstancia.ObtenerSALT(),
-                     .idioma = New IdiomaDTO With {.id_idioma = lstIdioma.SelectedValue},
+                     .dni = usuario.dni,
                      .perfil = New PerfilCompuesto With {.id_permiso = lstPerfil.SelectedValue}
                 }
                 If UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) = False Then
@@ -80,8 +78,6 @@ Public Class AgregarUsuario
                     Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                         .tipoSuceso = New SucesoBitacoraDTO With {.id = 7}, 'Suceso 7: Creacion de usuario
                                                         .usuario = Current.Session("Cliente"),
-                                                        .ValorAnterior = "",
-                                                        .NuevoValor = usuario.username,
                                                         .observaciones = "Se creo el usuario " & usuario.username
                                                         }
                     BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
@@ -93,18 +89,6 @@ Public Class AgregarUsuario
                 MostrarMensaje("Debe aceptar los Términos y Condiciones", TipoAlerta.Info)
             End If
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = Current.Session("cliente"),
-                .ValorAnterior = "",
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 7}, 'Suceso 7: Creacion de usuario
-                .observaciones = "Error creando usuario "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub

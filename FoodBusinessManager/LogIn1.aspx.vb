@@ -19,6 +19,7 @@ Public Class LogIn1
 
         labelMensaje.Text = mensaje
         panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Style.Add("z-index", "1000")
         panelMensaje.Attributes.Add("role", "alert")
         panelMensaje.Visible = True
     End Sub
@@ -50,8 +51,6 @@ Public Class LogIn1
                         Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
                                                 .usuario = usuarioLogeado,
-                                                .ValorAnterior = "",
-                                                .NuevoValor = "",
                                                 .observaciones = ""
                                                 }
                         BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
@@ -64,17 +63,7 @@ Public Class LogIn1
             End If
         Catch ex As Exception
             'Grabo Bitacora - Suceso Login = 1
-            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
-                                    .usuario = usuarioLogeado,
-                                    .ValorAnterior = "",
-                                    .NuevoValor = "",
-                                    .observaciones = ""
-                                    }
-            Dim BitacoraError As New BitacoraErroresDTO With {.excepcion = ex.Message,
-                        .stackTrace = ex.StackTrace
-                        }
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, BitacoraError)
+
         End Try
     End Sub
 

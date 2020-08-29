@@ -16,13 +16,9 @@ Public Class BitacoraDTO
 
     Private _id As Integer
     Private _usuario As UsuarioDTO
-    Private _usuarioVal As String
     Private _FechaHora As DateTime
     Private _tipoSuceso As SucesoBitacoraDTO
-    Private _tipoSucesoVal As String
-    Private _ValorAnterior As String
-    Private _NuevoValor As String
-    Private _BitacoraError As BitacoraErroresDTO
+    Private _criticidad As CriticidadDTO
     Private _observaciones As String
 
 
@@ -74,39 +70,21 @@ Public Class BitacoraDTO
         End Get
     End Property
 
-    Public Property ValorAnterior() As String
-        Get
-            Return _ValorAnterior
-        End Get
-        Set(ByVal Value As String)
-            _ValorAnterior = Value
-        End Set
-    End Property
-
-    Public Property NuevoValor() As String
-        Get
-            Return _NuevoValor
-        End Get
-        Set(ByVal Value As String)
-            _NuevoValor = Value
-        End Set
-    End Property
-
-    Public Property BitacoraError() As BitacoraErroresDTO
-        Get
-            Return _BitacoraError
-        End Get
-        Set(ByVal value As BitacoraErroresDTO)
-            _BitacoraError = value
-        End Set
-    End Property
-
     Public Property observaciones() As String
         Get
             Return _observaciones
         End Get
         Set(ByVal value As String)
             _observaciones = value
+        End Set
+    End Property
+
+    Public Property criticidad() As CriticidadDTO
+        Get
+            Return _criticidad
+        End Get
+        Set(ByVal value As CriticidadDTO)
+            _criticidad = value
         End Set
     End Property
 

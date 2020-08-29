@@ -23,6 +23,7 @@
             }, 3000);
         });
     </script>
+
     <script type="text/javascript"> 
         function resizeText(multiplier) {
             if (document.body.style.fontSize == "") {
@@ -32,6 +33,14 @@
         }
 
     </script>
+
+    <!-- Google translate -->
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'es' }, 'google_translate_element');
+        } </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -129,20 +138,27 @@
         <footer>
             <div class="container-fluid text-center text-md-left fondo-gris">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">                      
                         <asp:HyperLink ID="linkAboutUs" CssClass="footerlinks" runat="server" href="/AboutUs.aspx" Text="¿Quienes somos?"></asp:HyperLink>
                         <br />
                         <asp:HyperLink ID="linkTerminosYCondiciones" runat="server" href="/TerminosYCondiciones.aspx" Text="Terminos y Condiciones"></asp:HyperLink>
+                        <br />
+                        <asp:HyperLink ID="linkPoliticas" runat="server" href="/PoliticasSeguridad.aspx" Text="Politicas de Seguridad"></asp:HyperLink>
                         <br />
                         <asp:HyperLink ID="linkFAQS" runat="server" href="/FAQS.aspx" Text="FAQS"></asp:HyperLink>
                         <br />
                         <asp:HyperLink ID="linkContactenos" runat="server" href="/Contactenos.aspx" Text="Contáctenos"></asp:HyperLink>
                     </div>
                     <div class="col-md-2">
+                        <div id="google_translate_element"></div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <div class="input-group">
-                                <asp:TextBox ID="txtSearch" onkeypress="return BuscarKP(event);" runat="server" CssClass="form-control"></asp:TextBox>
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" CausesValidation="false" />
+                                <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -157,7 +173,7 @@
                 </div>
             </div>
             <div class="footer-copyright text-center py-3">
-                © UAI - Trabajo final de Ingenieria - Sebastian Travella                          
+                © Food Business Manager                         
             </div>
         </footer>
     </form>

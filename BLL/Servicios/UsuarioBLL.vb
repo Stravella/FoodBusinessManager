@@ -66,20 +66,20 @@ Public Class UsuarioBLL
         Try
             Dim oUsuario As UsuarioDTO = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)
             'Password se mantiene encriptada
-            If oUsuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & oUsuario.SALT) Then
-                Return oUsuario
-            Else
-                If oUsuario.bloqueado = False Then
-                    If oUsuario.intentos = 3 Then
-                        oUsuario.bloqueado = True
-                    Else
-                        oUsuario.intentos = +1
-                    End If
-                    ModificarUsuario(oUsuario)
-                Else
-                    Return Nothing
-                End If
-            End If
+            'If oUsuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & oUsuario.SALT) Then
+            '    Return oUsuario
+            'Else
+            '    If oUsuario.bloqueado = False Then
+            '        If oUsuario.intentos = 3 Then
+            '            oUsuario.bloqueado = True
+            '        Else
+            '            oUsuario.intentos = +1
+            '        End If
+            '        ModificarUsuario(oUsuario)
+            '    Else
+            '        Return Nothing
+            '    End If
+            'End If
         Catch ex As Exception
             Throw ex
         End Try
@@ -92,7 +92,7 @@ Public Class UsuarioBLL
             usuarioObtenido.bloqueado = 1
             usuarioObtenido.password = GenerarToken()
             GestorMailBLL.ObtenerInstancia.EnviarMail(usuarioObtenido, True)
-            usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuarioObtenido.password + usuarioObtenido.SALT)
+            'usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuarioObtenido.password + usuarioObtenido.SALT)
             'Encriptar la nueva contraseña (si la encripto el token tiene que devolverse antes)
             ModificarUsuario(usuarioObtenido)
             Return usuarioObtenido
@@ -105,7 +105,7 @@ Public Class UsuarioBLL
     Public Function CambiarContraseña(usuario As UsuarioDTO) As UsuarioDTO
         Try
             Dim usuarioObtenido = ObtenerUsuario(usuario)
-            usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuarioObtenido.SALT)
+            'usuarioObtenido.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuarioObtenido.SALT)
             usuarioObtenido.bloqueado = 0
             usuarioObtenido.intentos = 0
             ModificarUsuario(usuarioObtenido)

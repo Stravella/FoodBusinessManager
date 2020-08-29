@@ -86,10 +86,12 @@
   <ItemGroup>
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
+    <Compile Include="Servicios\ClienteBLL.vb" />
     <Compile Include="Servicios\DigitoVerificadorBLL.vb" />
     <Compile Include="Servicios\GestorMailBLL.vb" />
     <Compile Include="Servicios\IdiomaBLL.vb" />
     <Compile Include="Servicios\PermisoBLL.vb" />
+    <Compile Include="Servicios\ProvinciaBLL.vb" />
     <Compile Include="Servicios\UsuarioBLL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

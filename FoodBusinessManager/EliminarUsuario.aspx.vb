@@ -65,7 +65,6 @@ Public Class EliminarUsuario
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             usuarios = Session("Usuarios")
             Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
@@ -73,8 +72,6 @@ Public Class EliminarUsuario
             Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                         .tipoSuceso = New SucesoBitacoraDTO With {.id = 9}, 'Suceso 9: Eliminar usuario
                                         .usuario = Current.Session("Cliente"),
-                                        .ValorAnterior = usuarioSeleccionado.ToString,
-                                        .NuevoValor = "",
                                         .observaciones = "Se elimino el usuario " & usuarioSeleccionado.username
                                         }
             BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
@@ -82,19 +79,6 @@ Public Class EliminarUsuario
             MostrarMensaje("Se ha eliminado el usuario", TipoAlerta.Success)
             Response.Redirect("EliminarUsuario.aspx")
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
-            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                        .tipoSuceso = New SucesoBitacoraDTO With {.id = 9}, 'Suceso 9: Eliminar usuario
-                                        .usuario = Current.Session("Cliente"),
-                                        .ValorAnterior = usuarioSeleccionado.ToString,
-                                        .NuevoValor = "",
-                                        .observaciones = "Se elimino el usuario " & usuarioSeleccionado.username
-                                        }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub

@@ -26,8 +26,6 @@ Public Class ModificarContraseña
                 Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 8}, 'Tipo suceso: Modificacion usuario
                                                 .usuario = usuario,
-                                                .ValorAnterior = txtContraseña.Text,
-                                                .NuevoValor = txtNuevaContraseña.Text,
                                                 .observaciones = "Se modifico la contraseña"
                                                 }
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
@@ -37,18 +35,6 @@ Public Class ModificarContraseña
                 MostrarMensaje("Las contraseñas no coinciden", "Warning")
             End If
         Catch ex As Exception
-            Dim usuario As UsuarioDTO = Current.Session("Cliente")
-            Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 8}, 'Tipo suceso: Modificacion usuario
-                                                .usuario = usuario,
-                                                .ValorAnterior = txtContraseña.Text,
-                                                .NuevoValor = txtNuevaContraseña.Text,
-                                                .observaciones = "Se modifico la contraseña"
-                                                }
-            Dim BitacoraError As New BitacoraErroresDTO With {.excepcion = ex.Message,
-                        .stackTrace = ex.StackTrace
-                        }
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, BitacoraError)
             MostrarMensaje("Lo siento! Ocurrio un error", "Warning")
         End Try
     End Sub

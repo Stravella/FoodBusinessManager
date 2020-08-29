@@ -63,7 +63,7 @@ Public Class Permisos
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
+
             End If
 
             Dim Perfil As New PerfilCompuesto With {.nombre = txtNombrePerfil.Text,

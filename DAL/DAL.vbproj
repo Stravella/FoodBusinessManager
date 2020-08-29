@@ -84,10 +84,14 @@
   <ItemGroup>
     <Compile Include="AccesoDAL.vb" />
     <Compile Include="DAL\Servicios\BitacoraDAL.vb" />
+    <Compile Include="DAL\Servicios\ClienteDAL.vb" />
+    <Compile Include="DAL\Servicios\CriticidadDAL.vb" />
     <Compile Include="DAL\Servicios\DigitoVerificadorDAL.vb" />
+    <Compile Include="DAL\Servicios\EstadoClienteDAL.vb" />
     <Compile Include="DAL\Servicios\IdiomaDAL.vb" />
     <Compile Include="DAL\Servicios\IdiomaEtiquetaDAL.vb" />
     <Compile Include="DAL\Servicios\PermisoDAL.vb" />
+    <Compile Include="DAL\Servicios\ProvinciasDAL.vb" />
     <Compile Include="DAL\Servicios\SucesoBitacoraDAL.vb" />
     <Compile Include="DAL\Servicios\UsuarioDAL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

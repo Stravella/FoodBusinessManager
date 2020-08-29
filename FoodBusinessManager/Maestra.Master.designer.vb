@@ -131,6 +131,15 @@ Partial Public Class Maestra
     Protected WithEvents linkTerminosYCondiciones As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
+    '''Control linkPoliticas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkPoliticas As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
     '''Control linkFAQS.
     '''</summary>
     '''<remarks>
@@ -147,22 +156,4 @@ Partial Public Class Maestra
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents linkContactenos As Global.System.Web.UI.WebControls.HyperLink
-
-    '''<summary>
-    '''Control txtSearch.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control btnBuscar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnBuscar As Global.System.Web.UI.WebControls.Button
 End Class

@@ -78,7 +78,7 @@ Public Class ModificarUsuario
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
+
             End If
             usuarios = Session("Usuarios")
             Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
@@ -94,7 +94,7 @@ Public Class ModificarUsuario
                 Else
                     chkBloqueado.Checked = False
                 End If
-                lstIdioma.SelectedValue = usuarioSeleccionado.idioma.id_idioma
+
                 lstPerfil.SelectedValue = usuarioSeleccionado.perfil.id_permiso
             End If
         Catch ex As Exception
@@ -108,7 +108,6 @@ Public Class ModificarUsuario
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             usuarios = Session("Usuarios")
             idiomas = Session("Idiomas")
@@ -122,9 +121,8 @@ Public Class ModificarUsuario
                 .mail = txtMail.Text,
                 .fechaCreacion = usuarioSeleccionado.fechaCreacion,
                 .intentos = usuarioSeleccionado.intentos,
-                .idioma = idiomas(lstIdioma.SelectedIndex),
                 .perfil = perfiles(lstPerfil.SelectedIndex),
-                .SALT = usuarioSeleccionado.SALT
+                .dni = usuarioModificado.dni
                 }
             If chkBloqueado.Checked = True Then
                 usuarioModificado.bloqueado = True
@@ -136,26 +134,11 @@ Public Class ModificarUsuario
             Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                     .tipoSuceso = New SucesoBitacoraDTO With {.id = 8}, 'Suceso 8: Modificacion de usuario
                                                     .usuario = Current.Session("Cliente"),
-                                                    .ValorAnterior = usuarioSeleccionado.ToString,
-                                                    .NuevoValor = usuarioModificado.ToString,
                                                     .observaciones = "Se modifico el usuario " & usuarioModificado.username
                                                     }
             BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
             MostrarMensaje("Se ha creado el usuario", TipoAlerta.Success)
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = Current.Session("cliente"),
-                .ValorAnterior = "",
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 8}, 'Suceso 8: Modificacion de usuario
-                .observaciones = "Error modificando usuario " & usuarioSeleccionado.username
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub

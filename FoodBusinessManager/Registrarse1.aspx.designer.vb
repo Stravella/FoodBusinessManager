@@ -203,6 +203,276 @@ Partial Public Class Registrarse1
     Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
+    '''Control lblValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValidarContraseña As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtValidarContraseña As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqValidarContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control compValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents compValidarContraseña As Global.System.Web.UI.WebControls.CompareValidator
+
+    '''<summary>
+    '''Control cantValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cantValidarContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblDNI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblDNI As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtDNI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDNI As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqDNI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqDNI As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatDNI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatDNI As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblCUIT.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCUIT As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtCUIT.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtCUIT As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqCUIT.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqCUIT As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatCUIT.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatCUIT As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblDireccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblDireccion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtDireccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDireccion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqDireccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqDireccion As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control lblTelefono.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTelefono As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtTelefono.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtTelefono As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqTelefono.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqTelefono As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatTelefono.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatTelefono As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblCP.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCP As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtCP.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtCP As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqCP.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqCP As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatCP.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatCP As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblLocalidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblLocalidad As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtLocalidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtLocalidad As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqLocalidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqLocalidad As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatLocalidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatLocalidad As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblProvincia.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblProvincia As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlProvincias.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlProvincias As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control chkTyC.
     '''</summary>
     '''<remarks>
@@ -221,13 +491,22 @@ Partial Public Class Registrarse1
     Protected WithEvents linkTyC As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
-    '''Control chkNovedades.
+    '''Control chkPoliticas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents chkNovedades As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents chkPoliticas As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control linkPoliticas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkPoliticas As Global.System.Web.UI.WebControls.HyperLink
 
     '''<summary>
     '''Control btnRegistrarse.

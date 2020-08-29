@@ -23,10 +23,9 @@ Public Class UsuarioDTO
     Private _intentos As Integer
     Private _bloqueado As Boolean
     Private _mail As String
-    Private _idioma As IdiomaDTO
+    'Private _idioma As IdiomaDTO
     Private _perfil As PerfilCompuesto
-    Private _SALT As String
-
+    Private _dni As Integer
 
     Public Property id() As Integer
         Get
@@ -38,58 +37,58 @@ Public Class UsuarioDTO
     End Property
 
     Public Property apellido() As String
-            Get
-                Return _apellido
-            End Get
-            Set(ByVal Value As String)
-                _apellido = Value
-            End Set
-        End Property
+        Get
+            Return _apellido
+        End Get
+        Set(ByVal Value As String)
+            _apellido = Value
+        End Set
+    End Property
 
-        Public Property fechaCreacion() As DateTime
-            Get
-                Return _fechaCreacion
-            End Get
-            Set(ByVal Value As DateTime)
-                _fechaCreacion = Value
-            End Set
-        End Property
+    Public Property fechaCreacion() As DateTime
+        Get
+            Return _fechaCreacion
+        End Get
+        Set(ByVal Value As DateTime)
+            _fechaCreacion = Value
+        End Set
+    End Property
 
-        Public Property nombre() As String
-            Get
-                Return _nombre
-            End Get
-            Set(ByVal Value As String)
-                _nombre = Value
-            End Set
-        End Property
+    Public Property nombre() As String
+        Get
+            Return _nombre
+        End Get
+        Set(ByVal Value As String)
+            _nombre = Value
+        End Set
+    End Property
 
-        Public Property password() As String
-            Get
-                Return _password
-            End Get
-            Set(ByVal Value As String)
-                _password = Value
-            End Set
-        End Property
+    Public Property password() As String
+        Get
+            Return _password
+        End Get
+        Set(ByVal Value As String)
+            _password = Value
+        End Set
+    End Property
 
-        Public Property username() As String
-            Get
-                Return _username
-            End Get
-            Set(ByVal Value As String)
-                _username = Value
-            End Set
-        End Property
+    Public Property username() As String
+        Get
+            Return _username
+        End Get
+        Set(ByVal Value As String)
+            _username = Value
+        End Set
+    End Property
 
-        Public Property bloqueado() As Boolean
-            Get
-                Return _bloqueado
-            End Get
-            Set(ByVal Value As Boolean)
-                _bloqueado = Value
-            End Set
-        End Property
+    Public Property bloqueado() As Boolean
+        Get
+            Return _bloqueado
+        End Get
+        Set(ByVal Value As Boolean)
+            _bloqueado = Value
+        End Set
+    End Property
 
     Public Property intentos() As Integer
         Get
@@ -118,21 +117,21 @@ Public Class UsuarioDTO
         End Set
     End Property
 
-    Public Property idioma() As IdiomaDTO
-        Get
-            Return _idioma
-        End Get
-        Set(ByVal Value As IdiomaDTO)
-            _idioma = Value
-        End Set
-    End Property
+    'Public Property idioma() As IdiomaDTO
+    '    Get
+    '        Return _idioma
+    '    End Get
+    '    Set(ByVal Value As IdiomaDTO)
+    '        _idioma = Value
+    '    End Set
+    'End Property
 
-    Public Property SALT() As String
+    Public Property dni As Integer
         Get
-            Return _SALT
+            Return _dni
         End Get
-        Set(ByVal Value As String)
-            _SALT = Value
+        Set(ByVal Value As Integer)
+            _dni = Value
         End Set
     End Property
 

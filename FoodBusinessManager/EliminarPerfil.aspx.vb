@@ -50,7 +50,6 @@ Public Class EliminarPerfil
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
             TreeHelper.ObtenerInstancia.CargarPefil(TreeViewPermisoActual, perfiles(lstPerfil.SelectedIndex))
@@ -80,7 +79,6 @@ Public Class EliminarPerfil
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             listaPerfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfilesEditables
             Dim perfilSeleccionado As PerfilCompuesto = listaPerfiles(lstPerfil.SelectedIndex)
@@ -91,8 +89,6 @@ Public Class EliminarPerfil
                 Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 6}, 'Suceso 6: Borrado de perfil
                                                 .usuario = Current.Session("Cliente"),
-                                                .ValorAnterior = lstPerfil.SelectedValue,
-                                                .NuevoValor = "",
                                                 .observaciones = "Se elimino el perfil"
                                                 }
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
@@ -102,18 +98,7 @@ Public Class EliminarPerfil
                 MostrarMensaje("No se puede eliminar un perfil que es utilizado por usuarios. Primero re asigne un nuevo perfil a los usuarios", TipoAlerta.Info)
             End If
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = Current.Session("cliente"),
-                .ValorAnterior = lstPerfil.SelectedValue,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 6}, 'Suceso 6: Borrado de perfil
-                .observaciones = "Error eliminando perfil "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub

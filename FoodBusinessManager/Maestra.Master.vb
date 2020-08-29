@@ -13,7 +13,6 @@ Public Class Maestra
             'Perfil y traducciones
             Dim usuarioLogeado As UsuarioDTO = Current.Session("Cliente")
             CargarPerfil(usuarioLogeado)
-            TraducirPagina(usuarioLogeado.idioma)
             'Manejo de navbar
             linkIniciarSesion.Visible = False
             linkRegistrarse.Visible = False
@@ -75,17 +74,7 @@ Public Class Maestra
                 menuItem.Text = etiquetaAEncontrar.traduccion
             End If
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error : " & menuItem.Text & menuItem.Value
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+
         End Try
     End Sub
 
@@ -107,7 +96,7 @@ Public Class Maestra
             Dim registroError As New BitacoraErroresDTO With {
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+
             'TODO: Mostrar mensaje error
         End Try
     End Sub
@@ -131,7 +120,6 @@ Public Class Maestra
             Dim registroError As New BitacoraErroresDTO With {
                 .excepcion = ex.Message,
                 .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             'TODO: Mostrar mensaje error
         End Try
     End Sub
@@ -143,17 +131,6 @@ Public Class Maestra
                 TraducirSubMenu(menu.Items, idioma)
             End If
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error traduciendo menu "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             'TODO: Mostrar mensaje error
         End Try
     End Sub
@@ -167,17 +144,7 @@ Public Class Maestra
                 End If
             Next
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error traduciendo sub menu "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+
             'TODO: Mostrar mensaje error
         End Try
     End Sub
@@ -197,17 +164,6 @@ Public Class Maestra
                 End If
             Next
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error traduciendo controles "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
             'TODO: Mostrar mensaje error
         End Try
     End Sub
@@ -220,18 +176,6 @@ Public Class Maestra
             Dim contenido As New ContentPlaceHolder
             TraducirControl(contenido.Controls, idioma)
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error traduciendo pagina "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
-            'TODO: Mostrar mensaje error
         End Try
     End Sub
 

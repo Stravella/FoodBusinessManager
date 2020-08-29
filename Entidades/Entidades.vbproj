@@ -66,11 +66,15 @@
   <ItemGroup>
     <Compile Include="Servicios\BitacoraDTO.vb" />
     <Compile Include="Servicios\BitacoraErroresDTO.vb" />
+    <Compile Include="Servicios\ClienteDTO.vb" />
+    <Compile Include="Servicios\CriticidadDTO.vb" />
+    <Compile Include="Servicios\EstadoClienteDTO.vb" />
     <Compile Include="Servicios\IdiomaDTO.vb" />
     <Compile Include="Servicios\IdiomaEtiquetaDTO.vb" />
     <Compile Include="Servicios\PerfilCompuesto.vb" />
     <Compile Include="Servicios\PermisoComponente.vb" />
     <Compile Include="Servicios\PermisoHoja.vb" />
+    <Compile Include="Servicios\ProvinciaDTO.vb" />
     <Compile Include="Servicios\SucesoBitacoraDTO.vb" />
     <Compile Include="Servicios\UsuarioDTO.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

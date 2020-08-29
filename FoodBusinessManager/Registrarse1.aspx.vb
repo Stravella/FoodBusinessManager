@@ -8,53 +8,101 @@ Public Class Registrarse1
     Inherits System.Web.UI.Page
 
 #Region "Mensajes"
-    Protected Sub MostrarMensaje(Mensaje As String, Tipo As String)
-        'Tipos: Alert, Warning, Info, Success
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.[GetType](), System.Guid.NewGuid().ToString(), "ShowMessage('" & Mensaje & "','" & Tipo & "');", True)
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
+
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Style.Add("z-index", "1000")
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack() Then
+            CargarProvincias()
+        End If
+    End Sub
 
+    Private Sub CargarProvincias()
+        Try
+            Dim ls As List(Of ProvinciaDTO) = ProvinciaBLL.ObtenerInstancia.Listar
+            ddlProvincias.DataSource = ls
+            ddlProvincias.DataBind()
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Private Sub btnRegistrarse_Click(sender As Object, e As EventArgs) Handles btnRegistrarse.Click
         Try
-            If chkTyC.Checked = True Then 'check de TyC
-                'If Me.IsReCaptchaValid() Then
-                Dim usuario As New UsuarioDTO With {.nombre = txtNombre.Text,
-                                    .apellido = txtApellido.Text,
-                                    .username = txtUsuario.Text,
-                                    .mail = txtMail.Text,
-                                    .intentos = 0,
-                                    .bloqueado = 1,
-                                    .fechaCreacion = Now(),
-                                    .password = UsuarioBLL.ObtenerInstancia.GenerarToken(),
-                                    .SALT = DigitoVerificadorBLL.ObtenerInstancia.ObtenerSALT(),
-                                    .perfil = New PerfilCompuesto With {.id_permiso = 18}, 'TODO: ¿Con qué perfil lo inicio? Esta en Admin por defeault
-                                    .idioma = New IdiomaDTO With {.id_idioma = "es-AR"}
-                                    }
-                If UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) = True Then
-                    MostrarMensaje("El usuario ya existe", "Danger")
-                Else
-                    If UsuarioBLL.ObtenerInstancia.ChequearExistenciaMail(usuario) = True Then
-                        MostrarMensaje("El mail ya está siendo utilizado", "Danger")
+            If chkTyC.Checked = True Then
+                If Me.IsReCaptchaValid() Then
+                    Dim usuario As New UsuarioDTO With {
+                            .nombre = txtNombre.Text,
+                            .apellido = txtApellido.Text,
+                            .dni = txtDNI.Text,
+                            .mail = txtMail.Text,
+                            .fechaCreacion = Now(),
+                            .password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(txtContraseña.Text),
+                            .intentos = 0,
+                            .bloqueado = 1,
+                            .perfil = New PerfilCompuesto With {.id_permiso = 18}
+                        }
+                    Dim cliente As New ClienteDTO With {
+                            .usuario = usuario,
+                            .CUIT = txtCUIT.Text,
+                            .domicilio = txtDireccion.Text,
+                            .localidad = txtLocalidad.Text,
+                            .CP = txtCP.Text.Length,
+                            .estado = New EstadoClienteDTO With {.id = 1, .descripcion = "Activo"},
+                            .provincia = ddlProvincias.SelectedValue,
+                            .aceptaNewsletter = False,
+                            .telefono = txtTelefono.Text
+                    }
+                    If UsuarioBLL.ObtenerInstancia.ChequearExistenciaMail(usuario) Then
+                        MostrarMensaje("El mail ya se encuentra registrado!", TipoAlerta.Danger)
                     Else
-                        Dim passwordDesencriptada As String = usuario.password
-                        usuario.password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(usuario.password & usuario.SALT) 'Guardo la password desencriptada para enviar por mail
-                        usuario = UsuarioBLL.ObtenerInstancia.AgregarUsuario(usuario)
-                        usuario.password = passwordDesencriptada 'Seteo la pwd vieja para enviar por mail
-                        GestorMailBLL.ObtenerInstancia.EnviarMail(usuario, False)
-                        MostrarMensaje("Usuario creado con éxito!", "Success")
-                        Response.Redirect("LogIn.aspx")
+                        If UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) Then
+                            MostrarMensaje("El usuario ya se encuentra registrado!", TipoAlerta.Danger)
+                        Else
+                            ClienteBLL.ObtenerInstancia.Agregar(cliente)
+                            Dim bitacora As New BitacoraDTO With {
+                                .FechaHora = Now(),
+                                .usuario = cliente.usuario,
+                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 10}, 'Suceso: creacion cliente
+                                .criticidad = New CriticidadDTO With {.id = 2}, 'Criticidad: media
+                                .observaciones = "Se creo el cliente :" & cliente.usuario.nombre & cliente.usuario.apellido & "de usuario: " & cliente.usuario.username
+                            }
+                            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+                        End If
                     End If
+                Else
+                    MostrarMensaje("El captcha no es válido", TipoAlerta.Danger)
                 End If
-                'End If
             Else
-                MostrarMensaje("Debe aceptar los terminos y condiciones", "Danger")
+                MostrarMensaje("Debe aceptar los terminos condiciones", TipoAlerta.Info)
             End If
         Catch ex As Exception
-
+            Dim bitacora As New BitacoraDTO With {
+                .FechaHora = Now(),
+                .tipoSuceso = New SucesoBitacoraDTO With {.id = 10}, 'Suceso: creacion cliente
+                .criticidad = New CriticidadDTO With {.id = 2}, 'Criticidad: media
+                .observaciones = ex.Message
+            }
+            '.usuario = cliente.usuario,
+            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+            MostrarMensaje("Lo siento! Ocurrio un error, contacte a su administrador", TipoAlerta.Danger)
         End Try
     End Sub
 

@@ -75,7 +75,7 @@ Public Class Bitacora2
 
 
         Dim ListaBitacora As New List(Of BitacoraDTO)
-        ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta)
+        'ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta)
 
         If IsNothing(ListaBitacora) Then
             Me.gv_Bitacora.DataSource = ListaBitacora
@@ -111,7 +111,6 @@ Public Class Bitacora2
                     IdiomaActual = Application("Español")
                 Else
                     Dim usuarioLogueado As UsuarioDTO = Current.Session("Cliente")
-                    IdiomaActual = usuarioLogueado.idioma
                 End If
                 'Con esto cambio el nombre de los rows de acuerdo al idioma del usuario
                 'TODO: Implementar cuando tenga multidioma

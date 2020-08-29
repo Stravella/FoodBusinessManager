@@ -51,7 +51,7 @@ Public Class ModificarPermiso
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
+                'IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
             TreeHelper.ObtenerInstancia.CargarPefil(TreeViewPermisoActual, perfiles(lstPerfil.SelectedIndex))
@@ -84,7 +84,7 @@ Public Class ModificarPermiso
             If IsNothing(Current.Session("Cliente")) Then
                 IdiomaActual.nombre = "Español"
             Else
-                IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
+                'IdiomaActual.nombre = Application(TryCast(Current.Session("Cliente"), UsuarioDTO).idioma.nombre)
             End If
             Dim perfiles As List(Of PermisoComponente) = TryCast(Session("Perfiles"), List(Of PermisoComponente))
             Dim PerfilViejo As PerfilCompuesto = perfiles(lstPerfil.SelectedIndex)
@@ -96,9 +96,7 @@ Public Class ModificarPermiso
                 Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso 5: Modificacion de perfil
                                                 .usuario = Current.Session("Cliente"),
-                                                .ValorAnterior = PerfilViejo.nombre,
-                                                .NuevoValor = PerfilNuevo.nombre,
-                                                .observaciones = "Se modificaron los permisos del perfil "
+                .observaciones = "Se modificaron los permisos del perfil "
                                                 }
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
                 MostrarMensaje("Se ha modificado el perfil", TipoAlerta.Success)
@@ -106,18 +104,7 @@ Public Class ModificarPermiso
                 MostrarMensaje("Debe seleccionar algún permiso del listado", TipoAlerta.Warning)
             End If
         Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = Current.Session("cliente"),
-                .ValorAnterior = lstPerfil.SelectedValue,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 5}, 'Suceso 5: Modificacion de perfil
-                .observaciones = "Error modificando perfiles "
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            BitacoraBLL.ObtenerInstancia.AgregarError(registroBitacora, registroError)
+
             MostrarMensaje("Lo siento! Ocurrió un error inesperado", TipoAlerta.Danger)
         End Try
     End Sub

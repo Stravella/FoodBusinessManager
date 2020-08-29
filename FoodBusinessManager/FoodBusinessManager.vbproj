@@ -99,7 +99,6 @@
     <Content Include="AgregarUsuario.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
-    <Content Include="BitacoraErrores.aspx" />
     <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -134,7 +133,6 @@
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
-    <Content Include="AgregarIdioma.aspx" />
     <Content Include="Imagenes\AffinitiLogo.png" />
     <Content Include="Imagenes\FBMLogoNavbar.png" />
     <Content Include="Imagenes\NewSearch.png" />
@@ -142,15 +140,14 @@
     <Content Include="Imagenes\UserImage.png" />
     <Content Include="LogIn1.aspx" />
     <Content Include="ModificarContraseña.aspx" />
-    <Content Include="ModificarIdioma.aspx" />
     <Content Include="ModificarPerfil.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="NuevaContraseña.aspx" />
     <Content Include="AgregarPerfil.aspx" />
     <Content Include="OlvidoContraseña1.aspx" />
+    <Content Include="PoliticasSeguridad.aspx" />
     <Content Include="Registrarse1.aspx" />
     <Content Include="Restore.aspx" />
-    <Content Include="SeleccionarIdioma.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -253,13 +250,6 @@
       <DependentUpon>Bitacora.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="BitacoraErrores.aspx.designer.vb">
-      <DependentUpon>BitacoraErrores.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="BitacoraErrores.aspx.vb">
-      <DependentUpon>BitacoraErrores.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Contactenos.aspx.designer.vb">
       <DependentUpon>Contactenos.aspx</DependentUpon>
     </Compile>
@@ -314,13 +304,6 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="AgregarIdioma.aspx.designer.vb">
-      <DependentUpon>AgregarIdioma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AgregarIdioma.aspx.vb">
-      <DependentUpon>AgregarIdioma.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="AgregarPerfil.aspx.designer.vb">
       <DependentUpon>AgregarPerfil.aspx</DependentUpon>
     </Compile>
@@ -333,13 +316,6 @@
     </Compile>
     <Compile Include="ModificarContraseña.aspx.vb">
       <DependentUpon>ModificarContraseña.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="ModificarIdioma.aspx.designer.vb">
-      <DependentUpon>ModificarIdioma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarIdioma.aspx.vb">
-      <DependentUpon>ModificarIdioma.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ModificarPerfil.aspx.designer.vb">
@@ -363,6 +339,13 @@
       <DependentUpon>OlvidoContraseña1.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PoliticasSeguridad.aspx.designer.vb">
+      <DependentUpon>PoliticasSeguridad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoliticasSeguridad.aspx.vb">
+      <DependentUpon>PoliticasSeguridad.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Registrarse1.aspx.designer.vb">
       <DependentUpon>Registrarse1.aspx</DependentUpon>
     </Compile>
@@ -375,13 +358,6 @@
     </Compile>
     <Compile Include="Restore.aspx.vb">
       <DependentUpon>Restore.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="SeleccionarIdioma.aspx.designer.vb">
-      <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SeleccionarIdioma.aspx.vb">
-      <DependentUpon>SeleccionarIdioma.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
