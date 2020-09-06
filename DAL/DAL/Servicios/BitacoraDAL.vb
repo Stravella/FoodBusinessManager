@@ -15,17 +15,31 @@ Public Class BitacoraDAL
     End Function
 
 
-    Public Function CrearParametros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As DateTime = Nothing, Optional ByVal fechaHasta As DateTime = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing, Optional ByVal criticidad As CriticidadDTO = Nothing) As List(Of SqlParameter)
+    Public Function CrearParametros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As DateTime = Nothing, Optional ByVal fechaHasta As DateTime = Nothing, Optional criticidad As CriticidadDTO = Nothing) As List(Of SqlParameter)
+        'Public Function CrearParametros(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As DateTime = Nothing, Optional ByVal fechaHasta As DateTime = Nothing, Optional ByVal nroPagina As Integer = Nothing, Optional ByVal rowsPagina As Integer = Nothing, Optional criticidad As CriticidadDTO = Nothing) As List(Of SqlParameter)
+
         Dim params As New List(Of SqlParameter)
         Try
             With AccesoDAL.ObtenerInstancia()
-                params.Add(.CrearParametro("@id_usuario", Usuario.id))
-                params.Add(.CrearParametro("@id_tipo_suceso", tipoSuceso.id))
+                If Usuario IsNot Nothing Then
+                    params.Add(.CrearParametro("@id_usuario", Usuario.id))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@id_usuario", .Value = DBNull.Value})
+                End If
+                If tipoSuceso IsNot Nothing Then
+                    params.Add(.CrearParametro("@id_tipo_suceso", tipoSuceso.id))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@id_tipo_suceso", .Value = DBNull.Value})
+                End If
+                If criticidad IsNot Nothing Then
+                    params.Add(.CrearParametro("@id_criticidad", criticidad.id))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@id_criticidad", .Value = DBNull.Value})
+                End If
                 params.Add(.CrearParametro("@fechaInicial", fechaDesde))
                 params.Add(.CrearParametro("@fechaFinal", fechaHasta))
-                params.Add(.CrearParametro("@nroPagina", nroPagina))
-                params.Add(.CrearParametro("@rowsPagina", rowsPagina))
-                params.Add(.CrearParametro("@criticidad", criticidad.id))
+                'params.Add(.CrearParametro("@nroPagina", nroPagina))
+                'params.Add(.CrearParametro("@rowsPagina", rowsPagina))
             End With
         Catch ex As Exception
             Throw ex
@@ -41,16 +55,16 @@ Public Class BitacoraDAL
             params.Add(.CrearParametro("@id_usuario", Elemento.usuario.id))
             params.Add(.CrearParametro("@id_tipo_suceso", Elemento.tipoSuceso.id))
             params.Add(.CrearParametro("@obs", Elemento.observaciones))
-            params.Add(.CrearParametro("@criticidad", Elemento.criticidad.id))
+            params.Add(.CrearParametro("@id_criticidad", Elemento.criticidad.id))
             .EjecutarSP("Bitacora_Crear", params)
         End With
     End Sub
 
     Public Function Listar(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal criticidad As CriticidadDTO = Nothing) As List(Of BitacoraDTO)
         Try
-            Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta, criticidad.id)
+            Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta, criticidad)
             Dim ls As New List(Of BitacoraDTO)
-            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Bitacora_Listar", params).Rows
+            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Bitacora_Listar2", params).Rows
                 Dim oBitacora As New BitacoraDTO With {.id = Row("id_Bitacora"),
                                                        .FechaHora = Row("fecha_Hora"),
                                                        .usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(Row("id_usuario")),

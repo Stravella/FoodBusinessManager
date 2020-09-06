@@ -23,42 +23,6 @@ Partial Public Class ModificarContraseña
     Protected WithEvents lblModificarContraseña As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblContraseña.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblContraseña As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtContraseña.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtContraseña As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control reqContraseña.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents reqContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''Control cantContraseña.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
-
-    '''<summary>
     '''Control lblNuevaContraseña.
     '''</summary>
     '''<remarks>

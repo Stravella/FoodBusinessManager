@@ -38,22 +38,23 @@ Public Class LogIn1
             usuario.username = txtUsuario.Text
             usuario.password = txtContraseña.Text
             If BLL.UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) Then
-                usuarioLogeado = BLL.UsuarioBLL.ObtenerInstancia.LogIn(usuario)
+                usuarioLogeado = UsuarioBLL.ObtenerInstancia.LogIn(usuario)
                 If usuarioLogeado Is Nothing Then 'El usuario existe pero no corresponde la contraseña
                     MostrarMensaje("<strong> Error </strong> La contraseña es incorrecta", TipoAlerta.Danger)
                 Else
                     If usuarioLogeado.bloqueado = True Then 'La contraseña responde, pero el usuario está bloqueado -> Solicito cambio contraseña
-                        Current.Session("Cliente") = usuarioLogeado
-                        Response.Redirect("/ModificarContraseña.aspx")
+                        MostrarMensaje("<strong> Error </strong> El usuario se encuentra bloqueado! Debe recuperar su contraseña", TipoAlerta.Danger)
                     Else
-                        Current.Session("Cliente") = usuarioLogeado
+                        Current.Session("Cliente") = ClienteBLL.ObtenerInstancia.ObtenerPorUsuario(usuarioLogeado)
                         'Grabo Bitacora - Suceso Login = 1
-                        Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
-                                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1},
-                                                .usuario = usuarioLogeado,
-                                                .observaciones = ""
-                                                }
-                        BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
+                        Dim bitacora As New BitacoraDTO With {
+                                .FechaHora = Now(),
+                                .usuario = usuarioLogeado,
+                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: creacion cliente
+                                .criticidad = New CriticidadDTO With {.id = 1}, 'Criticidad: media
+                                .observaciones = "Se logeo el usuario :" & usuarioLogeado.username
+                            }
+                        BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
 
                         Response.Redirect("Default1.aspx", False)
                     End If
@@ -62,8 +63,14 @@ Public Class LogIn1
                 MostrarMensaje("<strong> Error </strong> El usuario no existe", TipoAlerta.Danger)
             End If
         Catch ex As Exception
-            'Grabo Bitacora - Suceso Login = 1
-
+            Dim bitacora As New BitacoraDTO With {
+            .FechaHora = Now(),
+            .usuario = usuarioLogeado,
+            .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: Logeo
+            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+            .observaciones = "Ocurrio un error al logear el usuario :" & usuarioLogeado.username & ". Error: " & ex.Message
+             }
+            MostrarMensaje("<strong> Lo siento! </strong> Ocurrio un error inesperado.", TipoAlerta.Danger)
         End Try
     End Sub
 

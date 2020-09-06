@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Servicios\BitacoraDTO.vb" />
-    <Compile Include="Servicios\BitacoraErroresDTO.vb" />
     <Compile Include="Servicios\ClienteDTO.vb" />
     <Compile Include="Servicios\CriticidadDTO.vb" />
     <Compile Include="Servicios\EstadoClienteDTO.vb" />

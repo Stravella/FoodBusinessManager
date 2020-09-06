@@ -3,41 +3,49 @@ Imports Entidades
 Imports System.Web.HttpContext
 Public Class Maestra
     Inherits System.Web.UI.MasterPage
-
+    Private usuarioLogeado As New UsuarioDTO
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            ArmarMenuSuperior()
-        End If
 
+        End If
         If Not IsNothing(Current.Session("Cliente")) Then
             'Perfil y traducciones
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("Cliente")
-            CargarPerfil(usuarioLogeado)
+            Dim cliente As ClienteDTO = Current.Session("Cliente")
+            CargarPerfil(cliente.usuario)
             'Manejo de navbar
-            linkIniciarSesion.Visible = False
-            linkRegistrarse.Visible = False
-            linkLogOut.Visible = True
-            linkUsuario.Visible = True
+            panelLoginform.Visible = False
+            panelLogout.Visible = True
         Else
-            linkIniciarSesion.Visible = True
-            linkRegistrarse.Visible = True
-            linkLogOut.Visible = False
-            linkUsuario.Visible = False
+            panelLoginform.Visible = True
+            panelLogout.Visible = False
         End If
 
     End Sub
 
-#Region "Menu"
+#Region "Mensajes"
+    Public Enum TipoAlerta
+        Success
+        Info
+        Warning
+        Danger
+    End Enum
 
-    Public Sub ArmarMenuSuperior()
-        Try
-            Me.MenuSuperior.Items.Add(New MenuItem("Soluciones", "Sol"))
-            Me.MenuSuperior.Items.Add(New MenuItem("Caracteristicas", "Carac"))
-            Me.MenuSuperior.Items.Add(New MenuItem("Servicios", "Serv"))
-            Me.MenuSuperior.Items.Add(New MenuItem("Contáctenos", "Contac"))
-        Catch ex As Exception
-        End Try
+    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
+        Dim panelMensaje As Panel = Me.FindControl("Mensaje")
+        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+
+        labelMensaje.Text = mensaje
+        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
+        panelMensaje.Style.Add("z-index", "1000")
+        panelMensaje.Attributes.Add("role", "alert")
+        panelMensaje.Visible = True
     End Sub
+
+#End Region
+
+
+
+#Region "Menu"
 
     Public Sub ArmarMenuLateral()
         Try
@@ -45,7 +53,6 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/Backup.aspx"))
             Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/Restore.aspx"))
             Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Auditoria", "BitacoraAuditoria", Nothing, "/Bitacora.aspx"))
-            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Errores", "BitacoraErrores", Nothing, "/BitacoraErrores.aspx"))
             Me.MenuLateral.Items.Add(New MenuItem("Administración Usuarios", "AdminUsu"))
             Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Agregar Usuario", "AgregarUsuario", Nothing, "/AgregarUsuario.aspx"))
             Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Modificar Usuario", "ModificarUsuario", Nothing, "/ModificarUsuario.aspx"))
@@ -63,122 +70,6 @@ Public Class Maestra
         End Try
 
     End Sub
-#End Region
-
-#Region "Traducciones"
-    Private Sub Traducir(ByVal menuItem As MenuItem, ByVal idioma As IdiomaDTO)
-        Try
-            Dim etiquetas As List(Of IdiomaEtiquetaDTO) = idioma.ListaEtiquetas
-            Dim etiquetaAEncontrar As IdiomaEtiquetaDTO = etiquetas.Find(Function(p) p.etiqueta = menuItem.Value)
-            If Not IsNothing(etiquetaAEncontrar) Then
-                menuItem.Text = etiquetaAEncontrar.traduccion
-            End If
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub Traducir(ByVal button As Button, ByVal idioma As IdiomaDTO)
-        Try
-            Dim etiquetas As List(Of IdiomaEtiquetaDTO) = idioma.ListaEtiquetas
-            Dim etiquetaAEncontrar As IdiomaEtiquetaDTO = etiquetas.Find(Function(p) p.etiqueta = button.ID)
-            If Not IsNothing(etiquetaAEncontrar) Then
-                button.Text = etiquetaAEncontrar.traduccion
-            End If
-        Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error : " & button.Text & button.ID
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-
-            'TODO: Mostrar mensaje error
-        End Try
-    End Sub
-
-
-    Private Sub Traducir(ByVal label As Label, ByVal idioma As IdiomaDTO)
-        Try
-            Dim etiquetas As List(Of IdiomaEtiquetaDTO) = idioma.ListaEtiquetas
-            Dim etiquetaAEncontrar As IdiomaEtiquetaDTO = etiquetas.Find(Function(p) p.etiqueta = label.ID)
-            If Not IsNothing(etiquetaAEncontrar) Then
-                label.Text = etiquetaAEncontrar.traduccion
-            End If
-        Catch ex As Exception
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("cliente")
-            Dim registroBitacora As New BitacoraDTO With {
-                .FechaHora = Now(),
-                .usuario = usuarioLogeado,
-                .tipoSuceso = New SucesoBitacoraDTO With {.id = 4}, 'Suceso: Error de sistema
-                .observaciones = "Error : " & label.Text & label.ID
-            }
-            Dim registroError As New BitacoraErroresDTO With {
-                .excepcion = ex.Message,
-                .stackTrace = ex.StackTrace}
-            'TODO: Mostrar mensaje error
-        End Try
-    End Sub
-
-    Private Sub TraducirMenu(ByVal idioma As IdiomaDTO)
-        Try
-            Dim menu As Menu = Me.FindControl("MenuLateral")
-            If menu.Items.Count > 0 Then
-                TraducirSubMenu(menu.Items, idioma)
-            End If
-        Catch ex As Exception
-            'TODO: Mostrar mensaje error
-        End Try
-    End Sub
-
-    Private Sub TraducirSubMenu(ByVal items As MenuItemCollection, ByVal idioma As IdiomaDTO)
-        Try
-            For Each item As MenuItem In items
-                Me.Traducir(item, idioma)
-                If item.ChildItems.Count > 0 Then
-                    TraducirSubMenu(item.ChildItems, idioma)
-                End If
-            Next
-        Catch ex As Exception
-
-            'TODO: Mostrar mensaje error
-        End Try
-    End Sub
-
-    Private Sub TraducirControl(ByVal listaControles As ControlCollection, ByVal idioma As IdiomaDTO)
-        Try
-            For Each control As Control In listaControles
-                If TypeOf control Is Button Then
-                    Traducir(DirectCast(control, Button), idioma)
-                ElseIf TypeOf control Is Label Then
-                    Traducir(DirectCast(control, Label), idioma)
-                ElseIf TypeOf control Is GridView Then
-                    Dim controlGridView As GridView = DirectCast(control, GridView)
-                    For Each label In controlGridView.BottomPagerRow.Cells(0).Controls
-                        Traducir(DirectCast(label, Label), idioma)
-                    Next
-                End If
-            Next
-        Catch ex As Exception
-            'TODO: Mostrar mensaje error
-        End Try
-    End Sub
-
-
-    Protected Sub TraducirPagina(ByRef idioma As IdiomaDTO)
-        Try
-            Dim pagina As String = Right(Request.Path, Len(Request.Path) - 1)
-            Me.TraducirMenu(idioma)
-            Dim contenido As New ContentPlaceHolder
-            TraducirControl(contenido.Controls, idioma)
-        Catch ex As Exception
-        End Try
-    End Sub
-
 #End Region
 
 #Region "Perfiles y permisos"
@@ -227,17 +118,52 @@ Public Class Maestra
         End If
     End Sub
 
-    Private Sub linkIniciarSesion_Click(sender As Object, e As EventArgs) Handles linkIniciarSesion.Click
-        Response.Redirect("/Login1.aspx")
-    End Sub
 
-    Private Sub linkRegistrarse_Click(sender As Object, e As EventArgs) Handles linkRegistrarse.Click
-        Response.Redirect("/Registrarse1.aspx")
-    End Sub
 
     Private Sub linkLogOut_Click(sender As Object, e As EventArgs) Handles linkLogOut.Click
         Current.Session("Cliente") = Nothing
-        Response.Redirect("/Login1.aspx")
+        Response.Redirect("/Home.aspx")
+    End Sub
+
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        Try
+            Dim usuario As New UsuarioDTO
+            usuario.username = txtUsuario.Text
+            usuario.password = txtContraseña.Text
+            If BLL.UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) Then
+                usuarioLogeado = UsuarioBLL.ObtenerInstancia.LogIn(usuario)
+                If usuarioLogeado Is Nothing Then 'El usuario existe pero no corresponde la contraseña
+                    MostrarMensaje("<strong> Error </strong> La contraseña es incorrecta", TipoAlerta.Danger)
+                Else
+                    If usuarioLogeado.bloqueado = True Then 'La contraseña responde, pero el usuario está bloqueado -> Solicito cambio contraseña
+                        MostrarMensaje("<strong> Error </strong> El usuario se encuentra bloqueado! Debe recuperar su contraseña", TipoAlerta.Danger)
+                    Else
+                        Current.Session("Cliente") = ClienteBLL.ObtenerInstancia.ObtenerPorUsuario(usuarioLogeado)
+                        'Grabo Bitacora - Suceso Login = 1
+                        Dim bitacora As New BitacoraDTO With {
+                                .FechaHora = Now(),
+                                .usuario = usuarioLogeado,
+                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: creacion cliente
+                                .criticidad = New CriticidadDTO With {.id = 1}, 'Criticidad: media
+                                .observaciones = "Se logeo el usuario :" & usuarioLogeado.username
+                            }
+                        BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+
+                        Response.Redirect("/Home.aspx", False)
+                    End If
+                End If
+            Else
+                MostrarMensaje("<strong> Error </strong> El usuario no existe", TipoAlerta.Danger)
+            End If
+        Catch ex As Exception
+            Dim bitacora As New BitacoraDTO With {
+            .FechaHora = Now(),
+            .usuario = usuarioLogeado,
+            .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: Logeo
+            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+            .observaciones = "Ocurrio un error al logear el usuario :" & usuarioLogeado.username & ". Error: " & ex.Message.ToString}
+            MostrarMensaje("<strong> Lo siento! </strong> Ocurrio un error inesperado.", TipoAlerta.Danger)
+        End Try
     End Sub
 
 

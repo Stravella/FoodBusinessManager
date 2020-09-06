@@ -133,6 +133,18 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col">
+                                <label>
+                                    <asp:Label ID="lblRazonSocial" runat="server" Text="Razon social"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:TextBox ID="txtRazonSocial" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtRazonSocial" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^([\S\s]{0,100})$" ErrorMessage="Formato invalido" ControlToValidate="txtRazonSocial" ForeColor="Red"></asp:RegularExpressionValidator>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <label>
                                     <asp:Label ID="lblDireccion" runat="server" Text="Direccion"></asp:Label>
@@ -171,7 +183,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqLocalidad" runat="server" ErrorMessage="*" ControlToValidate="txtLocalidad" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatLocalidad" runat="server" ErrorMessage="Formato inválido" ValidationExpression="^[a-z][a-z\s]*$" ControlToValidate="txtLocalidad" ForeColor="Red"></asp:RegularExpressionValidator>
+                                    <%--<asp:RegularExpressionValidator ID="formatLocalidad" runat="server" ErrorMessage="Formato inválido" ValidationExpression="^[a-z][a-z\s]*$" ControlToValidate="txtLocalidad" ForeColor="Red"></asp:RegularExpressionValidator>--%>
                                 </div>
                             </div>
                             <div class="col-md-4">

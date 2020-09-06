@@ -11,68 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class NuevaContraseña
-    
+Partial Public Class ConfirmarContraseña
+
     '''<summary>
-    '''Control form1.
+    '''Control titConfirmarContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+    Protected WithEvents titConfirmarContraseña As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtUsuario.
+    '''Control lblConfirmarContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents lblConfirmarContraseña As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''Control txtPassword.
+    '''Control txtConfirmarContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents txtConfirmarContraseña As Global.System.Web.UI.WebControls.TextBox
+
     '''<summary>
-    '''Control txtConfirmPassword.
+    '''Control reqContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtConfirmPassword As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents reqContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
     '''<summary>
-    '''Control btnSubmit.
+    '''Control cantContraseña.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
-    
+    Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
     '''<summary>
-    '''Control dvMensaje.
+    '''Control btnIngresar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents dvMensaje As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Control lblRespuesta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblRespuesta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnIngresar As Global.System.Web.UI.WebControls.Button
 End Class

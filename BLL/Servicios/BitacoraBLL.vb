@@ -32,5 +32,12 @@ Public Class BitacoraBLL
         Return SucesoBitacoraDAL.ObtenerInstancia.ObtenerPorId(unTipoSuceso.id)
     End Function
 
+    Public Function Listar(Optional ByVal tipoSuceso As Entidades.SucesoBitacoraDTO = Nothing, Optional ByVal Usuario As Entidades.UsuarioDTO = Nothing, Optional ByVal fechaDesde As Date = Nothing, Optional ByVal fechaHasta As Date = Nothing, Optional ByVal criticidad As CriticidadDTO = Nothing) As List(Of BitacoraDTO)
+        Try
+            Return BitacoraDAL.ObtenerInstancia.Listar(tipoSuceso, Usuario, fechaDesde, fechaHasta, criticidad)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 End Class

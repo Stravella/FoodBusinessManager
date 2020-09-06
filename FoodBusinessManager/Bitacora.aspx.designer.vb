@@ -41,6 +41,24 @@ Partial Public Class Bitacora2
     Protected WithEvents lstTipoSuceso As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control lblCriticidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCriticidad As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lstCriticidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lstCriticidad As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control LblUsuarios.
     '''</summary>
     '''<remarks>

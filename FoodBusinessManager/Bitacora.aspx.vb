@@ -1,6 +1,7 @@
 ﻿Imports Entidades
 Imports BLL
 Imports System.Web.HttpContext
+Imports System.Globalization
 
 Public Class Bitacora2
     Inherits System.Web.UI.Page
@@ -10,6 +11,7 @@ Public Class Bitacora2
         If Not IsPostBack Then
             cargarUsuarios()
             cargarSucesos()
+            cargarCriticidad()
         End If
     End Sub
 
@@ -33,49 +35,94 @@ Public Class Bitacora2
 
 #End Region
 
+#Region "Carga DropDowns"
     Protected Sub cargarUsuarios()
         Dim listaUsuarios As New List(Of UsuarioDTO)
         listaUsuarios = UsuarioBLL.ObtenerInstancia.ListarUsuarios
+        lstUsuarios.Items.Add(New ListItem("Seleccione :", "0"))
         For Each user As UsuarioDTO In listaUsuarios
             Dim item As New ListItem
             item.Text = user.username
-            item.Value = user.username
+            item.Value = user.id
             lstUsuarios.Items.Add(item)
+            lstUsuarios.SelectedIndex = 0
         Next
     End Sub
 
     Protected Sub cargarSucesos()
         Dim listaSuceso As New List(Of SucesoBitacoraDTO)
         listaSuceso = BitacoraBLL.ObtenerInstancia.ListarSucesoBitacora
+        lstTipoSuceso.Items.Add(New ListItem("Seleccione :", "0"))
         For Each suceso As SucesoBitacoraDTO In listaSuceso
             Dim item As New ListItem
             item.Text = suceso.descripcion
             item.Value = suceso.id
             lstTipoSuceso.Items.Add(item)
+            lstTipoSuceso.SelectedIndex = -1
         Next
     End Sub
+
+    Protected Sub cargarCriticidad()
+        Dim listaCriticidad As New List(Of CriticidadDTO)
+        listaCriticidad = CriticidadBLL.ObtenerInstancia.Listar
+        lstCriticidad.Items.Add(New ListItem("Seleccione :", "0"))
+        For Each crit As CriticidadDTO In listaCriticidad
+            Dim item As New ListItem
+            item.Text = crit.criticidad
+            item.Value = crit.id
+            lstCriticidad.Items.Add(item)
+            lstTipoSuceso.SelectedIndex = -1
+        Next
+    End Sub
+
+#End Region
+
+
     'TODO: Revisar este método, debería pasar todas todas las páginas
     Private Sub CargarBitacoras()
-        Dim usuarioSeleccionado As UsuarioDTO = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
-        Dim tipoSucesoSeleccionado As SucesoBitacoraDTO = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
+        Dim usuarioSeleccionado As New UsuarioDTO
+        If lstUsuarios.SelectedIndex = 0 Then
+            usuarioSeleccionado = Nothing
+        Else
+            usuarioSeleccionado = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
+        End If
 
-        Dim fechaDesde As DateTime
+        Dim tipoSucesoSeleccionado As New SucesoBitacoraDTO
+        If lstTipoSuceso.SelectedIndex = 0 Then
+            tipoSucesoSeleccionado = Nothing
+        Else
+            tipoSucesoSeleccionado = BitacoraBLL.ObtenerInstancia.ObtenerSucesoBitacora(New SucesoBitacoraDTO With {.id = lstTipoSuceso.SelectedValue})
+        End If
+
+        Dim criticidadSeleccionada As New CriticidadDTO
+        If lstCriticidad.SelectedIndex = 0 Then
+            criticidadSeleccionada = Nothing
+        Else
+            criticidadSeleccionada = CriticidadBLL.ObtenerInstancia.ObtenerPorId(lstCriticidad.SelectedValue)
+        End If
+
+        Dim fechaDesde As Date
         If txtDesde.Text = "" Then
-            fechaDesde = New DateTime(2010, 1, 1)
+            fechaDesde = New Date(2010, 1, 1)
         Else
             fechaDesde = txtDesde.Text.Trim()
         End If
 
-        Dim fechaHasta As DateTime
+        Dim fechaHasta As Date
         If txtDesde.Text = "" Then
-            fechaHasta = DateTime.Today
+            fechaHasta = Date.Today
         Else
             fechaHasta = txtHasta.Text.Trim()
         End If
 
+        'TODO: Probar esto
+        fechaDesde = DateTime.ParseExact(fechaDesde, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        fechaHasta = DateTime.ParseExact(fechaHasta, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        fechaDesde = fechaDesde.ToString()
+        fechaHasta = fechaHasta.ToString()
 
         Dim ListaBitacora As New List(Of BitacoraDTO)
-        'ListaBitacora = BitacoraBLL.ObtenerInstancia.ListarTodos(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta)
+        ListaBitacora = BitacoraBLL.ObtenerInstancia.Listar(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, criticidadSeleccionada)
 
         If IsNothing(ListaBitacora) Then
             Me.gv_Bitacora.DataSource = ListaBitacora
@@ -106,22 +153,11 @@ Public Class Bitacora2
                     ddlCantidadPaginas.Items.Add(item)
                 Next cnt
 
-                Dim IdiomaActual As IdiomaDTO
-                If IsNothing(Current.Session("Cliente")) Then
-                    IdiomaActual = Application("Español")
-                Else
-                    Dim usuarioLogueado As UsuarioDTO = Current.Session("Cliente")
-                End If
-                'Con esto cambio el nombre de los rows de acuerdo al idioma del usuario
-                'TODO: Implementar cuando tenga multidioma
-                With gv_Bitacora.HeaderRow
-
-                End With
                 gv_Bitacora.BottomPagerRow.Visible = True
                 gv_Bitacora.BottomPagerRow.CssClass = "table-bottom-dark"
             End If
         Catch ex As Exception
-            'TODO: Guardar Bitacora Error y mostrar mensaje error
+            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -131,7 +167,7 @@ Public Class Bitacora2
             Dim ddl As DropDownList = CType(gv_Bitacora.BottomPagerRow.Cells(0).FindControl("ddlCantidadPaginas"), DropDownList)
             gv_Bitacora.SetPageIndex(ddl.SelectedIndex)
         Catch ex As Exception
-            'TODO: Implementar logeo de errores y mensaje error
+            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -141,7 +177,7 @@ Public Class Bitacora2
             gv_Bitacora.PageSize = ddl.SelectedValue
             CargarBitacoras()
         Catch ex As Exception
-            'TODO: Implementar logeo de errores y mensaje error
+            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
         End Try
     End Sub
 
@@ -151,7 +187,7 @@ Public Class Bitacora2
             gv_Bitacora.PageIndex = e.NewPageIndex
             gv_Bitacora.DataBind()
         Catch ex As Exception
-            'TODO: Implementar logeo de errores y mensaje error
+            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
         End Try
     End Sub
 

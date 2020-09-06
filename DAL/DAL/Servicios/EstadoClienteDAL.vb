@@ -28,7 +28,7 @@ Public Class EstadoClienteDAL
         Return params
     End Function
 
-    Public Function ListarEstados() As List(Of EstadoClienteDTO)
+    Public Function Listar() As List(Of EstadoClienteDTO)
         Dim lsEstados As New List(Of EstadoClienteDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Estado_Cliente_Listar").Rows
             Dim oEstado As New EstadoClienteDTO With {.id = row("id_estado_cliente"),
@@ -37,6 +37,21 @@ Public Class EstadoClienteDAL
             lsEstados.Add(oEstado)
         Next
         Return lsEstados
+    End Function
+
+    Public Function ObtenerPorId(id As Integer) As EstadoClienteDTO
+        Try
+            Dim ls As List(Of EstadoClienteDTO) = Listar()
+            Dim resultado As New EstadoClienteDTO
+            For Each obj As EstadoClienteDTO In ls
+                If obj.id = id Then
+                    resultado = obj
+                End If
+            Next
+            Return resultado
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
 End Class

@@ -23,21 +23,17 @@
                     <div class="row">
                         <div class="col">
                             <label>
-                                <asp:Label ID="lblContraseña" runat="server" Text="Contraseña"></asp:Label>
-                            </label>
-                            <div class="form-group">
-                                <asp:TextBox ID="txtContraseña" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqContraseña" runat="server" ErrorMessage="Ingrese su contraseña" ControlToValidate="txtContraseña" ForeColor="Red"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="cantContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtContraseña" ForeColor="Red"></asp:RegularExpressionValidator>
-                            </div>
-                            <label>
                                 <asp:Label ID="lblNuevaContraseña" runat="server" Text="Nueva contraseña"></asp:Label>
                             </label>
                             <div class="form-group">
                                 <asp:TextBox ID="txtNuevaContraseña" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="reqNuevaContraseña" runat="server" ErrorMessage="Ingrese su nueva contraseña" ControlToValidate="txtContraseña" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="reqNuevaContraseña" runat="server" ErrorMessage="Ingrese su nueva contraseña" ControlToValidate="txtNuevaContraseña" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="cantNuevaContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtNuevaContraseña" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
                             <label>
                                 <asp:Label ID="lblConfirmeContraseña" runat="server" Text="Confirme contraseña"></asp:Label>
                             </label>
@@ -47,11 +43,13 @@
                                 <asp:RegularExpressionValidator ID="valConfirmeContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtConfirmeContraseña" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                             <div class="form-group">
-                                <asp:Button ID="btnCambiarContraseña" CssClass="btn btn-success btn-block" runat="server" Text="CambiarContraseña" CausesValidation="true" />
+                                <asp:Button ID="btnCambiarContraseña" CssClass="btn btn-success btn-block" runat="server" Text="Cambiar Contraseña" CausesValidation="true" />
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>

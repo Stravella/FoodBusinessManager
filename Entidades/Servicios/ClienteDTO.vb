@@ -20,13 +20,23 @@
         End Set
     End Property
 
-    Private _CUIT As Integer
-    Public Property CUIT() As Integer
+    Private _CUIT As String
+    Public Property CUIT() As String
         Get
             Return _CUIT
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             _CUIT = value
+        End Set
+    End Property
+
+    Private _razonSocial As String
+    Public Property RazonSocial() As String
+        Get
+            Return _razonSocial
+        End Get
+        Set(ByVal value As String)
+            _razonSocial = value
         End Set
     End Property
 

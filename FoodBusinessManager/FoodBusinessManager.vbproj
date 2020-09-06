@@ -19,10 +19,10 @@
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>53372</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -99,6 +99,7 @@
     <Content Include="AgregarUsuario.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
+    <Content Include="ConfirmarContraseña.aspx" />
     <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -122,27 +123,31 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
-    <Content Include="Default1.aspx" />
     <Content Include="EliminarPerfil.aspx" />
     <Content Include="EliminarUsuario.aspx" />
+    <Content Include="EmailTemplates\Template_mail.html" />
     <Content Include="Estilos\MiEstilo.css" />
-    <Content Include="Estilos\Principal.css" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
     <Content Include="EmailTemplates\SignUp.html" />
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Home.aspx" />
     <Content Include="Imagenes\AffinitiLogo.png" />
+    <Content Include="Imagenes\Cocina_restaurant.jpg" />
+    <Content Include="Imagenes\Comandas.jpg" />
     <Content Include="Imagenes\FBMLogoNavbar.png" />
+    <Content Include="Imagenes\FBM_Logo_Mail.png" />
+    <Content Include="Imagenes\Masthead-cook.jpg" />
     <Content Include="Imagenes\NewSearch.png" />
+    <Content Include="Imagenes\Plato_colorido.jpg" />
     <Content Include="Imagenes\Search.png" />
     <Content Include="Imagenes\UserImage.png" />
     <Content Include="LogIn1.aspx" />
     <Content Include="ModificarContraseña.aspx" />
     <Content Include="ModificarPerfil.aspx" />
     <Content Include="ModificarUsuario.aspx" />
-    <Content Include="NuevaContraseña.aspx" />
     <Content Include="AgregarPerfil.aspx" />
     <Content Include="OlvidoContraseña1.aspx" />
     <Content Include="PoliticasSeguridad.aspx" />
@@ -250,18 +255,18 @@
       <DependentUpon>Bitacora.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ConfirmarContraseña.aspx.designer.vb">
+      <DependentUpon>ConfirmarContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmarContraseña.aspx.vb">
+      <DependentUpon>ConfirmarContraseña.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Contactenos.aspx.designer.vb">
       <DependentUpon>Contactenos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contactenos.aspx.vb">
       <DependentUpon>Contactenos.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Default1.aspx.designer.vb">
-      <DependentUpon>Default1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default1.aspx.vb">
-      <DependentUpon>Default1.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EliminarPerfil.aspx.designer.vb">
@@ -287,6 +292,13 @@
     </Compile>
     <Compile Include="Helpers\HtmlHelper.vb" />
     <Compile Include="Helpers\TreeHelper.vb" />
+    <Compile Include="Home.aspx.designer.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LogIn1.aspx.designer.vb">
       <DependentUpon>LogIn1.aspx</DependentUpon>
     </Compile>
@@ -378,13 +390,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="NuevaContraseña.aspx.designer.vb">
-      <DependentUpon>NuevaContraseña.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="NuevaContraseña.aspx.vb">
-      <DependentUpon>NuevaContraseña.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="TerminosYCondiciones.aspx.designer.vb">
       <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
@@ -478,7 +483,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53372</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53372/</IISUrl>
+          <IISUrl>https://localhost:44334/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

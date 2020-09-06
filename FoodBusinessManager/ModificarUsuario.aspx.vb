@@ -115,7 +115,7 @@ Public Class ModificarUsuario
             Dim usuarioSeleccionado As UsuarioDTO = usuarios(lstUsuarios.SelectedIndex)
             Dim usuarioModificado As New UsuarioDTO With {.id = lstUsuarios.SelectedValue,
                 .username = usuarioSeleccionado.username, 'El nombre de usuario no lo puede modificar
-                .password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(txtContraseña.Text),
+                .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                 .apellido = txtApellido.Text,
                 .nombre = txtNombre.Text,
                 .mail = txtMail.Text,

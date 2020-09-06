@@ -66,7 +66,7 @@ Public Class AgregarUsuario
                 Dim usuario As New UsuarioDTO With {.nombre = txtNombre.Text,
                      .apellido = txtApellido.Text,
                      .username = txtUsuario.Text,
-                     .password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(txtContraseña.Text),
+                     .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                      .mail = txtMail.Text,
                      .bloqueado = False,
                      .fechaCreacion = Now(),

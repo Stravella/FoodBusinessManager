@@ -18,10 +18,8 @@ Public Class ClienteBLL
 
     Public Sub Agregar(cliente As ClienteDTO)
         Try
-            If UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(cliente.usuario) = False And UsuarioBLL.ObtenerInstancia.ChequearExistenciaMail(cliente.usuario) = False Then
-                UsuarioBLL.ObtenerInstancia.AgregarUsuario(cliente.usuario)
-                ClienteDAL.ObtenerInstancia.AgregarCliente(cliente)
-            End If
+            UsuarioBLL.ObtenerInstancia.AgregarUsuario(cliente.usuario)
+            ClienteDAL.ObtenerInstancia.AgregarCliente(cliente)
         Catch ex As Exception
             Throw ex
         End Try
@@ -46,6 +44,21 @@ Public Class ClienteBLL
     Public Function Obtener(cliente As ClienteDTO) As ClienteDTO
         Try
             Return ClienteDAL.ObtenerInstancia.Obtener(cliente)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ObtenerPorUsuario(usuario As UsuarioDTO) As ClienteDTO
+        Try
+            Dim ls As List(Of ClienteDTO) = Listar()
+            Dim resultado As New ClienteDTO
+            For Each obj As ClienteDTO In ls
+                If obj.usuario.id = usuario.id Then
+                    resultado = obj
+                End If
+            Next
+            Return resultado
         Catch ex As Exception
             Throw ex
         End Try

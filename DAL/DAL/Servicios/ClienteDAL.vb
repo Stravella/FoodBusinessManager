@@ -24,13 +24,14 @@ Public Class ClienteDAL
                 params.Add(.CrearParametro("@id_cliente", cliente.id))
                 params.Add(.CrearParametro("@id_usuario", cliente.usuario.id))
                 params.Add(.CrearParametro("@CUIT", cliente.CUIT))
+                params.Add(.CrearParametro("@RazonSocial", cliente.RazonSocial))
                 params.Add(.CrearParametro("@domicilio", cliente.domicilio))
                 params.Add(.CrearParametro("@CP", cliente.domicilio))
                 params.Add(.CrearParametro("@Localidad", cliente.localidad))
                 params.Add(.CrearParametro("@Provincia", cliente.provincia))
                 params.Add(.CrearParametro("@telefono", cliente.telefono))
                 params.Add(.CrearParametro("@novedades", cliente.aceptaNewsletter))
-                params.Add(.CrearParametro("@estado", cliente.estado.descripcion))
+                params.Add(.CrearParametro("@id_estado", cliente.estado.id))
             End With
         Catch ex As Exception
             Throw ex
@@ -76,12 +77,13 @@ Public Class ClienteDAL
             Dim oCliente As New ClienteDTO With {.id = row("id_cliente"),
                                               .usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(row("id_usuario")),
                                               .CUIT = row("CUIT"),
+                                              .RazonSocial = row("RazonSocial"),
                                               .domicilio = row("domicilio"),
                                               .CP = row("CP"),
                                               .localidad = row("Localidad"),
                                               .provincia = row("Provincia"),
                                               .aceptaNewsletter = row("novedades"),
-                                              .estado = row("estado"),
+                                              .estado = EstadoClienteDAL.ObtenerInstancia.ObtenerPorId(row("id_estado")),
                                               .telefono = row("telefono")
             }
             lsClientes.Add(oCliente)

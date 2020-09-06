@@ -21,12 +21,20 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-6">
                                 <label>
                                     <asp:Label ID="LblTipoSuceso" runat="server" Text="Tipo suceso"></asp:Label>
                                 </label>
                                 <div class="form-group">
                                     <asp:DropDownList ID="lstTipoSuceso" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <asp:Label ID="lblCriticidad" runat="server" Text="Criticidad"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:DropDownList ID="lstCriticidad" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -103,8 +111,7 @@
                                             <asp:BoundField DataField="FechaHora" HeaderText="Fecha/Hora" />
                                             <asp:BoundField DataField="UsuarioVal" HeaderText="Usuario" />
                                             <asp:BoundField DataField="tipoSucesoVal" HeaderText="Tipo Suceso" />
-                                            <asp:BoundField DataField="ValorAnterior" HeaderText="Valor Anterior" />
-                                            <asp:BoundField DataField="NuevoValor" HeaderText="Valor Posterior" />
+                                            <asp:BoundField DataField="criticidadVal" HeaderText="Criticidad" />
                                             <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
                                         </Columns>
                                     </asp:GridView>
@@ -118,7 +125,5 @@
         </div>
     </div>
     <br />
-    <%--                        <asp:Calendar ID="CalendarDesde" runat="server" SelectedDate="1990-01-01" Style="align-content"></asp:Calendar>--%>
 
-    <%--<asp:Calendar ID="CalendarHasta" runat="server" SelectedDate="2020-01-24" Style="align-content"></asp:Calendar>--%>
 </asp:Content>

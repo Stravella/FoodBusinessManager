@@ -87,7 +87,8 @@
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
     <Compile Include="Servicios\ClienteBLL.vb" />
-    <Compile Include="Servicios\DigitoVerificadorBLL.vb" />
+    <Compile Include="Servicios\CriptografiaBLL.vb" />
+    <Compile Include="Servicios\CriticidadBLL.vb" />
     <Compile Include="Servicios\GestorMailBLL.vb" />
     <Compile Include="Servicios\IdiomaBLL.vb" />
     <Compile Include="Servicios\PermisoBLL.vb" />

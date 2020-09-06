@@ -60,8 +60,8 @@ Public Class AccesoDAL
             DA.Fill(DT)
 
             Return DT
-        Catch
-
+        Catch ex As Exception
+            Throw ex
         Finally
             CX.Close()
         End Try
@@ -139,7 +139,7 @@ Public Class AccesoDAL
     End Function
 
     Public Overloads Function CrearParametro(ByVal Campo As String, ByVal vFecha As DateTime) As SqlParameter
-        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vFecha, .DbType = DbType.DateTime2}
+        Dim par As New SqlParameter With {.ParameterName = Campo, .Value = vFecha, .DbType = DbType.DateTime}
         Return par
     End Function
 

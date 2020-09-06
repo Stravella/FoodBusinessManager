@@ -51,10 +51,11 @@ Public Class Registrarse1
                     Dim usuario As New UsuarioDTO With {
                             .nombre = txtNombre.Text,
                             .apellido = txtApellido.Text,
+                            .username = txtUsuario.Text,
                             .dni = txtDNI.Text,
                             .mail = txtMail.Text,
                             .fechaCreacion = Now(),
-                            .password = DigitoVerificadorBLL.ObtenerInstancia.Encriptar(txtContraseña.Text),
+                            .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                             .intentos = 0,
                             .bloqueado = 1,
                             .perfil = New PerfilCompuesto With {.id_permiso = 18}
@@ -62,9 +63,10 @@ Public Class Registrarse1
                     Dim cliente As New ClienteDTO With {
                             .usuario = usuario,
                             .CUIT = txtCUIT.Text,
+                            .RazonSocial = txtRazonSocial.Text,
                             .domicilio = txtDireccion.Text,
                             .localidad = txtLocalidad.Text,
-                            .CP = txtCP.Text.Length,
+                            .CP = txtCP.Text,
                             .estado = New EstadoClienteDTO With {.id = 1, .descripcion = "Activo"},
                             .provincia = ddlProvincias.SelectedValue,
                             .aceptaNewsletter = False,
@@ -77,6 +79,9 @@ Public Class Registrarse1
                             MostrarMensaje("El usuario ya se encuentra registrado!", TipoAlerta.Danger)
                         Else
                             ClienteBLL.ObtenerInstancia.Agregar(cliente)
+                            Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "ConfirmarContraseña.aspx?clave=" + Server.UrlEncode(CriptografiaBLL.ObtenerInstancia.EncriptarSimetrico(usuario.mail))
+                            GestorMailBLL.ObtenerInstancia.EnviarMail(usuario.mail, "Bienvenido a Food BusinessManager.", "Hola " + cliente.RazonSocial + ", ya sos usuario. <br /><br />" + vbCrLf + "Ingresá al siguiente link para activarlo: " + "<a href=" + ActiveURL + ">link</a>" + "<br /><br /> Si no te funciona el link, copia y pega esta dirección: " + ActiveURL, Server.MapPath("\EmailTemplates\Template_mail.html"))
+
                             Dim bitacora As New BitacoraDTO With {
                                 .FechaHora = Now(),
                                 .usuario = cliente.usuario,
@@ -85,6 +90,7 @@ Public Class Registrarse1
                                 .observaciones = "Se creo el cliente :" & cliente.usuario.nombre & cliente.usuario.apellido & "de usuario: " & cliente.usuario.username
                             }
                             BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+                            MostrarMensaje("Se envio un correo a su casilla de mail", TipoAlerta.Success)
                         End If
                     End If
                 Else
