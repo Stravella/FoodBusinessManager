@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Masthead -->
         <header class="masthead text-white text-center">
             <div class="overlay"></div>

@@ -211,3 +211,11 @@ footer.footer {
 /*!
  * Fin estilo masterpage
  */
+
+
+.img-servicio {
+    max-width: 100%;
+    height: 50px;
+    width: 50px;
+    align-content:center;
+}

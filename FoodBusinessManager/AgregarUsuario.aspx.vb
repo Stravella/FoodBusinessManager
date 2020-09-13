@@ -28,22 +28,11 @@ Public Class AgregarUsuario
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            CargarCulturasCreadas()
             CargarListaPerfiles()
         End If
     End Sub
 
-    Private Sub CargarCulturasCreadas()
-        Try
-            idiomas = IdiomaBLL.ObtenerInstancia.Listar()
-            lstIdioma.DataTextField = "nombre"
-            lstIdioma.DataValueField = "id_idioma"
-            lstIdioma.DataSource = idiomas
-            lstIdioma.DataBind()
-        Catch ex As Exception
-            MostrarMensaje("Error al cargar la lista de idiomas", TipoAlerta.Danger)
-        End Try
-    End Sub
+
 
     Protected Sub CargarListaPerfiles()
         perfiles = BLL.PermisoBLL.ObtenerInstancia.ListarPerfiles

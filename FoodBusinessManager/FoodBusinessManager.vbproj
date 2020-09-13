@@ -96,9 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
+    <Content Include="AdministrarCaracteristicas.aspx" />
     <Content Include="AgregarUsuario.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
+    <Content Include="Caracteristicas.aspx" />
     <Content Include="ConfirmarContraseña.aspx" />
     <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -123,6 +125,7 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
+    <Content Include="Controles\Modal.ascx" />
     <Content Include="EliminarPerfil.aspx" />
     <Content Include="EliminarUsuario.aspx" />
     <Content Include="EmailTemplates\Template_mail.html" />
@@ -134,17 +137,28 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="IconosSVG\edit-solid.svg" />
+    <Content Include="IconosSVG\trash-solid.svg" />
+    <Content Include="IconosSVG\user-solid.svg" />
+    <Content Include="ImagenesServicios\Free-logo.png" />
+    <Content Include="ImagenesServicios\ORO %281%29.png" />
+    <Content Include="ImagenesServicios\ORO.png" />
     <Content Include="Imagenes\AffinitiLogo.png" />
+    <Content Include="Imagenes\Almacen_restaurante.jfif" />
+    <Content Include="Imagenes\carta-restaurante.jpg" />
+    <Content Include="Imagenes\Cocina_card.jpg" />
     <Content Include="Imagenes\Cocina_restaurant.jpg" />
     <Content Include="Imagenes\Comandas.jpg" />
+    <Content Include="Imagenes\Estadisticas_card.jfif" />
+    <Content Include="Imagenes\Factura_restaurante.jpg" />
     <Content Include="Imagenes\FBMLogoNavbar.png" />
     <Content Include="Imagenes\FBM_Logo_Mail.png" />
     <Content Include="Imagenes\Masthead-cook.jpg" />
     <Content Include="Imagenes\NewSearch.png" />
+    <Content Include="Imagenes\Pedido.jpg" />
     <Content Include="Imagenes\Plato_colorido.jpg" />
     <Content Include="Imagenes\Search.png" />
-    <Content Include="Imagenes\UserImage.png" />
-    <Content Include="LogIn1.aspx" />
+    <Content Include="Mensaje.aspx" />
     <Content Include="ModificarContraseña.aspx" />
     <Content Include="ModificarPerfil.aspx" />
     <Content Include="ModificarUsuario.aspx" />
@@ -181,6 +195,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
@@ -206,6 +221,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="AdministrarServicios.aspx" />
+    <Content Include="Soluciones.aspx" />
     <Content Include="TerminosYCondiciones.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -234,6 +251,13 @@
       <DependentUpon>AboutUs.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="AdministrarCaracteristicas.aspx.designer.vb">
+      <DependentUpon>AdministrarCaracteristicas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarCaracteristicas.aspx.vb">
+      <DependentUpon>AdministrarCaracteristicas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="AgregarUsuario.aspx.designer.vb">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
     </Compile>
@@ -255,6 +279,13 @@
       <DependentUpon>Bitacora.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Caracteristicas.aspx.designer.vb">
+      <DependentUpon>Caracteristicas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Caracteristicas.aspx.vb">
+      <DependentUpon>Caracteristicas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ConfirmarContraseña.aspx.designer.vb">
       <DependentUpon>ConfirmarContraseña.aspx</DependentUpon>
     </Compile>
@@ -268,6 +299,13 @@
     <Compile Include="Contactenos.aspx.vb">
       <DependentUpon>Contactenos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Controles\Modal.ascx.designer.vb">
+      <DependentUpon>Modal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Modal.ascx.vb">
+      <DependentUpon>Modal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EliminarPerfil.aspx.designer.vb">
       <DependentUpon>EliminarPerfil.aspx</DependentUpon>
@@ -299,13 +337,6 @@
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="LogIn1.aspx.designer.vb">
-      <DependentUpon>LogIn1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LogIn1.aspx.vb">
-      <DependentUpon>LogIn1.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Maestra.Master.designer.vb">
       <DependentUpon>Maestra.Master</DependentUpon>
     </Compile>
@@ -321,6 +352,13 @@
     </Compile>
     <Compile Include="AgregarPerfil.aspx.vb">
       <DependentUpon>AgregarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Mensaje.aspx.designer.vb">
+      <DependentUpon>Mensaje.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mensaje.aspx.vb">
+      <DependentUpon>Mensaje.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ModificarContraseña.aspx.designer.vb">
@@ -391,11 +429,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="AdministrarServicios.aspx.designer.vb">
+      <DependentUpon>AdministrarServicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarServicios.aspx.vb">
+      <DependentUpon>AdministrarServicios.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Soluciones.aspx.designer.vb">
+      <DependentUpon>Soluciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Soluciones.aspx.vb">
+      <DependentUpon>Soluciones.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="TerminosYCondiciones.aspx.designer.vb">
       <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="TerminosYCondiciones.aspx.vb">
       <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.vb">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.vb">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

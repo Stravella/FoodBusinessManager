@@ -43,7 +43,32 @@ Public Class Maestra
 
 #End Region
 
+#Region "Modal"
 
+    Public ReadOnly Property btnModalAceptar() As Button
+        Get
+            Return btnAceptar
+        End Get
+    End Property
+
+    Public Event AceptarModal As CommandEventHandler
+
+    'Protected Sub Moods_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Moods.SelectedIndexChanged
+    '    If Moods.SelectedIndex <> 0 Then
+    '        RaiseEvent MoodChanged(Me, New CommandEventArgs(Moods.SelectedItem.Text, Moods.SelectedValue))
+    '    End If
+    'End Sub
+
+
+    Protected Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
+        RaiseEvent AceptarModal(Me, New CommandEventArgs("Aceptado", btnAceptar))
+    End Sub
+
+    Public Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+
+    End Sub
+
+#End Region
 
 #Region "Menu"
 
@@ -61,10 +86,9 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Crear Perfil", "CrearPerfil", Nothing, "/AgregarPerfil.aspx"))
             Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Modificar Perfil", "ModificarPerfil", Nothing, "/ModificarPerfil.aspx"))
             Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Eliminar Perfil", "EliminarPerfil", Nothing, "/EliminarPerfil.aspx"))
-            Me.MenuLateral.Items.Add(New MenuItem("Administración Idiomas", "AdminIdi"))
-            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Crear Idioma", "AgregarIdioma", Nothing, "/AgregarIdioma.aspx"))
-            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Modificar Idioma", "ModificarIdioma", Nothing, "/ModificarIdioma.aspx"))
-            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Seleccionar Idioma", "SeleccionarIdioma", Nothing, "/SeleccionarIdioma.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Administración Catalogo", "AdminCata"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Caracteristicas", "AdministrarCaracteristicas", Nothing, "/AdministrarCaracteristicas.aspx"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Servicios", "AdministrarServicios", Nothing, "/AdministrarServicios.aspx"))
         Catch ex As Exception
 
         End Try
@@ -133,27 +157,27 @@ Public Class Maestra
             If BLL.UsuarioBLL.ObtenerInstancia.ChequearExistenciaUsuario(usuario) Then
                 usuarioLogeado = UsuarioBLL.ObtenerInstancia.LogIn(usuario)
                 If usuarioLogeado Is Nothing Then 'El usuario existe pero no corresponde la contraseña
-                    MostrarMensaje("<strong> Error </strong> La contraseña es incorrecta", TipoAlerta.Danger)
+                    'Modal.Mostrar("La contraseña es incorrecta", "Error!")
                 Else
                     If usuarioLogeado.bloqueado = True Then 'La contraseña responde, pero el usuario está bloqueado -> Solicito cambio contraseña
-                        MostrarMensaje("<strong> Error </strong> El usuario se encuentra bloqueado! Debe recuperar su contraseña", TipoAlerta.Danger)
+                        'Modal.Mostrar("El usuario se encuentra bloqueado! Debe recuperar su contraseña", "Error!")
                     Else
                         Current.Session("Cliente") = ClienteBLL.ObtenerInstancia.ObtenerPorUsuario(usuarioLogeado)
+                        Current.Session("Usuario") = usuarioLogeado
                         'Grabo Bitacora - Suceso Login = 1
                         Dim bitacora As New BitacoraDTO With {
-                                .FechaHora = Now(),
-                                .usuario = usuarioLogeado,
-                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: creacion cliente
-                                .criticidad = New CriticidadDTO With {.id = 1}, 'Criticidad: media
-                                .observaciones = "Se logeo el usuario :" & usuarioLogeado.username
+                        .FechaHora = Now(),
+                        .usuario = usuarioLogeado,
+                        .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: creacion cliente
+                        .criticidad = New CriticidadDTO With {.id = 1}, 'Criticidad: media
+                        .observaciones = "Se logeo el usuario :" & usuarioLogeado.username
                             }
                         BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-
                         Response.Redirect("/Home.aspx", False)
                     End If
                 End If
             Else
-                MostrarMensaje("<strong> Error </strong> El usuario no existe", TipoAlerta.Danger)
+                'Modal.Mostrar("Error. El usuario no existe", "Error")
             End If
         Catch ex As Exception
             Dim bitacora As New BitacoraDTO With {
@@ -162,13 +186,13 @@ Public Class Maestra
             .tipoSuceso = New SucesoBitacoraDTO With {.id = 1}, 'Suceso: Logeo
             .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
             .observaciones = "Ocurrio un error al logear el usuario :" & usuarioLogeado.username & ". Error: " & ex.Message.ToString}
-            MostrarMensaje("<strong> Lo siento! </strong> Ocurrio un error inesperado.", TipoAlerta.Danger)
+            'Modal.Mostrar("Lo siento! Ocurrio un error inesperado.", "Error")
         End Try
     End Sub
 
 
-
 #End Region
+
 
 
 

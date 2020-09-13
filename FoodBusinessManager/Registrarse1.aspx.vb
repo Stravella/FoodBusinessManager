@@ -109,6 +109,7 @@ Public Class Registrarse1
             '.usuario = cliente.usuario,
             BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
             MostrarMensaje("Lo siento! Ocurrio un error, contacte a su administrador", TipoAlerta.Danger)
+
         End Try
     End Sub
 
@@ -131,5 +132,9 @@ Public Class Registrarse1
 
         Return result
     End Function
+
+
+
+
 
 End Class

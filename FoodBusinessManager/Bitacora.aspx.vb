@@ -39,7 +39,7 @@ Public Class Bitacora2
     Protected Sub cargarUsuarios()
         Dim listaUsuarios As New List(Of UsuarioDTO)
         listaUsuarios = UsuarioBLL.ObtenerInstancia.ListarUsuarios
-        lstUsuarios.Items.Add(New ListItem("Seleccione :", "0"))
+        lstUsuarios.Items.Add(New ListItem("Todos", "0"))
         For Each user As UsuarioDTO In listaUsuarios
             Dim item As New ListItem
             item.Text = user.username
@@ -52,7 +52,7 @@ Public Class Bitacora2
     Protected Sub cargarSucesos()
         Dim listaSuceso As New List(Of SucesoBitacoraDTO)
         listaSuceso = BitacoraBLL.ObtenerInstancia.ListarSucesoBitacora
-        lstTipoSuceso.Items.Add(New ListItem("Seleccione :", "0"))
+        lstTipoSuceso.Items.Add(New ListItem("Todos", "0"))
         For Each suceso As SucesoBitacoraDTO In listaSuceso
             Dim item As New ListItem
             item.Text = suceso.descripcion
@@ -65,7 +65,7 @@ Public Class Bitacora2
     Protected Sub cargarCriticidad()
         Dim listaCriticidad As New List(Of CriticidadDTO)
         listaCriticidad = CriticidadBLL.ObtenerInstancia.Listar
-        lstCriticidad.Items.Add(New ListItem("Seleccione :", "0"))
+        lstCriticidad.Items.Add(New ListItem("Todos", "0"))
         For Each crit As CriticidadDTO In listaCriticidad
             Dim item As New ListItem
             item.Text = crit.criticidad

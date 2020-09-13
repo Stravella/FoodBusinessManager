@@ -11,113 +11,125 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LogIn1
+Partial Public Class Servicios
 
     '''<summary>
-    '''Control lblLoginUsuario.
+    '''Control Image1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblLoginUsuario As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
-    '''Control lblUsuario.
+    '''Control FileUpload1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents FileUpload1 As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
-    '''Control txtUsuario.
+    '''Control lblFileSubido.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblFileSubido As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control reqUsuario.
+    '''Control txtID.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents reqUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents txtID As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control cantUsuario.
+    '''Control txtNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cantUsuario As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control lblContraseña.
+    '''Control txtPrecio.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblContraseña As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtPrecio As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtContraseña.
+    '''Control txtDescripcion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtContraseña As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDescripcion As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control reqContraseña.
+    '''Control grdCaracteristicas.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents reqContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents grdCaracteristicas As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''Control cantContraseña.
+    '''Control btnAgregar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents btnAgregar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btnLogin.
+    '''Control btnModificar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btnRegistrarse.
+    '''Control btnCancelar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnRegistrarse As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control linkOlvidoContraseña.
+    '''Control gv_Servicios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents linkOlvidoContraseña As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents gv_Servicios As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Propiedad Master.
+    '''</summary>
+    '''<remarks>
+    '''Propiedad generada automáticamente.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As FoodBusinessManager.Maestra
+        Get
+            Return CType(MyBase.Master, FoodBusinessManager.Maestra)
+        End Get
+    End Property
 End Class

@@ -50,7 +50,8 @@ Public Class ConfirmarContraseña
         }
             BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
             Current.Session("Cliente") = ClienteBLL.ObtenerInstancia.ObtenerPorUsuario(usuario)
-            Response.Redirect("Default1.aspx")
+            'TODO: esto redirige a HOME
+            Response.Redirect("Home.aspx")
         Else
             MostrarMensaje("La contraseña ingresada no coincide!", TipoAlerta.Danger)
         End If

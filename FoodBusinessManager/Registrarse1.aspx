@@ -14,7 +14,11 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img  width="100px" src="Imagenes/UserImage.png"/>
+                                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                                        <div class="features-icons-icon d-flex">
+                                            <i class="fas fa-user m-auto text-primary fa-3x"></i>
+                                        </div>
+                                    </div>
                                 </center>
                             </div>
                         </div>

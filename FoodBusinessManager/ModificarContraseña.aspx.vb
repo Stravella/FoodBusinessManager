@@ -37,12 +37,13 @@ Public Class ModificarContraseña
                 BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
                 Dim registroBitacora As New BitacoraDTO With {.FechaHora = Date.Now,
                                                 .tipoSuceso = New SucesoBitacoraDTO With {.id = 8}, 'Tipo suceso: Modificacion usuario
+                                                .criticidad = New CriticidadDTO With {.id = 2}, 'Criticidad: media
                                                 .usuario = usuario,
                                                 .observaciones = "Se modifico la contraseña"
                                                 }
                 BitacoraBLL.ObtenerInstancia.Agregar(registroBitacora)
                 MostrarMensaje("Se modifico la contraseña", "Success")
-                Response.Redirect("/Default1.aspx")
+                Response.Redirect("/Home.aspx")
             Else
                 MostrarMensaje("Las contraseñas no coinciden", "Warning")
             End If
