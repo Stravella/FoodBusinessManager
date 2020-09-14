@@ -33,7 +33,7 @@ Public Class ServicioCaracteristicasDAL
 
     Public Sub Agregar(servicio As ServicioDTO, caracteristica As CaracteristicaDTO)
         Try
-            AccesoDAL.ObtenerInstancia.EjecutarSP("Servicio_caracteristicas_crear", CrearParametros(servicio, caracteristica))
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Servicio_caracteristica_crear", CrearParametros(servicio, caracteristica))
         Catch ex As Exception
             Throw ex
         End Try
@@ -41,7 +41,19 @@ Public Class ServicioCaracteristicasDAL
 
     Public Sub Eliminar(servicio As ServicioDTO, caracteristica As CaracteristicaDTO)
         Try
-            AccesoDAL.ObtenerInstancia.EjecutarSP("Servicio_caracteristicas_eliminar", CrearParametros(servicio, caracteristica))
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Servicio_caracteristica_eliminar", CrearParametros(servicio, caracteristica))
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Sub EliminarPorServicio(servicio As ServicioDTO)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add(.CrearParametro("@id_servicio", servicio.id))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Servicio_caracteristica_eliminar_por_servicio", params)
         Catch ex As Exception
             Throw ex
         End Try

@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Negocio\CaracteristicaBLL.vb" />
+    <Compile Include="Negocio\CatalogoBLL.vb" />
     <Compile Include="Negocio\ImagenBLL.vb" />
     <Compile Include="Negocio\ServicioBLL.vb" />
     <Compile Include="Servicios\BackupRestoreBLL.vb" />

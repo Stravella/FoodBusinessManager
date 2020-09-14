@@ -59,4 +59,25 @@
         End Set
     End Property
 
+
+    Private _id_catalogo As Integer
+    Public Property id_catalogo() As Integer
+        Get
+            Return _id_catalogo
+        End Get
+        Set(ByVal value As Integer)
+            _id_catalogo = value
+        End Set
+    End Property
+
+    Private _orden_catalogo As Integer
+    Public Property orden_catalogo() As Integer
+        Get
+            Return _orden_catalogo
+        End Get
+        Set(ByVal value As Integer)
+            _orden_catalogo = value
+        End Set
+    End Property
+
 End Class

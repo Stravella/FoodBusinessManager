@@ -101,6 +101,7 @@
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
     <Content Include="Caracteristicas.aspx" />
+    <Content Include="AdministrarCatalogo.aspx" />
     <Content Include="ConfirmarContraseña.aspx" />
     <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -284,6 +285,13 @@
     </Compile>
     <Compile Include="Caracteristicas.aspx.vb">
       <DependentUpon>Caracteristicas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarCatalogo.aspx.designer.vb">
+      <DependentUpon>AdministrarCatalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarCatalogo.aspx.vb">
+      <DependentUpon>AdministrarCatalogo.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ConfirmarContraseña.aspx.designer.vb">

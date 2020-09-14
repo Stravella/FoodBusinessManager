@@ -11,43 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Servicios
-
-    '''<summary>
-    '''Control Image1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control FileUpload1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents FileUpload1 As Global.System.Web.UI.WebControls.FileUpload
-
-    '''<summary>
-    '''Control lblFileSubido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblFileSubido As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control btnCambiarImagen.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCambiarImagen As Global.System.Web.UI.WebControls.Button
+Partial Public Class Catalogo
 
     '''<summary>
     '''Control txtID.
@@ -68,15 +32,6 @@ Partial Public Class Servicios
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtPrecio.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtPrecio As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
     '''Control txtDescripcion.
     '''</summary>
     '''<remarks>
@@ -86,13 +41,13 @@ Partial Public Class Servicios
     Protected WithEvents txtDescripcion As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control grdCaracteristicas.
+    '''Control grdServicios.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents grdCaracteristicas As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents grdServicios As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control btnAgregar.
@@ -122,13 +77,13 @@ Partial Public Class Servicios
     Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control gv_Servicios.
+    '''Control gv_Catalogos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gv_Servicios As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gv_Catalogos As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Propiedad Master.

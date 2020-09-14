@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="AccesoDAL.vb" />
     <Compile Include="DAL\Negocio\CaracteristicasDAL.vb" />
+    <Compile Include="DAL\Negocio\CatalogoDAL.vb" />
     <Compile Include="DAL\Negocio\ImagenDAL.vb" />
     <Compile Include="DAL\Negocio\ServicioCaracteristicasDAL.vb" />
     <Compile Include="DAL\Negocio\ServicioDAL.vb" />

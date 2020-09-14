@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Negocio\CaracteristicaDTO.vb" />
+    <Compile Include="Negocio\CatalogoDTO.vb" />
     <Compile Include="Negocio\ImagenDTO.vb" />
     <Compile Include="Negocio\ServicioDTO.vb" />
     <Compile Include="Servicios\BitacoraDTO.vb" />

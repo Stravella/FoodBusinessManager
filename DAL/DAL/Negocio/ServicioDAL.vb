@@ -25,6 +25,8 @@ Public Class ServicioDAL
                 params.Add(.CrearParametro("@descripcion", servicio.descripcion))
                 params.Add(.CrearParametro("@precio", servicio.precio))
                 params.Add(.CrearParametro("id_imagen", servicio.imagen.ID))
+                params.Add(.CrearParametro("id_catalogo", servicio.id_catalogo))
+                params.Add(.CrearParametro("orden_catalogo", servicio.orden_catalogo))
             End With
         Catch ex As Exception
             Throw ex
@@ -71,7 +73,9 @@ Public Class ServicioDAL
                                               .nombre = row("nombre"),
                                               .descripcion = row("descripcion"),
                                               .precio = row("precio"),
-                                              .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen"))
+                                              .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
+                                              .id_catalogo = row("id_catalogo"),
+                                              .orden_catalogo = row("orden_catalogo")
              }
             servicio.caracteristicas = ServicioCaracteristicasDAL.ObtenerInstancia.ListarPorServicio(servicio)
             servicios.Add(servicio)

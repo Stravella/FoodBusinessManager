@@ -87,8 +87,10 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Modificar Perfil", "ModificarPerfil", Nothing, "/ModificarPerfil.aspx"))
             Me.MenuLateral.Items.Item(2).ChildItems.Add(New MenuItem("Eliminar Perfil", "EliminarPerfil", Nothing, "/EliminarPerfil.aspx"))
             Me.MenuLateral.Items.Add(New MenuItem("Administración Catalogo", "AdminCata"))
-            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Caracteristicas", "AdministrarCaracteristicas", Nothing, "/AdministrarCaracteristicas.aspx"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Catalogos", "AdministrarCatalogos", Nothing, "/AdministrarCatalogo.aspx"))
             Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Servicios", "AdministrarServicios", Nothing, "/AdministrarServicios.aspx"))
+            Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Caracteristicas", "AdministrarCaracteristicas", Nothing, "/AdministrarCaracteristicas.aspx"))
+
         Catch ex As Exception
 
         End Try

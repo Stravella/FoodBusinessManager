@@ -15,35 +15,36 @@ Public Class Servicios
 
     'Acá le doy el comportamiento según mis entidades.
     Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
-        '    If Current.Session("accion") = "Eliminar" Then
-        '        Dim caracteristica As CaracteristicaDTO = Current.Session("entidadModal")
-        '        CaracteristicaBLL.ObtenerInstancia.Eliminar(caracteristica)
-        '        Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-        '        Dim bitacora As New BitacoraDTO With {
-        '                    .FechaHora = Now(),
-        '                    .usuario = usuarioLogeado,
-        '                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 12}, 'Suceso: Eliminacion caracteristica
-        '                    .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-        '                    .observaciones = "Se elimino la caracteristica :" & caracteristica.id
-        '            }
-        '        BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-        '    End If
-        '    If Current.Session("accion") = "Modificar" Then
-        '        Dim caracteristica As CaracteristicaDTO = Current.Session("entidadModal")
-        '        CaracteristicaBLL.ObtenerInstancia.Modificar(caracteristica)
-        '        Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-        '        Dim bitacora As New BitacoraDTO With {
-        '                    .FechaHora = Now(),
-        '                    .usuario = usuarioLogeado,
-        '                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 12}, 'Suceso: Modificacion caracteristica
-        '                    .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-        '                    .observaciones = "Se modifico la caracteristica :" & caracteristica.id
-        '            }
-        '        BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-        '    End If
-        '    CargarCaracteristicas()
-        '    'Acá tengo que hidear el modal
-        '    ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        If Current.Session("accion") = "Eliminar" Then
+            Dim servicio As ServicioDTO = Current.Session("entidadModal")
+            ServicioBLL.ObtenerInstancia.Eliminar(servicio.id)
+            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+            Dim bitacora As New BitacoraDTO With {
+                            .FechaHora = Now(),
+                            .usuario = usuarioLogeado,
+                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 15}, 'Suceso: Eliminacion servicio
+                            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                            .observaciones = "Se elimino el servicio :" & servicio.id
+                    }
+            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+        End If
+        If Current.Session("accion") = "Modificar" Then
+            Dim servicio As ServicioDTO = Current.Session("entidadModal")
+            ServicioBLL.ObtenerInstancia.Modificar(servicio)
+            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+            Dim bitacora As New BitacoraDTO With {
+                            .FechaHora = Now(),
+                            .usuario = usuarioLogeado,
+                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 16}, 'Suceso: Eliminacion servicio
+                            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                            .observaciones = "Se modifico el servicio :" & servicio.id
+                    }
+            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+        End If
+        CargarCaracteristicas()
+        CargarServicios()
+        'Acá tengo que hidear el modal
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
@@ -174,7 +175,9 @@ Public Class Servicios
                 .imagen = imagen,
                 .precio = txtPrecio.Text,
                 .descripcion = txtDescripcion.Text,
-                .caracteristicas = lsCaracteristicas
+                .caracteristicas = lsCaracteristicas,
+                .id_catalogo = 0,
+                .orden_catalogo = 0
                 }
             ServicioBLL.ObtenerInstancia.Agregar(servicio)
             CargarServicios()
@@ -193,20 +196,40 @@ Public Class Servicios
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Try
-            Dim servicio As New ServicioDTO With {
-                .id = txtID.ID,
-                .nombre = txtNombre.Text,
-                .descripcion = txtDescripcion.Text,
-                .precio = txtPrecio.Text
-                }
-            'TODO: Imagen y caracteristicas
-            ServicioBLL.ObtenerInstancia.Modificar(servicio)
-            'TODO: Agregar Bitacora.
-            CargarServicios()
+            Dim servicio As ServicioDTO = Current.Session("servicioModificando")
+            With servicio
+                .id = CType(txtID.Text, Integer)
+                .nombre = txtNombre.Text
+                .descripcion = txtDescripcion.Text
+                .precio = CType(txtPrecio.Text, Decimal)
+            End With
+            Dim lsCaracteristicas As New List(Of CaracteristicaDTO)
+            For Each gvrow As GridViewRow In grdCaracteristicas.Rows
+                Dim checkbox As CheckBox = gvrow.FindControl("Checkbox1")
+                If checkbox.Checked = True Then
+                    Dim caracteristica As New CaracteristicaDTO With
+                            {.id = Convert.ToInt16(gvrow.Cells(1).Text),
+                             .caracteristica = gvrow.Cells(2).Text
+                            }
+                    lsCaracteristicas.Add(caracteristica)
+                End If
+            Next
+            servicio.caracteristicas = lsCaracteristicas
+            If FileUpload1.HasFile = True Then
+                Dim fileName As String = "~/Imagenes/" + FileUpload1.FileName
+                FileUpload1.SaveAs(Server.MapPath("~/Imagenes/" + FileUpload1.FileName))
+                servicio.imagen.Img64 = fileName
+            Else
+                servicio.imagen.Img64 = lblFileSubido.Text
+            End If
+            Current.Session("entidadModal") = servicio
+            Current.Session("accion") = "Modificar"
+            MostrarModal("Modificacion de servicio", "¿Está seguro que desea modificar el servicio" & servicio.id & "?",, True)
         Catch ex As Exception
             'TODO: Mostra error y agregar bitacora
         End Try
     End Sub
+
 
 
     Private Sub btnCancelar_click(sender As Object, e As EventArgs) Handles btnCancelar.Click
@@ -226,6 +249,9 @@ Public Class Servicios
 
 
 
+
+
+
     Private Sub gv_Servicios_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gv_Servicios.RowCommand
         Dim servicios As List(Of ServicioDTO) = ServicioBLL.ObtenerInstancia.Listar
         Dim servicio As New ServicioDTO
@@ -242,6 +268,7 @@ Public Class Servicios
             FileUpload1.Visible = False
             lblFileSubido.Text = servicio.imagen.Img64
             lblFileSubido.Visible = True
+            btnCambiarImagen.Visible = True
             btnAgregar.Visible = False
             btnModificar.Visible = True
             btnCancelar.Visible = True
@@ -254,13 +281,19 @@ Public Class Servicios
                     End If
                 Next
             Next
+            Current.Session("servicioModificando") = servicio
         End If
         If e.CommandName = "Borrar" Then
             Current.Session("entidadModal") = servicio
             Current.Session("accion") = "Eliminar"
-            'Ver si está asociado a algun catálogo
-
+            MostrarModal("Eliminacion de servicio", "¿Está seguro que desea eliminar el servicio" & servicio.id & "?",, True)
         End If
+    End Sub
+
+    Private Sub btnCambiarImagen_Click(sender As Object, e As EventArgs) Handles btnCambiarImagen.Click
+        lblFileSubido.Visible = False
+        btnCambiarImagen.Visible = False
+        FileUpload1.Visible = True
     End Sub
 
 End Class

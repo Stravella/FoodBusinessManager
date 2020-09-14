@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="AdministrarServicios.aspx.vb" Inherits="FoodBusinessManager.Servicios" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="AdministrarCatalogo.aspx.vb" Inherits="FoodBusinessManager.Catalogo" %>
 
 <%@ MasterType VirtualPath="~/Maestra.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                           <h4>Servicios</h4>
+                           <h4>Catálogo</h4>
                         </center>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                                 <center>
                                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div class="features-icons-icon d-flex">
-                                <i class="fas fa-handshake m-auto text-primary fa-3x"></i>
+                                <i class="fas fa-book-open m-auto text-primary fa-3x"></i>
                             </div>
                                         </div>
                         </center>
@@ -31,26 +31,6 @@
                         <div class="row">
                             <div class="col">
                                 <hr>
-                            </div>
-                        </div>
-                        <div class="row">    
-                            <div class="col">
-                                <center>
-                                    <asp:Image ID="Image1" Class="img-servicio" runat="server" Visible="false" Height="300px" Width="300px" ImageAlign="Middle"/>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:FileUpload class="form-control" ID="FileUpload1" runat="server" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <asp:Label ID="lblFileSubido" class="form-control" runat="server" Text="" Visible="false"></asp:Label>
-                            </div>
-                            <div class="col-md-3">
-                                <asp:Button ID="btnCambiarImagen" CssClass="btn btn-block btn-warning" runat="server" Text="Cambiar imagen" visible="false"/>
                             </div>
                         </div>
                         <div class="row">
@@ -71,14 +51,6 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label>Precio (Mensual)</label>
-                                <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtPrecio" runat="server" placeholder="Precio" TextMode="Number"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
                                 <label>Descripcion</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2"></asp:TextBox>
@@ -93,13 +65,13 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                           <h4>Caracteristicas</h4>
+                           <h4>Servicios</h4>
                         </center>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col">
-                                <asp:GridView ID="grdCaracteristicas" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Servicios_PageIndexChanging" RowStyle-Height="40px">
+                                <asp:GridView ID="grdServicios" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Servicios_PageIndexChanging" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
                                     <PagerTemplate>
                                         <div class="col-md-4 text-left">
@@ -131,7 +103,29 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="id" HeaderText="ID" />
-                                        <asp:BoundField DataField="caracteristica" HeaderText="Caracteristica" />
+                                        <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+                                        <asp:BoundField DataField="precio" HeaderText="precio" />
+                                        <asp:TemplateField HeaderText="Imagen" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <img id="imagen" runat="server" width="75" height="75" src='<%# eval("Imagen.Img64")%>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="orden">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblOrden" runat="server"
+                                                    Text='<%# Eval("orden_catalogo") %>'></asp:Label>
+                                                <asp:TextBox ID="txtOrden" runat="server"
+                                                    Text='<%# Eval("orden_catalogo") %>' Width="175px"
+                                                    Visible="false"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="orden_catalogo" HeaderText="orden" />
+                                        <asp:TemplateField HeaderText="Editar orden" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="ImgEditar" ImageUrl="~/IconosSVG/edit-solid.svg" Text="Editar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -167,7 +161,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                           <h4>Lista Servicios</h4>
+                           <h4>Lista Catálogos</h4>
                         </center>
                             </div>
                         </div>
@@ -178,11 +172,12 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Servicios" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Servicios_PageIndexChanging" RowStyle-Height="40px">
+                                <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Catalogos" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Servicios_PageIndexChanging" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
                                     <PagerTemplate>
                                         <div class="col-md-4 text-left">
                                             <asp:Label ID="lblmostrarpag" runat="server" Text="Mostrar Pagina"></asp:Label>
+
                                             <asp:DropDownList ID="ddlCantidadPaginas" runat="server" AutoPostBack="true" CssClass="margenPaginacion" OnSelectedIndexChanged="ddlCantidadPaginas_SelectedIndexChanged"></asp:DropDownList>
                                             <asp:Label ID="lblde" runat="server" Text="de"></asp:Label>
                                             <asp:Label ID="lblTotalPaginas" runat="server" Text=""></asp:Label>
@@ -204,12 +199,6 @@
                                         <asp:BoundField DataField="id" HeaderText="ID" />
                                         <asp:BoundField DataField="nombre" HeaderText="Nombre" />
                                         <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
-                                        <asp:BoundField DataField="precio" HeaderText="precio" />
-                                        <asp:TemplateField HeaderText="Imagen" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <img id="imagen" runat="server" width="75" height="75" src='<%# eval("Imagen.Img64")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Editar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="ImgEditar" ImageUrl="~/IconosSVG/edit-solid.svg" Text="Editar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
