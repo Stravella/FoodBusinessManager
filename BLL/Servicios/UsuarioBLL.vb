@@ -17,8 +17,12 @@ Public Class UsuarioBLL
 #End Region
 
 #Region "CRUD"
-    Public Function ObtenerUsuario(usuario As UsuarioDTO) As UsuarioDTO
-        Return UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)
+    Public Function ObtenerPorUsername(usuario As UsuarioDTO) As UsuarioDTO
+        Return UsuarioDAL.ObtenerInstancia.ObtenerPorUsername(usuario)
+    End Function
+
+    Public Function ObtenerPorId(id As Integer) As UsuarioDTO
+        Return UsuarioDAL.ObtenerInstancia.ObtenerPorId(id)
     End Function
 
     Public Function ListarUsuarios() As List(Of UsuarioDTO)
@@ -64,7 +68,7 @@ Public Class UsuarioBLL
 
     Public Function LogIn(usuario As UsuarioDTO) As UsuarioDTO
         Try
-            Dim oUsuario As UsuarioDTO = UsuarioDAL.ObtenerInstancia.ObtenerUsuario(usuario)
+            Dim oUsuario As UsuarioDTO = UsuarioDAL.ObtenerInstancia.ObtenerPorUsername(usuario)
             If oUsuario.password = CriptografiaBLL.ObtenerInstancia.Cifrar(usuario.password) Then
                 Return oUsuario
             Else

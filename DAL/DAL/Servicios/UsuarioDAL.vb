@@ -45,17 +45,13 @@ Public Class UsuarioDAL
     End Function
 
 
-    Public Function ObtenerUsuario(ByVal usuario As UsuarioDTO) As UsuarioDTO
+    Public Function ObtenerPorUsername(ByVal usuario As UsuarioDTO) As UsuarioDTO
         Try
             Dim oUsuario As UsuarioDTO
             'listo todos los usuarios y selecciono por username.
             Dim ls As List(Of UsuarioDTO) = Me.ListarUsuarios()
             'Dim oUsuario As UsuarioDTO = ls.Find(Function(x) x.username = usuario.username)
-            For Each iUsuario As UsuarioDTO In ls
-                If iUsuario.username = usuario.username Then
-                    oUsuario = iUsuario
-                End If
-            Next
+            oUsuario = ls.Find(Function(x) x.username = usuario.username)
             'Encontrado el usuario, comparo password
             Return oUsuario
         Catch ex As Exception
@@ -68,11 +64,7 @@ Public Class UsuarioDAL
             Dim oUsuario As UsuarioDTO
             'listo todos los usuarios y selecciono por id.
             Dim ls As List(Of UsuarioDTO) = Me.ListarUsuarios()
-            For Each iUsuario As UsuarioDTO In ls
-                If iUsuario.id = id Then
-                    oUsuario = iUsuario
-                End If
-            Next
+            oUsuario = ls.Find(Function(x) x.id = id)
             Return oUsuario
         Catch ex As Exception
 

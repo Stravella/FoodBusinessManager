@@ -38,8 +38,6 @@ Public Class BitacoraDAL
                 End If
                 params.Add(.CrearParametro("@fechaInicial", fechaDesde))
                 params.Add(.CrearParametro("@fechaFinal", fechaHasta))
-                'params.Add(.CrearParametro("@nroPagina", nroPagina))
-                'params.Add(.CrearParametro("@rowsPagina", rowsPagina))
             End With
         Catch ex As Exception
             Throw ex
@@ -64,7 +62,7 @@ Public Class BitacoraDAL
         Try
             Dim params As List(Of SqlParameter) = CrearParametros(tipoSuceso, Usuario, fechaDesde, fechaHasta, criticidad)
             Dim ls As New List(Of BitacoraDTO)
-            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Bitacora_Listar2", params).Rows
+            For Each Row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Bitacora_Listar", params).Rows
                 Dim oBitacora As New BitacoraDTO With {.id = Row("id_Bitacora"),
                                                        .FechaHora = Row("fecha_Hora"),
                                                        .usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(Row("id_usuario")),

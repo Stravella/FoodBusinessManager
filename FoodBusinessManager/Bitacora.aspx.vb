@@ -84,7 +84,7 @@ Public Class Bitacora2
         If lstUsuarios.SelectedIndex = 0 Then
             usuarioSeleccionado = Nothing
         Else
-            usuarioSeleccionado = UsuarioBLL.ObtenerInstancia.ObtenerUsuario(New UsuarioDTO With {.username = lstUsuarios.SelectedValue})
+            usuarioSeleccionado = UsuarioBLL.ObtenerInstancia.ObtenerPorId(lstUsuarios.SelectedValue)
         End If
 
         Dim tipoSucesoSeleccionado As New SucesoBitacoraDTO
@@ -101,25 +101,14 @@ Public Class Bitacora2
             criticidadSeleccionada = CriticidadBLL.ObtenerInstancia.ObtenerPorId(lstCriticidad.SelectedValue)
         End If
 
-        Dim fechaDesde As Date
-        If txtDesde.Text = "" Then
-            fechaDesde = New Date(2010, 1, 1)
-        Else
-            fechaDesde = txtDesde.Text.Trim()
+        Dim fechaDesde As Date = Date.Parse("01/01/2019")
+        Dim fechaHasta As Date = Date.Parse("01/01/2022")
+        If Not (txtDesde.Text = "") Then
+            fechaDesde = Date.Parse(txtDesde.Text)
         End If
-
-        Dim fechaHasta As Date
-        If txtDesde.Text = "" Then
-            fechaHasta = Date.Today
-        Else
-            fechaHasta = txtHasta.Text.Trim()
+        If Not (txtHasta.Text = "") Then
+            fechaHasta = Date.Parse(txtHasta.Text)
         End If
-
-        'TODO: Probar esto
-        fechaDesde = DateTime.ParseExact(fechaDesde, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-        fechaHasta = DateTime.ParseExact(fechaHasta, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-        fechaDesde = fechaDesde.ToString()
-        fechaHasta = fechaHasta.ToString()
 
         Dim ListaBitacora As New List(Of BitacoraDTO)
         ListaBitacora = BitacoraBLL.ObtenerInstancia.Listar(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, criticidadSeleccionada)

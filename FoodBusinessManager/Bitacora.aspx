@@ -111,7 +111,7 @@
                                             <asp:BoundField DataField="FechaHora" HeaderText="Fecha/Hora" />
                                             <asp:BoundField DataField="UsuarioVal" HeaderText="Usuario" />
                                             <asp:BoundField DataField="tipoSucesoVal" HeaderText="Tipo Suceso" />
-                                            <asp:BoundField DataField="criticidadVal" HeaderText="Criticidad" />
+                                            <asp:BoundField DataField="criticidad.criticidad" HeaderText="Criticidad" />
                                             <asp:BoundField DataField="observaciones" HeaderText="Observaciones" />
                                         </Columns>
                                     </asp:GridView>
