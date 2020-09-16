@@ -180,6 +180,7 @@ Public Class Catalogo
             btnModificar.Visible = True
             btnCancelar.Visible = True
             CargarServicios()
+            catalogo.servicios = ServicioBLL.ObtenerInstancia.ListarPorIdCatalogo(catalogo.id)
             For Each servicio As ServicioDTO In catalogo.servicios
                 For Each gvrow As GridViewRow In grdServicios.Rows
                     If Convert.ToInt16(gvrow.Cells(1).Text) = servicio.id Then
@@ -213,8 +214,15 @@ Public Class Catalogo
         catalogo.servicios = lsServicios
         CatalogoBLL.ObtenerInstancia.Agregar(catalogo)
         For Each servicio In catalogo.servicios
-            servicio.id = catalogo.id
+            servicio.id_catalogo = catalogo.id
             'Agregar el orden
+            For Each gvrow As GridViewRow In grdServicios.Rows
+                Dim checkbox As CheckBox = gvrow.FindControl("Checkbox1")
+                If checkbox.Checked = True And gvrow.Cells(1).Text = servicio.id Then
+                    Dim txtbox As TextBox = gvrow.FindControl("txtOrden")
+                    servicio.orden_catalogo = txtbox.Text
+                End If
+            Next
             ServicioBLL.ObtenerInstancia.Modificar(servicio)
         Next
         CargarCatalogos()
@@ -249,7 +257,8 @@ Public Class Catalogo
                 If checkbox.Checked = True Then
                     Dim servicio As ServicioDTO = ServicioBLL.ObtenerInstancia.Obtener(gvrow.Cells(1).Text)
                     servicio.id_catalogo = catalogo.id
-                    servicio.orden_catalogo = gvrow.Cells(6).Text
+                    Dim txtbox As TextBox = gvrow.FindControl("txtOrden")
+                    servicio.orden_catalogo = txtbox.Text
                     lsServicios.Add(servicio)
                 End If
             Next

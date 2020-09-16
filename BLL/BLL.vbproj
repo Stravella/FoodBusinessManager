@@ -87,6 +87,7 @@
     <Compile Include="Negocio\CaracteristicaBLL.vb" />
     <Compile Include="Negocio\CatalogoBLL.vb" />
     <Compile Include="Negocio\ImagenBLL.vb" />
+    <Compile Include="Negocio\PreguntaBLL.vb" />
     <Compile Include="Negocio\ServicioBLL.vb" />
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />

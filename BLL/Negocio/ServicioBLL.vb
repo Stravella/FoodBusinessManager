@@ -30,6 +30,17 @@ Public Class ServicioBLL
         End Try
     End Function
 
+    Public Function ObtenerPorNombre(nombre As String) As ServicioDTO
+        Try
+            Dim lista As List(Of ServicioDTO) = Listar()
+            Dim servicio As ServicioDTO = lista.Find(Function(x) x.nombre = nombre)
+            Return servicio
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
     Public Sub Agregar(servicio As ServicioDTO)
         Try
             servicio.imagen = ImagenBLL.ObtenerInstancia.Agregar(servicio.imagen)
@@ -75,6 +86,21 @@ Public Class ServicioBLL
                         serviciosAsociados.Add(servicio)
                     End If
                 Next
+            Next
+            Return serviciosAsociados
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarPorIdCatalogo(id As Integer) As List(Of ServicioDTO)
+        Try
+            Dim ls As List(Of ServicioDTO) = Listar()
+            Dim serviciosAsociados As New List(Of ServicioDTO)
+            For Each servicio As ServicioDTO In ls
+                If servicio.id_catalogo = id Then
+                    serviciosAsociados.Add(servicio)
+                End If
             Next
             Return serviciosAsociados
         Catch ex As Exception

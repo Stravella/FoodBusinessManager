@@ -67,6 +67,8 @@
     <Compile Include="Negocio\CaracteristicaDTO.vb" />
     <Compile Include="Negocio\CatalogoDTO.vb" />
     <Compile Include="Negocio\ImagenDTO.vb" />
+    <Compile Include="Negocio\PreguntaDTO.vb" />
+    <Compile Include="Negocio\RespuestaDTO.vb" />
     <Compile Include="Negocio\ServicioDTO.vb" />
     <Compile Include="Servicios\BitacoraDTO.vb" />
     <Compile Include="Servicios\ClienteDTO.vb" />

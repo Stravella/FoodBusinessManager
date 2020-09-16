@@ -71,28 +71,9 @@
                         </div>
                         <div class="row ">
                             <div class="col">
-                                <asp:GridView ID="grdServicios" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Servicios_PageIndexChanging" RowStyle-Height="40px">
+                                <asp:GridView ID="grdServicios" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center"  RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
-                                    <PagerTemplate>
-                                        <div class="col-md-4 text-left">
-                                            <asp:Label ID="lblmostrarpag" runat="server" Text="Mostrar Pagina"></asp:Label>
-                                            <asp:DropDownList ID="ddlCantidadPaginas" runat="server" AutoPostBack="true" CssClass="margenPaginacion" OnSelectedIndexChanged="ddlCantidadPaginas_SelectedIndexChanged"></asp:DropDownList>
-                                            <asp:Label ID="lblde" runat="server" Text="de"></asp:Label>
-                                            <asp:Label ID="lblTotalPaginas" runat="server" Text=""></asp:Label>
-                                        </div>
-                                        <div class="col-md-4 col-md-offset-4">
-                                            <asp:Label ID="lblMostrar" runat="server" Text="Mostrar"></asp:Label>
-                                            <asp:DropDownList ID="ddlTamañoPaginas" runat="server" AutoPostBack="true" CssClass="margenPaginacion" OnSelectedIndexChanged="ddlTamañoPaginas_SelectedPageSizeChanged">
-                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                                <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                                                <asp:ListItem Text="10" Value="10"></asp:ListItem>
-                                                <asp:ListItem Text="20" Value="20"></asp:ListItem>
-                                                <asp:ListItem Text="25" Value="25"></asp:ListItem>
-                                                <asp:ListItem Text="50" Value="50"></asp:ListItem>
-                                            </asp:DropDownList>
-                                            <asp:Label ID="lblRegistrosPag" runat="server" Text="Registros por Pagina"></asp:Label>
-                                        </div>
-                                    </PagerTemplate>
+                                   
                                     <Columns>
                                         <asp:TemplateField HeaderText="Seleccionar">
                                             <EditItemTemplate>
@@ -119,8 +100,7 @@
                                                     Text='<%# Eval("orden_catalogo") %>' Width="175px"
                                                     Visible="false"></asp:TextBox>
                                             </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="orden_catalogo" HeaderText="orden" />
+                                        </asp:TemplateField>                                       
                                         <asp:TemplateField HeaderText="Editar orden" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="ImgEditar" ImageUrl="~/IconosSVG/edit-solid.svg" Text="Editar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />

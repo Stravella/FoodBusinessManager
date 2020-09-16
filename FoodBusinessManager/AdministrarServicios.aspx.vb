@@ -15,36 +15,40 @@ Public Class Servicios
 
     'Acá le doy el comportamiento según mis entidades.
     Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
-        If Current.Session("accion") = "Eliminar" Then
-            Dim servicio As ServicioDTO = Current.Session("entidadModal")
-            ServicioBLL.ObtenerInstancia.Eliminar(servicio.id)
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-            Dim bitacora As New BitacoraDTO With {
-                            .FechaHora = Now(),
-                            .usuario = usuarioLogeado,
-                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 15}, 'Suceso: Eliminacion servicio
-                            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-                            .observaciones = "Se elimino el servicio :" & servicio.id
-                    }
-            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-        End If
-        If Current.Session("accion") = "Modificar" Then
-            Dim servicio As ServicioDTO = Current.Session("entidadModal")
-            ServicioBLL.ObtenerInstancia.Modificar(servicio)
-            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-            Dim bitacora As New BitacoraDTO With {
-                            .FechaHora = Now(),
-                            .usuario = usuarioLogeado,
-                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 16}, 'Suceso: Eliminacion servicio
-                            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-                            .observaciones = "Se modifico el servicio :" & servicio.id
-                    }
-            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-        End If
-        CargarCaracteristicas()
-        CargarServicios()
-        'Acá tengo que hidear el modal
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Try
+            If Current.Session("accion") = "Eliminar" Then
+                Dim servicio As ServicioDTO = Current.Session("entidadModal")
+                ServicioBLL.ObtenerInstancia.Eliminar(servicio.id)
+                Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+                Dim bitacora As New BitacoraDTO With {
+                                .FechaHora = Now(),
+                                .usuario = usuarioLogeado,
+                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 15}, 'Suceso: Eliminacion servicio
+                                .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                                .observaciones = "Se elimino el servicio :" & servicio.id
+                        }
+                BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+            End If
+            If Current.Session("accion") = "Modificar" Then
+                Dim servicio As ServicioDTO = Current.Session("entidadModal")
+                ServicioBLL.ObtenerInstancia.Modificar(servicio)
+                Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+                Dim bitacora As New BitacoraDTO With {
+                                .FechaHora = Now(),
+                                .usuario = usuarioLogeado,
+                                .tipoSuceso = New SucesoBitacoraDTO With {.id = 16}, 'Suceso: Eliminacion servicio
+                                .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                                .observaciones = "Se modifico el servicio :" & servicio.id
+                        }
+                BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+            End If
+            CargarCaracteristicas()
+            CargarServicios()
+            'Acá tengo que hidear el modal
+            ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Catch ex As Exception
+            MostrarModal("Error", "Lo siento! Ocurrio un error",, True)
+        End Try
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
@@ -190,7 +194,15 @@ Public Class Servicios
                     .observaciones = "Se creo el servico :" & servicio.id
             }
         Catch ex As Exception
-            'TODO: Mostra error y agregar bitacora
+            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+            Dim bitacora As New BitacoraDTO With {
+                    .FechaHora = Now(),
+                    .usuario = usuarioLogeado,
+                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 14}, 'Suceso: Creacion Servicio
+                    .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                    .observaciones = "Ocurrio un error creando un servicio :" & ex.Message
+            }
+            MostrarModal("Error", "Lo siento! Ocurrio un error",, True)
         End Try
     End Sub
 

@@ -136,6 +136,7 @@
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="IconosSVG\edit-solid.svg" />
@@ -196,6 +197,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Servicios.aspx" />
     <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
@@ -336,6 +338,13 @@
       <DependentUpon>FAQS.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="VistaServicios.aspx.designer.vb">
+      <DependentUpon>VistaServicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VistaServicios.aspx.vb">
+      <DependentUpon>VistaServicios.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Helpers\HtmlHelper.vb" />
     <Compile Include="Helpers\TreeHelper.vb" />
     <Compile Include="Home.aspx.designer.vb">
@@ -442,6 +451,13 @@
     </Compile>
     <Compile Include="AdministrarServicios.aspx.vb">
       <DependentUpon>AdministrarServicios.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Servicios.aspx.designer.vb">
+      <DependentUpon>Servicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Servicios.aspx.vb">
+      <DependentUpon>Servicios.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Soluciones.aspx.designer.vb">

@@ -60,11 +60,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Caracteristicas.aspx">Características</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Soluciones</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catálogo
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="VistaServicios.aspx?Serv=Free">Free</a>
+                                <a class="dropdown-item" href="VistaServicios.aspx?Serv=Oro">Oro</a>
+                                <a class="dropdown-item" href="VistaServicios.aspx?Serv=Platino">Platino</a>                               
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="Soluciones.aspx">Servicios</a>
+                            <a class="nav-item nav-link" href="Servicios.aspx">Servicios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item nav-link" href="Mensaje.aspx">Contáctenos</a>
