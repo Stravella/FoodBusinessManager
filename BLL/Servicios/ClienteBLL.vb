@@ -18,7 +18,9 @@ Public Class ClienteBLL
 
     Public Sub Agregar(cliente As ClienteDTO)
         Try
-            UsuarioBLL.ObtenerInstancia.AgregarUsuario(cliente.usuario)
+
+            cliente.usuario = UsuarioBLL.ObtenerInstancia.AgregarUsuario(cliente.usuario)
+            cliente.id = ClienteDAL.ObtenerInstancia.GetNextID
             ClienteDAL.ObtenerInstancia.AgregarCliente(cliente)
         Catch ex As Exception
             Throw ex
@@ -27,6 +29,7 @@ Public Class ClienteBLL
 
     Public Sub Modificar(cliente As ClienteDTO)
         Try
+            UsuarioBLL.ObtenerInstancia.ModificarUsuario(cliente.usuario)
             ClienteDAL.ObtenerInstancia.ModificarCliente(cliente)
         Catch ex As Exception
             Throw ex
@@ -63,5 +66,14 @@ Public Class ClienteBLL
             Throw ex
         End Try
     End Function
+
+    Public Sub Eliminar(cliente As ClienteDTO)
+        Try
+            ClienteDAL.ObtenerInstancia.EliminarCliente(cliente)
+            UsuarioBLL.ObtenerInstancia.EliminarUsuario(cliente.usuario)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
 End Class

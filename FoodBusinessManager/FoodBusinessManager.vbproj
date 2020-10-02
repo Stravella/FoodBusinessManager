@@ -97,7 +97,7 @@
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
     <Content Include="AdministrarCaracteristicas.aspx" />
-    <Content Include="AgregarUsuario.aspx" />
+    <Content Include="AdministrarUsuarios.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
     <Content Include="Caracteristicas.aspx" />
@@ -128,7 +128,6 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Controles\Modal.ascx" />
     <Content Include="EliminarPerfil.aspx" />
-    <Content Include="EliminarUsuario.aspx" />
     <Content Include="EmailTemplates\Template_mail.html" />
     <Content Include="Estilos\MiEstilo.css" />
     <Content Include="EmailTemplates\RecoverPassword.html" />
@@ -136,6 +135,7 @@
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Respuestas.aspx" />
     <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
@@ -163,7 +163,6 @@
     <Content Include="Mensaje.aspx" />
     <Content Include="ModificarContraseña.aspx" />
     <Content Include="ModificarPerfil.aspx" />
-    <Content Include="ModificarUsuario.aspx" />
     <Content Include="AgregarPerfil.aspx" />
     <Content Include="OlvidoContraseña1.aspx" />
     <Content Include="PoliticasSeguridad.aspx" />
@@ -261,11 +260,11 @@
       <DependentUpon>AdministrarCaracteristicas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="AgregarUsuario.aspx.designer.vb">
-      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+    <Compile Include="AdministrarUsuarios.aspx.designer.vb">
+      <DependentUpon>AdministrarUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgregarUsuario.aspx.vb">
-      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+    <Compile Include="AdministrarUsuarios.aspx.vb">
+      <DependentUpon>AdministrarUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Backup.aspx.designer.vb">
@@ -324,18 +323,18 @@
       <DependentUpon>EliminarPerfil.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="EliminarUsuario.aspx.designer.vb">
-      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EliminarUsuario.aspx.vb">
-      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="FAQS.aspx.designer.vb">
       <DependentUpon>FAQS.aspx</DependentUpon>
     </Compile>
     <Compile Include="FAQS.aspx.vb">
       <DependentUpon>FAQS.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Respuestas.aspx.designer.vb">
+      <DependentUpon>Respuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Respuestas.aspx.vb">
+      <DependentUpon>Respuestas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="VistaServicios.aspx.designer.vb">
@@ -390,13 +389,6 @@
     </Compile>
     <Compile Include="ModificarPerfil.aspx.vb">
       <DependentUpon>ModificarPerfil.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="ModificarUsuario.aspx.designer.vb">
-      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarUsuario.aspx.vb">
-      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="OlvidoContraseña1.aspx.designer.vb">

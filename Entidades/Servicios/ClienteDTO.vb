@@ -80,12 +80,12 @@
         End Set
     End Property
 
-    Private _telefono As Integer
-    Public Property telefono() As Integer
+    Private _telefono As String
+    Public Property telefono() As String
         Get
             Return _telefono
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             _telefono = value
         End Set
     End Property

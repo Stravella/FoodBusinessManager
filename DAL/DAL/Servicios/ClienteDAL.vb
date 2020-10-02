@@ -65,7 +65,7 @@ Public Class ClienteDAL
             With AccesoDAL.ObtenerInstancia()
                 params.Add((.CrearParametro("@id_cliente", cliente.id)))
             End With
-            AccesoDAL.ObtenerInstancia.EjecutarSP("Clientes_Eliminar", CrearParametros(cliente))
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Clientes_Eliminar", params)
         Catch ex As Exception
             Throw ex
         End Try

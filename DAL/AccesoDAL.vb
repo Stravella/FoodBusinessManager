@@ -34,7 +34,7 @@ Public Class AccesoDAL
         Try
             i = cmd.ExecuteNonQuery
         Catch ex As Exception
-            MsgBox("Se produjo el siguiente error al operar en la Base de Datos:  " & ex.Message, MsgBoxStyle.Critical, "OrderCenter")
+            MsgBox("Se produjo el siguiente error al operar en la Base de Datos:  " & ex.Message, MsgBoxStyle.Critical, "Food Business Manager")
             i = -1
         Finally
             CX.Close()
