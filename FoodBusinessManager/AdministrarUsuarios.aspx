@@ -101,7 +101,7 @@
                                     <asp:Label ID="lblContraseña" runat="server" Text="Contraseña"></asp:Label>
                                 </label>
                                 <div class="form-group">
-                                    <asp:TextBox ID="txtContraseña" CssClass="form-control" runat="server" TextMode="Password" ></asp:TextBox>
+                                    <asp:TextBox ID="txtContraseña" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqContraseña" runat="server" ErrorMessage="*" ControlToValidate="txtContraseña" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="cantContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtContraseña" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
                                 </div>
@@ -192,7 +192,24 @@
                                     <asp:Label ID="lblProvincia" runat="server" Text="Provincia"></asp:Label>
                                 </label>
                                 <div class="form-group">
-                                    <asp:DropDownList ID="ddlProvincias" DataValueField="id" DataTextField="provincia" CssClass="form-control" runat="server" ></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProvincias" DataValueField="id" DataTextField="provincia" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col">
+                                <asp:CheckBox ID="chkBloqueado" Text="Bloqueado" runat="server" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <asp:Label ID="lblPerfil" runat="server" Text="Perfil"></asp:Label>
+                                </label>
+                                <div class="form-group">
+                                    <asp:DropDownList ID="ddlPerfil" DataValueField="id_permiso" DataTextField="nombre" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -207,10 +224,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false"  ValidationGroup="Usuario"/>                       
+                        <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" ValidationGroup="Usuario" />
                     </div>
                     <div class="col-6">
-                        <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false" />                       
+                        <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false" />
                     </div>
                 </div>
             </div>

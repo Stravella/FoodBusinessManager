@@ -8,6 +8,7 @@ Public Class AdministrarUsuarios1
         If Not IsPostBack() Then
             CargarUsuarios()
             CargarProvincias()
+            CargarPerfiles()
         End If
     End Sub
 
@@ -20,6 +21,27 @@ Public Class AdministrarUsuarios1
     Public Sub CargarProvincias()
         ddlProvincias.DataSource = ProvinciaBLL.ObtenerInstancia.Listar
         ddlProvincias.DataBind()
+    End Sub
+
+    Public Sub CargarPerfiles()
+        ddlPerfil.DataSource = PermisoBLL.ObtenerInstancia.ListarPerfiles
+        ddlPerfil.DataBind()
+    End Sub
+
+    Public Sub SeleccionarPerfil(nombrePerfil As String)
+        For Each item As ListItem In ddlPerfil.Items
+            If item.Text = nombrePerfil Then
+                ddlPerfil.SelectedValue = item.Value
+            End If
+        Next
+    End Sub
+
+    Public Sub SeleccionarProvincia(provincia As String)
+        For Each item As ListItem In ddlProvincias.Items
+            If item.Text = provincia Then
+                ddlProvincias.SelectedValue = item.Value
+            End If
+        Next
     End Sub
 
 
@@ -107,6 +129,14 @@ Public Class AdministrarUsuarios1
             txtLocalidad.Text = cliente.localidad
             txtTelefono.Text = cliente.telefono
             txtRazonSocial.Text = cliente.RazonSocial
+            If usuario.bloqueado = True Then
+                chkBloqueado.Checked = True
+            Else
+                chkBloqueado.Checked = False
+            End If
+
+            SeleccionarProvincia(cliente.provincia)
+            SeleccionarPerfil(usuario.perfil.nombre)
 
             btnAgregar.Visible = False
             btnModificar.Visible = True
@@ -148,8 +178,8 @@ Public Class AdministrarUsuarios1
                             .fechaCreacion = Now(),
                             .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                             .intentos = 0,
-                            .bloqueado = 1,
-                            .perfil = New PerfilCompuesto With {.id_permiso = 18}
+                            .bloqueado = chkBloqueado.Checked,
+                            .perfil = New PerfilCompuesto With {.id_permiso = ddlPerfil.SelectedValue}
                         }
             Dim cliente As New ClienteDTO With {
                             .usuario = usuario,
@@ -167,7 +197,7 @@ Public Class AdministrarUsuarios1
             Current.Session("accion") = "Modificar"
             MostrarModal("Modificacion de usuario", "¿Está seguro que desea modificar el usuario " & usuario.username & "?",, True)
         Catch ex As Exception
-
+            MostrarModal("Error", "Lo siento! Ocurrio un error, intente nuevemente o contacte a su administrador",, True)
         End Try
     End Sub
 
@@ -183,8 +213,8 @@ Public Class AdministrarUsuarios1
                 .fechaCreacion = Now(),
                 .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                 .intentos = 0,
-                .bloqueado = 1,
-                .perfil = New PerfilCompuesto With {.id_permiso = 18}
+                .bloqueado = chkBloqueado.Checked,
+                .perfil = New PerfilCompuesto With {.id_permiso = ddlPerfil.SelectedValue}
             }
             Dim cliente As New ClienteDTO
             cliente.usuario = usuario

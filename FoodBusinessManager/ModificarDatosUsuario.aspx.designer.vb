@@ -11,61 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class AdministrarUsuarios1
+Partial Public Class ModificarDatosUsuario
 
     '''<summary>
-    '''Control AdministrarUsuarios.
+    '''Control lblModificarDatos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents AdministrarUsuarios As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtID.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtID As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control lblMail.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblMail As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtMail.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtMail As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control reqMail.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents reqMail As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''Control formatMail.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents formatMail As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents lblModificarDatos As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lblNombre.
@@ -140,6 +95,42 @@ Partial Public Class AdministrarUsuarios1
     Protected WithEvents cantApellido As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
+    '''Control lblMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMail As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMail As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqMail As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control formatMail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents formatMail As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
     '''Control lblUsuario.
     '''</summary>
     '''<remarks>
@@ -210,6 +201,51 @@ Partial Public Class AdministrarUsuarios1
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents cantContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Control lblValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValidarContraseña As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtValidarContraseña As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control reqValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents reqValidarContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control compValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents compValidarContraseña As Global.System.Web.UI.WebControls.CompareValidator
+
+    '''<summary>
+    '''Control cantValidarContraseña.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cantValidarContraseña As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
     '''Control lblDNI.
@@ -464,42 +500,6 @@ Partial Public Class AdministrarUsuarios1
     Protected WithEvents ddlProvincias As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control chkBloqueado.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents chkBloqueado As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
-    '''Control lblPerfil.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblPerfil As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control ddlPerfil.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ddlPerfil As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control btnAgregar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnAgregar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''Control btnModificar.
     '''</summary>
     '''<remarks>
@@ -507,24 +507,6 @@ Partial Public Class AdministrarUsuarios1
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control btnCancelar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control gv_Usuarios.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents gv_Usuarios As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Propiedad Master.

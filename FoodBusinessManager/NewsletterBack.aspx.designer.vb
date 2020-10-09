@@ -11,43 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class AdministrarServicios
-
-    '''<summary>
-    '''Control Image1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control FileUpload1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents FileUpload1 As Global.System.Web.UI.WebControls.FileUpload
-
-    '''<summary>
-    '''Control lblFileSubido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblFileSubido As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control btnCambiarImagen.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCambiarImagen As Global.System.Web.UI.WebControls.Button
+Partial Public Class NewsletterBack
 
     '''<summary>
     '''Control txtID.
@@ -59,40 +23,58 @@ Partial Public Class AdministrarServicios
     Protected WithEvents txtID As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtNombre.
+    '''Control txtTitulo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtTitulo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtPrecio.
+    '''Control RequiredFieldValidator2.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtPrecio As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control txtDescripcion.
+    '''Control txtCuerpo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtDescripcion As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtCuerpo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control grdCaracteristicas.
+    '''Control RequiredFieldValidator1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents grdCaracteristicas As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control FileUpload1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents FileUpload1 As Global.System.Web.UI.WebControls.FileUpload
+
+    '''<summary>
+    '''Control ddlEstado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlEstado As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnAgregar.
@@ -104,31 +86,13 @@ Partial Public Class AdministrarServicios
     Protected WithEvents btnAgregar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btnModificar.
+    '''Control gv_Newsletter.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control btnCancelar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control gv_Servicios.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents gv_Servicios As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gv_Newsletter As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Propiedad Master.

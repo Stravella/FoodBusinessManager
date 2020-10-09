@@ -6,20 +6,20 @@ Public Class Maestra
     Private usuarioLogeado As New UsuarioDTO
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-
+            If IsNothing(Current.Session("Cliente")) Then
+                'Panel de logeo
+                panelLoginform.Visible = True
+                panelLogout.Visible = False
+            Else
+                Dim cliente As ClienteDTO = Current.Session("Cliente")
+                'Perfil y traducciones
+                CargarPerfil(cliente.usuario)
+                'Panel de usuario logueado
+                panelLoginform.Visible = False
+                panelLogout.Visible = True
+                linkUsuario.Text = "Bienvenido: " & cliente.usuario.username
+            End If
         End If
-        If Not IsNothing(Current.Session("Cliente")) Then
-            'Perfil y traducciones
-            Dim cliente As ClienteDTO = Current.Session("Cliente")
-            CargarPerfil(cliente.usuario)
-            'Manejo de navbar
-            panelLoginform.Visible = False
-            panelLogout.Visible = True
-        Else
-            panelLoginform.Visible = True
-            panelLogout.Visible = False
-        End If
-
     End Sub
 
 #Region "Mensajes"
@@ -88,7 +88,8 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Catalogos", "AdministrarCatalogos", Nothing, "/AdministrarCatalogo.aspx"))
             Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Servicios", "AdministrarServicios", Nothing, "/AdministrarServicios.aspx"))
             Me.MenuLateral.Items.Item(3).ChildItems.Add(New MenuItem("Caracteristicas", "AdministrarCaracteristicas", Nothing, "/AdministrarCaracteristicas.aspx"))
-
+            Me.MenuLateral.Items.Add(New MenuItem("Administración Mensajes", "AdminMensajes"))
+            Me.MenuLateral.Items.Item(4).ChildItems.Add(New MenuItem("Respuestas", "AdministrarRespuestas", Nothing, "/Respuestas.aspx"))
         Catch ex As Exception
 
         End Try

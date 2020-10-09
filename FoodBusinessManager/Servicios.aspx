@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="Servicios.aspx.vb" Inherits="FoodBusinessManager.Servicios1" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="Servicios.aspx.vb" Inherits="FoodBusinessManager.Servicios" %>
 
 <%@ MasterType VirtualPath="~/Maestra.Master" %>
 
@@ -53,6 +53,26 @@
                                             </center>
                                         </div>
                                     </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col">
+                                            <center>
+                                                <asp:CheckBox id="chkComparar" text=" Comparar" OnCheckedChanged="Check" CommandName='<%# Eval("id") %>' AutoPostBack="true" runat="server"></asp:CheckBox>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:Button ID="btnDetalle" CssClass="btn btn-block btn-info" CommandName="detalle" CommandArgument='<%# Eval("id") %>' runat="server" Text="Ver detalle" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" Visible="true" runat="server" Text="Comprar" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,5 +80,18 @@
                 </ItemTemplate>
             </asp:Repeater>
         </div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <asp:Button ID="btnComparar" CssClass="btn btn-block btn-warning" Enabled="false" runat="server" Text="Comparar" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <asp:Button ID="btnCancelar" CssClass="btn btn-block btn-danger" Enabled="true" Visible="false" runat="server" Text="Cancelar" />
+            </div>
+        </div>
+        <br />
     </div>
 </asp:Content>

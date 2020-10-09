@@ -85,7 +85,9 @@
     <Compile Include="AccesoDAL.vb" />
     <Compile Include="DAL\Negocio\CaracteristicasDAL.vb" />
     <Compile Include="DAL\Negocio\CatalogoDAL.vb" />
+    <Compile Include="DAL\Negocio\EstadoDAL.vb" />
     <Compile Include="DAL\Negocio\ImagenDAL.vb" />
+    <Compile Include="DAL\Negocio\NewsletterDAL.vb" />
     <Compile Include="DAL\Negocio\PreguntaDAL.vb" />
     <Compile Include="DAL\Negocio\RespuestaDAL.vb" />
     <Compile Include="DAL\Negocio\ServicioCaracteristicasDAL.vb" />

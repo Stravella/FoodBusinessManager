@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Servicios1
+Partial Public Class Servicios
 
     '''<summary>
     '''Control repeaterServicios.
@@ -21,6 +21,24 @@ Partial Public Class Servicios1
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents repeaterServicios As Global.System.Web.UI.WebControls.Repeater
+
+    '''<summary>
+    '''Control btnComparar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnComparar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnCancelar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Propiedad Master.

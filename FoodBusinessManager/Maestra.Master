@@ -53,7 +53,7 @@
     <form id="form1" runat="server">
         <div class="container-fluid">
             <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-toggleable-md">
                 <a class="navbar-brand" href="Home.aspx">Food Business Manager</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
@@ -66,7 +66,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="VistaServicios.aspx?Serv=Free">Free</a>
                                 <a class="dropdown-item" href="VistaServicios.aspx?Serv=Oro">Oro</a>
-                                <a class="dropdown-item" href="VistaServicios.aspx?Serv=Platino">Platino</a>                               
+                                <a class="dropdown-item" href="VistaServicios.aspx?Serv=Platino">Platino</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -102,14 +102,17 @@
                                 </div>
 
                                 <a href="Registrarse1.aspx" id="btnRegistrarse" class="btn btn-md btn-info">Registrarse <i class="fas fa-sign-in-alt"></i></a>
-                        </asp:Panel>
-
-                        <asp:Panel ID="panelLogout" runat="server" Visible="false">
-                            <li class="nav-item active">
-                                <asp:LinkButton class="nav-link" ID="linkUsuario" runat="server" Text="Hola! : " Visible="false" CausesValidation="false"></asp:LinkButton>
                             </li>
+                        </asp:Panel>
+                        <asp:Panel ID="panelLogout" runat="server" Visible="false">
+                            <li class="nav-item dropdown">
+                                <asp:Button ID="linkUsuario" runat="server" data-toggle="dropdown" class="btn  btn-md dropdown-toggle btn-info" CausesValidation="false" />
+                                <div class="dropdown-menu" aria-labelledby="linkUsuario">
+                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>
+                                </div>
+                            </li>                           
                             <li class="nav-item active">
-                                <asp:LinkButton class="nav-link btn btn-md btn-info" ID="linkLogOut" runat="server" Text="Log Out" Visible="false" CausesValidation="false"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
+                                <asp:LinkButton class="nav-link btn btn-md btn-info" ID="linkLogOut" runat="server" Text="Log Out" CausesValidation="false"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                             </li>
                         </asp:Panel>
                     </ul>

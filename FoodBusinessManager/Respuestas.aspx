@@ -68,7 +68,7 @@
                                 <asp:GridView ID="grdRespuestas" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center" AllowPaging="false" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
                                     <Columns>
-                                        <asp:BoundField DataField="respuesta" HeaderText="Caracteristica" />
+                                        <asp:BoundField DataField="respuesta" HeaderText="Respuestas" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

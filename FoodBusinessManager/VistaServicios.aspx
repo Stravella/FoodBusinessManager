@@ -53,6 +53,15 @@
                             <asp:Label ID="lblPrecio" CssClass="text-success" runat="server" Font-Bold="true" > $<%#Eval("precio") %> </asp:Label>
                         </center>
                     </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <asp:Button ID="btnComprar" CssClass="btn btn-lg btn-success" Visible="true" runat="server" Text="Comprar" />
+                            </center>                            
+                        </div>
+                    </div>
+                    <br />
                 </div>
                 <hr />
                 <div class="row">
@@ -92,7 +101,6 @@
                                     <ItemTemplate>
                                         <div class="row">
                                             <div class="col-1">
-                                                
                                             </div>
                                             <div class="col-11">
                                                 <asp:Label ID="lblRespuesta" runat="server" Text='<%#Eval("Respuesta") %>' BackColor="LightGray"></asp:Label>
@@ -102,7 +110,7 @@
                                 </asp:Repeater>
                                 <div class="row">
                                     <div class="col">
-                                      <hr />
+                                        <hr />
                                     </div>
                                 </div>
                             </ItemTemplate>

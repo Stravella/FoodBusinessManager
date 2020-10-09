@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="AdministrarServicios.aspx.vb" Inherits="FoodBusinessManager.Servicios" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="AdministrarServicios.aspx.vb" Inherits="FoodBusinessManager.AdministrarServicios" %>
 
 <%@ MasterType VirtualPath="~/Maestra.Master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">

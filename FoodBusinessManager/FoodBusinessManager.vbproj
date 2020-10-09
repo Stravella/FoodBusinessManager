@@ -48,6 +48,9 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -135,6 +138,9 @@
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="IconosSVG\play-circle-regular.svg" />
+    <Content Include="ModificarDatosUsuario.aspx" />
+    <Content Include="NewsletterBack.aspx" />
     <Content Include="Respuestas.aspx" />
     <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
@@ -197,7 +203,6 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Servicios.aspx" />
-    <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
@@ -224,7 +229,6 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="AdministrarServicios.aspx" />
-    <Content Include="Soluciones.aspx" />
     <Content Include="TerminosYCondiciones.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -328,6 +332,20 @@
     </Compile>
     <Compile Include="FAQS.aspx.vb">
       <DependentUpon>FAQS.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ModificarDatosUsuario.aspx.designer.vb">
+      <DependentUpon>ModificarDatosUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarDatosUsuario.aspx.vb">
+      <DependentUpon>ModificarDatosUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="NewsletterBack.aspx.designer.vb">
+      <DependentUpon>NewsletterBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsletterBack.aspx.vb">
+      <DependentUpon>NewsletterBack.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Respuestas.aspx.designer.vb">
@@ -452,25 +470,11 @@
       <DependentUpon>Servicios.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Soluciones.aspx.designer.vb">
-      <DependentUpon>Soluciones.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Soluciones.aspx.vb">
-      <DependentUpon>Soluciones.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="TerminosYCondiciones.aspx.designer.vb">
       <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="TerminosYCondiciones.aspx.vb">
       <DependentUpon>TerminosYCondiciones.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.vb">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.vb">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

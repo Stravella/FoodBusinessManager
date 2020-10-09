@@ -2,7 +2,7 @@
 Imports Entidades
 Imports BLL
 
-Public Class Servicios
+Public Class AdministrarServicios
     Inherits System.Web.UI.Page
 
 
