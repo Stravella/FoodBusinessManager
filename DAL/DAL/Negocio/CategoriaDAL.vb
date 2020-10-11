@@ -67,7 +67,8 @@ Public Class CategoriaDAL
         Dim lsCategoria As New List(Of CategoriaDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Categorias_Listar").Rows
             Dim categoria As New CategoriaDTO With {.id = row("id"),
-                                              .nombre = row("nombre")
+                                              .nombre = row("nombre"),
+                                              .subscriptores = SubscripcionesDAL.ObtenerInstancia.ListarPorCategoria(row("id"))
             }
             lsCategoria.Add(categoria)
         Next

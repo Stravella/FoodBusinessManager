@@ -93,6 +93,7 @@
     <Compile Include="DAL\Negocio\RespuestaDAL.vb" />
     <Compile Include="DAL\Negocio\ServicioCaracteristicasDAL.vb" />
     <Compile Include="DAL\Negocio\ServicioDAL.vb" />
+    <Compile Include="DAL\Negocio\SubscripcionesDAL.vb" />
     <Compile Include="DAL\Servicios\BitacoraDAL.vb" />
     <Compile Include="DAL\Servicios\ClienteDAL.vb" />
     <Compile Include="DAL\Servicios\CriticidadDAL.vb" />

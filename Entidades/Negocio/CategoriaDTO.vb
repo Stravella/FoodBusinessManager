@@ -20,5 +20,14 @@
         End Set
     End Property
 
+    Private _subscriptores As List(Of SubscriptorDTO)
+    Public Property subscriptores() As List(Of SubscriptorDTO)
+        Get
+            Return _subscriptores
+        End Get
+        Set(ByVal value As List(Of SubscriptorDTO))
+            _subscriptores = value
+        End Set
+    End Property
 
 End Class

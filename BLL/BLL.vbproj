@@ -92,6 +92,7 @@
     <Compile Include="Negocio\PreguntaBLL.vb" />
     <Compile Include="Negocio\RespuestaBLL.vb" />
     <Compile Include="Negocio\ServicioBLL.vb" />
+    <Compile Include="Negocio\SubscriptorBLL.vb" />
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
     <Compile Include="Servicios\ClienteBLL.vb" />

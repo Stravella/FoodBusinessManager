@@ -142,6 +142,7 @@
     <Content Include="IconosSVG\play-circle-regular.svg" />
     <Content Include="ModificarDatosUsuario.aspx" />
     <Content Include="NewsletterBack.aspx" />
+    <Content Include="NewsletterSubscribir.aspx" />
     <Content Include="Respuestas.aspx" />
     <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
@@ -354,6 +355,13 @@
     </Compile>
     <Compile Include="NewsletterBack.aspx.vb">
       <DependentUpon>NewsletterBack.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="NewsletterSubscribir.aspx.designer.vb">
+      <DependentUpon>NewsletterSubscribir.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsletterSubscribir.aspx.vb">
+      <DependentUpon>NewsletterSubscribir.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Respuestas.aspx.designer.vb">
