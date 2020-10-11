@@ -25,6 +25,7 @@ Public Class NewsletterDAL
                 params.Add(.CrearParametro("@cuerpo", newsletter.Cuerpo))
                 params.Add(.CrearParametro("@id_imagen", newsletter.Imagen.ID))
                 params.Add(.CrearParametro("@id_estado", newsletter.Estado.ID))
+                params.Add(.CrearParametro("@id_categoria", newsletter.Categoria.id))
             End With
         Catch ex As Exception
             Throw ex
@@ -71,7 +72,8 @@ Public Class NewsletterDAL
                                               .Titulo = row("titulo"),
                                               .Cuerpo = row("cuerpo"),
                                               .Imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
-                                              .Estado = EstadoDAL.ObtenerInstancia.Obtener(row("id_estado"))
+                                              .Estado = EstadoDAL.ObtenerInstancia.Obtener(row("id_estado")),
+                                              .Categoria = CategoriaDAL.ObtenerInstancia.Obtener(row("id_categoria"))
             }
             lsNewsletter.Add(newsletter)
         Next
@@ -93,5 +95,22 @@ Public Class NewsletterDAL
             Throw ex
         End Try
     End Function
+
+    Public Function ListarPorCategoria(id_categoria As Integer) As List(Of NewsletterDTO)
+        Try
+            Dim resultado As New List(Of NewsletterDTO)
+            Dim newsletters As List(Of NewsletterDTO) = Listar()
+            For Each newsletter In newsletters
+                If newsletter.Categoria.id = id_categoria Then
+                    resultado.Add(newsletter)
+                    Exit For
+                End If
+            Next
+            Return resultado
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
 End Class

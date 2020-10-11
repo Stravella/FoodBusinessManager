@@ -44,4 +44,13 @@ Public Class CaracteristicaBLL
         End Try
     End Sub
 
+    Public Function Obtener(id As Integer) As CaracteristicaDTO
+        Try
+            Return CaracteristicasDAL.ObtenerInstancia.Obtener(id)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 End Class

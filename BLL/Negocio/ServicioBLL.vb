@@ -108,4 +108,13 @@ Public Class ServicioBLL
         End Try
     End Function
 
+    Public Function Filtrar(Optional nombre As String = Nothing, Optional precioMin As Decimal = Nothing, Optional precioMax As Decimal = Nothing, Optional caracteristica As CaracteristicaDTO = Nothing) As List(Of ServicioDTO)
+        Try
+            Return ServicioDAL.ObtenerInstancia.Filtrar(nombre, precioMin, precioMax, caracteristica)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 End Class

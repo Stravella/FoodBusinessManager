@@ -50,4 +50,14 @@
         End Set
     End Property
 
+    Private _categoria As CategoriaDTO
+    Public Property Categoria() As CategoriaDTO
+        Get
+            Return _categoria
+        End Get
+        Set(ByVal value As CategoriaDTO)
+            _categoria = value
+        End Set
+    End Property
+
 End Class

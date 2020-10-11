@@ -100,6 +100,7 @@
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
     <Content Include="AdministrarCaracteristicas.aspx" />
+    <Content Include="AdministrarCategorias.aspx" />
     <Content Include="AdministrarUsuarios.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
@@ -262,6 +263,13 @@
     </Compile>
     <Compile Include="AdministrarCaracteristicas.aspx.vb">
       <DependentUpon>AdministrarCaracteristicas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarCategorias.aspx.designer.vb">
+      <DependentUpon>AdministrarCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarCategorias.aspx.vb">
+      <DependentUpon>AdministrarCategorias.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="AdministrarUsuarios.aspx.designer.vb">

@@ -99,4 +99,56 @@ Public Class ServicioDAL
         End Try
     End Function
 
+    Public Function Filtrar(Optional nombre As String = Nothing, Optional precioMin As Decimal = Nothing, Optional precioMax As Decimal = Nothing, Optional caracteristica As CaracteristicaDTO = Nothing) As List(Of ServicioDTO)
+        Try
+            Dim servicios As New List(Of ServicioDTO)
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                If nombre <> "" Then
+                    params.Add(.CrearParametro("@nombre", nombre))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@nombre", .Value = DBNull.Value})
+                End If
+                If precioMin > 0 Then
+                    params.Add(.CrearParametro("@precio_min", precioMin))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@precio_min", .Value = DBNull.Value})
+                End If
+                If precioMax > 0 Then
+                    params.Add(.CrearParametro("@precio_max", precioMax))
+                Else
+                    params.Add(New SqlParameter With {.ParameterName = "@precio_max", .Value = DBNull.Value})
+                End If
+            End With
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Servicio_filtar", params).Rows
+                Dim servicio As New ServicioDTO With {.id = row("id"),
+                                              .nombre = row("nombre"),
+                                              .descripcion = row("descripcion"),
+                                              .precio = row("precio"),
+                                              .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
+                                              .id_catalogo = row("id_catalogo"),
+                                              .orden_catalogo = row("orden_catalogo")
+             }
+                servicio.caracteristicas = ServicioCaracteristicasDAL.ObtenerInstancia.ListarPorServicio(servicio)
+                servicios.Add(servicio)
+            Next
+            Dim resultado As New List(Of ServicioDTO)
+            If caracteristica Is Nothing Then
+                resultado = servicios
+            Else
+                For Each servicio In servicios
+                    For Each oCaracteristica In servicio.caracteristicas
+                        If oCaracteristica.id = caracteristica.id Then
+                            resultado.Add(servicio)
+                        End If
+                    Next
+                Next
+            End If
+            Return resultado
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 End Class

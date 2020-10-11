@@ -21,4 +21,12 @@ Public Class NewsletterBLL
         End Try
     End Function
 
+    Public Function ListarPorCategoria(id_categoria) As List(Of NewsletterDTO)
+        Try
+            Return NewsletterDAL.ObtenerInstancia.ListarPorCategoria(id_categoria)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 End Class

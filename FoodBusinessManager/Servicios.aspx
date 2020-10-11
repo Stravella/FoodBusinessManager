@@ -8,6 +8,75 @@
     <div class="container">
         <br />
         <div class="row">
+            <div class="col">
+                <center>
+                    <h4>Catálogo</h4>
+                </center>
+            </div>           
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <h4>Filtros</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <label>Nombre</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <center>
+                                            <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server"></asp:TextBox>
+                                        </center>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Caracteristica</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:DropDownList ID="lstCaracteristicas" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Precio minimo:</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="txtPrecioMin" runat="server" ValidationGroup="Filtro"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecioMin" runat="server" ErrorMessage="El valor solo puede ser numerico" ForeColor="Red" ValidationExpression="^[0-9]\d*(,\d+)?$"></asp:RegularExpressionValidator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Precio máximo:</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="txtPrecioMax" runat="server" ValidationGroup="Filtro"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="txtPrecioMax" runat="server" ForeColor="Red" ErrorMessage="El valor solo puede ser numerico" ValidationExpression="^[0-9]\d*(,\d+)?$"></asp:RegularExpressionValidator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:Button ID="btnFiltrar" CssClass="btn btn-block btn-secondary" runat="server" Text="Filtrar"  ValidationGroup="Filtro"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
             <asp:Repeater ID="repeaterServicios" runat="server">
                 <ItemTemplate>
                     <div class="col">
@@ -37,9 +106,11 @@
                                         <ItemTemplate>
                                             <div class="row">
                                                 <div class="col">
-                                                    <li>
+                                                    <center>
+                                                        <li>
                                                         <asp:Label ID="lblCaracteristica" runat="server" Text='<%#Eval("caracteristica") %>'></asp:Label>
                                                     </li>
+                                                    </center>                                                    
                                                 </div>
                                             </div>
                                         </ItemTemplate>
