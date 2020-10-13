@@ -59,6 +59,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">    
+                            <div class="col">
+                                <center>
+                                    <asp:Image ID="Image1" Class="img-servicio" runat="server" Visible="false" Height="300px" Width="300px" ImageAlign="Middle"/>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:FileUpload class="form-control" ID="FileUpload2" runat="server" visible ="false"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <asp:Label ID="lblFileSubido" class="form-control" runat="server" Text="" Visible="false"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <asp:Button ID="btnCambiarImagen" CssClass="btn btn-block btn-warning" runat="server" Text="Cambiar imagen" visible="false"/>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <label>Imagen</label>
@@ -68,10 +88,20 @@
                         <div class="row">
                             <div class="col">
                                 <label>
+                                    Categoría
+                                </label>
+                                <div class="form-group">
+                                    <asp:DropDownList ID="ddlCategoria" DataValueField="id" DataTextField="nombre" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>
                                     Estado
                                 </label>
                                 <div class="form-group">
-                                    <asp:DropDownList ID="ddlEstado" DataValueField="id" DataTextField="nombre" CssClass="form-control" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlEstado" DataValueField="id" DataTextField="nombre" CssClass="form-control" Enabled="false" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -81,6 +111,14 @@
                 <div class="row">
                     <div class="col">
                         <asp:Button ID="btnAgregar" class="btn btn-block btn-success" runat="server" Text="Agregar" ValidationGroup="Newsletter" />
+                    </div>                   
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" />
+                    </div>
+                    <div class="col-6">
+                        <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false" />
                     </div>
                 </div>
                 <hr />
@@ -91,6 +129,7 @@
                             <Columns>
                                 <asp:BoundField DataField="id" HeaderText="ID" />
                                 <asp:BoundField DataField="titulo" HeaderText="Titulo" />
+                                <asp:BoundField DataField="estado.nombre" HeaderText="Estado" />
                                 <asp:TemplateField HeaderText="Enviar" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="ImgEnviar" ImageUrl="~/IconosSVG/play-circle-regular.svg" Text="Enviar" ToolTip="Enviar" runat="server" CommandName="Enviar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />

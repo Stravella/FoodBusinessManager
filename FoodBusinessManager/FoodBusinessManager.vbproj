@@ -131,6 +131,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Controles\Modal.ascx" />
+    <Content Include="DesubscribirNewsletter.aspx" />
     <Content Include="EliminarPerfil.aspx" />
     <Content Include="EmailTemplates\Template_mail.html" />
     <Content Include="Estilos\MiEstilo.css" />
@@ -328,6 +329,13 @@
     <Compile Include="Controles\Modal.ascx.vb">
       <DependentUpon>Modal.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesubscribirNewsletter.aspx.designer.vb">
+      <DependentUpon>DesubscribirNewsletter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesubscribirNewsletter.aspx.vb">
+      <DependentUpon>DesubscribirNewsletter.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EliminarPerfil.aspx.designer.vb">
       <DependentUpon>EliminarPerfil.aspx</DependentUpon>

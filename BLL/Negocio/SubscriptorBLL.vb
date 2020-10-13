@@ -50,6 +50,14 @@ Public Class SubscriptorBLL
         End Try
     End Sub
 
+    Public Function Obtener(id As Integer) As SubscriptorDTO
+        Try
+            Return SubscripcionesDAL.ObtenerInstancia.Obtener(id)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
 
 

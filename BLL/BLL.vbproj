@@ -87,6 +87,7 @@
     <Compile Include="Negocio\CaracteristicaBLL.vb" />
     <Compile Include="Negocio\CatalogoBLL.vb" />
     <Compile Include="Negocio\CategoriaBLL.vb" />
+    <Compile Include="Negocio\EstadoBLL.vb" />
     <Compile Include="Negocio\ImagenBLL.vb" />
     <Compile Include="Negocio\NewsletterBLL.vb" />
     <Compile Include="Negocio\PreguntaBLL.vb" />

@@ -12,7 +12,7 @@
                 <center>
                     <h4>Catálogo</h4>
                 </center>
-            </div>           
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -30,7 +30,7 @@
                                     <div class="input-group">
                                         <center>
                                             <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server"></asp:TextBox>
-                                        </center>                                        
+                                        </center>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:Button ID="btnFiltrar" CssClass="btn btn-block btn-secondary" runat="server" Text="Filtrar"  ValidationGroup="Filtro"/>
+                                <asp:Button ID="btnFiltrar" CssClass="btn btn-block btn-secondary" runat="server" Text="Filtrar" ValidationGroup="Filtro" />
                             </div>
                         </div>
                     </div>
@@ -97,9 +97,11 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h6>
+                                            <center>
+                                                <h6>
                                                 <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("descripcion") %>'></asp:Label>
                                             </h6>
+                                            </center>
                                         </div>
                                     </div>
                                     <asp:Repeater ID="repeaterCaracteristicas" runat="server">
@@ -110,7 +112,7 @@
                                                         <li>
                                                         <asp:Label ID="lblCaracteristica" runat="server" Text='<%#Eval("caracteristica") %>'></asp:Label>
                                                     </li>
-                                                    </center>                                                    
+                                                    </center>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
