@@ -76,6 +76,9 @@
                             <a class="nav-item nav-link" href="NewsletterSubscribir.aspx">Newsletter</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-item nav-link" href="Publicidad.aspx">Publicidad</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-item nav-link" href="Mensaje.aspx">Contáctenos</a>
                         </li>
                     </ul>

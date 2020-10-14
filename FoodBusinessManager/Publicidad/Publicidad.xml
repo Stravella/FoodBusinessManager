@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Advertisements>
+  <Ad>
+    <NavigateUrl>http://www.tegui.com.ar/</NavigateUrl>
+    <ImageUrl>https://tasteofargentina.com/sites/default/files/content-images/Restaurantes_ID000279_002_0.jpg?1353028775</ImageUrl>
+    <height>391</height>
+    <width>120</width>
+    <Keyword>Computers</Keyword>
+    <Impressions>2</Impressions>
+    <AlternateText>Tegui</AlternateText>
+  </Ad>
+  <Ad>
+    <NavigateUrl>https://www.instagram.com/cafesanjuanoficial/?hl=es-la</NavigateUrl>
+    <ImageUrl>https://img.guiaoleo.com.ar/unsafe/938x528/filters:fill(green)/photo_1060_1.jpg-fdceb2bf-f4e4-11e4-be7b-d3500e263ce1_s0.jpg</ImageUrl>
+    <height>391</height>
+    <width>120</width>
+    <Keyword>Computers</Keyword>
+    <Impressions>2</Impressions>
+    <AlternateText>CSJ</AlternateText>
+  </Ad>
+  <Ad>
+    <NavigateUrl>https://www.kansasgrillandbar.com.ar/</NavigateUrl>
+    <ImageUrl>https://www.kansasgrillandbar.com.ar/gfx/local_draw_01.jpg</ImageUrl>
+    <height>391</height>
+    <width>120</width>
+    <Keyword>Computers</Keyword>
+    <Impressions>2</Impressions>
+    <AlternateText>Kansas</AlternateText>
+  </Ad>
+</Advertisements>

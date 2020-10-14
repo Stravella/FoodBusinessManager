@@ -144,6 +144,9 @@
     <Content Include="ModificarDatosUsuario.aspx" />
     <Content Include="NewsletterBack.aspx" />
     <Content Include="NewsletterSubscribir.aspx" />
+    <Content Include="Publicidad.aspx" />
+    <Content Include="PublicidadBack.aspx" />
+    <Content Include="Publicidad\Publicidad.xml" />
     <Content Include="Respuestas.aspx" />
     <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
@@ -371,6 +374,20 @@
     <Compile Include="NewsletterSubscribir.aspx.vb">
       <DependentUpon>NewsletterSubscribir.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Publicidad.aspx.designer.vb">
+      <DependentUpon>Publicidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publicidad.aspx.vb">
+      <DependentUpon>Publicidad.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PublicidadBack.aspx.designer.vb">
+      <DependentUpon>PublicidadBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PublicidadBack.aspx.vb">
+      <DependentUpon>PublicidadBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Respuestas.aspx.designer.vb">
       <DependentUpon>Respuestas.aspx</DependentUpon>
