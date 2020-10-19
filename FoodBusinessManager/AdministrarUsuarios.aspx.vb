@@ -83,6 +83,7 @@ Public Class AdministrarUsuarios1
         CargarUsuarios()
         'Acá tengo que hidear el modal
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Response.Redirect("/AdministrarUsuarios.aspx")
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)

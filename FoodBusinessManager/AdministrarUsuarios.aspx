@@ -175,7 +175,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtCP" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqCP" runat="server" ErrorMessage="Ingrese su código postal" ControlToValidate="txtCP" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatCP" runat="server" ErrorMessage="Formato inválido" ValidationExpression="\b[a-zA-Z0-9]{7}\b|\b[a-zA-Z0-9]{10}\b+" ControlToValidate="txtCP" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <%--<asp:RegularExpressionValidator ID="formatCP" runat="server" ErrorMessage="Formato inválido" ValidationExpression="\b[a-zA-Z0-9]{7}\b|\b[a-zA-Z0-9]{10}\b+" ControlToValidate="txtCP" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>--%>
                                 </div>
                             </div>
                             <div class="col-md-4">

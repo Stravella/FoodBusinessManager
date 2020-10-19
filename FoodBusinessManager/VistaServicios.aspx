@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col">
                             <center>
-                                <asp:Button ID="btnComprar" CssClass="btn btn-lg btn-success" Visible="true" runat="server" Text="Comprar" />
+                                <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" Visible="true" runat="server" Text="Agregar al carrito" />
                             </center>                            
                         </div>
                     </div>

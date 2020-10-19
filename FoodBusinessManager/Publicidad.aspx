@@ -4,6 +4,31 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <div class="container">
-        <asp:AdRotator AdvertisementFile="Publicidad/Publicidad.xml" runat="server" Width="391px" Height="120px"></asp:AdRotator>
-    </div>   
+        <br />
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h4>
+                                    <center>Algunos de nuestros clientes</center>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <center>
+                                    <asp:AdRotator AdvertisementFile="Publicidad/Publicidad.xml" runat="server" Target="_blank"></asp:AdRotator>
+                                </center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

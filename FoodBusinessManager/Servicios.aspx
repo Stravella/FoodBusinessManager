@@ -24,13 +24,11 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12">
                                 <label>Nombre</label>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <center>
-                                            <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server"></asp:TextBox>
-                                        </center>
+                                        <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +94,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col d-flex">
                                             <center>
                                                 <h6>
                                                 <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("descripcion") %>'></asp:Label>
@@ -143,7 +141,7 @@
                                     <hr />
                                     <div class="row">
                                         <div class="col">
-                                            <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" Visible="true" runat="server" Text="Comprar" />
+                                            <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" CommandName="comprar" CommandArgument='<%# Eval("id") %>' Visible="true" runat="server" Text="Agregar al carrito" />
                                         </div>
                                     </div>
                                 </div>

@@ -16,7 +16,7 @@ Public Class NewsletterSubscribir
     Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
         Try
             ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
-            Response.Redirect("/AdministrarCategorias.aspx")
+            Response.Redirect("/NewsletterSubscribir.aspx")
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error",, True)
         End Try

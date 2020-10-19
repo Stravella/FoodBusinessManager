@@ -40,10 +40,6 @@ Public Class Servicios
     End Sub
 
 #End Region
-
-
-
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Dim lsComparar As New List(Of ServicioDTO)
@@ -89,6 +85,42 @@ Public Class Servicios
         If e.CommandName = "detalle" Then
             Dim url As String = "VistaServicios.aspx?Serv=" & servicio.nombre
             Response.Redirect(url)
+        End If
+        If e.CommandName = "comprar" Then
+            Dim carrito As List(Of ServicioCarritoDTO)
+            If Current.Session("Carrito") Is Nothing Then
+                carrito = New List(Of ServicioCarritoDTO)
+                Dim servicioCarrito As New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 1, .importeTotal = servicio.precio * .cantidad}
+                carrito.Add(servicioCarrito)
+                Current.Session("Carrito") = carrito
+            Else
+                carrito = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
+                Dim existe As Boolean = False
+
+                For Each serv As ServicioCarritoDTO In carrito
+                    If serv.servicio.id = servicio.id Then
+                        existe = True
+                    End If
+                Next
+
+                If existe = False Then
+                    carrito.Add(New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 0})
+                End If
+
+                For Each serv As ServicioCarritoDTO In carrito
+                    If serv.servicio.id = servicio.id Then
+                        'Servicio Free puede existir 1 solo
+                        If serv.servicio.nombre = "Free" And serv.cantidad > 0 Then
+                            MostrarModal("Solo puede probar la version free por 30 dias", "Lo siento! Ya tiene la prueba de 30 dias agregada al carrito",, True)
+                            Exit For
+                        Else
+                            serv.cantidad = serv.cantidad + 1
+                            serv.importeTotal = serv.servicio.precio * serv.cantidad
+                        End If
+                    End If
+                Next
+                Current.Session("Carrito") = carrito
+            End If
         End If
     End Sub
 
@@ -188,4 +220,6 @@ Public Class Servicios
             MostrarModal("Error", "Lo siento! Ocurrio un error, contacte a su administrador",, True)
         End Try
     End Sub
+
+
 End Class

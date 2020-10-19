@@ -94,10 +94,11 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(5).ChildItems.Add(New MenuItem("Categorias", "AdministrarCategorias", Nothing, "/AdministrarCategorias.aspx"))
             Me.MenuLateral.Items.Item(5).ChildItems.Add(New MenuItem("Newsletter", "NewsletterBack", Nothing, "/NewsletterBack.aspx"))
             Me.MenuLateral.Items.Item(5).ChildItems.Add(New MenuItem("Publicidad", "PublicidadBack", Nothing, "/PublicidadBack.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Movimientos", "AdminMovimientos"))
+            Me.MenuLateral.Items.Item(6).ChildItems.Add(New MenuItem("Mis Movimientos", "MisMovimientos", Nothing, "/MisMovimientos.aspx"))
         Catch ex As Exception
 
         End Try
-
     End Sub
 #End Region
 

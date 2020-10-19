@@ -27,41 +27,7 @@ Public Class Free
     'Acá le doy el comportamiento según mis entidades.
     Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
         Try
-            'If Current.Session("accion") = "Eliminar" Then
-            '    Dim catalogo As CatalogoDTO = Current.Session("entidadModal")
-            '    CatalogoBLL.ObtenerInstancia.Eliminar(catalogo.id)
-            '    Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-            '    Dim bitacora As New BitacoraDTO With {
-            '                        .FechaHora = Now(),
-            '                        .usuario = usuarioLogeado,
-            '                        .tipoSuceso = New SucesoBitacoraDTO With {.id = 18}, 'Suceso: Eliminacion catalogo
-            '                        .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-            '                        .observaciones = "Se elimino el catalogo :" & catalogo.id
-            '                }
-            '    BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-            'End If
-            'If Current.Session("accion") = "Modificar" Then
-            '    Dim catalogo As CatalogoDTO = Current.Session("entidadModal")
-            '    CatalogoBLL.ObtenerInstancia.Modificar(catalogo)
-            '    'Actualizo el orden y el id de Catalogo
-            '    For Each servicio As ServicioDTO In catalogo.servicios
-            '        ServicioBLL.ObtenerInstancia.Modificar(servicio)
-            '    Next
-            '    Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
-            '    Dim bitacora As New BitacoraDTO With {
-            '                .FechaHora = Now(),
-            '                .usuario = usuarioLogeado,
-            '                .tipoSuceso = New SucesoBitacoraDTO With {.id = 19}, 'Suceso: Modificacion catalogo
-            '                .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
-            '                .observaciones = "Se modifico el catalogo :" & catalogo.id
-            '        }
-            '    BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
-            'End If
-            'CargarCatalogos()
-            'CargarServicios()
-            ''Acá tengo que hidear el modal
-            'ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
-
+            ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error",, True)
         End Try
@@ -134,5 +100,44 @@ Public Class Free
         End Try
     End Sub
 
+    Private Sub btnComprar_Click(sender As Object, e As EventArgs) Handles btnComprar.Click
+        Dim nombreServicio As String = Request.QueryString("Serv")
+        Dim servicio As ServicioDTO = ServicioBLL.ObtenerInstancia.ObtenerPorNombre(nombreServicio)
 
+        Dim carrito As List(Of ServicioCarritoDTO)
+        If Current.Session("Carrito") Is Nothing Then
+            carrito = New List(Of ServicioCarritoDTO)
+            Dim servicioCarrito As New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 1, .importeTotal = servicio.precio * .cantidad}
+            carrito.Add(servicioCarrito)
+            Current.Session("Carrito") = carrito
+        Else
+            carrito = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
+            Dim existe As Boolean = False
+
+            For Each serv As ServicioCarritoDTO In carrito
+                If serv.servicio.id = servicio.id Then
+                    existe = True
+                End If
+            Next
+
+            If existe = False Then
+                carrito.Add(New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 0})
+            End If
+
+            For Each serv As ServicioCarritoDTO In carrito
+                If serv.servicio.id = servicio.id Then
+                    'Servicio Free puede existir 1 solo
+                    If serv.servicio.nombre = "Free" And serv.cantidad > 0 Then
+                        MostrarModal("Solo puede probar la version free por 30 dias", "Lo siento! Ya tiene la prueba de 30 dias agregada al carrito",, True)
+                        Exit For
+                    Else
+                        serv.cantidad = serv.cantidad + 1
+                        serv.importeTotal = serv.servicio.precio * serv.cantidad
+                    End If
+                End If
+            Next
+            Current.Session("Carrito") = carrito
+        End If
+
+    End Sub
 End Class

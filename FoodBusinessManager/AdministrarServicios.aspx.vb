@@ -260,10 +260,6 @@ Public Class AdministrarServicios
     End Sub
 
 
-
-
-
-
     Private Sub gv_Servicios_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gv_Servicios.RowCommand
         Dim servicios As List(Of ServicioDTO) = ServicioBLL.ObtenerInstancia.Listar
         Dim servicio As New ServicioDTO

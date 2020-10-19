@@ -34,13 +34,16 @@ Public Class ModificarDatosUsuario
                             .observaciones = "Se modifico el usuario :" & cliente.usuario.username
                     }
                 BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+                If Current.Session("ModificaContraseña") = True Then
+                    GestorMailBLL.ObtenerInstancia.EnviarMail(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", Server.MapPath("\EmailTemplates\Template_mail.html"))
+                End If
             Else
                 MostrarModal("Error", "Las contraseñas no coinciden",, True)
-
             End If
         End If
         'Acá tengo que hidear el modal
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Response.Redirect("/ModificarDatosUsuario.aspx")
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
@@ -88,6 +91,12 @@ Public Class ModificarDatosUsuario
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Try
+            Dim clienteLogeado As ClienteDTO = Current.Session("Cliente")
+            If clienteLogeado.usuario.password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text) Then
+                Current.Session("ModificaContraseña") = False
+            Else
+                Current.Session("ModificaContraseña") = True
+            End If
             Dim usuario As New UsuarioDTO With {
                           .nombre = txtNombre.Text,
                           .apellido = txtApellido.Text,
@@ -114,7 +123,7 @@ Public Class ModificarDatosUsuario
                     }
             Current.Session("entidadModal") = cliente
             Current.Session("accion") = "Modificar"
-            MostrarModal("Modificacion de usuario", "¿Está seguro que desea sus datos" & usuario.username & "?",, True)
+            MostrarModal("Modificacion de usuario", "¿Está seguro que desea sus modificar sus datos " & usuario.username & "?",, True)
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error, intente nuevemente o contacte a su administrador",, True)
         End Try

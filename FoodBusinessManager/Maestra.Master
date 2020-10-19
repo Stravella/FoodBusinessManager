@@ -81,6 +81,9 @@
                         <li class="nav-item">
                             <a class="nav-item nav-link" href="Mensaje.aspx">Contáctenos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i></a>
+                        </li>
                     </ul>
                     <%-- Panel derecho: Logeo, registro, Welcome y logout --%>
                     <ul class="navbar-nav ml-auto mr-1">
@@ -115,11 +118,10 @@
                                 <asp:Button ID="linkUsuario" runat="server" data-toggle="dropdown" class="btn  btn-md dropdown-toggle btn-info" CausesValidation="false" />
                                 <div class="dropdown-menu" aria-labelledby="linkUsuario">
                                     <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>
+                                    <asp:LinkButton class="nav-link" ID="linkLogOut" runat="server" Text="Log Out" CausesValidation="false"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                                 </div>
-                            </li>                           
-                            <li class="nav-item active">
-                                <asp:LinkButton class="nav-link btn btn-md btn-info" ID="linkLogOut" runat="server" Text="Log Out" CausesValidation="false"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                             </li>
+                            <li class="nav-item active"></li>
                         </asp:Panel>
                     </ul>
                 </div>

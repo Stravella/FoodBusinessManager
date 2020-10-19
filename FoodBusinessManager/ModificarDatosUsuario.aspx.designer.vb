@@ -446,15 +446,6 @@ Partial Public Class ModificarDatosUsuario
     Protected WithEvents reqCP As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control formatCP.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents formatCP As Global.System.Web.UI.WebControls.RegularExpressionValidator
-
-    '''<summary>
     '''Control lblLocalidad.
     '''</summary>
     '''<remarks>

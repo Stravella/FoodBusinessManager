@@ -106,6 +106,7 @@
     <Content Include="Bitacora.aspx" />
     <Content Include="Caracteristicas.aspx" />
     <Content Include="AdministrarCatalogo.aspx" />
+    <Content Include="Compra.aspx" />
     <Content Include="ConfirmarContraseña.aspx" />
     <Content Include="Contactenos.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -132,6 +133,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Controles\Modal.ascx" />
     <Content Include="DesubscribirNewsletter.aspx" />
+    <Content Include="FacturacionHelper.asmx" />
     <Content Include="EliminarPerfil.aspx" />
     <Content Include="EmailTemplates\Template_mail.html" />
     <Content Include="Estilos\MiEstilo.css" />
@@ -140,10 +142,14 @@
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="IconosSVG\file-download-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
+    <Content Include="IconosSVG\window-close-solid.svg" />
+    <Content Include="MisMovimientos.aspx" />
     <Content Include="ModificarDatosUsuario.aspx" />
     <Content Include="NewsletterBack.aspx" />
     <Content Include="NewsletterSubscribir.aspx" />
+    <Content Include="Pago.aspx" />
     <Content Include="Publicidad.aspx" />
     <Content Include="PublicidadBack.aspx" />
     <Content Include="Publicidad\Publicidad.xml" />
@@ -312,6 +318,13 @@
       <DependentUpon>AdministrarCatalogo.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Compra.aspx.designer.vb">
+      <DependentUpon>Compra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compra.aspx.vb">
+      <DependentUpon>Compra.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ConfirmarContraseña.aspx.designer.vb">
       <DependentUpon>ConfirmarContraseña.aspx</DependentUpon>
     </Compile>
@@ -340,6 +353,10 @@
       <DependentUpon>DesubscribirNewsletter.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="FacturacionHelper.asmx.vb">
+      <DependentUpon>FacturacionHelper.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EliminarPerfil.aspx.designer.vb">
       <DependentUpon>EliminarPerfil.aspx</DependentUpon>
     </Compile>
@@ -352,6 +369,13 @@
     </Compile>
     <Compile Include="FAQS.aspx.vb">
       <DependentUpon>FAQS.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MisMovimientos.aspx.designer.vb">
+      <DependentUpon>MisMovimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisMovimientos.aspx.vb">
+      <DependentUpon>MisMovimientos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ModificarDatosUsuario.aspx.designer.vb">
@@ -373,6 +397,13 @@
     </Compile>
     <Compile Include="NewsletterSubscribir.aspx.vb">
       <DependentUpon>NewsletterSubscribir.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Pago.aspx.designer.vb">
+      <DependentUpon>Pago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pago.aspx.vb">
+      <DependentUpon>Pago.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Publicidad.aspx.designer.vb">
