@@ -221,7 +221,7 @@
                         <hr />
                         <div class="row">
                             <div class="col-4">
-                                <asp:Button ID="btnValidarTarjeta" CssClass="btn btn-warning" runat="server" Text="Varlidar Tarjeta" ValidationGroup="Tarjeta" />
+                                <asp:Button ID="btnValidarTarjeta" CssClass="btn btn-warning" runat="server" Text="Validar Tarjeta" ValidationGroup="Tarjeta" />
                             </div>
                             <div class="col-4">
                             </div>
@@ -253,6 +253,7 @@
                                         <asp:BoundField DataField="id" HeaderText="ID" />
                                         <asp:BoundField DataField="id_factura" HeaderText="Nro. Factura" />
                                         <asp:BoundField DataField="fecha" HeaderText="Fecha" />
+                                        <asp:BoundField DataField="concepto" HeaderText="Concepto" />
                                         <asp:BoundField DataField="importe" HeaderText="Importe" />
                                     </Columns>
                                 </asp:GridView>

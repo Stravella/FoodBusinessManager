@@ -79,14 +79,7 @@ Public Class NotaCreditoDAL
                 params.Add(.CrearParametro("@id_factura", id))
             End With
             For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Factura_notas_listar_por_factura", params).Rows
-                Dim notaCredito As New NotaCreditoDTO With {.id = row("id"),
-                                              .id_factura = row("id_factura_originante"),
-                                              .concepto = row("concepto"),
-                                              .fecha = row("fecha"),
-                                              .importe = row("importe"),
-                                              .estado = ObtenerEstadoNota(row("id_estado_nota")),
-                                              .cliente = ClienteDAL.ObtenerInstancia.Obtener(New ClienteDTO With {.id = row("id_cliente")})
-            }
+                Dim notaCredito As NotaCreditoDTO = Obtener(row("id_nota_credito"))
                 lsResultado.Add(notaCredito)
             Next
             Return lsResultado

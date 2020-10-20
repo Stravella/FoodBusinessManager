@@ -23,7 +23,11 @@ Public Class FacturaDAL
                 params.Add(.CrearParametro("@id", factura.id))
                 params.Add(.CrearParametro("@id_cliente", factura.cliente.id))
                 params.Add(.CrearParametro("@total", Convert.ToDecimal(factura.total)))
-                params.Add(.CrearParametro("@id_tarjeta", factura.tarjeta.id))
+                If factura.tarjeta Is Nothing Then
+
+                Else
+                    params.Add(.CrearParametro("@id_tarjeta", factura.tarjeta.id))
+                End If
                 params.Add(.CrearParametro("@importe_tarjeta", Convert.ToDecimal(factura.importeTarjeta)))
             End With
         Catch ex As Exception
@@ -51,10 +55,14 @@ Public Class FacturaDAL
             Dim factura As New FacturaDTO With {.id = row("id"),
                                               .cliente = ClienteDAL.ObtenerInstancia.Obtener(New ClienteDTO With {.id = row("id_cliente")}),
                                               .total = row("total"),
-                                              .tarjeta = TarjetaDAL.ObtenerInstancia.ObtenerPorId(row("id_tarjeta")),
                                               .importeTarjeta = row("importe_tarjeta"),
                                               .notasCredito = NotaCreditoDAL.ObtenerInstancia.ListarRedimidasPorIdFactura(row("id"))
             }
+            If row("id_tarjeta") Is DBNull.Value Then
+                factura.tarjeta = Nothing
+            Else
+                factura.tarjeta = TarjetaDAL.ObtenerInstancia.ObtenerPorId(row("id_tarjeta"))
+            End If
             lsFactura.Add(factura)
         Next
         Return lsFactura

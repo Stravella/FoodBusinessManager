@@ -53,14 +53,14 @@
                                         <asp:BoundField DataField="fecha" HeaderText="Fecha" />
                                         <asp:BoundField DataField="total" HeaderText="Importe" />
                                         <asp:BoundField DataField="estado.estado" HeaderText="Estado" />
-                                        <asp:TemplateField HeaderText="Descargar Factura" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="ImgDescargar" ImageUrl="~/IconosSVG/file-download-solid.svg" Text="Descargar" runat="server" CommandName="Descargar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Cancelar Compra" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="ImgCancelar" ImageUrl="~/IconosSVG/window-close-solid.svg" Text="Cancelar" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Descargar Factura" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="ImgDescargar" ImageUrl="~/IconosSVG/file-download-solid.svg" Text="Descargar" runat="server" CommandName="Descargar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

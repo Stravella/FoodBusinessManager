@@ -117,8 +117,9 @@
                             <li class="nav-item dropdown">
                                 <asp:Button ID="linkUsuario" runat="server" data-toggle="dropdown" class="btn  btn-md dropdown-toggle btn-info" CausesValidation="false" />
                                 <div class="dropdown-menu" aria-labelledby="linkUsuario">
-                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>
-                                    <asp:LinkButton class="nav-link" ID="linkLogOut" runat="server" Text="Log Out" CausesValidation="false"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="linkModificarDatos" class="nav-link" CausesValidation="false" runat="server">Modificar datos</asp:LinkButton>
+<%--                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>--%>
+                                    <asp:LinkButton class="nav-link" ID="linkLogOut" runat="server" CausesValidation="false">  Log out <i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                                 </div>
                             </li>
                             <li class="nav-item active"></li>

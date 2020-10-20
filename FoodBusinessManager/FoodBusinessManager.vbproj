@@ -57,6 +57,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=20.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.20.1.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -132,6 +135,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Controles\Modal.ascx" />
+    <Content Include="DescargaFactura.aspx" />
     <Content Include="DesubscribirNewsletter.aspx" />
     <Content Include="FacturacionHelper.asmx" />
     <Content Include="EliminarPerfil.aspx" />
@@ -154,6 +158,7 @@
     <Content Include="PublicidadBack.aspx" />
     <Content Include="Publicidad\Publicidad.xml" />
     <Content Include="Respuestas.aspx" />
+    <Content Include="TemplateFactura.html" />
     <Content Include="VistaServicios.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
@@ -345,6 +350,13 @@
     <Compile Include="Controles\Modal.ascx.vb">
       <DependentUpon>Modal.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DescargaFactura.aspx.designer.vb">
+      <DependentUpon>DescargaFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargaFactura.aspx.vb">
+      <DependentUpon>DescargaFactura.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DesubscribirNewsletter.aspx.designer.vb">
       <DependentUpon>DesubscribirNewsletter.aspx</DependentUpon>

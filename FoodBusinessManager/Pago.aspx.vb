@@ -116,6 +116,7 @@ Public Class Pago
         If Not IsPostBack Then
             CargarCarrito()
             CargarCliente()
+            CargarNotaCredito()
         End If
     End Sub
     Public Sub CargarCarrito()

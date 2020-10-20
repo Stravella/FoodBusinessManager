@@ -150,11 +150,6 @@ Public Class Maestra
 
 
 
-    Private Sub linkLogOut_Click(sender As Object, e As EventArgs) Handles linkLogOut.Click
-        Current.Session("Cliente") = Nothing
-        Response.Redirect("/Home.aspx")
-    End Sub
-
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Try
             Dim usuario As New UsuarioDTO
@@ -197,9 +192,22 @@ Public Class Maestra
     End Sub
 
 
+
+
 #End Region
 
+#Region "Panel logout"
 
+    Private Sub linkModificarDatos_Click(sender As Object, e As EventArgs) Handles linkModificarDatos.Click
 
+        Response.Redirect("/ModificarDatosUsuario.aspx")
+    End Sub
+
+    Private Sub linkLogOut_Click(sender As Object, e As EventArgs) Handles linkLogOut.Click
+        Current.Session("Cliente") = Nothing
+        Response.Redirect("/Home.aspx")
+    End Sub
+
+#End Region
 
 End Class

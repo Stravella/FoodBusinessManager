@@ -172,7 +172,12 @@ Public Class MisCompras
                 MostrarModal("Confirmar cancelacion de compra", "¿Desea cancelar la compra? Se generara una nota de credito por $" & compra.total,, True)
             End If
         ElseIf e.CommandName = "Descargar" Then
-            'TODO: Implementar descarga de Factura
+            If e.CommandName = "Descargar" Then
+                ' Response.Redirect("DescargaFactura.aspx?Fc=" & e.CommandArgument)
+                Response.Write("<script>window.open ('/DescargaFactura.aspx?Cr=" & e.CommandArgument & "','_blank');</script>")
+                '  Dim str As String = "/DescargaFactura.aspx?Fc=" & e.CommandArgument
+                '  Response.Write(String.Format("<script> window.open('{0}','_blank');</script>", ResolveUrl(str)))
+            End If
         End If
     End Sub
 
@@ -248,7 +253,7 @@ Public Class MisCompras
         nota = NotasCreditoBLL.ObtenerInstancia.Obtener(id)
 
         If e.CommandName = "Descargar" Then
-            'TODO: Implementar descarga de Nota Credito
+            Response.Write("<script>window.open ('/DescargaFactura.aspx?Nc=" & e.CommandArgument & "','_blank');</script>")
         End If
     End Sub
 

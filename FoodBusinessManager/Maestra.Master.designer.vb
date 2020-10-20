@@ -122,6 +122,15 @@ Partial Public Class Maestra
     Protected WithEvents linkUsuario As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control linkModificarDatos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkModificarDatos As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''Control linkLogOut.
     '''</summary>
     '''<remarks>
