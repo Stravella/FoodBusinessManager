@@ -137,6 +137,7 @@
     <Content Include="Controles\Modal.ascx" />
     <Content Include="DescargaFactura.aspx" />
     <Content Include="DesubscribirNewsletter.aspx" />
+    <Content Include="EmailTemplates\TemplateMail.html" />
     <Content Include="FacturacionHelper.asmx" />
     <Content Include="EliminarPerfil.aspx" />
     <Content Include="EmailTemplates\Template_mail.html" />

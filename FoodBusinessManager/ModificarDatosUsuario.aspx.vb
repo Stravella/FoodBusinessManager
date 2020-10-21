@@ -35,15 +35,18 @@ Public Class ModificarDatosUsuario
                     }
                 BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
                 If Current.Session("ModificaContraseña") = True Then
-                    GestorMailBLL.ObtenerInstancia.EnviarMail(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", Server.MapPath("\EmailTemplates\Template_mail.html"))
+                    'GestorMailBLL.ObtenerInstancia.EnviarMail(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", Server.MapPath("\EmailTemplates\Template_mail.html"))
+                    Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "Home.aspx"
+                    GestorMailBLL.ObtenerInstancia.EnviarCorreo(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),,)
+                    ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+                    Response.Redirect("/ModificarDatosUsuario.aspx")
                 End If
             Else
                 MostrarModal("Error", "Las contraseñas no coinciden",, True)
+                ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+                Response.Redirect("/ModificarDatosUsuario.aspx")
             End If
         End If
-        'Acá tengo que hidear el modal
-        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
-        Response.Redirect("/ModificarDatosUsuario.aspx")
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)

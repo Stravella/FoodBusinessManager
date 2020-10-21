@@ -80,8 +80,7 @@ Public Class Registrarse1
                         Else
                             ClienteBLL.ObtenerInstancia.Agregar(cliente)
                             Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "ConfirmarContraseña.aspx?clave=" + Server.UrlEncode(CriptografiaBLL.ObtenerInstancia.EncriptarSimetrico(usuario.mail))
-                            GestorMailBLL.ObtenerInstancia.EnviarMail(usuario.mail, "Bienvenido a Food BusinessManager.", "Hola " + cliente.RazonSocial + ", ya sos usuario. <br /><br />" + vbCrLf + "Ingresá al siguiente link para activarlo: " + "<a href=" + ActiveURL + ">link</a>" + "<br /><br /> Si no te funciona el link, copia y pega esta dirección: " + ActiveURL, Server.MapPath("\EmailTemplates\Template_mail.html"))
-
+                            GestorMailBLL.ObtenerInstancia.EnviarCorreo(usuario.mail, "Bienvenido a Food BusinessManager", "Hola " + cliente.RazonSocial + ", ya sos usuario. Hace click en siguiente botón para activar tu usuario", ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),,)
                             Dim bitacora As New BitacoraDTO With {
                                 .FechaHora = Now(),
                                 .usuario = cliente.usuario,
