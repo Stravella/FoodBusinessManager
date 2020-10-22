@@ -183,6 +183,7 @@
                                     Numero Tarjeta
                                 </label>
                                 <div class="form-group">
+
                                     <asp:TextBox ID="txtNumeroTarjeta" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtNumeroTarjeta" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="El formato es inválido" ValidationExpression="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$" ControlToValidate="txtNumeroTarjeta" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RegularExpressionValidator>
@@ -203,7 +204,6 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtFechaVencimiento" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtFechaVencimiento" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
-
                                 </div>
                             </div>
                         </div>
@@ -221,12 +221,12 @@
                         <hr />
                         <div class="row">
                             <div class="col-4">
-                                <asp:Button ID="btnValidarTarjeta" CssClass="btn btn-warning" runat="server" Text="Validar Tarjeta" ValidationGroup="Tarjeta" />
-                            </div>
-                            <div class="col-4">
-                            </div>
-                            <div class="col-4">
                                 <asp:Label ID="lblRespuestaTarjeta" CssClass="form-control" runat="server" Visible="false" Enabled="false"></asp:Label>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <asp:Label ID="lblMontoTarjeta" CssClass="form-control" runat="server" Visible="false" Enabled="false"></asp:Label>
                             </div>
                         </div>
                         <%-- Modulo nota crédito --%>
@@ -257,6 +257,16 @@
                                         <asp:BoundField DataField="importe" HeaderText="Importe" />
                                     </Columns>
                                 </asp:GridView>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <asp:Button ID="btnValidarTarjeta" CssClass="btn btn-warning" runat="server" Text="Validar Medio de Pago" />
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <asp:Label ID="lblMontoNota" CssClass="form-control" runat="server" Visible="false" Enabled="false"></asp:Label>
                             </div>
                         </div>
                     </div>

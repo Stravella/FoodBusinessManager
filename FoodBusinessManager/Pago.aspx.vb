@@ -27,12 +27,14 @@ Public Class Pago
                         .total = total
                     }
             Dim nuevaNota As New NotaCreditoDTO
-
+            'Manejo de mail
+            Dim oGestorPdf As New GestorPDF
+            Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "Home.aspx"
 
             If Current.Session("NotasCredito") IsNot Nothing Then
                 Dim lsNotas As List(Of NotaCreditoDTO) = DirectCast(Current.Session("NotasCredito"), List(Of NotaCreditoDTO))
                 Dim diferenciaNotasImporte As Double = Current.Session("DiferenciaNotas")
-                If Math.Abs(diferenciaNotasImporte) > 0 Then
+                If diferenciaNotasImporte > 0 Then ' TODO esto tiene que ser menos
 
                     'Creo una nota por la diferencia
                     nuevaNota.estado = New EstadoNotaDTO With {.id = 2} 'pendiente
@@ -46,13 +48,13 @@ Public Class Pago
                     factura.tarjeta = Nothing
                     factura.importeTarjeta = 0
                 Else
+                    factura.notasCredito = lsNotas 'Agrego las notas a la factura para cambiar el estado en el alta de la facutra
                     If Current.Session("RequiereTarjeta") = True Then
                         Dim tarjeta As TarjetaDTO = DirectCast(Current.Session("Tarjeta"), TarjetaDTO)
                         factura.tarjeta = tarjeta
                         factura.importeTarjeta = Math.Abs(diferenciaNotasImporte)
                     Else 'La nota de credito es justa y no necesito tarjeta
                         factura.tarjeta = Nothing
-                        factura.notasCredito = lsNotas
                         factura.importeTarjeta = 0
                     End If
                 End If
@@ -65,6 +67,7 @@ Public Class Pago
             FacturaBLL.ObtenerInstancia.Agregar(factura)
             If nuevaNota.importe > 0 Then ' Aquí veo si tengo que agregar una nota               
                 NotasCreditoBLL.ObtenerInstancia.Agregar(nuevaNota)
+                GestorMailBLL.ObtenerInstancia.EnviarCorreoSinFooter(cliente.usuario.mail, "Nota de credito " & nuevaNota.id, "Hola " + cliente.RazonSocial + ", te adjuntamos la nota de credito " & nuevaNota.id & "por tu compra realizada el dia " & nuevaNota.fecha, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"), True, oGestorPdf.ArmardPDFADjunto(Response, Server.MapPath("TemplateFactura.html"), nuevaNota))
             End If
 
             Dim compra As New CompraDTO With {
@@ -86,6 +89,9 @@ Public Class Pago
                            }
             BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
             'TODO: Redirect a encuesta
+            'Envio Factura            
+            GestorMailBLL.ObtenerInstancia.EnviarCorreoSinFooter(cliente.usuario.mail, "Factura compra " & compra.factura.id, "Hola " + cliente.RazonSocial + ", te adjuntamos la factura " & compra.factura.id & "por tu compra realizada el dia " & compra.fecha, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"), True, oGestorPdf.ArmardPDFADjunto(Response, Server.MapPath("TemplateFactura.html"), compra))
+            Response.Redirect("/PostCompra.aspx")
         End If
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
     End Sub
@@ -119,6 +125,8 @@ Public Class Pago
             CargarNotaCredito()
         End If
     End Sub
+
+#Region "Carga_Datos"
     Public Sub CargarCarrito()
         Try
             If Current.Session("Carrito") Is Nothing Then
@@ -176,56 +184,113 @@ Public Class Pago
             MostrarModal("Error", "Lo siento! Ocurrio un error al cargar sus notas de crédito",, True)
         End Try
     End Sub
+#End Region
+
 
     Private Sub btnValidarTarjeta_Click(sender As Object, e As EventArgs) Handles btnValidarTarjeta.Click
         Try
-            Dim tarj As New TarjetaDTO With {
-                   .id = 0,
-                   .nro = txtNumeroTarjeta.Text,
-                   .codigo_seguridad = txtCodigoSeguridad.Text,
-                   .vencimiento = txtFechaVencimiento.Text
-            }
-            tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
-            lblRespuestaTarjeta.Visible = True
-            If tarj.id = 0 Then
-                lblRespuestaTarjeta.CssClass = "danger"
-                lblRespuestaTarjeta.Text = "La tarjeta no existe"
-                Current.Session("TarjetaValida") = False
-            Else 'La tarjeta existe
-                Select Case tarj.estado.estado
-                    Case "Valida"
-                        lblRespuestaTarjeta.CssClass = "success"
-                        lblRespuestaTarjeta.Text = "La tarjeta es válida"
-                        Current.Session("TarjetaValida") = True
-                    Case "Sin fondos"
-                        lblRespuestaTarjeta.CssClass = "danger"
-                        lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
-                        Current.Session("TarjetaValida") = False
-                    Case "Inactiva"
-                        lblRespuestaTarjeta.CssClass = "danger"
-                        lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
-                        Current.Session("TarjetaValida") = False
-                End Select
-                Select Case tarj.marca
-                    Case "Visa Crédito"
-                        lblRespuestaTarjeta.CssClass = "fas fa-cc-visa"
-                    Case "Mastercard"
-                        lblRespuestaTarjeta.CssClass = "fas fa-cc-mastercard"
-                    Case "American Express"
-                        lblRespuestaTarjeta.CssClass = "fas fa-cc-amex"
-                End Select
+            'Chequeo si está cargada la tarjeta
+            Dim tarjetaCargada As Boolean = False
+            If txtNumeroTarjeta.Text <> "" AndAlso txtFechaVencimiento.Text <> "" AndAlso txtCodigoSeguridad.Text <> "" Then
+                tarjetaCargada = True
             End If
+            'Total carrito
+            Dim total As Double = 0
+            Dim carrito As List(Of ServicioCarritoDTO) = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
+            For Each serv In carrito
+                total = total + serv.importeTotal
+            Next
+
+            'Total NotaCredito
+            Dim totalNotas As Double = 0
+            Dim lsNotas As New List(Of NotaCreditoDTO)
+            For Each gvrow As GridViewRow In grdNotasCredito.Rows
+                Dim checkbox As CheckBox = gvrow.FindControl("Checkbox1")
+                If checkbox.Checked = True Then
+                    Dim nota As New NotaCreditoDTO
+                    nota = NotasCreditoBLL.ObtenerInstancia.Obtener(Convert.ToInt16(gvrow.Cells(1).Text))
+                    totalNotas = totalNotas + nota.importe
+                    lsNotas.Add(nota)
+                End If
+            Next
+
+            If total = 0 Then 'El carrito tiene solo servicio free y no necesito validar nada.
+                Current.Session("MedioPagoValido") = True
+            Else
+                If totalNotas >= total Then 'No necesito tarjeta, con las notas alcanza
+                    lblMontoNota.Visible = True
+                    lblMontoNota.Text = "Importe a cobrar con las notas: " & total
+                    Current.Session("MedioPagoValido") = True
+                End If
+                If tarjetaCargada = True Then
+                    Dim tarj As New TarjetaDTO With {
+                       .id = 0,
+                       .nro = txtNumeroTarjeta.Text,
+                       .codigo_seguridad = txtCodigoSeguridad.Text,
+                       .vencimiento = txtFechaVencimiento.Text
+                        }
+                    tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
+                    lblRespuestaTarjeta.Visible = True
+                    If tarj.id = 0 Then
+                        lblRespuestaTarjeta.CssClass = "danger"
+                        lblRespuestaTarjeta.Text = "La tarjeta no existe"
+                        Current.Session("MedioPagoValido") = False
+                    Else 'La tarjeta existe
+                        Select Case tarj.estado.estado
+                            Case "Valida"
+                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
+                                lblRespuestaTarjeta.Text = "La tarjeta es válida"
+                                Current.Session("MedioPagoValido") = True
+                            Case "Sin fondos"
+                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
+                                Current.Session("MedioPagoValido") = False
+                            Case "Inactiva"
+                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
+                                Current.Session("MedioPagoValido") = False
+                        End Select
+                        Select Case tarj.marca
+                            Case "Visa Crédito"
+                                lblRespuestaTarjeta.CssClass = "fas fa-cc-visa"
+                            Case "Mastercard"
+                                lblRespuestaTarjeta.CssClass = "fas fa-cc-mastercard"
+                            Case "American Express"
+                                lblRespuestaTarjeta.CssClass = "fas fa-cc-amex"
+                        End Select
+                    End If
+                    If Not Current.Session("MedioPagoValido") = False Then 'Si es falso la tarjeta no es valida
+                        If totalNotas = 0 Then 'No hay notas
+                            lblMontoTarjeta.Visible = True
+                            Current.Session("MedioPagoValido") = True
+                            lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total
+                        End If
+                        If totalNotas > 0 AndAlso totalNotas < total Then 'Pago combinado
+                            lblMontoNota.Visible = True
+                            lblMontoTarjeta.Visible = True
+                            Current.Session("MedioPagoValido") = True
+                            lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total - totalNotas
+                            lblMontoNota.Text = "Importe a cobrar con las notas: " & totalNotas
+                        End If
+                    End If
+                Else 'El carrito es mayor a cero y no selecciono tarjeta ni notas
+                    If Current.Session("MedioPagoValido") = False Or Current.Session("MedioPagoValido") Is Nothing Then
+                        MostrarModal("Error", "Lo siento! Verifique que al menos haya seleccionado un medio de pago.",, True)
+                    End If
+                End If
+            End If
+
         Catch ex As Exception
-            MostrarModal("Error", "Lo siento! Ocurrio un error al validar su tarjeta",, True)
+            MostrarModal("Error", "Lo siento! Ocurrio un error al validar el medio de pago. Verifique que al menos haya seleccionado un medio de pago.",, True)
         End Try
     End Sub
 
     Private Sub btnComprar_Click(sender As Object, e As EventArgs) Handles btnComprar.Click
         Try
-            If Current.Session("TarjetaValida") Is Nothing Then
+            If Current.Session("MedioPagoValido") Is Nothing Then
                 MostrarModal("Error", "Para continuar, debe validar el medio de pago primero",, True)
             Else
-                If Current.Session("TarjetaValida") = True Then
+                If Current.Session("MedioPagoValido") = True Then
                     Dim cliente As ClienteDTO = DirectCast(Current.Session("Cliente"), ClienteDTO)
                     Dim carrito As List(Of ServicioCarritoDTO) = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
                     Dim total As Double = 0

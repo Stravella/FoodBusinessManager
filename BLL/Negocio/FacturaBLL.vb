@@ -55,14 +55,17 @@ Public Class FacturaBLL
             lineaMDP = lineaMDP.Replace("_MedioDePago", "Nro: " & compra.factura.tarjeta.nro).Replace("_ImporteMDP", compra.factura.importeTarjeta)
             content = content.Insert(content.IndexOf("<!--_lineasMDP-->") + 18, lineaMDP)
         End If
-        If compra.factura.notasCredito.Count > 0 Then
-            content = content.Replace("_FormaDePago", "Nota de crédito")
-            For Each nota In compra.factura.notasCredito
-                Dim lineaMDP As String = "<tr class=""details""><td>_MedioDePago</td><td>$ _ImporteMDP</td></tr>"
-                lineaMDP = lineaMDP.Replace("_MedioDePago", nota.concepto).Replace("_ImporteMDP", nota.importe)
-                content = content.Insert(content.IndexOf("<!--_lineasMDP-->") + 18, lineaMDP)
-            Next
+        If compra.factura.notasCredito IsNot Nothing Then
+            If compra.factura.notasCredito.Count > 0 Then
+                content = content.Replace("_FormaDePago", "Nota de crédito")
+                For Each nota In compra.factura.notasCredito
+                    Dim lineaMDP As String = "<tr class=""details""><td>_MedioDePago</td><td>$ _ImporteMDP</td></tr>"
+                    lineaMDP = lineaMDP.Replace("_MedioDePago", nota.concepto).Replace("_ImporteMDP", nota.importe)
+                    content = content.Insert(content.IndexOf("<!--_lineasMDP-->") + 18, lineaMDP)
+                Next
+            End If
         End If
+
 
         For Each servicioCarrito In compra.carrito
             Dim lineaItemProd As String = "<tr class=""itemP""><td>_ItemProducto    x  _Q</td><td>$ _Importe</td></tr>"

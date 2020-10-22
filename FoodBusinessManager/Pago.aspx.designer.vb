@@ -176,15 +176,6 @@ Partial Public Class Pago
     Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control btnValidarTarjeta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnValidarTarjeta As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''Control lblRespuestaTarjeta.
     '''</summary>
     '''<remarks>
@@ -194,6 +185,15 @@ Partial Public Class Pago
     Protected WithEvents lblRespuestaTarjeta As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lblMontoTarjeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMontoTarjeta As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control grdNotasCredito.
     '''</summary>
     '''<remarks>
@@ -201,6 +201,24 @@ Partial Public Class Pago
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents grdNotasCredito As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control btnValidarTarjeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnValidarTarjeta As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lblMontoNota.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMontoNota As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control btnCancelar.

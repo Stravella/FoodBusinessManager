@@ -52,8 +52,9 @@ Public Class NewsletterBack
                 Dim newsletter As NewsletterDTO = Current.Session("entidadModal")
                 For Each subscriptor As SubscriptorDTO In newsletter.Categoria.subscriptores
                     Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "DesubscribirNewsletter.aspx?idSubscriptor=" + Server.UrlEncode(CriptografiaBLL.ObtenerInstancia.EncriptarSimetrico(subscriptor.id))
-                    GestorMailBLL.ObtenerInstancia.EnviarMail(subscriptor.mail, "Food Business Manager : " & newsletter.Titulo, newsletter.Imagen.Img64, newsletter.Cuerpo & "<br/> <br/> Ustéd esta recibiendo este mensaje por qué está subscripto al newsletter. Para desubscribirse, haga click aquí: " + "<a href=" + ActiveURL + ">link</a>" + "<br /><br /> Si no te funciona el link, copia y pega esta dirección: " + ActiveURL, Server.MapPath("\EmailTemplates\Template_mail.html"))
-                    '"Hola " + cliente.RazonSocial + ", ya sos usuario. <br /><br />" + vbCrLf + "Ingresá al siguiente link para activarlo: " + "<a href=" + ActiveURL + ">link</a>" + "<br /><br /> Si no te funciona el link, copia y pega esta dirección: " + ActiveURL, )
+
+                    GestorMailBLL.ObtenerInstancia.EnviarNewsletter(subscriptor.mail, "Food Business Manager : " & newsletter.Titulo, newsletter.Cuerpo, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),, Encoding.Unicode.GetBytes(newsletter.Imagen.Img64))
+
                 Next
                 newsletter.Estado.ID = 2 'Estado enviado.
                 NewsletterBLL.ObtenerInstancia.Modificar(newsletter)

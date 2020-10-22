@@ -37,7 +37,7 @@ Public Class ModificarDatosUsuario
                 If Current.Session("ModificaContraseña") = True Then
                     'GestorMailBLL.ObtenerInstancia.EnviarMail(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", Server.MapPath("\EmailTemplates\Template_mail.html"))
                     Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "Home.aspx"
-                    GestorMailBLL.ObtenerInstancia.EnviarCorreo(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),,)
+                    GestorMailBLL.ObtenerInstancia.EnviarCorreoSinFooter(cliente.usuario.mail, "Food Business Manager : Cambio de contraseña", "Se ha registrado su cambio de contraseña", ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),,)
                     ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
                     Response.Redirect("/ModificarDatosUsuario.aspx")
                 End If

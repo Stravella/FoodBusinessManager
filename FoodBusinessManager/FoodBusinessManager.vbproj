@@ -155,6 +155,7 @@
     <Content Include="NewsletterBack.aspx" />
     <Content Include="NewsletterSubscribir.aspx" />
     <Content Include="Pago.aspx" />
+    <Content Include="PostCompra.aspx" />
     <Content Include="Publicidad.aspx" />
     <Content Include="PublicidadBack.aspx" />
     <Content Include="Publicidad\Publicidad.xml" />
@@ -417,6 +418,13 @@
     </Compile>
     <Compile Include="Pago.aspx.vb">
       <DependentUpon>Pago.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PostCompra.aspx.designer.vb">
+      <DependentUpon>PostCompra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostCompra.aspx.vb">
+      <DependentUpon>PostCompra.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Publicidad.aspx.designer.vb">
