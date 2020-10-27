@@ -22,6 +22,7 @@ Public Class TarjetaDAL
             Dim oEstado As New TarjetaDTO With {
                                             .id = Row("id"),
                                             .nro = Row("nro"),
+                                            .nombre = Row("nombre"),
                                             .marca = Row("marca"),
                                             .codigo_seguridad = Row("codigo_seguridad"),
                                             .vencimiento = Row("vencimiento"),

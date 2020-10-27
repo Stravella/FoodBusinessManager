@@ -82,7 +82,8 @@
                             <a class="nav-item nav-link" href="Mensaje.aspx">Contáctenos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i></a>
+                            <%--<a href="Compra.aspx" class="icon-shopping-cart" style="font-size: 25px"><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/></a>--%>
+                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/></a>
                         </li>
                     </ul>
                     <%-- Panel derecho: Logeo, registro, Welcome y logout --%>

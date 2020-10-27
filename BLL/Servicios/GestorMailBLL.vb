@@ -198,14 +198,16 @@ Public Class GestorMailBLL
     End Function
 
 
-    Public Function EnviarNewsletter(pDestino As String, pAsunto As String, pCuerpo As String, linkDestino As String, pPath As String, Optional esfactura As Boolean = False, Optional ByVal adjuntos As Byte() = Nothing) As Boolean
+    Public Function EnviarNewsletter(pDestino As String, pAsunto As String, pCuerpo As String, linkDestino As String, pPath As String, pImg As String) As Boolean
         'Uso otro método por que cambia el footer y otras cosas
+        'Optional ByVal adjuntos As Byte() = Nothing
         Dim result As Boolean = False
         Dim _from As String = "Food.Business.Manager@gmail.com"
         Dim footer As String = linkDestino.Substring(0, linkDestino.LastIndexOf("/")) & "/DesubscribirNewsletter.aspx"
         Try
             Dim Smtp_Server As New SmtpClient
             Dim e_mail As New MailMessage()
+
             Smtp_Server.UseDefaultCredentials = False
             Smtp_Server.DeliveryMethod = SmtpDeliveryMethod.Network
             Smtp_Server.Credentials = New Net.NetworkCredential("Food.Business.Manager@gmail.com", "fbm123456")
@@ -218,19 +220,28 @@ Public Class GestorMailBLL
             e_mail.To.Add(pDestino)
             e_mail.Subject = pAsunto
             e_mail.IsBodyHtml = True
-            If adjuntos IsNot Nothing Then
-                e_mail.Attachments.Add(New Attachment(New MemoryStream(adjuntos), "Img.jpeg"))
-            End If
+            'If adjuntos IsNot Nothing Then
+            '    e_mail.Attachments.Add(New Attachment(New MemoryStream(adjuntos), "Img.jpeg"))
+            'End If
 
             Dim sr = New StreamReader(pPath)
             Dim Plantilla As String = sr.ReadToEnd
             sr.Dispose()
 
-            If esfactura Then
-                e_mail.Body = pCuerpo
-            Else
-                e_mail.Body = Plantilla.Replace("Titulo", pAsunto).Replace("Cuerpo", pCuerpo).Replace("LINKDESTINO", linkDestino).Replace("LINKFOOTER", footer)
-            End If
+            e_mail.Body = Plantilla.Replace("Titulo", pAsunto).Replace("Cuerpo", pCuerpo).Replace("LINKDESTINO", linkDestino).Replace("LINKFOOTER", footer)
+            '' Declaring Images
+            Dim img1 As LinkedResource = New LinkedResource(pImg, MediaTypeNames.Image.Jpeg)
+            '' You can choose any name for ContentID, but be careful because we would need these names
+            '' when we create HTML table 
+            img1.ContentId = "Image1"
+
+            'Create alternate view HTML
+            Dim av1 As AlternateView = AlternateView.CreateAlternateViewFromString(e_mail.Body, Nothing, MediaTypeNames.Text.Html)
+            av1.LinkedResources.Add(img1)
+
+            e_mail.AlternateViews.Add(av1)
+            '' MUST declare below line of code
+            e_mail.IsBodyHtml = True
 
             Smtp_Server.Send(e_mail)
             result = True

@@ -83,6 +83,7 @@ Public Class Respuestas
             item.Value = servicio.id
             ddlServicio.Items.Add(item)
         Next
+        CargarPreguntas(1)
     End Sub
 
     Private Sub ddlServicio_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlServicio.SelectedIndexChanged
@@ -91,6 +92,7 @@ Public Class Respuestas
 
 
     Public Sub CargarPreguntas(id As Integer)
+        ddlPregunta.Items.Clear()
         Dim preguntas As List(Of PreguntaDTO) = PreguntaBLL.ObtenerInstancia.ListarPorIdServicio(id)
         For Each pregunta In preguntas
             Dim item As New ListItem
@@ -98,6 +100,12 @@ Public Class Respuestas
             item.Value = pregunta.id
             ddlPregunta.Items.Add(item)
         Next
+        If preguntas.Count = 0 Then
+            Dim item As New ListItem
+            item.Text = "No hay preguntas"
+            item.Value = 0
+            ddlPregunta.Items.Add(item)
+        End If
     End Sub
 
 
@@ -116,6 +124,7 @@ Public Class Respuestas
         Try
             Dim respuesta As New RespuestaDTO With {.respuesta = txtRespuesta.Text, .id_pregunta = ddlPregunta.SelectedValue}
             RespuestaBLL.ObtenerInstancia.Agregar(respuesta)
+            Response.Redirect("/Respuestas.aspx")
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error",, True)
         End Try

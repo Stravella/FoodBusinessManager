@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row display-flex">
                                         <div class="col d-flex">
                                             <center>
                                                 <h6>

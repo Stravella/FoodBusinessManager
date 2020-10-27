@@ -93,6 +93,7 @@ Public Class Servicios
                 Dim servicioCarrito As New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 1, .importeTotal = servicio.precio * .cantidad}
                 carrito.Add(servicioCarrito)
                 Current.Session("Carrito") = carrito
+                Response.Redirect("/Servicios.aspx")
             Else
                 carrito = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
                 Dim existe As Boolean = False
@@ -120,6 +121,7 @@ Public Class Servicios
                     End If
                 Next
                 Current.Session("Carrito") = carrito
+                Response.Redirect("/Servicios.aspx")
             End If
         End If
     End Sub

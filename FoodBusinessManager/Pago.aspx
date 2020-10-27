@@ -173,7 +173,14 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtNombreApe" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtNombreApe" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                                        ErrorMessage="Este campo es requerido" ControlToValidate="txtNombreApe"
+                                        ForeColor="Red" ValidationGroup="Tarjeta">
+                                    </asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtNombreApe"
+                                        ValidationExpression="^[a-zA-Z\s]{10,30}$" ForeColor="Red" 
+                                        ErrorMessage="Ingrese el nombre cómo figura en su tarjeta." ValidationGroup="Tarjeta">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -183,38 +190,51 @@
                                     Numero Tarjeta
                                 </label>
                                 <div class="form-group">
-
-                                    <asp:TextBox ID="txtNumeroTarjeta" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtNumeroTarjeta" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="El formato es inválido" ValidationExpression="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$" ControlToValidate="txtNumeroTarjeta" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RegularExpressionValidator>
+                                    <asp:TextBox ID="txtNumeroTarjeta" CssClass="form-control" runat="server" onkeyup="ValidarTC(this)" placeholder="Ingrese los 16 dígitos sin guiónes ni espacios"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                        ErrorMessage="Este campo es requerido" ControlToValidate="txtNumeroTarjeta"
+                                        ForeColor="Red" ValidationGroup="Tarjeta">
+                                    </asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                        ErrorMessage="El formato es inválido" ValidationExpression="\d{16}"
+                                        ControlToValidate="txtNumeroTarjeta" ForeColor="Red" ValidationGroup="Tarjeta">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                             </div>
                             <div class="col-2">
-                                <i class="fas fa-credit-card"></i>
-                            </div>
-                            <div class="col-2">
-                                <%-- Acá pongo el icono de la tarjeta --%>
+                                <img id="imgTC" src="IconosSVG/credit-card-solid.svg" width="80" height="40" />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-6">
                                 <label>
                                     Fecha Vencimiento
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtFechaVencimiento" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtFechaVencimiento" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                        ErrorMessage="Este campo es requerido" ControlToValidate="txtFechaVencimiento"
+                                        ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFechaVencimiento"
+                                        ValidationExpression="((0[1-9])|(1[012]))/\d{2}" ForeColor="Red" 
+                                        ErrorMessage="Ingrese los 4 dígitos en formato MM/YY." ValidationGroup="Tarjeta">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
+                            <div class="col-6">
                                 <label>
                                     Codigo Seguridad
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtCodigoSeguridad" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtCodigoSeguridad" ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                        ErrorMessage="Este campo es requerido" ControlToValidate="txtCodigoSeguridad"
+                                        ForeColor="Red" ValidationGroup="Tarjeta">
+                                    </asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtCodigoSeguridad"
+                                        ValidationExpression="^[0-9]{3}$" ErrorMessage="Ingrese solo los 3 dígitos."
+                                        ForeColor="Red" ValidationGroup="Tarjeta">
+                                    </asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -284,4 +304,40 @@
         </div>
         <br />
     </div>
+
+    <script>
+        function ValidarTC(nroTC) {
+            var imagen = document.getElementById("imgTC");
+            if (nroTC.value.length > 2) {
+                var re = new RegExp("^4");
+                var nro = nroTC.value;
+
+                if (nro.match(re) != null) {
+                    imagen.src = "IconosSVG/cc-visa-brands.svg";
+                    //$("#TCValida").value = true;
+                    return true;
+                }
+                re = new RegExp("^(34|37)");
+                if (nro.match(re) != null) {
+                    imagen.src = "IconosSVG/cc-amex-brands.svg";
+
+                    return true;
+                }
+                re = new RegExp("^5[1-5]");
+                if (nro.match(re) != null) {
+                    imagen.src = "IconosSVG/cc-mastercard-brands.svg";
+
+                    return true;
+                }
+                imagen.src = "IconosSVG/credit-card-solid.svg";
+
+            }
+            else {
+                imagen.src = "IconosSVG/credit-card-solid.svg";
+
+            }
+        }
+    </script>
+
+
 </asp:Content>

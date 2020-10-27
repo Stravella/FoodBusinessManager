@@ -104,6 +104,8 @@
     <Content Include="AboutUs.aspx" />
     <Content Include="AdministrarCaracteristicas.aspx" />
     <Content Include="AdministrarCategorias.aspx" />
+    <Content Include="AdministrarEncuestaPreguntas.aspx" />
+    <Content Include="AdministrarEncuestaRespuestas.aspx" />
     <Content Include="AdministrarUsuarios.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
@@ -147,6 +149,10 @@
     <Content Include="Estilos\LogIn.css" />
     <Content Include="FAQS.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="IconosSVG\cc-amex-brands.svg" />
+    <Content Include="IconosSVG\cc-mastercard-brands.svg" />
+    <Content Include="IconosSVG\cc-visa-brands.svg" />
+    <Content Include="IconosSVG\credit-card-solid.svg" />
     <Content Include="IconosSVG\file-download-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
     <Content Include="IconosSVG\window-close-solid.svg" />
@@ -288,6 +294,20 @@
     </Compile>
     <Compile Include="AdministrarCategorias.aspx.vb">
       <DependentUpon>AdministrarCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarEncuestaPreguntas.aspx.designer.vb">
+      <DependentUpon>AdministrarEncuestaPreguntas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarEncuestaPreguntas.aspx.vb">
+      <DependentUpon>AdministrarEncuestaPreguntas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarEncuestaRespuestas.aspx.designer.vb">
+      <DependentUpon>AdministrarEncuestaRespuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarEncuestaRespuestas.aspx.vb">
+      <DependentUpon>AdministrarEncuestaRespuestas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="AdministrarUsuarios.aspx.designer.vb">

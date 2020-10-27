@@ -53,7 +53,7 @@ Public Class NewsletterBack
                 For Each subscriptor As SubscriptorDTO In newsletter.Categoria.subscriptores
                     Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "DesubscribirNewsletter.aspx?idSubscriptor=" + Server.UrlEncode(CriptografiaBLL.ObtenerInstancia.EncriptarSimetrico(subscriptor.id))
 
-                    GestorMailBLL.ObtenerInstancia.EnviarNewsletter(subscriptor.mail, "Food Business Manager : " & newsletter.Titulo, newsletter.Cuerpo, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"),, Encoding.Unicode.GetBytes(newsletter.Imagen.Img64))
+                    GestorMailBLL.ObtenerInstancia.EnviarNewsletter(subscriptor.mail, "Food Business Manager : " & newsletter.Titulo, newsletter.Cuerpo, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"), newsletter.Imagen.Img64)
 
                 Next
                 newsletter.Estado.ID = 2 'Estado enviado.

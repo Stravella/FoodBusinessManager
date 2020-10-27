@@ -91,6 +91,13 @@ Public Class Pago
             'TODO: Redirect a encuesta
             'Envio Factura            
             GestorMailBLL.ObtenerInstancia.EnviarCorreoSinFooter(cliente.usuario.mail, "Factura compra " & compra.factura.id, "Hola " + cliente.RazonSocial + ", te adjuntamos la factura " & compra.factura.id & "por tu compra realizada el dia " & compra.fecha, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"), True, oGestorPdf.ArmardPDFADjunto(Response, Server.MapPath("TemplateFactura.html"), compra))
+            'Blanqueo las variables
+            Current.Session("NotasCredito") = Nothing
+            Current.Session("Carrito") = Nothing
+            Current.Session("RequiereTarjeta") = Nothing
+            Current.Session("Tarjeta") = Nothing
+            Current.Session("DiferenciaNotas") = Nothing
+
             Response.Redirect("/PostCompra.aspx")
         End If
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
@@ -189,6 +196,8 @@ Public Class Pago
 
     Private Sub btnValidarTarjeta_Click(sender As Object, e As EventArgs) Handles btnValidarTarjeta.Click
         Try
+            lblMontoNota.Text = ""
+            lblMontoTarjeta.Text = ""
             'Chequeo si está cargada la tarjeta
             Dim tarjetaCargada As Boolean = False
             If txtNumeroTarjeta.Text <> "" AndAlso txtFechaVencimiento.Text <> "" AndAlso txtCodigoSeguridad.Text <> "" Then
@@ -216,10 +225,15 @@ Public Class Pago
 
             If total = 0 Then 'El carrito tiene solo servicio free y no necesito validar nada.
                 Current.Session("MedioPagoValido") = True
+                lblMontoNota.Text = "Importe a cobrar con las notas: " & 0
             Else
                 If totalNotas >= total Then 'No necesito tarjeta, con las notas alcanza
                     lblMontoNota.Visible = True
                     lblMontoNota.Text = "Importe a cobrar con las notas: " & total
+                    lblMontoTarjeta.Visible = True
+                    lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & 0
+                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
+                    lblRespuestaTarjeta.Text = "La tarjeta es válida"
                     Current.Session("MedioPagoValido") = True
                 End If
                 If tarjetaCargada = True Then
@@ -231,33 +245,31 @@ Public Class Pago
                         }
                     tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
                     lblRespuestaTarjeta.Visible = True
-                    If tarj.id = 0 Then
-                        lblRespuestaTarjeta.CssClass = "danger"
+                    If tarj Is Nothing Then
+                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
                         lblRespuestaTarjeta.Text = "La tarjeta no existe"
                         Current.Session("MedioPagoValido") = False
                     Else 'La tarjeta existe
-                        Select Case tarj.estado.estado
-                            Case "Valida"
-                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
-                                lblRespuestaTarjeta.Text = "La tarjeta es válida"
-                                Current.Session("MedioPagoValido") = True
-                            Case "Sin fondos"
-                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                                lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
-                                Current.Session("MedioPagoValido") = False
-                            Case "Inactiva"
-                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                                lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
-                                Current.Session("MedioPagoValido") = False
-                        End Select
-                        Select Case tarj.marca
-                            Case "Visa Crédito"
-                                lblRespuestaTarjeta.CssClass = "fas fa-cc-visa"
-                            Case "Mastercard"
-                                lblRespuestaTarjeta.CssClass = "fas fa-cc-mastercard"
-                            Case "American Express"
-                                lblRespuestaTarjeta.CssClass = "fas fa-cc-amex"
-                        End Select
+                        If tarj.nro = txtNumeroTarjeta.Text AndAlso txtNombreApe.Text = tarj.nombre AndAlso txtFechaVencimiento.Text = tarj.vencimiento AndAlso txtCodigoSeguridad.Text = tarj.codigo_seguridad Then
+                            Select Case tarj.estado.estado
+                                Case "Valida"
+                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
+                                    lblRespuestaTarjeta.Text = "La tarjeta es válida"
+                                    Current.Session("MedioPagoValido") = True
+                                Case "Sin fondos"
+                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                    lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
+                                    Current.Session("MedioPagoValido") = False
+                                Case "Inactiva"
+                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                    lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
+                                    Current.Session("MedioPagoValido") = False
+                            End Select
+                        Else
+                            lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                            lblRespuestaTarjeta.Text = "Los datos ingresados no corresponden a la tarjeta"
+                            Current.Session("MedioPagoValido") = False
+                        End If
                     End If
                     If Not Current.Session("MedioPagoValido") = False Then 'Si es falso la tarjeta no es valida
                         If totalNotas = 0 Then 'No hay notas
@@ -273,13 +285,13 @@ Public Class Pago
                             lblMontoNota.Text = "Importe a cobrar con las notas: " & totalNotas
                         End If
                     End If
+
                 Else 'El carrito es mayor a cero y no selecciono tarjeta ni notas
                     If Current.Session("MedioPagoValido") = False Or Current.Session("MedioPagoValido") Is Nothing Then
-                        MostrarModal("Error", "Lo siento! Verifique que al menos haya seleccionado un medio de pago.",, True)
+                        MostrarModal("Advertencia", "Lo siento! Verifique que al menos haya seleccionado un medio de pago.",, True)
                     End If
                 End If
             End If
-
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error al validar el medio de pago. Verifique que al menos haya seleccionado un medio de pago.",, True)
         End Try
@@ -288,7 +300,7 @@ Public Class Pago
     Private Sub btnComprar_Click(sender As Object, e As EventArgs) Handles btnComprar.Click
         Try
             If Current.Session("MedioPagoValido") Is Nothing Then
-                MostrarModal("Error", "Para continuar, debe validar el medio de pago primero",, True)
+                MostrarModal("Advertencia", "Para continuar, debe validar el medio de pago primero",, True)
             Else
                 If Current.Session("MedioPagoValido") = True Then
                     Dim cliente As ClienteDTO = DirectCast(Current.Session("Cliente"), ClienteDTO)
@@ -299,8 +311,6 @@ Public Class Pago
                     Next
                     'Guardo la accion para el modal
                     Current.Session("Accion") = "Compra"
-
-
                     'Notas de crédito
                     Dim totalNotas As Double = 0
                     Dim lsNotas As New List(Of NotaCreditoDTO)
@@ -340,24 +350,69 @@ Public Class Pago
                                 MostrarModal("Confirmar compra", "Se abonara $" & total & " con la/s notas de credito seleccionadas",, True)
                         End Select
                     Else 'No hay notas de credito
-                        Dim tarj As New TarjetaDTO With {
+                        If total = 0 And carrito.Count = 1 Then 'Es el producto free
+                            'Manejo de mail
+                            Dim oGestorPdf As New GestorPDF
+                            Dim ActiveURL = "https://" & Request.Url.Host & ":" & Request.Url.Port & "/" & "Home.aspx"
+                            Dim factura As New FacturaDTO With {
+                                .cliente = cliente,
+                                .total = total,
+                                .importeTarjeta = 0,
+                                .notasCredito = Nothing,
+                                .tarjeta = Nothing
+                            }
+                            FacturaBLL.ObtenerInstancia.Agregar(factura)
+                            Dim compra As New CompraDTO With {
+                                    .carrito = carrito,
+                                    .cliente = cliente,
+                                    .fecha = Now,
+                                    .total = total,
+                                    .estado = New EstadoCompraDTO With {.id = 5}, 'Estado: Servicio de prueba, no se puede redimir
+                                    .factura = factura
+                                }
+                            CompraBLL.ObtenerInstancia.Agregar(compra)
+                            Dim usuarioLogeado As UsuarioDTO = Current.Session("Usuario")
+                            Dim bitacora As New BitacoraDTO With {
+                                                    .FechaHora = Now(),
+                                                    .usuario = usuarioLogeado,
+                                                    .tipoSuceso = New SucesoBitacoraDTO With {.id = 27}, 'Suceso: Compra
+                                                    .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
+                                                    .observaciones = "Se realizo la compra :" & compra.id
+                                           }
+                            BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
+                            GestorMailBLL.ObtenerInstancia.EnviarCorreoSinFooter(cliente.usuario.mail, "Factura compra " & compra.factura.id, "Hola " + cliente.RazonSocial + ", te adjuntamos la factura " & compra.factura.id & "por tu compra realizada el dia " & compra.fecha, ActiveURL, Server.MapPath("\EmailTemplates\TemplateMail.html"), True, oGestorPdf.ArmardPDFADjunto(Response, Server.MapPath("TemplateFactura.html"), compra))
+                            'Blanqueo las variables
+                            Current.Session("NotasCredito") = Nothing
+                            Current.Session("Carrito") = Nothing
+                            Current.Session("RequiereTarjeta") = Nothing
+                            Current.Session("Tarjeta") = Nothing
+                            Current.Session("DiferenciaNotas") = Nothing
+
+                            Response.Redirect("/PostCompra.aspx")
+                        Else
+                            Dim tarj As New TarjetaDTO With {
                                 .id = 0,
                                 .nro = txtNumeroTarjeta.Text,
                                 .codigo_seguridad = txtCodigoSeguridad.Text,
                                 .vencimiento = txtFechaVencimiento.Text
                             }
-                        tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
-                        Current.Session("RequiereTarjeta") = True
-                        Current.Session("Tarjeta") = tarj
-                        MostrarModal("Confirmar compra", "Se abonara $" & total & " con la tarjeta nro. " & tarj.nro,, True)
+                            tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
+                            Current.Session("RequiereTarjeta") = True
+                            Current.Session("Tarjeta") = tarj
+                            MostrarModal("Confirmar compra", "Se abonara $" & total & " con la tarjeta nro. " & tarj.nro,, True)
+                        End If
                     End If
-
                 Else
-                    MostrarModal("Error", "El medio de pago seleccionado es invalido",, True)
+                    MostrarModal("Advertencia", "El medio de pago seleccionado es invalido",, True)
                 End If
             End If
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error al realizar la compra",, True)
         End Try
+    End Sub
+
+    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+        Current.Session("NotasCredito") = Nothing
+        Response.Redirect("/Compra.aspx")
     End Sub
 End Class

@@ -6,6 +6,7 @@ Public Class Maestra
     Private usuarioLogeado As New UsuarioDTO
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
+            CargarNumberCarrito()
             If IsNothing(Current.Session("Cliente")) Then
                 'Panel de logeo
                 panelLoginform.Visible = True
@@ -21,6 +22,14 @@ Public Class Maestra
             End If
         End If
     End Sub
+
+    Public Sub CargarNumberCarrito()
+        If Current.Session("Carrito") IsNot Nothing Then
+            lblCartCount.Text = TryCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO)).Count
+        End If
+    End Sub
+
+
 
 #Region "Mensajes"
     Public Enum TipoAlerta
@@ -96,6 +105,9 @@ Public Class Maestra
             Me.MenuLateral.Items.Item(5).ChildItems.Add(New MenuItem("Publicidad", "PublicidadBack", Nothing, "/PublicidadBack.aspx"))
             Me.MenuLateral.Items.Add(New MenuItem("Movimientos", "AdminMovimientos"))
             Me.MenuLateral.Items.Item(6).ChildItems.Add(New MenuItem("Mis Movimientos", "MisMovimientos", Nothing, "/MisMovimientos.aspx"))
+            Me.MenuLateral.Items.Add(New MenuItem("Encuestas y Opiniones", "AdminEncuestas"))
+            Me.MenuLateral.Items.Item(7).ChildItems.Add(New MenuItem("Administrar Preguntas", "AdministrarPreguntas", Nothing, "/AdministrarEncuestaPreguntas.aspx"))
+            Me.MenuLateral.Items.Item(7).ChildItems.Add(New MenuItem("Administrar Respuesta", "AdministrarRespuestas", Nothing, "/AdministrarEncuestaRespuestas.aspx"))
         Catch ex As Exception
 
         End Try

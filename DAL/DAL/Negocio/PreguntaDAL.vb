@@ -96,5 +96,32 @@ Public Class PreguntaDAL
         End Try
     End Function
 
+#Region "Preguntas_encuesta"
+
+    Public Function ListarPorIdEncuesta(id As Integer) As List(Of PreguntaDTO)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_encuesta", id))
+            End With
+            Dim lsPreguntas As New List(Of PreguntaDTO)
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_pregunta_encuesta_listarPorIdEncuesta", params).Rows
+                Dim pregunta As New PreguntaDTO With {.id = row("id"),
+                                                  .pregunta = row("pregunta"),
+                                                  .fechaVencimiento = row("fechaVencimiento"),
+                                                  .respuestas = RespuestaDAL.ObtenerInstancia.ListarPorIdPregunta(row("id")),
+                                                  .id_servicio = row("id_servicio"),
+                                                  .usuario = UsuarioDAL.ObtenerInstancia.ObtenerPorId(row("id_usuario"))
+                }
+                lsPreguntas.Add(pregunta)
+            Next
+            Return lsPreguntas
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+#End Region
 
 End Class

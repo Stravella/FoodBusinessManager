@@ -43,13 +43,13 @@
                                 <asp:BoundField DataField="servicio.nombre" HeaderText="Nombre" />
                                 <asp:TemplateField HeaderText="Cantidad" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:TextBox runat="server" ID="txtCantidad" Columns="5" Text='<%# Eval("cantidad") %>'></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtCantidad" Columns="5" TextMode="Number" Text='<%# Eval("cantidad") %>'></asp:TextBox>
                                         <asp:LinkButton runat="server" ID="btnRemover" Text="Remover" CommandName="Remover" CommandArgument='<%# Eval("Servicio.id") %>' Style="font-size: 12px;"></asp:LinkButton><br />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
                                             ControlToValidate="txtCantidad" runat="server"
                                             ErrorMessage="Solo se aceptan numeros"
                                             ValidationExpression="\d+"
-                                            BackColor="Red">
+                                            ForeColor="Red">
                                         </asp:RegularExpressionValidator>
                                     </ItemTemplate>
                                 </asp:TemplateField>

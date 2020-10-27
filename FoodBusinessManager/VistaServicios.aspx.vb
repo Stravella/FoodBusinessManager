@@ -137,6 +137,9 @@ Public Class Free
                 End If
             Next
             Current.Session("Carrito") = carrito
+            Response.Redirect(Request.Url.PathAndQuery)
+
+
         End If
 
     End Sub

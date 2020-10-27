@@ -155,29 +155,30 @@ Public Class MisCompras
         compra = CompraBLL.ObtenerInstancia.Obtener(id)
 
         If e.CommandName = "Cancelar" Then
-            If compra.estado.id = 4 Then
-                MostrarModal("Error", "La compra ya se encuentra cancelada",, True)
-            Else
-                Dim notaCredito As New NotaCreditoDTO With {
-                .estado = New EstadoNotaDTO With {.id = 2}, 'Pendiente de redimir
-                .id_factura = compra.factura.id,
-                .fecha = Now,
-                .importe = compra.total,
-                .concepto = "Nota de credito por cancelacion de compra : " & compra.id & " por un total de $" & compra.total & " realizada el día " & compra.fecha & ". La factura correspondiente es : " & compra.factura.id,
-                .cliente = compra.cliente
-                }
-                Current.Session("Accion") = "CancelarCompra"
-                Current.Session("NotaCredito") = notaCredito
-                Current.Session("Compra") = compra
-                MostrarModal("Confirmar cancelacion de compra", "¿Desea cancelar la compra? Se generara una nota de credito por $" & compra.total,, True)
-            End If
+            Select Case compra.estado.id
+                Case 4
+                    MostrarModal("Error", "La compra ya se encuentra cancelada",, True)
+                Case 5
+                    MostrarModal("Error", "La compra no se puede redimir",, True)
+                Case 2
+                    'TODO: Implementar cancelacion de compra
+                    MostrarModal("Error", "La compra se encuentra en proceso. Se elevo una solicitud para su cancelacion",, True)
+                Case Else
+                    Dim notaCredito As New NotaCreditoDTO With {
+                        .estado = New EstadoNotaDTO With {.id = 2}, 'Pendiente de redimir
+                        .id_factura = compra.factura.id,
+                        .fecha = Now,
+                        .importe = compra.total,
+                        .concepto = "Nota de credito por cancelacion de compra : " & compra.id & " por un total de $" & compra.total & " realizada el día " & compra.fecha & ". La factura correspondiente es : " & compra.factura.id,
+                        .cliente = compra.cliente
+                        }
+                    Current.Session("Accion") = "CancelarCompra"
+                    Current.Session("NotaCredito") = notaCredito
+                    Current.Session("Compra") = compra
+                    MostrarModal("Confirmar cancelacion de compra", "¿Desea cancelar la compra? Se generara una nota de credito por $" & compra.total,, True)
+            End Select
         ElseIf e.CommandName = "Descargar" Then
-            If e.CommandName = "Descargar" Then
-                ' Response.Redirect("DescargaFactura.aspx?Fc=" & e.CommandArgument)
-                Response.Write("<script>window.open ('/DescargaFactura.aspx?Cr=" & e.CommandArgument & "','_blank');</script>")
-                '  Dim str As String = "/DescargaFactura.aspx?Fc=" & e.CommandArgument
-                '  Response.Write(String.Format("<script> window.open('{0}','_blank');</script>", ResolveUrl(str)))
-            End If
+            Response.Write("<script>window.open ('/DescargaFactura.aspx?Cr=" & e.CommandArgument & "','_blank');</script>")
         End If
     End Sub
 
