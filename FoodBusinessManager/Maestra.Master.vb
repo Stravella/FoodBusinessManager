@@ -261,6 +261,51 @@ Public Class Maestra
         Response.Redirect("/Home.aspx")
     End Sub
 
+
+
 #End Region
+
+
+#Region "Busqueda"
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+        Try
+            If txtBuscar.Text IsNot "" Then
+                Current.Session("buscar") = txtBuscar.Text
+                Response.Redirect("/Buscador.aspx", False)
+            Else
+                MostrarModal("Advertencia", "Ingrese un valor a buscar",, False)
+            End If
+        Catch ex As Exception
+            MostrarModal("Error", "Lo siento! Ocurrio un error",, False)
+        End Try
+    End Sub
+
+#End Region
+
+#Region "Modal"
+
+    'Acá le doy el comportamiento según mis entidades.
+    Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
+        Try
+            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Catch ex As Exception
+            MostrarModal("Error", "Lo siento! Ocurrio un error",, False)
+        End Try
+    End Sub
+
+    Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
+        lblModalTitle.Text = titulo
+        lblModalBody.Text = body
+
+        If cancelar = True Then
+            btnCancelar.Visible = True
+        End If
+        ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "myModal", "$('#myModal').modal();", True)
+    End Sub
+
+#End Region
+
+
+
 
 End Class

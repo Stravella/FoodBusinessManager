@@ -178,16 +178,17 @@
                                         ForeColor="Red" ValidationGroup="Tarjeta">
                                     </asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtNombreApe"
-                                        ValidationExpression="^[a-zA-Z\s]{10,30}$" ForeColor="Red" 
+                                        ValidationExpression="^[a-zA-Z\s]{10,30}$" ForeColor="Red"
                                         ErrorMessage="Ingrese el nombre cómo figura en su tarjeta." ValidationGroup="Tarjeta">
                                     </asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-12">
                                 <label>
                                     Numero Tarjeta
+                                    <img id="imgTC" src="IconosSVG/credit-card-solid.svg" width="40" height="20" />
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtNumeroTarjeta" CssClass="form-control" runat="server" onkeyup="ValidarTC(this)" placeholder="Ingrese los 16 dígitos sin guiónes ni espacios"></asp:TextBox>
@@ -201,9 +202,6 @@
                                     </asp:RegularExpressionValidator>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <img id="imgTC" src="IconosSVG/credit-card-solid.svg" width="80" height="40" />
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -216,7 +214,7 @@
                                         ErrorMessage="Este campo es requerido" ControlToValidate="txtFechaVencimiento"
                                         ForeColor="Red" ValidationGroup="Tarjeta"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtFechaVencimiento"
-                                        ValidationExpression="((0[1-9])|(1[012]))/\d{2}" ForeColor="Red" 
+                                        ValidationExpression="((0[1-9])|(1[012]))/\d{2}" ForeColor="Red"
                                         ErrorMessage="Ingrese los 4 dígitos en formato MM/YY." ValidationGroup="Tarjeta">
                                     </asp:RegularExpressionValidator>
                                 </div>
@@ -305,6 +303,7 @@
         <br />
     </div>
 
+
     <script>
         function ValidarTC(nroTC) {
             var imagen = document.getElementById("imgTC");
@@ -338,6 +337,4 @@
             }
         }
     </script>
-
-
 </asp:Content>

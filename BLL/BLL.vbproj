@@ -109,6 +109,7 @@
     <Compile Include="Negocio\TipoEncuestaBLL.vb" />
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
+    <Compile Include="Servicios\BusquedaBLL.vb" />
     <Compile Include="Servicios\ClienteBLL.vb" />
     <Compile Include="Servicios\CriptografiaBLL.vb" />
     <Compile Include="Servicios\CriticidadBLL.vb" />

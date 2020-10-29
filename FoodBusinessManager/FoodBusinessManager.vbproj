@@ -111,6 +111,7 @@
     <Content Include="AdministrarUsuarios.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
+    <Content Include="Buscador.aspx" />
     <Content Include="Caracteristicas.aspx" />
     <Content Include="AdministrarCatalogo.aspx" />
     <Content Include="Compra.aspx" />
@@ -158,6 +159,7 @@
     <Content Include="IconosSVG\credit-card-solid.svg" />
     <Content Include="IconosSVG\file-download-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
+    <Content Include="IconosSVG\search-solid.svg" />
     <Content Include="IconosSVG\window-close-solid.svg" />
     <Content Include="MisMovimientos.aspx" />
     <Content Include="ModificarDatosUsuario.aspx" />
@@ -339,6 +341,13 @@
     </Compile>
     <Compile Include="Bitacora.aspx.vb">
       <DependentUpon>Bitacora.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Buscador.aspx.designer.vb">
+      <DependentUpon>Buscador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buscador.aspx.vb">
+      <DependentUpon>Buscador.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Caracteristicas.aspx.designer.vb">

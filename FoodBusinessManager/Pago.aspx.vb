@@ -223,75 +223,83 @@ Public Class Pago
                 End If
             Next
 
-            If total = 0 Then 'El carrito tiene solo servicio free y no necesito validar nada.
-                Current.Session("MedioPagoValido") = True
-                lblMontoNota.Text = "Importe a cobrar con las notas: " & 0
-            Else
-                If totalNotas >= total Then 'No necesito tarjeta, con las notas alcanza
-                    lblMontoNota.Visible = True
-                    lblMontoNota.Text = "Importe a cobrar con las notas: " & total
-                    lblMontoTarjeta.Visible = True
-                    lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & 0
-                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
-                    lblRespuestaTarjeta.Text = "La tarjeta es válida"
-                    Current.Session("MedioPagoValido") = True
-                End If
-                If tarjetaCargada = True Then
-                    Dim tarj As New TarjetaDTO With {
-                       .id = 0,
-                       .nro = txtNumeroTarjeta.Text,
-                       .codigo_seguridad = txtCodigoSeguridad.Text,
-                       .vencimiento = txtFechaVencimiento.Text
-                        }
-                    tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
-                    lblRespuestaTarjeta.Visible = True
-                    If tarj Is Nothing Then
-                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                        lblRespuestaTarjeta.Text = "La tarjeta no existe"
-                        Current.Session("MedioPagoValido") = False
-                    Else 'La tarjeta existe
-                        If tarj.nro = txtNumeroTarjeta.Text AndAlso txtNombreApe.Text = tarj.nombre AndAlso txtFechaVencimiento.Text = tarj.vencimiento AndAlso txtCodigoSeguridad.Text = tarj.codigo_seguridad Then
-                            Select Case tarj.estado.estado
-                                Case "Valida"
-                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
-                                    lblRespuestaTarjeta.Text = "La tarjeta es válida"
-                                    Current.Session("MedioPagoValido") = True
-                                Case "Sin fondos"
-                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                                    lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
-                                    Current.Session("MedioPagoValido") = False
-                                Case "Inactiva"
-                                    lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                                    lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
-                                    Current.Session("MedioPagoValido") = False
-                            End Select
-                        Else
-                            lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
-                            lblRespuestaTarjeta.Text = "Los datos ingresados no corresponden a la tarjeta"
-                            Current.Session("MedioPagoValido") = False
-                        End If
-                    End If
-                    If Not Current.Session("MedioPagoValido") = False Then 'Si es falso la tarjeta no es valida
-                        If totalNotas = 0 Then 'No hay notas
-                            lblMontoTarjeta.Visible = True
-                            Current.Session("MedioPagoValido") = True
-                            lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total
-                        End If
-                        If totalNotas > 0 AndAlso totalNotas < total Then 'Pago combinado
-                            lblMontoNota.Visible = True
-                            lblMontoTarjeta.Visible = True
-                            Current.Session("MedioPagoValido") = True
-                            lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total - totalNotas
-                            lblMontoNota.Text = "Importe a cobrar con las notas: " & totalNotas
-                        End If
-                    End If
+            Dim inputFecha As Integer = Left(txtFechaVencimiento.Text, 2) * Right(txtFechaVencimiento.Text, 2)
+            Dim mesAño As Integer = DateTime.Now.Month * Convert.ToInt32(DateTime.Now.ToString("yy"))
 
-                Else 'El carrito es mayor a cero y no selecciono tarjeta ni notas
-                    If Current.Session("MedioPagoValido") = False Or Current.Session("MedioPagoValido") Is Nothing Then
-                        MostrarModal("Advertencia", "Lo siento! Verifique que al menos haya seleccionado un medio de pago.",, True)
+            If inputFecha < mesAño Then 'Validacion vencimiento 
+                MostrarModal("Advertencia", "La fecha de vencimiento ingresada se encuetra vencida",, True)
+            Else
+                If total = 0 Then 'El carrito tiene solo servicio free y no necesito validar nada.
+                    Current.Session("MedioPagoValido") = True
+                    lblMontoNota.Text = "Importe a cobrar con las notas: " & 0
+                Else
+                    If totalNotas >= total Then 'No necesito tarjeta, con las notas alcanza
+                        lblMontoNota.Visible = True
+                        lblMontoNota.Text = "Importe a cobrar con las notas: " & total
+                        lblMontoTarjeta.Visible = True
+                        lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & 0
+                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
+                        lblRespuestaTarjeta.Text = "La tarjeta es válida"
+                        Current.Session("MedioPagoValido") = True
+                    End If
+                    If tarjetaCargada = True Then
+                        Dim tarj As New TarjetaDTO With {
+                           .id = 0,
+                           .nro = txtNumeroTarjeta.Text,
+                           .codigo_seguridad = txtCodigoSeguridad.Text,
+                           .vencimiento = txtFechaVencimiento.Text
+                            }
+                        tarj = TarjetaBLL.ObtenerInstancia.Obtener(tarj)
+                        lblRespuestaTarjeta.Visible = True
+                        If tarj Is Nothing Then
+                            lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                            lblRespuestaTarjeta.Text = "La tarjeta no existe"
+                            Current.Session("MedioPagoValido") = False
+                        Else 'La tarjeta existe
+                            If tarj.nro = txtNumeroTarjeta.Text AndAlso txtNombreApe.Text = tarj.nombre AndAlso txtFechaVencimiento.Text = tarj.vencimiento AndAlso txtCodigoSeguridad.Text = tarj.codigo_seguridad Then
+                                Select Case tarj.estado.estado
+                                    Case "Valida"
+                                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Green
+                                        lblRespuestaTarjeta.Text = "La tarjeta es válida"
+                                        Current.Session("MedioPagoValido") = True
+                                    Case "Sin fondos"
+                                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                        lblRespuestaTarjeta.Text = "La tarjeta no tiene fondos"
+                                        Current.Session("MedioPagoValido") = False
+                                    Case "Inactiva"
+                                        lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                        lblRespuestaTarjeta.Text = "La tarjeta esta inactiva"
+                                        Current.Session("MedioPagoValido") = False
+                                End Select
+                            Else
+                                lblRespuestaTarjeta.ForeColor = Drawing.Color.Red
+                                lblRespuestaTarjeta.Text = "Los datos ingresados no corresponden a la tarjeta"
+                                Current.Session("MedioPagoValido") = False
+                            End If
+                        End If
+                        If Not Current.Session("MedioPagoValido") = False Then 'Si es falso la tarjeta no es valida
+                            If totalNotas = 0 Then 'No hay notas
+                                lblMontoTarjeta.Visible = True
+                                Current.Session("MedioPagoValido") = True
+                                lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total
+                            End If
+                            If totalNotas > 0 AndAlso totalNotas < total Then 'Pago combinado
+                                lblMontoNota.Visible = True
+                                lblMontoTarjeta.Visible = True
+                                Current.Session("MedioPagoValido") = True
+                                lblMontoTarjeta.Text = "Importe a cobrar a la tarjeta: " & total - totalNotas
+                                lblMontoNota.Text = "Importe a cobrar con las notas: " & totalNotas
+                            End If
+                        End If
+
+                    Else 'El carrito es mayor a cero y no selecciono tarjeta ni notas
+                        If Current.Session("MedioPagoValido") = False Or Current.Session("MedioPagoValido") Is Nothing Then
+                            MostrarModal("Advertencia", "Lo siento! Verifique que al menos haya seleccionado un medio de pago.",, True)
+                        End If
                     End If
                 End If
             End If
+
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error al validar el medio de pago. Verifique que al menos haya seleccionado un medio de pago.",, True)
         End Try

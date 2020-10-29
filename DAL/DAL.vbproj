@@ -108,9 +108,9 @@
     <Compile Include="DAL\Negocio\TarjetaDAL.vb" />
     <Compile Include="DAL\Negocio\TipoEncuestaDAL.vb" />
     <Compile Include="DAL\Servicios\BitacoraDAL.vb" />
+    <Compile Include="DAL\Servicios\BusquedaDAL.vb" />
     <Compile Include="DAL\Servicios\ClienteDAL.vb" />
     <Compile Include="DAL\Servicios\CriticidadDAL.vb" />
-    <Compile Include="DAL\Servicios\DigitoVerificadorDAL.vb" />
     <Compile Include="DAL\Servicios\EstadoClienteDAL.vb" />
     <Compile Include="DAL\Servicios\PermisoDAL.vb" />
     <Compile Include="DAL\Servicios\ProvinciasDAL.vb" />

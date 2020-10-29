@@ -78,79 +78,70 @@
             <asp:Repeater ID="repeaterServicios" runat="server">
                 <ItemTemplate>
                     <div class="col">
-                        <div class="card">
-                            <div class="card-header">
+                        <div class="card h-auto">
+                            <div class="card-header text-center h-50">
                                 <div class="row">
                                     <div class="col">
-                                        <h4>
-                                            <center>
-                                                    <asp:Label ID="lblServicio" runat="server" Text='<%#Eval("nombre") %>'></asp:Label>
-                                                </center>
-                                        </h4>
-                                        <center>
-                                                <asp:Image ID="imgServicio" runat="server" height="150px" width="150px" ImageUrl='<%#Eval("Imagen.Img64") %>'></asp:Image>
-                                            </center>
+                                        <h4><%#Eval("nombre") %></h4>
+                                        <center><asp:Image ID="imgServicio" runat="server" height="150px" width="150px" ImageUrl='<%#Eval("Imagen.Img64") %>'></asp:Image></center>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row display-flex">
-                                        <div class="col d-flex">
-                                            <center>
-                                                <h6>
-                                                <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("descripcion") %>'></asp:Label>
-                                            </h6>
-                                            </center>
-                                        </div>
-                                    </div>
-                                    <asp:Repeater ID="repeaterCaracteristicas" runat="server">
-                                        <ItemTemplate>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <center>
-                                                        <li>
-                                                        <asp:Label ID="lblCaracteristica" runat="server" Text='<%#Eval("caracteristica") %>'></asp:Label>
-                                                    </li>
-                                                    </center>
-                                                </div>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col">
-                                            <center>
-                                                <asp:Label ID="lblPrecio" CssClass="text-success" runat="server" Font-Bold="true" > $<%#Eval("precio") %> </asp:Label>
-                                            </center>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col">
-                                            <center>
-                                                <asp:CheckBox id="chkComparar" text=" Comparar" OnCheckedChanged="Check" CommandName='<%# Eval("id") %>' AutoPostBack="true" runat="server"></asp:CheckBox>
-                                            </center>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col">
-                                            <asp:Button ID="btnDetalle" CssClass="btn btn-block btn-info" CommandName="detalle" CommandArgument='<%# Eval("id") %>' runat="server" Text="Ver detalle" />
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col">
-                                            <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" CommandName="comprar" CommandArgument='<%# Eval("id") %>' Visible="true" runat="server" Text="Agregar al carrito" />
-                                        </div>
+                            </div>
+                            <div class="card-body h-100">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6><%#Eval("descripcion") %></h6>
                                     </div>
                                 </div>
+                                <asp:Repeater ID="repeaterCaracteristicas" runat="server">
+                                    <ItemTemplate>
+                                        <li><%#Eval("caracteristica") %></li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                            <div class="card-footer h-50">
+                                <p class="text-muted">$<%#Eval("precio") %></p>
+                                <asp:CheckBox ID="chkComparar" Text=" Comparar" OnCheckedChanged="Check" CommandName='<%# Eval("id") %>' AutoPostBack="true" runat="server"></asp:CheckBox>
+                                <asp:Button ID="btnDetalle" CssClass="btn btn-block btn-info" CommandName="detalle" CommandArgument='<%# Eval("id") %>' runat="server" Text="Ver detalle" />
+                                <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" CommandName="comprar" CommandArgument='<%# Eval("id") %>' Visible="true" runat="server" Text="Agregar al carrito" />
                             </div>
                         </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
+
+        <%-- Probe con card-decks. Me alinea el height de la card, no me pega el footer al fondo ni me centra las cards --%>
+        <%--<div class="card-deck">
+                <asp:Repeater ID="repeaterServicios" runat="server">
+                    <ItemTemplate>
+                        <div class="card text-center h-100 d-flex flex-column justify-content-between">
+                            <center><asp:Image ID="imgServicio" CssClass="card-img-top" runat="server" Height="200px" Width="200px" ImageUrl='<%#Eval("Imagen.Img64") %>'></asp:Image></center>
+                            <div class="card-body h-100 ">
+                                <h5 class="card-title">
+                                    <asp:Label ID="lblServicio" runat="server" Text='<%#Eval("nombre") %>'></asp:Label>
+                                </h5>
+                                <asp:Repeater ID="repeaterCaracteristicas" runat="server">
+                                    <ItemTemplate>
+                                        <div class="row">
+                                            <div class="col">
+                                                <li>
+                                                    <%#Eval("caracteristica") %>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <div class="card-footer align-bottom">
+                                    <p class="text-muted">$<%#Eval("precio") %></p>
+                                    <asp:CheckBox ID="chkComparar" Text=" Comparar" OnCheckedChanged="Check" CommandName='<%# Eval("id") %>' AutoPostBack="true" runat="server"></asp:CheckBox>
+                                    <asp:Button ID="btnDetalle" CssClass="btn btn-block btn-info" CommandName="detalle" CommandArgument='<%# Eval("id") %>' runat="server" Text="Ver detalle" />
+                                    <asp:Button ID="btnComprar" CssClass="btn btn-block btn-success" CommandName="comprar" CommandArgument='<%# Eval("id") %>' Visible="true" runat="server" Text="Agregar al carrito" />
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>--%>
         <hr />
         <div class="row">
             <div class="col">

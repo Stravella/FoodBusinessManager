@@ -139,6 +139,8 @@ Public Class AdministrarUsuarios1
             SeleccionarProvincia(cliente.provincia)
             SeleccionarPerfil(usuario.perfil.nombre)
 
+            Current.Session("perfilAnterior") = usuario.perfil.id_permiso
+
             btnAgregar.Visible = False
             btnModificar.Visible = True
             btnCancelar.Visible = True
@@ -170,7 +172,9 @@ Public Class AdministrarUsuarios1
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Try
+            Dim unicoAdmin As Boolean = False
             Dim usuario As New UsuarioDTO With {
+                            .id = txtID.Text,
                             .nombre = txtNombre.Text,
                             .apellido = txtApellido.Text,
                             .username = txtUsuario.Text,
@@ -194,9 +198,21 @@ Public Class AdministrarUsuarios1
                             .aceptaNewsletter = False,
                             .telefono = txtTelefono.Text
                     }
-            Current.Session("entidadModal") = cliente
-            Current.Session("accion") = "Modificar"
-            MostrarModal("Modificacion de usuario", "¿Está seguro que desea modificar el usuario " & usuario.username & "?",, True)
+
+            If Current.Session("perfilAnterior") = 18 AndAlso cliente.usuario.perfil.id_permiso <> 18 Then
+                Dim ls As List(Of UsuarioDTO) = UsuarioBLL.ObtenerInstancia.ListarPorPerfil(New PerfilCompuesto With {.id_permiso = 18})
+                If ls.Count <= 1 Then
+                    unicoAdmin = True
+                End If
+            End If
+            If unicoAdmin = False Then
+                Current.Session("perfilAnterior") = Nothing
+                Current.Session("entidadModal") = cliente
+                Current.Session("accion") = "Modificar"
+                MostrarModal("Modificacion de usuario", "¿Está seguro que desea modificar el usuario " & usuario.username & "?",, True)
+            Else
+                MostrarModal("Advertencia", "Lo siento! Usted es el unico usuario con perfil Administrador. Para modificar su perfil, debe existir otro usuario con el perfil de admin",, True)
+            End If
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error, intente nuevemente o contacte a su administrador",, True)
         End Try
@@ -204,7 +220,6 @@ Public Class AdministrarUsuarios1
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         Try
-            'debugear aca
             Dim usuario As New UsuarioDTO With {
                 .nombre = txtNombre.Text,
                 .apellido = txtApellido.Text,

@@ -83,14 +83,22 @@
                         </li>
                         <li class="nav-item">
                             <%--<a href="Compra.aspx" class="icon-shopping-cart" style="font-size: 25px"><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/></a>--%>
-                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i>
-                                <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning" ForeColor="White" /></a>
+                            <%--                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i>
+                                <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning" ForeColor="White" /></a>--%>
+                        </li>
+                        <li>
+                            <asp:TextBox ID="txtBuscar" placeholder="Buscar.." name="search" runat="server"></asp:TextBox>
+                            <asp:LinkButton ID="btnBuscar" runat="server"><i class="fa fa-search"></i></asp:LinkButton>
                         </li>
                     </ul>
                     <%-- Panel derecho: Logeo, registro, Welcome y logout --%>
                     <ul class="navbar-nav ml-auto mr-1">
+                        <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i>
+                            <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning" ForeColor="White" /></a>
                         <asp:Panel ID="panelLoginform" runat="server" Visible="true">
                             <li class="dropdown">
+
+
                                 <button type="button" id="dropdownLogin" data-toggle="dropdown" class=" btn  btn-md dropdown-toggle btn-info  ">Login <i class="fas fa-user"></i></button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="px-4 py-3">
@@ -261,6 +269,7 @@
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <div id="google_translate_element"></div>
                 </div>
+
             </div>
         </div>
     </footer>

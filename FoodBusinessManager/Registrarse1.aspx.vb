@@ -58,7 +58,7 @@ Public Class Registrarse1
                             .password = CriptografiaBLL.ObtenerInstancia.Cifrar(txtContraseña.Text),
                             .intentos = 0,
                             .bloqueado = 1,
-                            .perfil = New PerfilCompuesto With {.id_permiso = 18}
+                            .perfil = New PerfilCompuesto With {.id_permiso = 36} 'Perfil cliente
                         }
                     Dim cliente As New ClienteDTO With {
                             .usuario = usuario,
