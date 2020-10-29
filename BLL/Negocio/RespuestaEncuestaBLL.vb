@@ -30,6 +30,15 @@ Public Class RespuestaEncuestaBLL
         End Try
     End Sub
 
+    Public Sub Responder(id_pregunta As Integer, id_respuesta As Integer)
+        Try
+            RespuestaEncuestaDAL.ObtenerInstancia.Responder(id_pregunta, id_respuesta)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
     Public Sub Eliminar(id As Integer)
         Try
             RespuestaEncuestaDAL.ObtenerInstancia.Eliminar(id)
@@ -41,6 +50,14 @@ Public Class RespuestaEncuestaBLL
     Public Function Listar() As List(Of RespuestaEncuestaDTO)
         Try
             Return RespuestaEncuestaDAL.ObtenerInstancia.Listar
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarPorIdPregunta(id As Integer) As List(Of RespuestaEncuestaDTO)
+        Try
+            Return RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(id)
         Catch ex As Exception
             Throw ex
         End Try

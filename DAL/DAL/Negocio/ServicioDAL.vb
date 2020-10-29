@@ -75,7 +75,8 @@ Public Class ServicioDAL
                                               .precio = row("precio"),
                                               .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
                                               .id_catalogo = row("id_catalogo"),
-                                              .orden_catalogo = row("orden_catalogo")
+                                              .orden_catalogo = row("orden_catalogo"),
+                                              .encuestas = EncuestaDAL.ObtenerInstancia.ListarEncuestasPorIdServicio(row("id"))
              }
             servicio.caracteristicas = ServicioCaracteristicasDAL.ObtenerInstancia.ListarPorServicio(servicio)
             servicios.Add(servicio)
@@ -149,6 +150,68 @@ Public Class ServicioDAL
             Throw ex
         End Try
     End Function
+
+
+
+#Region "Servicio_encuestas"
+    'Borro el servicio, borro la relacion con las encuestas
+    Public Sub EliminarEncuestaServicio(ByVal id_servicio As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_servicio", id_servicio)))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_servicio_eliminarPorServicio", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Sub AgregarEncuestaServicio(ByVal id_encuesta As Integer, id_servicio As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_encuesta", id_encuesta)))
+                params.Add((.CrearParametro("@id_servicio", id_servicio)))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_servicio_crear", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+
+    Public Function ListarPorEncuesta(id_encuesta As Integer) As List(Of ServicioDTO)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_encuesta", id_encuesta)))
+            End With
+            Dim servicios As New List(Of ServicioDTO)
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_servicio_obtenerPorEncuesta", params).Rows
+                Dim servicio As New ServicioDTO With {.id = row("id"),
+                                              .nombre = row("nombre"),
+                                              .descripcion = row("descripcion"),
+                                              .precio = row("precio"),
+                                              .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
+                                              .id_catalogo = row("id_catalogo"),
+                                              .orden_catalogo = row("orden_catalogo"),
+                                              .encuestas = EncuestaDAL.ObtenerInstancia.ListarEncuestasPorIdServicio(row("id"))
+             }
+                servicio.caracteristicas = ServicioCaracteristicasDAL.ObtenerInstancia.ListarPorServicio(servicio)
+                servicios.Add(servicio)
+            Next
+            Return servicios
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+#End Region
+
+
+
 
 
 End Class

@@ -63,6 +63,11 @@
                                                 <asp:ImageButton ID="ImgDescargar" ImageUrl="~/IconosSVG/file-download-solid.svg" Text="Descargar" runat="server" CommandName="Descargar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Valorar servicios" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/check-square-regular.svg" Text="Valorar" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -70,6 +75,22 @@
                     </div>
                 </div>
                 <hr />
+                <div class="row">
+                    <div class="col">
+                        <asp:GridView CssClass="table table-hover table-bordered table-warning" ID="gvServicios" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" RowStyle-Height="40px" Visible="false">
+                            <HeaderStyle CssClass="thead-dark" />
+                            <Columns>
+                                <asp:BoundField DataField="id" HeaderText="ID" />
+                                <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                <asp:TemplateField HeaderText="Valorar servicios" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/check-square-regular.svg" Text="Valorar" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div class="row">

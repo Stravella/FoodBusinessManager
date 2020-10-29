@@ -65,6 +65,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web.DynamicData" />
@@ -106,6 +107,7 @@
     <Content Include="AdministrarCategorias.aspx" />
     <Content Include="AdministrarEncuestaPreguntas.aspx" />
     <Content Include="AdministrarEncuestaRespuestas.aspx" />
+    <Content Include="AdministrarEncuestas.aspx" />
     <Content Include="AdministrarUsuarios.aspx" />
     <Content Include="Backup.aspx" />
     <Content Include="Bitacora.aspx" />
@@ -152,6 +154,7 @@
     <Content Include="IconosSVG\cc-amex-brands.svg" />
     <Content Include="IconosSVG\cc-mastercard-brands.svg" />
     <Content Include="IconosSVG\cc-visa-brands.svg" />
+    <Content Include="IconosSVG\check-square-regular.svg" />
     <Content Include="IconosSVG\credit-card-solid.svg" />
     <Content Include="IconosSVG\file-download-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
@@ -308,6 +311,13 @@
     </Compile>
     <Compile Include="AdministrarEncuestaRespuestas.aspx.vb">
       <DependentUpon>AdministrarEncuestaRespuestas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarEncuestas.aspx.designer.vb">
+      <DependentUpon>AdministrarEncuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarEncuestas.aspx.vb">
+      <DependentUpon>AdministrarEncuestas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="AdministrarUsuarios.aspx.designer.vb">

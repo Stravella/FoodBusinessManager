@@ -79,6 +79,46 @@ Public Class Maestra
 
 #End Region
 
+#Region "ModalEncuesta"
+
+    Public ReadOnly Property btnEncuestaAceptar() As Button
+        Get
+            Return enviar
+        End Get
+    End Property
+
+    Public Event AceptarModalEncuesta As CommandEventHandler
+
+    'Protected Sub Moods_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Moods.SelectedIndexChanged
+    '    If Moods.SelectedIndex <> 0 Then
+    '        RaiseEvent MoodChanged(Me, New CommandEventArgs(Moods.SelectedItem.Text, Moods.SelectedValue))
+    '    End If
+    'End Sub
+
+
+    Protected Sub btnEncuestaAceptar_Click(sender As Object, e As EventArgs) Handles enviar.Click
+        RaiseEvent AceptarModalEncuesta(Me, New CommandEventArgs("Aceptado", enviar))
+    End Sub
+
+    Public Sub btnEncuestaCancelar_Click(sender As Object, e As EventArgs) Handles cancelar.Click
+
+    End Sub
+
+    Private Sub repeaterPreguntas_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles repeaterPreguntas.ItemDataBound
+        Dim rdioRtas = DirectCast(e.Item.FindControl("rdlRespuestas"), RadioButtonList)
+        If rdioRtas IsNot Nothing Then
+            rdioRtas.DataSource = Nothing
+            Dim oPreg As EncuestaPreguntaDTO = DirectCast(e.Item.DataItem, EncuestaPreguntaDTO)
+
+            rdioRtas.DataSource = oPreg.Respuestas
+            rdioRtas.DataValueField = "ID"
+            rdioRtas.DataTextField = "Respuesta"
+            rdioRtas.DataBind()
+        End If
+    End Sub
+
+#End Region
+
 #Region "Menu"
 
     Public Sub ArmarMenuLateral()
@@ -106,6 +146,7 @@ Public Class Maestra
             Me.MenuLateral.Items.Add(New MenuItem("Movimientos", "AdminMovimientos"))
             Me.MenuLateral.Items.Item(6).ChildItems.Add(New MenuItem("Mis Movimientos", "MisMovimientos", Nothing, "/MisMovimientos.aspx"))
             Me.MenuLateral.Items.Add(New MenuItem("Encuestas y Opiniones", "AdminEncuestas"))
+            Me.MenuLateral.Items.Item(7).ChildItems.Add(New MenuItem("Administrar Encuestas", "AdministrarEncuestas", Nothing, "/AdministrarEncuestas.aspx"))
             Me.MenuLateral.Items.Item(7).ChildItems.Add(New MenuItem("Administrar Preguntas", "AdministrarPreguntas", Nothing, "/AdministrarEncuestaPreguntas.aspx"))
             Me.MenuLateral.Items.Item(7).ChildItems.Add(New MenuItem("Administrar Respuesta", "AdministrarRespuestas", Nothing, "/AdministrarEncuestaRespuestas.aspx"))
         Catch ex As Exception

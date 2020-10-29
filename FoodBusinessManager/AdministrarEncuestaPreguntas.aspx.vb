@@ -183,6 +183,16 @@ Public Class AdministrarEncuestaPreguntas
                 .FechaVenc = txtVencimiento.Text,
                 .Estado = EstadoOpinionBLL.ObtenerInstancia.Obtener(ddlEstado.SelectedValue)
                 }
+            For Each gvrow As GridViewRow In gvRespuestas.Rows
+                Dim checkbox As CheckBox = gvrow.FindControl("Checkbox1")
+                If checkbox.Checked = True Then
+                    Dim respuesta As New RespuestaEncuestaDTO With
+                            {.id = Convert.ToInt16(gvrow.Cells(1).Text),
+                             .respuesta = gvrow.Cells(2).Text
+                            }
+                    pregunta.Respuestas.Add(respuesta)
+                End If
+            Next
             Current.Session("entidadModal") = pregunta
             Current.Session("accion") = "Modificar"
             MostrarModal("¿Está seguro que desea modificar la pregunta " & pregunta.ID & "?", pregunta.pregunta,, True)

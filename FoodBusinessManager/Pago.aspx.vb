@@ -168,7 +168,7 @@ Public Class Pago
                 txtProvincia.Text = cliente.provincia
                 txtCP.Text = cliente.CP
                 'Cargo el nombre en la tarjeta
-                txtNombreApe.Text = cliente.usuario.apellido & " " & cliente.usuario.nombre
+                txtNombreApe.Text = cliente.usuario.nombre & " " & cliente.usuario.apellido
             End If
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error al cargar su usuario",, True)

@@ -239,6 +239,51 @@ Partial Public Class Maestra
     Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control PanelModal.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents PanelModal As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Control titulo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents titulo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control repeaterPreguntas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents repeaterPreguntas As Global.System.Web.UI.WebControls.Repeater
+
+    '''<summary>
+    '''Control enviar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents enviar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control cancelar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cancelar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control Contenido.
     '''</summary>
     '''<remarks>

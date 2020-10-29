@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="Home.aspx.vb" Inherits="FoodBusinessManager.Home" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
@@ -63,7 +65,7 @@
                     <div class="col-lg-6 text-white showcase-img" style="background-image: url('Imagenes/Comandas.jpg');"></div>
                     <div class="col-lg-6 my-auto showcase-text">
                         <h2>Tecnología sostenible</h2>
-                        <p class="lead mb-0"> Eliminando la comanda en papel, ahorre dinero en la compra de insumos y reduzca el desperdicio de papel.</p>
+                        <p class="lead mb-0">Eliminando la comanda en papel, ahorre dinero en la compra de insumos y reduzca el desperdicio de papel.</p>
                     </div>
                 </div>
                 <div class="row no-gutters">
@@ -75,6 +77,44 @@
                 </div>
             </div>
         </section>
+
+        <!-- Encuesta -->
+        <section id="encuestas">
+            <div class="container">
+                <div class="row" style="place-content: center">
+                    <div class="col-4" id="panelEncuesta" runat="server">
+                        <div class="card-body">
+                            <div class="card card-body">
+                                <h3 id="Pregunta" runat="server"></h3>
+
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
+                                        <asp:HiddenField ID="idPregunta" runat="server" />
+                                        <asp:RadioButtonList runat="server" ID="rbPreguntas" AutoPostBack="false">
+                                        </asp:RadioButtonList>
+                                        <asp:Chart ID="chReportes" CssClass="chart" Visible="False" BackColor="LightGray" Width="280px" runat="server">
+                                            <Series>
+                                                <asp:Series Name="Series1"></asp:Series>
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="ChartArea1" AlignmentOrientation="Horizontal" Area3DStyle-Enable3D="true"
+                                                    Area3DStyle-WallWidth="2" Area3DStyle-Rotation="20"
+                                                    Area3DStyle-LightStyle="Simplistic" Area3DStyle-Inclination="40"
+                                                    BorderColor="White" ShadowColor="#CCCCCC">
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                        <br />
+                                        <asp:Button ID="btnVotar" Text="Votar" CssClass="btn btn-success" runat="server" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
     </div>
 </asp:Content>

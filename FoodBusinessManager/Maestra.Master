@@ -83,7 +83,8 @@
                         </li>
                         <li class="nav-item">
                             <%--<a href="Compra.aspx" class="icon-shopping-cart" style="font-size: 25px"><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/></a>--%>
-                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i><asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/></a>
+                            <a class="nav-item nav-link" href="Compra.aspx"><i class="fas fa-shopping-cart"></i>
+                                <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning" ForeColor="White" /></a>
                         </li>
                     </ul>
                     <%-- Panel derecho: Logeo, registro, Welcome y logout --%>
@@ -119,7 +120,7 @@
                                 <asp:Button ID="linkUsuario" runat="server" data-toggle="dropdown" class="btn  btn-md dropdown-toggle btn-info" CausesValidation="false" />
                                 <div class="dropdown-menu" aria-labelledby="linkUsuario">
                                     <asp:LinkButton ID="linkModificarDatos" class="nav-link" CausesValidation="false" runat="server">Modificar datos</asp:LinkButton>
-<%--                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>--%>
+                                    <%--                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>--%>
                                     <asp:LinkButton class="nav-link" ID="linkLogOut" runat="server" CausesValidation="false">  Log out <i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                                 </div>
                             </li>
@@ -178,6 +179,43 @@
                                     <div class="modal-footer">
                                         <asp:Button ID="btnAceptar" CssClass="btn btn-success" runat="server" Text="Aceptar" CausesValidation="false" />
                                         <asp:Button ID="btnCancelar" CssClass="btn btn-danger" runat="server" Text="Cancelar" data-dismiss="modal" CausesValidation="false" />
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+                <!-- Modal encuesta PostCompra-->
+                <div class="modal fade" id="modalEncuesta" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="PanelModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="titulo" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:Repeater ID="repeaterPreguntas" runat="server">
+                                            <ItemTemplate>
+                                                <div class="card border mb-3">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title"><%# Eval("Pregunta") %></h4>
+                                                        <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("Id") %>' Visible="false"></asp:Label>
+                                                        <div class=" form-group form-check pl-0 pt-0 card-text">
+                                                            <asp:RadioButtonList ID="rdlRespuestas" runat="server"
+                                                                RepeatDirection="Vertical">
+                                                            </asp:RadioButtonList>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button ID="enviar" CssClass="btn btn-success" runat="server" Text="Enviar" CausesValidation="false" />
+                                        <asp:Button ID="cancelar" CssClass="btn btn-danger" runat="server" Text="Cancelar" data-dismiss="modal" CausesValidation="false" />
                                     </div>
                                 </div>
                             </ContentTemplate>

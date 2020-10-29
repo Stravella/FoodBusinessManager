@@ -22,7 +22,6 @@ Public Class RespuestaEncuestaDAL
             With AccesoDAL.ObtenerInstancia()
                 params.Add(.CrearParametro("@id", respuesta.id))
                 params.Add(.CrearParametro("@respuesta", respuesta.respuesta))
-                params.Add(.CrearParametro("@cantidad", respuesta.cantidad))
             End With
         Catch ex As Exception
             Throw ex
@@ -67,8 +66,7 @@ Public Class RespuestaEncuestaDAL
         Dim lsRespuestas As New List(Of RespuestaEncuestaDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_respuestas_listar").Rows
             Dim respuesta As New RespuestaEncuestaDTO With {.id = row("id"),
-                                              .respuesta = row("respuesta"),
-                                              .cantidad = row("cantidad")
+                                              .respuesta = row("respuesta")
             }
             lsRespuestas.Add(respuesta)
         Next
@@ -112,6 +110,35 @@ Public Class RespuestaEncuestaDAL
         End Try
     End Function
 
+    Public Sub Responder(id_pregunta As Integer, id_respuesta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_pregunta", id_pregunta))
+                params.Add(.CrearParametro("@id_respuesta", id_respuesta))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_pregunta_respuesta_responder", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Function ObtenerCantidadRespuestas(id_pregunta As Integer, id_respuesta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_pregunta", id_pregunta))
+                params.Add(.CrearParametro("@id_respuesta", id_respuesta))
+            End With
+            Dim cantidad As Integer
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_pregunta_respuesta_obtenerCantidadRespuestas", params).Rows
+                cantidad = row("cantidad")
+            Next
+            Return cantidad
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 #End Region
 

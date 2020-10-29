@@ -110,7 +110,8 @@ Public Class EncuestaPreguntaDAL
                 Dim encuestaPregunta As New EncuestaPreguntaDTO With {.ID = row("id"),
                                                   .pregunta = row("pregunta"),
                                                   .FechaVenc = row("fecha_vencimiento"),
-                                                  .Estado = EstadoPreguntaDAL.ObtenerInstancia.Obtener(row("id_estado"))
+                                                  .Estado = EstadoPreguntaDAL.ObtenerInstancia.Obtener(row("id_estado")),
+                                                   .Respuestas = RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(row("id"))
                 }
                 lsEncuestaPregunta.Add(encuestaPregunta)
             Next

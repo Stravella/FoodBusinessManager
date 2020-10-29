@@ -16,6 +16,7 @@ Public Class MisCompras
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         'Encadeno el evento de mi maste con mi handler
         AddHandler Master.AceptarModal, AddressOf modalAceptar_Click
+        AddHandler Master.AceptarModalEncuesta, AddressOf modalEncuestaAceptar_click
     End Sub
 
     Public Sub CargarCompras()
@@ -85,6 +86,56 @@ Public Class MisCompras
 
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "myModal", "$('#myModal').modal();", True)
         panelMensaje.Update()
+    End Sub
+
+#End Region
+
+#Region "Modal Encuestas"
+
+    'Acá le doy el comportamiento según mis entidades.
+    Private Sub modalEncuestaAceptar_click(ByVal sender As Object, ByVal e As CommandEventArgs)
+
+        Dim panel As UpdatePanel = Master.FindControl("PanelModal")
+        Dim repeater As Repeater = panel.FindControl("repeaterPreguntas")
+        For Each pregItem As RepeaterItem In repeater.Items
+            'Dim itemIndex As Integer = pregItem.ItemIndex
+            Dim lblIdPregunta = DirectCast(pregItem.FindControl("lblIdPregunta"), Label)
+            Dim idPregunta As Integer = lblIdPregunta.Text
+            Dim oPreg As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(idPregunta)
+            'Dim oPreg As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(itemIndex)
+            Dim rdlst = DirectCast(pregItem.FindControl("rdlRespuestas"), System.Web.UI.WebControls.RadioButtonList)
+
+            Dim rtaElegida = (From rtas As ListItem In rdlst.Items
+                              Where rtas.Selected
+                              Select New RespuestaEncuestaDTO With {.id = rtas.Value, .respuesta = rtas.Text}).ToList(0)
+
+
+            RespuestaEncuestaBLL.ObtenerInstancia.Responder(oPreg.ID, rtaElegida.id)
+            Dim compra As CompraDTO = DirectCast(Current.Session("Compra"), CompraDTO)
+            Dim servicio As ServicioDTO = DirectCast(Current.Session("Servicio"), ServicioDTO)
+
+            EncuestaBLL.ObtenerInstancia.ResponderEncuesta(compra.id, servicio.id)
+
+        Next
+        Current.Session("Servicio") = Nothing
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#modalEncuesta').modal('hide')", True)
+    End Sub
+
+    Public Sub MostrarEncuesta(titulo As String, preguntas As List(Of EncuestaPreguntaDTO))
+        Dim panel As UpdatePanel = Master.FindControl("PanelModal")
+        Dim tituloModal As Label = panel.FindControl("titulo")
+        Dim repeater As Repeater = panel.FindControl("repeaterPreguntas")
+
+        tituloModal.Text = titulo
+
+        repeater.DataSource = preguntas
+        repeater.DataBind()
+
+        Dim btnCancelar As Button = panel.FindControl("btnCancelar")
+        btnCancelar.Visible = True
+
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "myModal", "$('#modalEncuesta').modal();", True)
+        panel.Update()
     End Sub
 
 #End Region
@@ -162,7 +213,7 @@ Public Class MisCompras
                     MostrarModal("Error", "La compra no se puede redimir",, True)
                 Case 2
                     'TODO: Implementar cancelacion de compra
-                    MostrarModal("Error", "La compra se encuentra en proceso. Se elevo una solicitud para su cancelacion",, True)
+                    MostrarModal("Solicitud de cancelacion", "La compra se encuentra en proceso. Se elevo una solicitud para su cancelacion",, True)
                 Case Else
                     Dim notaCredito As New NotaCreditoDTO With {
                         .estado = New EstadoNotaDTO With {.id = 2}, 'Pendiente de redimir
@@ -179,6 +230,16 @@ Public Class MisCompras
             End Select
         ElseIf e.CommandName = "Descargar" Then
             Response.Write("<script>window.open ('/DescargaFactura.aspx?Cr=" & e.CommandArgument & "','_blank');</script>")
+        ElseIf e.CommandName = "Valorar" Then
+            gvServicios.DataSource = Nothing
+            Dim lsServicios As New List(Of ServicioDTO)
+            For Each itemCarrito As ServicioCarritoDTO In compra.carrito
+                lsServicios.Add(itemCarrito.servicio)
+            Next
+            Current.Session("Compra") = compra
+            gvServicios.DataSource = lsServicios
+            gvServicios.DataBind()
+            gvServicios.Visible = True
         End If
     End Sub
 
@@ -260,6 +321,29 @@ Public Class MisCompras
 
 #End Region
 
+#Region "gvServicios"
 
+    Private Sub gvServicios_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvServicios.RowCommand
+        Dim servicio As New ServicioDTO
+        Dim id As Int16 = Integer.Parse(e.CommandArgument)
+        servicio = ServicioBLL.ObtenerInstancia.Obtener(id)
+
+        Dim compra As CompraDTO = DirectCast(Current.Session("Compra"), CompraDTO)
+
+        Dim encuesta As New EncuestaDTO
+        If servicio.encuestas.Count > 0 Then
+            encuesta = servicio.encuestas.Item(0)
+        End If
+
+        If EncuestaBLL.ObtenerInstancia.RespondioEncuesta(compra.id, servicio.id) = False Then
+            Current.Session("Servicio") = servicio
+            MostrarEncuesta(encuesta.nombre, encuesta.preguntas)
+        Else
+            MostrarModal("Ya contestó esta encuesta", "La encuesta ya se encuentra contestada.",, True)
+        End If
+
+    End Sub
+
+#End Region
 
 End Class

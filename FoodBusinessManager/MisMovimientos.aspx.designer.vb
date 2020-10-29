@@ -23,6 +23,15 @@ Partial Public Class MisCompras
     Protected WithEvents gv_Compras As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
+    '''Control gvServicios.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvServicios As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
     '''Control gv_Notas.
     '''</summary>
     '''<remarks>

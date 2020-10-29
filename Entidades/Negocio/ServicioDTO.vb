@@ -80,4 +80,14 @@
         End Set
     End Property
 
+    Private _encuestas As New List(Of EncuestaDTO)
+    Public Property encuestas() As List(Of EncuestaDTO)
+        Get
+            Return _encuestas
+        End Get
+        Set(ByVal value As List(Of EncuestaDTO))
+            _encuestas = value
+        End Set
+    End Property
+
 End Class

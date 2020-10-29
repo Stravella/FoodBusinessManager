@@ -69,6 +69,7 @@ Public Class ServicioBLL
 
     Public Sub Eliminar(id As Integer)
         Try
+            ServicioDAL.ObtenerInstancia.EliminarEncuestaServicio(id)
             ServicioCaracteristicasDAL.ObtenerInstancia.EliminarPorServicio(New ServicioDTO With {.id = id})
             ServicioDAL.ObtenerInstancia.Eliminar(id)
         Catch ex As Exception
@@ -116,5 +117,21 @@ Public Class ServicioBLL
         End Try
     End Function
 
+
+    Public Sub AgregarEncuestas(id_servicio As Integer, id_encuesta As Integer)
+        Try
+            ServicioDAL.ObtenerInstancia.AgregarEncuestaServicio(id_encuesta, id_servicio)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Function ListarPorIdEncuesta(id As Integer) As List(Of ServicioDTO)
+        Try
+            Return ServicioDAL.ObtenerInstancia.ListarPorEncuesta(id)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 End Class

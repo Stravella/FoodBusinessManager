@@ -14,22 +14,22 @@ Option Explicit On
 Partial Public Class PostCompra
 
     '''<summary>
-    '''Control rptPreguntas.
+    '''Control panelRepeater.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rptPreguntas As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents panelRepeater As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
-    '''Control btnEncuesta.
+    '''Control repeaterEncuesta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnEncuesta As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents repeaterEncuesta As Global.System.Web.UI.WebControls.Repeater
 
     '''<summary>
     '''Propiedad Master.

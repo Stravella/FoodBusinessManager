@@ -92,6 +92,7 @@
     <Compile Include="Negocio\CatalogoBLL.vb" />
     <Compile Include="Negocio\CategoriaBLL.vb" />
     <Compile Include="Negocio\CompraBLL.vb" />
+    <Compile Include="Negocio\EncuestaBLL.vb" />
     <Compile Include="Negocio\EstadoBLL.vb" />
     <Compile Include="Negocio\EstadoOpinionBLL.vb" />
     <Compile Include="Negocio\FacturaBLL.vb" />
@@ -105,6 +106,7 @@
     <Compile Include="Negocio\RespuestaEncuestaBLL.vb" />
     <Compile Include="Negocio\ServicioBLL.vb" />
     <Compile Include="Negocio\SubscriptorBLL.vb" />
+    <Compile Include="Negocio\TipoEncuestaBLL.vb" />
     <Compile Include="Servicios\BackupRestoreBLL.vb" />
     <Compile Include="Servicios\BitacoraBLL.vb" />
     <Compile Include="Servicios\ClienteBLL.vb" />

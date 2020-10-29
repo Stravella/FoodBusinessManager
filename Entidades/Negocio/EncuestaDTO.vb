@@ -20,7 +20,7 @@
         End Set
     End Property
 
-    Private _preguntas As List(Of EncuestaPreguntaDTO)
+    Private _preguntas As New List(Of EncuestaPreguntaDTO)
     Public Property preguntas() As List(Of EncuestaPreguntaDTO)
         Get
             Return _preguntas

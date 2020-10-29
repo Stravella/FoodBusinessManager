@@ -45,33 +45,28 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                Por favor complete la siguiente encuesta para que podamos mejorar el serivicio
+                                <h5>Por favor complete la siguiente encuesta para que podamos mejorar el servicio</h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="card-deck">
-                                    <asp:Repeater ID="rptPreguntas" runat="server">
-                                        <ItemTemplate>
-                                            <div class="card border mb-3">
-                                                <div class="card-body">
-                                                    <h4 class="card-title"><%# Eval("Opinion") %></h4>
-                                                    <div class=" form-group form-check pl-0 pt-0 card-text">
-                                                        <asp:RadioButtonList ID="rdlRespuestas" runat="server"
-                                                            RepeatDirection="Vertical">
-                                                        </asp:RadioButtonList>
+                                <asp:UpdatePanel ID="panelRepeater" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Repeater ID="repeaterEncuesta" runat="server">
+                                            <ItemTemplate>
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-9">                                                      
+                                                        <asp:Label ID="lblNombreEncuesta" runat="server" Text='<%# Eval("nombre") %>'></asp:Label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <asp:Button ID="btnResponder" CssClass="btn btn-block btn-warning" CommandName="responder" CommandArgument='<%# Eval("id") %>' OnClick="btnResponder_Click" runat="server" Text="Responder" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col">
-                                <asp:Button ID="btnEncuesta" Text="Enviar" runat="server" CssClass="btn btn-block btn-success" />
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
