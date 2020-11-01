@@ -16,18 +16,40 @@ Public Class BusquedaDAL
         Dim params As New List(Of SqlParameter)
         With AccesoDAL.ObtenerInstancia
             params.Add(.CrearParametro("@palabra_buscar", palabra))
-            params.Add(.CrearParametro("@usuario", backend))
+            params.Add(.CrearParametro("@backend", backend))
         End With
         Dim ls As New List(Of BusquedaDTO)
         For Each Row In AccesoDAL.ObtenerInstancia.LeerBD("Busqueda_frontEnd", params).Rows
             Dim o As New BusquedaDTO With {
                                             .Id = Row("id"),
                                             .URL = Row("url"),
-                                            .Menu = Row("descripcion")
+                                            .Menu = Row("descripcion"),
+                                            .esPublico = Row("es_publico")
             }
             ls.Add(o)
         Next
         Return ls
     End Function
+
+
+    Public Function Listar(palabra As String) As List(Of BusquedaDTO)
+        Dim params As New List(Of SqlParameter)
+        With AccesoDAL.ObtenerInstancia
+            params.Add(.CrearParametro("@palabra_buscar", palabra))
+        End With
+        Dim ls As New List(Of BusquedaDTO)
+        For Each Row In AccesoDAL.ObtenerInstancia.LeerBD("Busqueda_todo", params).Rows
+            Dim o As New BusquedaDTO With {
+                                            .Id = Row("id"),
+                                            .URL = Row("url"),
+                                            .Menu = Row("descripcion"),
+                                            .esPublico = Row("es_publico")
+            }
+            ls.Add(o)
+        Next
+        Return ls
+    End Function
+
+
 
 End Class

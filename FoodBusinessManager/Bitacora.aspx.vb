@@ -113,10 +113,7 @@ Public Class Bitacora2
         Dim ListaBitacora As New List(Of BitacoraDTO)
         ListaBitacora = BitacoraBLL.ObtenerInstancia.Listar(tipoSucesoSeleccionado, usuarioSeleccionado, fechaDesde, fechaHasta, criticidadSeleccionada)
 
-        If IsNothing(ListaBitacora) Then
-            Me.gv_Bitacora.DataSource = ListaBitacora
-            Me.gv_Bitacora.DataBind()
-        Else
+        If ListaBitacora.Count > 0 Then
             Me.gv_Bitacora.DataSource = ListaBitacora
             Me.gv_Bitacora.DataBind()
         End If

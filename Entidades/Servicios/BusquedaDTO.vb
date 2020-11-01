@@ -29,13 +29,15 @@
         End Set
     End Property
 
-    Private _icono As String
-    Public Property Icono() As String
+    Private _esPublico As Boolean
+    Public Property esPublico() As Boolean
         Get
-            Return _icono
+            Return _esPublico
         End Get
-        Set(ByVal value As String)
-            _icono = value
+        Set(ByVal value As Boolean)
+            _esPublico = value
         End Set
     End Property
+
+
 End Class

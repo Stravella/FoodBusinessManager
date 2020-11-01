@@ -16,9 +16,17 @@ Public Class BusquedaBLL
     End Function
 #End Region
 
-    Public Function Buscar(palabra As String, backend As Integer) As List(Of BusquedaDTO)
+    Public Function Buscar(palabra As String, esPublico As Integer) As List(Of BusquedaDTO)
         Try
-            Return BusquedaDAL.ObtenerInstancia.Listar(palabra, backend)
+            Return BusquedaDAL.ObtenerInstancia.Listar(palabra, esPublico)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function Buscar(palabra As String) As List(Of BusquedaDTO)
+        Try
+            Return BusquedaDAL.ObtenerInstancia.Listar(palabra)
         Catch ex As Exception
             Throw ex
         End Try

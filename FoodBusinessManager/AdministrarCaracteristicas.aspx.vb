@@ -30,7 +30,7 @@ Public Class AdministrarCaracteristicas
             Dim bitacora As New BitacoraDTO With {
                         .FechaHora = Now(),
                         .usuario = usuarioLogeado,
-                        .tipoSuceso = New SucesoBitacoraDTO With {.id = 12}, 'Suceso: Eliminacion caracteristica
+                        .tipoSuceso = New SucesoBitacoraDTO With {.id = 11}, 'Suceso: Eliminacion caracteristica
                         .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
                         .observaciones = "Se elimino la caracteristica :" & caracteristica.id
                 }

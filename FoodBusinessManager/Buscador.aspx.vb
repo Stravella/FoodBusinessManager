@@ -8,7 +8,6 @@ Public Class Buscador
         If Not IsPostBack Then
             Dim cliente As New ClienteDTO
             cliente = Current.Session("Cliente")
-
             If Current.Session("Cliente") IsNot Nothing Then
                 CargarBusqueda_Logeado()
             Else
@@ -17,7 +16,7 @@ Public Class Buscador
         End If
     End Sub
     Public Sub CargarBusqueda_Logeado()
-        Dim lista As New List(Of BusquedaDTO)
+        Dim busquedas As New List(Of BusquedaDTO)
         Dim texto As String
         texto = Session("buscar")
 
@@ -26,22 +25,24 @@ Public Class Buscador
         Session("usuario") = Cliente.usuario
         Session("IDUser") = Cliente.usuario.id
 
-        'Dim UsuarioRol As New Usuario_BE
-        'UsuarioRol = Usuario_BLL.ObtenerInstancia.ListarObjeto(User)
+        'la busqueda sin parametro trae todo
+        busquedas = BusquedaBLL.ObtenerInstancia.Buscar(texto)
+        Dim lista As New List(Of BusquedaDTO)
 
-        If Cliente.usuario.perfil.id_permiso = 18 Then
-            lista = BusquedaBLL.ObtenerInstancia.Buscar(texto, 1)
-            'Busca en la categoria Backend con el numero 1
-            rp_busqueda.DataSource = Nothing
-            rp_busqueda.DataSource = lista
-            rp_busqueda.DataBind()
-        Else
-            lista = BusquedaBLL.ObtenerInstancia.Buscar(texto, 2)
-            'Busca en la categoria Backend con el numero 2
-            rp_busqueda.DataSource = Nothing
-            rp_busqueda.DataSource = lista
-            rp_busqueda.DataBind()
-        End If
+        For Each acceso As BusquedaDTO In busquedas
+            If acceso.esPublico = True Then
+                lista.Add(acceso)
+            Else
+                If Cliente.usuario.perfil.PuedeUsar(acceso.URL) Then
+                    lista.Add(acceso)
+                End If
+            End If
+        Next
+
+        rp_busqueda.DataSource = Nothing
+        rp_busqueda.DataSource = lista
+        rp_busqueda.DataBind()
+
     End Sub
 
 
@@ -50,9 +51,9 @@ Public Class Buscador
         Dim texto As String
         texto = Session("buscar")
 
-        lista = BusquedaBLL.ObtenerInstancia.Buscar(texto, 2)
+        'La busqueda es una busqueda publica.
+        lista = BusquedaBLL.ObtenerInstancia.Buscar(texto, 1)
 
-        'Busca en la categoria Backend con el numero 0
         rp_busqueda.DataSource = Nothing
         rp_busqueda.DataSource = lista
         rp_busqueda.DataBind()

@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Bitacora" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Bitacora_PageIndexChanging" RowStyle-Height="40px">
+                                    <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Bitacora" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Bitacora_PageIndexChanging" RowStyle-Height="40px" EmpyDataText="Su consulta no devolvió resultados">
                                         <HeaderStyle CssClass="thead-dark" />
                                         <PagerTemplate>
                                             <div class="col-md-4 text-left">
