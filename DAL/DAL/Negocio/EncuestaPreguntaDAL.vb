@@ -80,6 +80,21 @@ Public Class EncuestaPreguntaDAL
         Return lsEncuestaPregunta
     End Function
 
+    'Lista las preguntas que no están siendo usadas en ninguna encuesta.
+    Public Function ListarSinUso() As List(Of EncuestaPreguntaDTO)
+        Dim lsEncuestaPregunta As New List(Of EncuestaPreguntaDTO)
+        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_pregunta_listarSinUso").Rows
+            Dim encuestaPregunta As New EncuestaPreguntaDTO With {.ID = row("id"),
+                                              .pregunta = row("pregunta"),
+                                              .FechaVenc = row("fecha_vencimiento"),
+                                              .Estado = EstadoPreguntaDAL.ObtenerInstancia.Obtener(row("id_estado")),
+                                              .Respuestas = RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(row("id"))
+            }
+            lsEncuestaPregunta.Add(encuestaPregunta)
+        Next
+        Return lsEncuestaPregunta
+    End Function
+
     Public Function Obtener(id As Integer) As EncuestaPreguntaDTO
         Try
             Dim resultado As New EncuestaPreguntaDTO
@@ -140,18 +155,6 @@ Public Class EncuestaPreguntaDAL
 
 #Region "Pregunta_respuestas"
 
-    Public Sub AgregarRespuesta(id_pregunta As Integer, id_respuesta As Integer)
-        Try
-            Dim params As New List(Of SqlParameter)
-            With AccesoDAL.ObtenerInstancia()
-                params.Add((.CrearParametro("@id_pregunta", id_pregunta)))
-                params.Add((.CrearParametro("@id_respuesta", id_respuesta)))
-            End With
-            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_pregunta_respuestas_crear", params)
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Sub
 
     Public Sub EliminarRespuesta(id_pregunta As Integer)
         Try
@@ -166,6 +169,24 @@ Public Class EncuestaPreguntaDAL
     End Sub
 
 #End Region
+
+#Region "Encuesta_preguntas_respuesta"
+
+    Public Sub AgregarEncuestaPreguntaRespuesta(id_encuesta As Integer, id_pregunta As Integer, id_respuesta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_encuesta", id_encuesta)))
+                params.Add((.CrearParametro("@id_pregunta", id_pregunta)))
+                params.Add((.CrearParametro("@id_respuesta", id_respuesta)))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_pregunta_respuestas_crear", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+#End Region
+
 
 
 End Class

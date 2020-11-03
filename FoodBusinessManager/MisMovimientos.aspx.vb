@@ -77,9 +77,11 @@ Public Class MisCompras
             grillaModal = grd
             grillaModal.Visible = True
         End If
+        Dim btnCancelar As Button = panelMensaje.FindControl("btnCancelar")
         If cancelar = True Then
-            Dim btnCancelar As Button = panelMensaje.FindControl("btnCancelar")
             btnCancelar.Visible = True
+        Else
+            btnCancelar.Visible = False
         End If
         tituloModal.Text = titulo
         bodyModal.Text = body
@@ -102,21 +104,22 @@ Public Class MisCompras
             Dim lblIdPregunta = DirectCast(pregItem.FindControl("lblIdPregunta"), Label)
             Dim idPregunta As Integer = lblIdPregunta.Text
             Dim oPreg As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(idPregunta)
-            'Dim oPreg As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(itemIndex)
             Dim rdlst = DirectCast(pregItem.FindControl("rdlRespuestas"), System.Web.UI.WebControls.RadioButtonList)
 
+            Dim idEncuesta As Integer = Session("idEncuesta")
             Dim rtaElegida = (From rtas As ListItem In rdlst.Items
                               Where rtas.Selected
                               Select New RespuestaEncuestaDTO With {.id = rtas.Value, .respuesta = rtas.Text}).ToList(0)
 
 
-            RespuestaEncuestaBLL.ObtenerInstancia.Responder(oPreg.ID, rtaElegida.id)
+            RespuestaEncuestaBLL.ObtenerInstancia.Responder(idEncuesta, oPreg.ID, rtaElegida.id)
             Dim compra As CompraDTO = DirectCast(Current.Session("Compra"), CompraDTO)
             Dim servicio As ServicioDTO = DirectCast(Current.Session("Servicio"), ServicioDTO)
 
             EncuestaBLL.ObtenerInstancia.ResponderEncuesta(compra.id, servicio.id)
 
         Next
+        Session("idEncuesta") = Nothing
         Current.Session("Servicio") = Nothing
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#modalEncuesta').modal('hide')", True)
     End Sub
@@ -143,10 +146,9 @@ Public Class MisCompras
 #Region "gv_Compras"
     Private Sub gv_Compras_DataBound(sender As Object, e As EventArgs) Handles gv_Compras.DataBound
         Try
-            If Not IsNothing(gv_Compras.DataSource) Then
-                If gv_Compras.DataSource > 0 Then
-                    Dim ddlCantidadPaginas As DropDownList = CType(gv_Compras.BottomPagerRow.Cells(0).FindControl("ddlComprasCantidadPaginas"), DropDownList)
-                    Dim ddlTamañoPaginas As DropDownList = CType(gv_Compras.BottomPagerRow.Cells(0).FindControl("ddlComprasTamañoPaginas"), DropDownList)
+            If Not IsNothing(gv_Compras.DataSource) AndAlso gv_Compras.Rows.Count > 0 Then
+                Dim ddlCantidadPaginas As DropDownList = CType(gv_Compras.BottomPagerRow.Cells(0).FindControl("ddlComprasCantidadPaginas"), DropDownList)
+                Dim ddlTamañoPaginas As DropDownList = CType(gv_Compras.BottomPagerRow.Cells(0).FindControl("ddlComprasTamañoPaginas"), DropDownList)
                     Dim txtTotalPaginas As Label = CType(gv_Compras.BottomPagerRow.Cells(0).FindControl("lblComprasTotalPaginas"), Label)
 
                     ddlTamañoPaginas.ClearSelection()
@@ -164,7 +166,7 @@ Public Class MisCompras
 
                     gv_Compras.BottomPagerRow.Visible = True
                     gv_Compras.BottomPagerRow.CssClass = "table-bottom-dark"
-                End If
+
             End If
         Catch ex As Exception
         End Try
@@ -232,13 +234,18 @@ Public Class MisCompras
             Response.Write("<script>window.open ('/DescargaFactura.aspx?Cr=" & e.CommandArgument & "','_blank');</script>")
         ElseIf e.CommandName = "Valorar" Then
             gvServicios.DataSource = Nothing
-            Dim lsServicios As New List(Of ServicioDTO)
-            For Each itemCarrito As ServicioCarritoDTO In compra.carrito
-                lsServicios.Add(itemCarrito.servicio)
-            Next
-            Current.Session("Compra") = compra
-            gvServicios.DataSource = lsServicios
+
+            gvServicios.DataSource = compra.carrito
             gvServicios.DataBind()
+
+
+            'Dim lsServicios As New List(Of ServicioDTO)
+            'For Each itemCarrito As ServicioCarritoDTO In compra.carrito
+            '    lsServicios.Add(itemCarrito.servicio)
+            'Next
+            Current.Session("Compra") = compra
+            'gvServicios.DataSource = lsServicios
+            'gvServicios.DataBind()
             gvServicios.Visible = True
         End If
     End Sub
@@ -252,28 +259,26 @@ Public Class MisCompras
 #Region "gv_Notas"
     Private Sub gv_Notas_DataBound(sender As Object, e As EventArgs) Handles gv_Notas.DataBound
         Try
-            If Not IsNothing(gv_Notas.DataSource) Then
-                If gv_Notas.DataSource > 0 Then
-                    Dim ddlNotasCantidadPaginas As DropDownList = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("ddlNotasCantidadPaginas"), DropDownList)
-                    Dim ddlNotasTamañoPaginas As DropDownList = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("ddlNotasTamañoPaginas"), DropDownList)
-                    Dim txtNotasTotalPaginas As Label = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("lblNotasTotalPaginas"), Label)
+            If Not IsNothing(gv_Notas.DataSource) AndAlso gv_Notas.Rows.Count > 0 Then
+                Dim ddlNotasCantidadPaginas As DropDownList = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("ddlNotasCantidadPaginas"), DropDownList)
+                Dim ddlNotasTamañoPaginas As DropDownList = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("ddlNotasTamañoPaginas"), DropDownList)
+                Dim txtNotasTotalPaginas As Label = CType(gv_Notas.BottomPagerRow.Cells(0).FindControl("lblNotasTotalPaginas"), Label)
 
-                    ddlNotasTamañoPaginas.ClearSelection()
-                    ddlNotasTamañoPaginas.Items.FindByValue(gv_Notas.PageSize).Selected = True
+                ddlNotasTamañoPaginas.ClearSelection()
+                ddlNotasTamañoPaginas.Items.FindByValue(gv_Notas.PageSize).Selected = True
 
-                    txtNotasTotalPaginas.Text = gv_Notas.PageCount
-                    For cnt As Integer = 0 To gv_Notas.PageCount - 1
-                        Dim curr As Integer = cnt + 1
-                        Dim item As New ListItem(curr.ToString())
-                        If cnt = gv_Notas.PageIndex Then
-                            item.Selected = True
-                        End If
-                        ddlNotasCantidadPaginas.Items.Add(item)
-                    Next cnt
+                txtNotasTotalPaginas.Text = gv_Notas.PageCount
+                For cnt As Integer = 0 To gv_Notas.PageCount - 1
+                    Dim curr As Integer = cnt + 1
+                    Dim item As New ListItem(curr.ToString())
+                    If cnt = gv_Notas.PageIndex Then
+                        item.Selected = True
+                    End If
+                    ddlNotasCantidadPaginas.Items.Add(item)
+                Next cnt
 
-                    gv_Notas.BottomPagerRow.Visible = True
-                    gv_Notas.BottomPagerRow.CssClass = "table-bottom-dark"
-                End If
+                gv_Notas.BottomPagerRow.Visible = True
+                gv_Notas.BottomPagerRow.CssClass = "table-bottom-dark"
             End If
         Catch ex As Exception
         End Try
@@ -325,6 +330,7 @@ Public Class MisCompras
 
     Private Sub gvServicios_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvServicios.RowCommand
         Dim servicio As New ServicioDTO
+
         Dim id As Int16 = Integer.Parse(e.CommandArgument)
         servicio = ServicioBLL.ObtenerInstancia.Obtener(id)
 
@@ -337,9 +343,10 @@ Public Class MisCompras
 
         If EncuestaBLL.ObtenerInstancia.RespondioEncuesta(compra.id, servicio.id) = False Then
             Current.Session("Servicio") = servicio
+            Session("idEncuesta") = encuesta.id
             MostrarEncuesta(encuesta.nombre, encuesta.preguntas)
         Else
-            MostrarModal("Ya contestó esta encuesta", "La encuesta ya se encuentra contestada.",, True)
+            MostrarModal("Ya contestó esta encuesta", "La encuesta ya se encuentra contestada.",,)
         End If
 
     End Sub

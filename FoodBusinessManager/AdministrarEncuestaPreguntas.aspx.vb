@@ -158,6 +158,8 @@ Public Class AdministrarEncuestaPreguntas
             btnAgregar.Visible = False
             btnModificar.Visible = True
             btnCancelar.Visible = True
+            gvRespuestas.DataSource = pregunta.Respuestas
+            gvRespuestas.DataBind()
         ElseIf e.CommandName = "Borrar" Then
             'Busco los servicios asociados           
             Current.Session("entidadModal") = pregunta

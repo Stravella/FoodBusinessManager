@@ -30,9 +30,9 @@ Public Class RespuestaEncuestaBLL
         End Try
     End Sub
 
-    Public Sub Responder(id_pregunta As Integer, id_respuesta As Integer)
+    Public Sub Responder(id_encuesta As Integer, id_pregunta As Integer, id_respuesta As Integer)
         Try
-            RespuestaEncuestaDAL.ObtenerInstancia.Responder(id_pregunta, id_respuesta)
+            RespuestaEncuestaDAL.ObtenerInstancia.Responder(id_encuesta, id_pregunta, id_respuesta)
         Catch ex As Exception
             Throw ex
         End Try
@@ -55,9 +55,9 @@ Public Class RespuestaEncuestaBLL
         End Try
     End Function
 
-    Public Function ListarPorIdPregunta(id As Integer) As List(Of RespuestaEncuestaDTO)
+    Public Function ListarPorIdPregunta(id_encuesta As Integer, id_pregunta As Integer) As List(Of RespuestaEncuestaDTO)
         Try
-            Return RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(id)
+            Return RespuestaEncuestaDAL.ObtenerInstancia.ListarPorEncuestaPregunta(id_encuesta, id_pregunta)
         Catch ex As Exception
             Throw ex
         End Try

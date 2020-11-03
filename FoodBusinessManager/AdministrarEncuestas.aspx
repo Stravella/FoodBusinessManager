@@ -77,8 +77,8 @@
                             </div>
                         </div>
                         <hr />
-                        <%-- Respuestas --%>
-                        <asp:GridView ID="gvPreguntas" runat="server" CssClass="table table-hover table-bordered table-success" AutoGenerateColumns="false" EmptyDataText="No hay preguntas cargadas" HorizontalAlign="Center" AllowPaging="false" RowStyle-Height="40px">
+                        <%-- PReguntas --%>
+                        <asp:GridView ID="gvPreguntas" runat="server" CssClass="table table-hover table-bordered table-success" AutoGenerateColumns="false" EmptyDataText="No hay preguntas disponibles" HorizontalAlign="Center" AllowPaging="false" RowStyle-Height="40px">
                             <HeaderStyle CssClass="thead-dark" />
                             <Columns>
                                 <asp:TemplateField HeaderText="Seleccionar">

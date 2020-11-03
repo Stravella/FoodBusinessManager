@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Maestra.Master" CodeBehind="Bitacora.aspx.vb" Inherits="FoodBusinessManager.Bitacora2" %>
 
+<%@ MasterType VirtualPath="~/Maestra.Master" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="Estilos/Principal.css" rel="stylesheet" />
 
@@ -7,6 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <br />
     <div class="container">
+        <br />
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

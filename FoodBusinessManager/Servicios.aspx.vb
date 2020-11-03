@@ -92,6 +92,7 @@ Public Class Servicios
                 carrito = New List(Of ServicioCarritoDTO)
                 Dim servicioCarrito As New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 1, .importeTotal = servicio.precio * .cantidad}
                 carrito.Add(servicioCarrito)
+                Current.Session("CantidadItemsCarrito") = 1
                 Current.Session("Carrito") = carrito
                 Response.Redirect("/Servicios.aspx")
             Else
@@ -112,14 +113,22 @@ Public Class Servicios
                     If serv.servicio.id = servicio.id Then
                         'Servicio Free puede existir 1 solo
                         If serv.servicio.nombre = "Free" And serv.cantidad > 0 Then
-                            MostrarModal("Solo puede probar la version free por 30 dias", "Lo siento! Ya tiene la prueba de 30 dias agregada al carrito",, True)
+                            MostrarModal("Solo puede probar la version free por 30 dias", "Lo siento! Ya tiene la prueba de 30 dias agregada al carrito",,)
                             Exit For
                         Else
                             serv.cantidad = serv.cantidad + 1
-                            serv.importeTotal = serv.servicio.precio * serv.cantidad
+                            serv.importeTotal = serv.cantidad * serv.servicio.precio
                         End If
                     End If
                 Next
+
+                Dim cantidadItemsCarrito As Integer
+                For Each serv As ServicioCarritoDTO In carrito
+                    cantidadItemsCarrito = cantidadItemsCarrito + serv.cantidad
+                Next
+
+                'TODO: En el badge muestro el count de items en el carrito, y no las cantidades.
+                Current.Session("CantidadItemsCarrito") = cantidadItemsCarrito
                 Current.Session("Carrito") = carrito
                 Response.Redirect("/Servicios.aspx")
             End If

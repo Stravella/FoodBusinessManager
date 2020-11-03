@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <asp:GridView CssClass="table table-hover table-bordered table-info" ID="gv_Compras" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Compras_PageIndexChanging" RowStyle-Height="40px">
+                                <asp:GridView CssClass="table table-hover table-bordered table-info" ID="gv_Compras" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" EmptyDataText="No tiene compras para mostrar" PageSize="5" OnPageIndexChanging="gv_Compras_PageIndexChanging" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
                                     <PagerTemplate>
                                         <div class="col-md-4 text-left">
@@ -63,9 +63,9 @@
                                                 <asp:ImageButton ID="ImgDescargar" ImageUrl="~/IconosSVG/file-download-solid.svg" Text="Descargar" runat="server" CommandName="Descargar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Valorar servicios" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Ver detalle" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/check-square-regular.svg" Text="Valorar" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                                <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/info-circle-solid.svg" Text="Detalla" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -80,11 +80,13 @@
                         <asp:GridView CssClass="table table-hover table-bordered table-warning" ID="gvServicios" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" RowStyle-Height="40px" Visible="false">
                             <HeaderStyle CssClass="thead-dark" />
                             <Columns>
-                                <asp:BoundField DataField="id" HeaderText="ID" />
-                                <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="servicio.id" HeaderText="ID" />
+                                <asp:BoundField DataField="servicio.nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
+                                <asp:BoundField DataField="importeTotal" HeaderText="Importe total" />
                                 <asp:TemplateField HeaderText="Valorar servicios" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/check-square-regular.svg" Text="Valorar" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
+                                        <asp:ImageButton ID="ImgValorar" ImageUrl="~/IconosSVG/check-square-regular.svg" Text="Valorar" runat="server" CommandName="Valorar" CommandArgument='<%# Eval("servicio.id") %>' Height="20px" Width="20px" CausesValidation="false" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -106,7 +108,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Notas" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Notas_PageIndexChanging" RowStyle-Height="40px">
+                                <asp:GridView CssClass="table table-hover table-bordered table-success " ID="gv_Notas" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_Notas_PageIndexChanging" EmptyDataText="No tiene notas de credito para mostrar" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
                                     <PagerTemplate>
                                         <div class="col-md-4 text-left">

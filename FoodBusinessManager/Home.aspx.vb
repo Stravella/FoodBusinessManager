@@ -46,6 +46,7 @@ Public Class Home
             Dim Reportes As DataVisualization.Charting.Chart = chReportes
             Reportes.ChartAreas("ChartArea1").AxisX.MajorGrid.Enabled = False
             Reportes.ChartAreas("ChartArea1").AxisY.MajorGrid.Enabled = False
+            Session("idOpinion") = oOpinion.id
 
         Catch ex As Exception
             panelEncuesta.Visible = False
@@ -55,8 +56,9 @@ Public Class Home
     'Votar 
     Protected Sub btnVotar_Click(sender As Object, e As EventArgs) Handles btnVotar.Click
         Try
+            Dim idOpinion As Integer = Session("idOpinion")
             Dim idPreg As HiddenField = idPregunta
-            RespuestaEncuestaBLL.ObtenerInstancia.Responder(idPreg.Value, rbPreguntas.SelectedValue)
+            RespuestaEncuestaBLL.ObtenerInstancia.Responder(idOpinion, idPreg.Value, rbPreguntas.SelectedValue)
             VerRestultadoEncuesta()
         Catch ex As Exception
 
@@ -70,7 +72,8 @@ Public Class Home
     Private Sub VerRestultadoEncuesta()
         Try
             Dim idPreg As HiddenField = idPregunta
-            Dim listRespuestas As List(Of RespuestaEncuestaDTO) = RespuestaEncuestaBLL.ObtenerInstancia.ListarPorIdPregunta(idPreg.Value)
+            Dim idOpinion As Integer = Session("idOpinion")
+            Dim listRespuestas As List(Of RespuestaEncuestaDTO) = RespuestaEncuestaBLL.ObtenerInstancia.ListarPorIdPregunta(idOpinion, idPreg.Value)
             Dim Reportes As DataVisualization.Charting.Chart = chReportes
 
             Dim Serie1 = Reportes.Series("Series1")
@@ -87,6 +90,7 @@ Public Class Home
             rbPreguntas.Visible = False
             btnVotar.Visible = False
             UpdatePanel1.Update()
+            Session("idOpinion") = Nothing
         Catch ex As Exception
 
         End Try

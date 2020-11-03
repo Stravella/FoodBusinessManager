@@ -119,6 +119,16 @@ Public Class Compra
                     End If
                 Next
             Next
+
+
+            Dim cantidadItemsCarrito As Integer
+            For Each serv As ServicioCarritoDTO In carrito
+                cantidadItemsCarrito = cantidadItemsCarrito + serv.cantidad
+            Next
+
+            'TODO: En el badge muestro el count de items en el carrito, y no las cantidades.
+            Current.Session("CantidadItemsCarrito") = cantidadItemsCarrito
+
             Current.Session("Carrito") = carrito
             CargarCarrito()
         Catch ex As Exception

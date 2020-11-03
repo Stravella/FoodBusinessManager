@@ -20,12 +20,20 @@ Public Class EncuestaPreguntaBLL
         End Try
     End Function
 
+    Public Function ListarSinUso() As List(Of EncuestaPreguntaDTO)
+        Try
+            Return EncuestaPreguntaDAL.ObtenerInstancia.ListarSinUso
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     Public Sub Agregar(pregunta As EncuestaPreguntaDTO)
         Try
             pregunta.ID = EncuestaPreguntaDAL.ObtenerInstancia.GetNextID
             EncuestaPreguntaDAL.ObtenerInstancia.Agregar(pregunta)
             For Each respuesta In pregunta.Respuestas
-                EncuestaPreguntaDAL.ObtenerInstancia.AgregarRespuesta(pregunta.ID, respuesta.id)
+                RespuestaEncuestaDAL.ObtenerInstancia.AsociarAPregunta(respuesta.id, pregunta.ID)
             Next
         Catch ex As Exception
             Throw ex
@@ -43,6 +51,9 @@ Public Class EncuestaPreguntaBLL
     Public Sub Eliminar(Pregunta As EncuestaPreguntaDTO)
         Try
             EncuestaPreguntaDAL.ObtenerInstancia.EliminarRespuesta(Pregunta.ID)
+            For Each respuesta In Pregunta.Respuestas
+                RespuestaEncuestaDAL.ObtenerInstancia.Eliminar(respuesta.id)
+            Next
             EncuestaPreguntaDAL.ObtenerInstancia.Eliminar(Pregunta)
         Catch ex As Exception
             Throw ex
@@ -54,7 +65,7 @@ Public Class EncuestaPreguntaBLL
             EncuestaPreguntaDAL.ObtenerInstancia.EliminarRespuesta(Pregunta.ID)
             EncuestaPreguntaDAL.ObtenerInstancia.Modificar(Pregunta)
             For Each respuesta In Pregunta.Respuestas
-                EncuestaPreguntaDAL.ObtenerInstancia.AgregarRespuesta(Pregunta.ID, respuesta.id)
+                'EncuestaPreguntaDAL.ObtenerInstancia.AgregarRespuesta(Pregunta.ID, respuesta.id)
             Next
         Catch ex As Exception
             Throw ex

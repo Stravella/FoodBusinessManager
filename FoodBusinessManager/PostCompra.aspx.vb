@@ -25,14 +25,15 @@ Public Class PostCompra
             'Dim oPreg As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(itemIndex)
             Dim rdlst = DirectCast(pregItem.FindControl("rdlRespuestas"), System.Web.UI.WebControls.RadioButtonList)
 
+            Dim idEncuesta As Integer = Session("idEncuesta")
             Dim rtaElegida = (From rtas As ListItem In rdlst.Items
                               Where rtas.Selected
                               Select New RespuestaEncuestaDTO With {.id = rtas.Value, .respuesta = rtas.Text}).ToList(0)
 
 
-            RespuestaEncuestaBLL.ObtenerInstancia.Responder(oPreg.ID, rtaElegida.id)
+            RespuestaEncuestaBLL.ObtenerInstancia.Responder(idEncuesta, oPreg.ID, rtaElegida.id)
         Next
-
+        Session("idEncuesta") = Nothing
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#modalEncuesta').modal('hide')", True)
     End Sub
 
@@ -72,6 +73,7 @@ Public Class PostCompra
         Dim id As Int16 = Integer.Parse(e.CommandArgument)
         Dim encuesta As EncuestaDTO = EncuestaBLL.ObtenerInstancia.Obtener(id)
         If e.CommandName = "responder" Then
+            Session("idEncuesta") = encuesta.id
             MostrarEncuesta(encuesta.nombre, encuesta.preguntas)
         End If
     End Sub

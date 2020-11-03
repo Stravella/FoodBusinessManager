@@ -50,6 +50,7 @@ Public Class RespuestaEncuestaDAL
         End Try
     End Sub
 
+
     Public Sub Eliminar(ByVal id As Integer)
         Try
             Dim params As New List(Of SqlParameter)
@@ -65,6 +66,21 @@ Public Class RespuestaEncuestaDAL
     Public Function Listar() As List(Of RespuestaEncuestaDTO)
         Dim lsRespuestas As New List(Of RespuestaEncuestaDTO)
         For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_respuestas_listar").Rows
+            Dim respuesta As New RespuestaEncuestaDTO With {.id = row("id"),
+                                              .respuesta = row("respuesta")
+            }
+            lsRespuestas.Add(respuesta)
+        Next
+        Return lsRespuestas
+    End Function
+
+    Public Function ListarPorPregunta(id As Integer) As List(Of RespuestaEncuestaDTO)
+        Dim params As New List(Of SqlParameter)
+        With AccesoDAL.ObtenerInstancia()
+            params.Add(.CrearParametro("@id", id))
+        End With
+        Dim lsRespuestas As New List(Of RespuestaEncuestaDTO)
+        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_respuestas_listarPorPregunta").Rows
             Dim respuesta As New RespuestaEncuestaDTO With {.id = row("id"),
                                               .respuesta = row("respuesta")
             }
@@ -89,12 +105,51 @@ Public Class RespuestaEncuestaDAL
         End Try
     End Function
 
-#Region "Pregunta_respuestas"
+    Public Sub AsociarAPregunta(id_respuesta As Integer, id_pregunta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_pregunta", id_pregunta))
+                params.Add(.CrearParametro("@id_respuesta", id_respuesta))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_respuestas_AsociarPregunta", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+#Region "Preguntas_respuestas"
+
     Public Function ListarPorIDPregunta(id As Integer) As List(Of RespuestaEncuestaDTO)
         Try
             Dim params As New List(Of SqlParameter)
             With AccesoDAL.ObtenerInstancia
                 params.Add(.CrearParametro("@id_pregunta", id))
+            End With
+            Dim lsRespuestas As New List(Of RespuestaEncuestaDTO)
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_respuestas_listarPorPregunta", params).Rows
+                Dim respuesta As New RespuestaEncuestaDTO With {.id = row("id"),
+                                                  .respuesta = row("respuesta")
+                }
+                lsRespuestas.Add(respuesta)
+            Next
+            Return lsRespuestas
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+#End Region
+
+
+
+
+#Region "Encuesta_Pregunta_respuestas"
+    Public Function ListarPorEncuestaPregunta(id_encuesta As Integer, id_pregunta As Integer) As List(Of RespuestaEncuestaDTO)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_encuesta", id_encuesta))
+                params.Add(.CrearParametro("@id_pregunta", id_pregunta))
             End With
             Dim lsRespuestas As New List(Of RespuestaEncuestaDTO)
             For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Encuesta_preguntas_respuestas_listarPorPregunta", params).Rows
@@ -110,10 +165,24 @@ Public Class RespuestaEncuestaDAL
         End Try
     End Function
 
-    Public Sub Responder(id_pregunta As Integer, id_respuesta As Integer)
+    Public Sub EliminarRespuestasUsuarios(id As Integer)
         Try
             Dim params As New List(Of SqlParameter)
             With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_encuesta", id))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_preguntas_respuestas_eliminar", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Sub Responder(id_encuesta As Integer, id_pregunta As Integer, id_respuesta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia
+                params.Add(.CrearParametro("@id_encuesta", id_encuesta))
                 params.Add(.CrearParametro("@id_pregunta", id_pregunta))
                 params.Add(.CrearParametro("@id_respuesta", id_respuesta))
             End With

@@ -110,6 +110,7 @@ Public Class Free
             Dim servicioCarrito As New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 1, .importeTotal = servicio.precio * .cantidad}
             carrito.Add(servicioCarrito)
             Current.Session("Carrito") = carrito
+            Current.Session("CantidadItemsCarrito") = 1
         Else
             carrito = DirectCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO))
             Dim existe As Boolean = False
@@ -123,7 +124,6 @@ Public Class Free
             If existe = False Then
                 carrito.Add(New ServicioCarritoDTO With {.servicio = servicio, .cantidad = 0})
             End If
-
             For Each serv As ServicioCarritoDTO In carrito
                 If serv.servicio.id = servicio.id Then
                     'Servicio Free puede existir 1 solo
@@ -136,10 +136,15 @@ Public Class Free
                     End If
                 End If
             Next
+
+            Dim cantidadItemsCarrito As Integer
+            For Each serv As ServicioCarritoDTO In carrito
+                cantidadItemsCarrito = cantidadItemsCarrito + serv.cantidad
+            Next
+
+            Current.Session("CantidadItemsCarrito") = cantidadItemsCarrito
             Current.Session("Carrito") = carrito
             Response.Redirect(Request.Url.PathAndQuery)
-
-
         End If
 
     End Sub

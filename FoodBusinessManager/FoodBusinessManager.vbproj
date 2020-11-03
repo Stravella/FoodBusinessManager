@@ -158,6 +158,7 @@
     <Content Include="IconosSVG\check-square-regular.svg" />
     <Content Include="IconosSVG\credit-card-solid.svg" />
     <Content Include="IconosSVG\file-download-solid.svg" />
+    <Content Include="IconosSVG\info-circle-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
     <Content Include="IconosSVG\search-solid.svg" />
     <Content Include="IconosSVG\window-close-solid.svg" />

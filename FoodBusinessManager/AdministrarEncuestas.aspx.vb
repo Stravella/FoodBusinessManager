@@ -22,8 +22,8 @@ Public Class AdministrarEncuestas
                 Dim bitacora As New BitacoraDTO With {
                                             .FechaHora = Now(),
                                             .usuario = usuarioLogeado,
-                                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 37}, 'Suceso: Eliminacion opinion
-                                            .criticidad = New CriticidadDTO With {.id = 2}, 'Criticidad: media
+                                            .tipoSuceso = New SucesoBitacoraDTO With {.id = 37}, 'Suceso: Eliminacion encuesta
+                                            .criticidad = New CriticidadDTO With {.id = 3}, 'Criticidad: Alta
                                             .observaciones = "Se elimino la encuesta : " & encuesta.nombre
                                    }
                 BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
@@ -84,7 +84,6 @@ Public Class AdministrarEncuestas
 
 #End Region
 
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             CargarEncuestas()
@@ -93,7 +92,6 @@ Public Class AdministrarEncuestas
             CargarServicios()
         End If
     End Sub
-
 
     Public Sub CargarEncuestas()
         Dim lsEncuesta As New List(Of EncuestaDTO)
@@ -111,9 +109,9 @@ Public Class AdministrarEncuestas
     End Sub
 
     Public Sub CargarPreguntas()
-        Dim opiniones As New List(Of EncuestaPreguntaDTO)
-        opiniones = EncuestaPreguntaBLL.ObtenerInstancia.Listar()
-        gvPreguntas.DataSource = opiniones
+        Dim preguntasDisponibles As New List(Of EncuestaPreguntaDTO)
+        preguntasDisponibles = EncuestaPreguntaBLL.ObtenerInstancia.ListarSinUso()
+        gvPreguntas.DataSource = preguntasDisponibles
         gvPreguntas.DataBind()
     End Sub
 
@@ -134,10 +132,7 @@ Public Class AdministrarEncuestas
             For Each gvrow As GridViewRow In gvPreguntas.Rows
                 Dim checkbox As CheckBox = gvrow.FindControl("Checkbox1")
                 If checkbox.Checked = True Then
-                    Dim pregunta As New EncuestaPreguntaDTO With
-                            {.ID = Convert.ToInt16(gvrow.Cells(1).Text),
-                             .pregunta = gvrow.Cells(2).Text
-                            }
+                    Dim pregunta As EncuestaPreguntaDTO = EncuestaPreguntaBLL.ObtenerInstancia.Obtener(Convert.ToInt16(gvrow.Cells(1).Text))
                     encuesta.preguntas.Add(pregunta)
                 End If
             Next
@@ -208,7 +203,7 @@ Public Class AdministrarEncuestas
             'Busco los servicios asociados           
             Current.Session("entidadModal") = encuesta
             Current.Session("accion") = "Eliminar"
-            MostrarModal("¿Está seguro que desea borrar la encuesta " & encuesta.id & " ?", encuesta.nombre,, True)
+            MostrarModal("¿Está seguro que desea borrar la encuesta " & encuesta.nombre & " ?", "Se eliminaran todas las preguntas asociadas y las respuestas de los clientes",, True)
         End If
     End Sub
 
@@ -237,6 +232,7 @@ Public Class AdministrarEncuestas
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Try
             Dim encuesta As New EncuestaDTO With {
+                .id = txtID.Text,
                 .nombre = txtNombre.Text,
                 .tipo = TipoEncuestaBLL.ObtenerInstancia.Obtener(ddlTipo.SelectedValue)
             }

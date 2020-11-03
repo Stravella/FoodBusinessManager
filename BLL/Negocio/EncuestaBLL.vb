@@ -19,6 +19,9 @@ Public Class EncuestaBLL
             EncuestaDAL.ObtenerInstancia.Agregar(encuesta)
             For Each pregunta In encuesta.preguntas
                 EncuestaDAL.ObtenerInstancia.AgregarPregunta(encuesta.id, pregunta.ID)
+                For Each respuesta As RespuestaEncuestaDTO In pregunta.Respuestas
+                    EncuestaPreguntaDAL.ObtenerInstancia.AgregarEncuestaPreguntaRespuesta(encuesta.id, pregunta.ID, respuesta.id)
+                Next
             Next
         Catch ex As Exception
             Throw ex
@@ -26,7 +29,12 @@ Public Class EncuestaBLL
     End Sub
     Public Sub Eliminar(id As Integer)
         Try
-            EncuestaDAL.ObtenerInstancia.EliminarPreguntasPorEncuesta(id)
+            RespuestaEncuestaDAL.ObtenerInstancia.EliminarRespuestasUsuarios(id)
+            EncuestaDAL.ObtenerInstancia.EliminarEncuestaPreguntas(id)
+            Dim encuesta As EncuestaDTO = Obtener(id)
+            For Each pregunta In encuesta.preguntas
+                EncuestaPreguntaBLL.ObtenerInstancia.Eliminar(pregunta)
+            Next
             EncuestaDAL.ObtenerInstancia.Eliminar(id)
         Catch ex As Exception
             Throw ex
@@ -35,11 +43,7 @@ Public Class EncuestaBLL
 
     Public Sub Modificar(encuesta As EncuestaDTO)
         Try
-            EncuestaDAL.ObtenerInstancia.EliminarPreguntasPorEncuesta(encuesta.id)
             EncuestaDAL.ObtenerInstancia.Modificar(encuesta)
-            For Each pregunta In encuesta.preguntas
-                EncuestaDAL.ObtenerInstancia.AgregarPregunta(encuesta.id, pregunta.ID)
-            Next
         Catch ex As Exception
             Throw ex
         End Try

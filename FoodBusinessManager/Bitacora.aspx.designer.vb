@@ -129,4 +129,16 @@ Partial Public Class Bitacora2
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gv_Bitacora As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Propiedad Master.
+    '''</summary>
+    '''<remarks>
+    '''Propiedad generada automáticamente.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As FoodBusinessManager.Maestra
+        Get
+            Return CType(MyBase.Master, FoodBusinessManager.Maestra)
+        End Get
+    End Property
 End Class

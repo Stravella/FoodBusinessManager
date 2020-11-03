@@ -7,6 +7,7 @@ Public Class Bitacora2
     Inherits System.Web.UI.Page
 
 
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             cargarUsuarios()
@@ -15,25 +16,37 @@ Public Class Bitacora2
         End If
     End Sub
 
-#Region "Mensajes"
-    Public Enum TipoAlerta
-        Success
-        Info
-        Warning
-        Danger
-    End Enum
+#Region "modal"
+    'Acá le doy el comportamiento según mis entidades.
+    Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
+        Response.Redirect("/Bitacora.aspx")
+    End Sub
 
-    Public Sub MostrarMensaje(mensaje As String, tipo As TipoAlerta)
-        Dim panelMensaje As Panel = Master.FindControl("Mensaje")
-        Dim labelMensaje As Label = panelMensaje.FindControl("labelMensaje")
+    Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
+        Dim panelMensaje As UpdatePanel = Master.FindControl("Modal")
+        Dim tituloModal As Label = panelMensaje.FindControl("lblModalTitle")
+        Dim bodyModal As Label = panelMensaje.FindControl("lblModalBody")
+        If grd IsNot Nothing Then
+            Dim grillaModal As GridView = panelMensaje.FindControl("grilla")
+            grillaModal = grd
+            grillaModal.Visible = True
+        End If
+        Dim btnCancelar As Button = panelMensaje.FindControl("btnCancelar")
+        If cancelar = True Then
+            btnCancelar.Visible = True
+        Else
+            btnCancelar.Visible = False
+        End If
+        tituloModal.Text = titulo
+        bodyModal.Text = body
 
-        labelMensaje.Text = mensaje
-        panelMensaje.CssClass = String.Format("alert alert-{0} alert-dismissable", tipo.ToString.ToLower())
-        panelMensaje.Attributes.Add("role", "alert")
-        panelMensaje.Visible = True
+        ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "myModal", "$('#myModal').modal();", True)
+        panelMensaje.Update()
     End Sub
 
 #End Region
+
 
 #Region "Carga DropDowns"
     Protected Sub cargarUsuarios()
@@ -77,8 +90,6 @@ Public Class Bitacora2
 
 #End Region
 
-
-    'TODO: Revisar este método, debería pasar todas todas las páginas
     Private Sub CargarBitacoras()
         Dim usuarioSeleccionado As New UsuarioDTO
         If lstUsuarios.SelectedIndex = 0 Then
@@ -116,12 +127,14 @@ Public Class Bitacora2
         If ListaBitacora.Count > 0 Then
             Me.gv_Bitacora.DataSource = ListaBitacora
             Me.gv_Bitacora.DataBind()
+        Else
+            MostrarModal("Lo siento", "La busqueda no devolvio resultados",,)
         End If
     End Sub
 
     Private Sub gv_Bitacora_DataBound(sender As Object, e As EventArgs) Handles gv_Bitacora.DataBound
         Try
-            If Not IsNothing(gv_Bitacora.DataSource) Then
+            If Not IsNothing(gv_Bitacora.DataSource) AndAlso gv_Bitacora.Rows.Count > 0 Then
                 Dim ddlCantidadPaginas As DropDownList = CType(gv_Bitacora.BottomPagerRow.Cells(0).FindControl("ddlCantidadPaginas"), DropDownList)
                 Dim ddlTamañoPaginas As DropDownList = CType(gv_Bitacora.BottomPagerRow.Cells(0).FindControl("ddlTamañoPaginas"), DropDownList)
                 Dim txtTotalPaginas As Label = CType(gv_Bitacora.BottomPagerRow.Cells(0).FindControl("lblTotalPaginas"), Label)
@@ -143,7 +156,7 @@ Public Class Bitacora2
                 gv_Bitacora.BottomPagerRow.CssClass = "table-bottom-dark"
             End If
         Catch ex As Exception
-            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
+            MostrarModal("Lo siento", "Ocurrio un error inesperado! Por favor contacte a su administrador",,)
         End Try
     End Sub
 
@@ -153,7 +166,7 @@ Public Class Bitacora2
             Dim ddl As DropDownList = CType(gv_Bitacora.BottomPagerRow.Cells(0).FindControl("ddlCantidadPaginas"), DropDownList)
             gv_Bitacora.SetPageIndex(ddl.SelectedIndex)
         Catch ex As Exception
-            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
+            MostrarModal("Lo siento", "Ocurrio un error inesperado! Por favor contacte a su administrador",,)
         End Try
     End Sub
 
@@ -163,7 +176,7 @@ Public Class Bitacora2
             gv_Bitacora.PageSize = ddl.SelectedValue
             CargarBitacoras()
         Catch ex As Exception
-            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
+            MostrarModal("Lo siento", "Ocurrio un error inesperado! Por favor contacte a su administrador",,)
         End Try
     End Sub
 
@@ -173,11 +186,15 @@ Public Class Bitacora2
             gv_Bitacora.PageIndex = e.NewPageIndex
             gv_Bitacora.DataBind()
         Catch ex As Exception
-            MostrarMensaje("<strong>Lo siento!</strong> ocurrio un error en el sistema", TipoAlerta.Danger)
+            MostrarModal("Lo siento", "Ocurrio un error inesperado! Por favor contacte a su administrador",,)
         End Try
     End Sub
 
     Private Sub BtnFiltrar_Click(sender As Object, e As EventArgs) Handles BtnFiltrar.Click
         CargarBitacoras()
+    End Sub
+
+    Private Sub Bitacora2_Init(sender As Object, e As EventArgs) Handles Me.Init
+        AddHandler Master.AceptarModal, AddressOf modalAceptar_Click
     End Sub
 End Class

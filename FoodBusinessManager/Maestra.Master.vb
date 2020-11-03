@@ -25,7 +25,7 @@ Public Class Maestra
 
     Public Sub CargarNumberCarrito()
         If Current.Session("Carrito") IsNot Nothing Then
-            lblCartCount.Text = TryCast(Current.Session("Carrito"), List(Of ServicioCarritoDTO)).Count
+            lblCartCount.Text = Current.Session("CantidadItemsCarrito")
         End If
     End Sub
 

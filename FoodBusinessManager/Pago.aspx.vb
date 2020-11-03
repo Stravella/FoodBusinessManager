@@ -97,6 +97,7 @@ Public Class Pago
             Current.Session("RequiereTarjeta") = Nothing
             Current.Session("Tarjeta") = Nothing
             Current.Session("DiferenciaNotas") = Nothing
+            Current.Session("CantidadItemsCarrito") = Nothing
 
             Response.Redirect("/PostCompra.aspx")
         End If

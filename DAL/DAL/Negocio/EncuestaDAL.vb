@@ -55,7 +55,6 @@ Public Class EncuestaDAL
             With AccesoDAL.ObtenerInstancia()
                 params.Add((.CrearParametro("@id", id)))
             End With
-            EliminarPreguntasPorEncuesta(id)
             AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_Eliminar", params)
         Catch ex As Exception
             Throw ex
@@ -125,18 +124,6 @@ Public Class EncuestaDAL
 
 #Region "Encuesta_preguntas"
 
-    Public Sub EliminarPreguntasPorEncuesta(ByVal id_encuesta As Integer)
-        Try
-            Dim params As New List(Of SqlParameter)
-            With AccesoDAL.ObtenerInstancia()
-                params.Add((.CrearParametro("@id_encuesta", id_encuesta)))
-            End With
-            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_encuesta_preguntas_Eliminar", params)
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Sub
-
 
     Public Sub AgregarPregunta(ByVal id_encuesta As Integer, id_pregunta As Integer)
         Try
@@ -151,10 +138,20 @@ Public Class EncuestaDAL
         End Try
     End Sub
 
-
+    'Borra la asociacion entre la encuesta y sus preguntas
+    Public Sub EliminarEncuestaPreguntas(ByVal id_encuesta As Integer)
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_encuesta", id_encuesta)))
+            End With
+            AccesoDAL.ObtenerInstancia.EjecutarSP("Encuesta_encuesta_preguntas_Eliminar", params)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
 #End Region
-
 
 #Region "Encuesta_servicios"
     Public Function ListarEncuestasPorIdServicio(id As Integer)
