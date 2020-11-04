@@ -34,7 +34,7 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row">    
+                        <div class="row">
                             <div class="col">
                                 <center>
                                     <asp:Image ID="Image1" Class="img-servicio" runat="server" Visible="false" Height="300px" Width="300px" ImageAlign="Middle"/>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:FileUpload class="form-control" ID="FileUpload1" runat="server" />
+                                <asp:FileUpload class="form-control" ID="FileUpload1" runat="server"  />
                             </div>
                         </div>
                         <div class="row">
@@ -51,7 +51,7 @@
                                 <asp:Label ID="lblFileSubido" class="form-control" runat="server" Text="" Visible="false"></asp:Label>
                             </div>
                             <div class="col-md-3">
-                                <asp:Button ID="btnCambiarImagen" CssClass="btn btn-block btn-warning" runat="server" Text="Cambiar imagen" visible="false"/>
+                                <asp:Button ID="btnCambiarImagen" CssClass="btn btn-block btn-warning" runat="server" Text="Cambiar imagen" Visible="false" />
                             </div>
                         </div>
                         <div class="row">
@@ -66,7 +66,8 @@
                             <div class="col-md-9">
                                 <label>Nombre</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" placeholder="Nombre"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" placeholder="Nombre" ValidationGroup="Servicio"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtNombre" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +75,8 @@
                             <div class="col-12">
                                 <label>Precio (Mensual)</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtPrecio" runat="server" placeholder="Precio" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="txtPrecio" runat="server" placeholder="Precio" TextMode="Number" ValidationGroup="Servicio" MaxLength="8"  min="1" max="99999" value="1" step="0.01"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecio" runat="server" ErrorMessage="Solo se aceptan valores numericos y comas" ForeColor="Red" ValidationExpression="^(\d*\,)?\d+$"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +84,8 @@
                             <div class="col-12">
                                 <label>Descripcion</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2" ValidationGroup="Servicio"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtDescripcion" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -124,12 +127,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" />
+                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" ValidationGroup="Servicio" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" />
+                                <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" ValidationGroup="Servicio" />
                             </div>
                             <div class="col-6">
                                 <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false" />

@@ -90,4 +90,14 @@
         End Set
     End Property
 
+    Private _valoracion As Decimal
+    Public Property valoracion() As Decimal
+        Get
+            Return _valoracion
+        End Get
+        Set(ByVal value As Decimal)
+            _valoracion = value
+        End Set
+    End Property
+
 End Class

@@ -60,6 +60,7 @@ Public Class Free
         Dim nombreServicio As String = Request.QueryString("Serv")
         Dim servicio As ServicioDTO = ServicioBLL.ObtenerInstancia.ObtenerPorNombre(nombreServicio)
         lblServicio.Text = servicio.nombre
+        lblValoracion.Text = servicio.valoracion
         imgServicio.ImageUrl = servicio.imagen.Img64
         lblDescripcion.Text = servicio.descripcion
         lblPrecio.Text = "$ " & servicio.precio

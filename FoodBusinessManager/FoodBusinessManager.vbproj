@@ -172,6 +172,7 @@
     <Content Include="Publicidad.aspx" />
     <Content Include="PublicidadBack.aspx" />
     <Content Include="Publicidad\Publicidad.xml" />
+    <Content Include="Reportes.aspx" />
     <Content Include="Respuestas.aspx" />
     <Content Include="TemplateFactura.html" />
     <Content Include="VistaServicios.aspx" />
@@ -480,6 +481,13 @@
     <Compile Include="PublicidadBack.aspx.vb">
       <DependentUpon>PublicidadBack.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes.aspx.designer.vb">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes.aspx.vb">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Respuestas.aspx.designer.vb">
       <DependentUpon>Respuestas.aspx</DependentUpon>

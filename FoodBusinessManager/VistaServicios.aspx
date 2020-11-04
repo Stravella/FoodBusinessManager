@@ -19,6 +19,9 @@
                                     <center>
                                        <asp:Image ID="imgServicio" runat="server" height="150px" width="150px" ImageUrl='<%#Eval("Imagen.Img64") %>'></asp:Image>
                                     </center>
+                                    <br />
+                                    <center><asp:Label ID="lblValoracion" CssClass="text-secondary" runat="server" Text='<%#Eval("valoracion") %>'></asp:Label><i class="fas fa-star" style="color:gold"></i></center>
+                                    <p class="text-muted text-center small">En base a la valoración de nuestros clientes</p>
                                 </h4>
                             </div>
                         </div>

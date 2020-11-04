@@ -76,7 +76,8 @@ Public Class ServicioDAL
                                               .imagen = ImagenDAL.ObtenerInstancia.Obtener(row("id_imagen")),
                                               .id_catalogo = row("id_catalogo"),
                                               .orden_catalogo = row("orden_catalogo"),
-                                              .encuestas = EncuestaDAL.ObtenerInstancia.ListarEncuestasPorIdServicio(row("id"))
+                                              .encuestas = EncuestaDAL.ObtenerInstancia.ListarEncuestasPorIdServicio(row("id")),
+                                              .valoracion = ObtenerValoracion(row("id"))
              }
             servicio.caracteristicas = ServicioCaracteristicasDAL.ObtenerInstancia.ListarPorServicio(servicio)
             servicios.Add(servicio)
@@ -203,6 +204,18 @@ Public Class ServicioDAL
                 servicios.Add(servicio)
             Next
             Return servicios
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ObtenerValoracion(id_servicio As Integer) As Double
+        Try
+            Dim params As New List(Of SqlParameter)
+            With AccesoDAL.ObtenerInstancia()
+                params.Add((.CrearParametro("@id_servicio", id_servicio)))
+            End With
+            Return Math.Round(AccesoDAL.ObtenerInstancia.LeerBD("Servicio_promedio", params).Rows(0)(0), 1)
         Catch ex As Exception
             Throw ex
         End Try

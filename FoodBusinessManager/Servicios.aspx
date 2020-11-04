@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control" ID="txtPrecioMin" runat="server" ValidationGroup="Filtro"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecioMin" runat="server" ErrorMessage="El valor solo puede ser numerico" ForeColor="Red" ValidationExpression="^[0-9]\d*(,\d+)?$"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecioMin" runat="server" ErrorMessage="Solo se aceptan valores numericos y comas" ForeColor="Red" ValidationExpression="^(\d*\,)?\d+$"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control" ID="txtPrecioMax" runat="server" ValidationGroup="Filtro"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="txtPrecioMax" runat="server" ForeColor="Red" ErrorMessage="El valor solo puede ser numerico" ValidationExpression="^[0-9]\d*(,\d+)?$"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="txtPrecioMax" runat="server" ForeColor="Red" ErrorMessage="Solo se aceptan valores numericos y comas" ValidationExpression="^(\d*\,)?\d+$"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>
