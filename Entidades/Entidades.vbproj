@@ -91,6 +91,7 @@
     <Compile Include="Negocio\SubscriptorDTO.vb" />
     <Compile Include="Negocio\TarjetaDTO.vb" />
     <Compile Include="Negocio\TipoEncuestaDTO.vb" />
+    <Compile Include="Servicios\BackupDTO.vb" />
     <Compile Include="Servicios\BitacoraDTO.vb" />
     <Compile Include="Servicios\BusquedaDTO.vb" />
     <Compile Include="Servicios\ClienteDTO.vb" />

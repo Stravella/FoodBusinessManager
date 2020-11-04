@@ -124,8 +124,7 @@ Public Class Maestra
     Public Sub ArmarMenuLateral()
         Try
             Me.MenuLateral.Items.Add(New MenuItem("Administración del Sistema", "AdminSist"))
-            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Copia de Seguridad", "Backup", Nothing, "/Backup.aspx"))
-            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Restauración de Datos", "Restore", Nothing, "/Restore.aspx"))
+            Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Backup y Restore", "Backup", Nothing, "/backup.aspx"))
             Me.MenuLateral.Items.Item(0).ChildItems.Add(New MenuItem("Visualizar Bitacora Auditoria", "BitacoraAuditoria", Nothing, "/Bitacora.aspx"))
             Me.MenuLateral.Items.Add(New MenuItem("Administración Usuarios", "AdminUsu"))
             Me.MenuLateral.Items.Item(1).ChildItems.Add(New MenuItem("Administrar Usuarios", "AdminUsuarios", Nothing, "/AdministrarUsuarios.aspx"))
