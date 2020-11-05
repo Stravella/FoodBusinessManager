@@ -126,7 +126,7 @@ Public Class EncuestaPreguntaDAL
                                                   .pregunta = row("pregunta"),
                                                   .FechaVenc = row("fecha_vencimiento"),
                                                   .Estado = EstadoPreguntaDAL.ObtenerInstancia.Obtener(row("id_estado")),
-                                                   .Respuestas = RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(row("id"))
+                                                  .Respuestas = RespuestaEncuestaDAL.ObtenerInstancia.ListarPorIDPregunta(row("id"))
                 }
                 lsEncuestaPregunta.Add(encuestaPregunta)
             Next

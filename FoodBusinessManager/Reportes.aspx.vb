@@ -7,30 +7,18 @@ Public Class Reportes
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        MostrarValoracion()
+        If Not IsPostBack Then
+            CargarEncuestas()
+        End If
     End Sub
 
 
     Private Sub MostrarValoracion()
-
         chValoracion.Titles.Clear()
         chValoracion.ChartAreas.Clear()
         chValoracion.Series.Clear()
 
         Dim servicios As List(Of ServicioDTO) = ServicioBLL.ObtenerInstancia.Listar
-
-        'Dim Reportes As DataVisualization.Charting.Chart = chValoracion
-
-        'Dim Serie1 = Reportes.Series("Series1")
-        'Serie1.Points.Clear()
-        'For Each item In servicios
-        '    Serie1.Points.AddXY(item.nombre, item.valoracion)
-        'Next
-        'Reportes.Series("Series1").ChartType = DataVisualization.Charting.SeriesChartType.Bar
-        'Dim ChartArea = Reportes.ChartAreas("ChartArea1")
-        'ChartArea.AxisX.Title = "Servicio"
-        'ChartArea.AxisY.Title = "Valoracion"
-
         'agrego el titulo
         chValoracion.Titles.Add("Valoracion de productos")
 
@@ -53,15 +41,68 @@ Public Class Reportes
 
     End Sub
 
+
+    Private Sub CargarEncuestas()
+        Dim encuestas As New List(Of EncuestaDTO)
+        encuestas = EncuestaBLL.ObtenerInstancia.ListarEncuestas
+        ddlEncuestas.Items.Add(New ListItem("Seleccione", "0"))
+        For Each encuesta In encuestas
+            Dim item As New ListItem
+            item.Text = encuesta.nombre
+            item.Value = encuesta.id
+            ddlEncuestas.Items.Add(item)
+        Next
+        ddlEncuestas.SelectedIndex = 0
+    End Sub
+
+
+
     Private Sub ddlReportes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlReportes.SelectedIndexChanged
         If ddlReportes.SelectedIndex > -1 Then
             If ddlReportes.SelectedValue = 0 Then 'no muestro
 
             End If
-            If ddlReportes.SelectedValue = 4 Then 'Valoracion producto
-                panelValoracion.Visible = True
+            If ddlReportes.SelectedValue = 1 Then 'Encuestas
+                panelEncuestas.Visible = True
+                panelValoracion.Visible = False
             End If
+            If ddlReportes.SelectedValue = 2 Then 'Valoracion producto
+                MostrarValoracion()
+                panelValoracion.Visible = True
+                panelEncuestas.Visible = False
+            End If
+            If ddlReportes.SelectedValue = 3 Then 'Ventas
+
+            End If
+        End If
+    End Sub
+
+    Private Sub ddlEncuestas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlEncuestas.SelectedIndexChanged
+        If ddlEncuestas.SelectedValue <> 0 Then
+            Dim encuesta As EncuestaDTO = EncuestaBLL.ObtenerInstancia.Obtener(ddlEncuestas.SelectedValue)
+            rptPreguntas.DataSource = encuesta.preguntas
+            rptPreguntas.DataBind()
+        End If
+    End Sub
+
+    Private Sub rptPreguntas_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptPreguntas.ItemDataBound
+        'en el dataBound le asigno el datasource el gráfico
+        Dim grafico = DirectCast(e.Item.FindControl("chPregunta"), Chart)
+
+        If e.Item.DataItem IsNot Nothing Then
+            Dim pregunta As EncuestaPreguntaDTO = TryCast(e.Item.DataItem, EncuestaPreguntaDTO)
+
+            grafico.DataSource = pregunta.Respuestas
+
+            grafico.Titles.Add(pregunta.pregunta)
+            grafico.Series("Series1").XValueMember = "Respuesta"
+            grafico.Series("Series1").YValueMembers = "Cantidad"
+            grafico.ChartAreas("ChartArea1").AxisX.MajorGrid.Enabled = False
+            grafico.ChartAreas("ChartArea1").AxisY.MajorGrid.Enabled = False
+
+            grafico.DataBind()
 
         End If
+
     End Sub
 End Class

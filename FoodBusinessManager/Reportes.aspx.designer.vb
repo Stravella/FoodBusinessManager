@@ -39,4 +39,31 @@ Partial Public Class Reportes
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents chValoracion As Global.System.Web.UI.DataVisualization.Charting.Chart
+
+    '''<summary>
+    '''Control panelEncuestas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents panelEncuestas As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control ddlEncuestas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlEncuestas As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control rptPreguntas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents rptPreguntas As Global.System.Web.UI.WebControls.Repeater
 End Class

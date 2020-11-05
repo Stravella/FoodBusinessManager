@@ -13,17 +13,16 @@
                 <p class="text-muted h4 custom-control-inline mr-0">Seleccione para visualizar un reporte:</p>
                 <asp:DropDownList ID="ddlReportes" runat="server" CssClass="ml-3 form-control" AutoPostBack="True">
                     <asp:ListItem Text="Seleccione" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="CSAT" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="Encuesta de Producto" Value="2"></asp:ListItem>
+                    <asp:ListItem Text="Encuestas" Value="1"></asp:ListItem>
+                    <asp:ListItem Text="Valoracion servicio" Value="2"></asp:ListItem>
                     <asp:ListItem Text="Ventas" Value="3"></asp:ListItem>
-                    <asp:ListItem Text="Valoracion servicio" Value="4"></asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div class="col-12">
                 <hr />
             </div>
-
         </div>
+        <%--Valoracion de servicios--%>
         <asp:Panel ID="panelValoracion" runat="server" Visible="false">
             <div class="col-12 justify-content-center">
                 <div class="card prodZoom">
@@ -40,11 +39,32 @@
                     </div>
                 </div>
         </asp:Panel>
+        <%--Graficos encuestas--%>
+        <asp:Panel ID="panelEncuestas" Visible="false" runat="server">
+            <div class="col">
+                <div class="card">
+                    <div class=" card-header h4  text-center">Seleccione una encuesta:</div>
+                    <asp:DropDownList ID="ddlEncuestas" CssClass="form-control small" runat="server" AutoPostBack="true"></asp:DropDownList>
+                    <asp:Repeater ID="rptPreguntas" runat="server">
+                        <ItemTemplate>
+                            <div class="card-body pb-2 text-center">
+                                <asp:Chart ID="chPregunta" runat="server">
+                                    <Series>
+                                        <asp:Series Name="Series1"></asp:Series>
+                                    </Series>
+                                    <ChartAreas>
+                                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                                    </ChartAreas>
+                                </asp:Chart>
+                            </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+        </asp:Panel>
 
 
 
-        <%-- --%>
-        <%--grilla Gráficos Encuestas--%>
         <%-- <div id="rowCSAT" class="row mt-2" runat="server" visible="false">
             <div class="col-12">
                 <h2 id="hPreguntas" class="text-muted" runat="server"></h2>

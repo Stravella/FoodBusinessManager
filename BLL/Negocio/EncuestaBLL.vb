@@ -74,7 +74,11 @@ Public Class EncuestaBLL
 
     Public Function Obtener(id As Integer) As EncuestaDTO
         Try
-            Return EncuestaDAL.ObtenerInstancia.Obtener(id)
+            Dim encuesta As EncuestaDTO = EncuestaDAL.ObtenerInstancia.Obtener(id)
+            For Each pregunta In encuesta.preguntas
+                pregunta.Respuestas = RespuestaEncuestaDAL.ObtenerInstancia.ListarPorEncuestaPregunta(encuesta.id, pregunta.ID)
+            Next
+            Return encuesta
         Catch ex As Exception
             Throw ex
         End Try
