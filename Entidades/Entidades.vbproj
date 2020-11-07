@@ -83,6 +83,7 @@
     <Compile Include="Negocio\NotaCreditoDTO.vb" />
     <Compile Include="Negocio\EncuestaPreguntaDTO.vb" />
     <Compile Include="Negocio\PreguntaDTO.vb" />
+    <Compile Include="Negocio\ReporteVentasDTO.vb" />
     <Compile Include="Negocio\RespuestaDTO.vb" />
     <Compile Include="Negocio\RespuestaEncuestaDTO.vb" />
     <Compile Include="Negocio\ResultadosDTO.vb" />

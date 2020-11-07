@@ -61,112 +61,94 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
+            </div>
+        </asp:Panel>
+
+        <%--panel ventas--%>
+        <asp:Panel ID="panelVentas" Visible="false" runat="server">
+            <div class="col-12">
+                <div class="card">
+                    <div class=" card-header h4  text-center">Reporte ventas</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col justify-content-center">
+                                <p class="h5 text-muted">Reporte anual</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p>Año desde : </p>
+                                <asp:DropDownList ID="ddlAñoDesde" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                            </div>
+                            <div class="col-4">
+                                <p>Año hasta : </p>
+                                <asp:DropDownList ID="ddlAñoHasta" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                            </div>
+                            <div class="col-4">
+                                <asp:Button ID="btnFiltrarAnual" CssClass="btn btn-success vertical-bottom" runat="server" Text="Filtrar" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col justify-content-center">
+                                <p class="h5 text-muted">Reporte mensual, semanal, diario</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Año : </p>
+                                <asp:DropDownList ID="ddlAño" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <asp:Button ID="btnFiltrarMensual" CssClass="btn btn-success" runat="server" Text="Reporte mensual" />
+                            </div>
+                            <div class="col-4">
+                                <asp:Button ID="btnFiltrarSemanal" CssClass="btn btn-success" runat="server" Text="Reporte semanal" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>Mes : </p>
+                                <asp:DropDownList ID="ddlMes" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                                <asp:Button ID="btnFiltrarDiario" CssClass="btn btn-success" runat="server" Text="Reporte diario" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col align-content-center">
+                                <asp:GridView CssClass="table table-hover table-bordered table-info " ID="gv_Ventas" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" RowStyle-Height="40px" EmptyDataText="No hubo resultados">
+                                    <HeaderStyle CssClass="thead-dark" />
+                                    <Columns>
+                                        <asp:BoundField DataField="nombre" HeaderText="Filtro" />
+                                        <asp:BoundField DataField="importe" HeaderText="Importe" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col align-content-center">
+                                <asp:Chart ID="chVentas" runat="server">
+                                    <Series>
+                                        <asp:Series Name="Series1"></asp:Series>
+                                    </Series>
+                                    <ChartAreas>
+                                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                                    </ChartAreas>
+                                </asp:Chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </asp:Panel>
 
 
-
-        <%-- <div id="rowCSAT" class="row mt-2" runat="server" visible="false">
-            <div class="col-12">
-                <h2 id="hPreguntas" class="text-muted" runat="server"></h2>
-                <hr />
-            </div>--%>
-        <%--GRAFICOS DE CSAT Y ENCUESTAS PRODUCTOO--%>
-        <%-- <div class="col mt-2">
-                <div class="card-deck">
-                    <asp:Repeater ID="rptCSAT" runat="server">
-                        <ItemTemplate>
-                            <div class="col-6 mt-2">
-                                <div class="card prodZoom" id="divResultadosEncuesta" runat="server" visible="true">
-                                    <div class="card-body pb-2">
-                                        <div class="card-title h4  text-center"><%# Eval("Pregunta")%></div>
-                                        <input id="inpNroPreg" type="hidden" runat="server" value='<%# Eval("ID")%>' />
-
-                                        <asp:Chart ID="chPregunta" runat="server" Width="400" Height="350">
-                                            <series>
-                                                <asp:Series Name="Series1" ChartType="Column" Color="#960080ff"></asp:Series>
-                                            </series>
-                                            <chartareas>
-                                                <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true">
-                                                </asp:ChartArea>
-                                            </chartareas>
-                                        </asp:Chart>
-                                        <p>Cantidad de preguntas respondidas: <%# Eval("QRespondidas")%> </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-
-                </div>
-            </div>
-        </div>--%>
-
-        <%--grilla Gráficos Ventas--%>
-        <%--        <asp:Panel ID="pnlVentas" runat="server" Visible="false">
-            <div class="row mt-2 justify-content-center">
-                <div class="col-12">
-                    <h2 class="text-muted">Reporte de ganancias</h2>
-                    <hr />
-                </div>--%>
-
-        <%--VENTAS POR AÑO--%>
-        <%--             <div class="col-8 mt-2 justify-content-center">
-                    <div class="card prodZoom">
-                        <div class=" card-header h4  text-center">Ventas por Año</div>
-                        <div class="card-body pb-2 text-center">
-                            <asp:Chart ID="chAno" runat="server" Width="500" Height="300" CssClass="bg-light">
-
-                                <series>
-                                    <asp:Series Name="Series1" ChartType="Column" Color="#d1690e" LabelFormat="{0:c}" LegendText="Ventas anuales"></asp:Series>
-                                </series>
-                                <chartareas>
-                                    <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true">
-                                    </asp:ChartArea>
-                                </chartareas>
-                            </asp:Chart>
-                            <p class="card-text">Cantidad de ventas en el periodo: <span id="lblQvtasAno" runat="server"></span></p>
-                        </div>
-                    </div>
-                </div>--%>
-
-        <%--VENTAS POR MES--%>
-        <%--                <div class="col-10 mt-5 justify-content-center">
-                    <div class="card prodZoom">
-                        <div class=" card-header h4  text-center">Ventas por Mes</div>
-                        <div class="card-body pb-2 text-center">
-                            <asp:Chart ID="chMes" runat="server" Width="600" Height="350" CssClass="bg-light">
-                                <series>
-                                    <asp:Series Name="Series1" ChartType="Column" LabelFormat="{0:c}"  Color="#2e8456" LegendText="Ventas mensuales"></asp:Series>
-                                </series>
-                                <chartareas>
-                                    <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true">
-                                    </asp:ChartArea>
-                                </chartareas>
-                            </asp:Chart>
-                        </div>
-                    </div>
-                </div>--%>
-
-        <%--VENTAS POR DIA--%>
-        <%--                <div class="col-10 mt-5 justify-content-center">
-                    <div class="card prodZoom">
-                        <div class=" card-header h4  text-center">Ventas por Día</div>
-                        <div class="card-body pb-2 text-center">
-                            <asp:Chart ID="chDia" runat="server" Width="800" Height="400" CssClass="bg-light">
-                                <series>
-                                    <asp:Series Name="Series1" ChartType="Spline" LabelFormat="{0:c}" Color="#2d94d8" LegendText="Ventas diarias"></asp:Series>
-                                </series>
-                                <chartareas>
-                                    <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true">
-                                    </asp:ChartArea>
-                                </chartareas>
-                            </asp:Chart>
-                        </div>
-                    </div>
-                </div>--%>
-
-        <%-- <p class="small mt-5">*Se excluyen facturas canceladas por notas de crédito. </p>--%>
-        <%--            </div>
-        </asp:Panel>--%>
     </div>
 </asp:Content>

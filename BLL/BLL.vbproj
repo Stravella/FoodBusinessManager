@@ -102,6 +102,7 @@
     <Compile Include="Negocio\NotasCreditoBLL.vb" />
     <Compile Include="Negocio\EncuestaPreguntaBLL.vb" />
     <Compile Include="Negocio\PreguntaBLL.vb" />
+    <Compile Include="Negocio\ReporteVentasBLL.vb" />
     <Compile Include="Negocio\RespuestaBLL.vb" />
     <Compile Include="Negocio\RespuestaEncuestaBLL.vb" />
     <Compile Include="Negocio\ServicioBLL.vb" />
