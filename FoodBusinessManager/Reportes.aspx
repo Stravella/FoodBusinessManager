@@ -75,23 +75,16 @@
                                 <p class="h5 text-muted">Reporte anual</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <p>Año desde : </p>
-                                <asp:DropDownList ID="ddlAñoDesde" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                        <div class="form-group row">
+                            <label for="ddlAñoDesde" class="col-sm-2 col-form-label">Año desde : </label>
+                            <div class="col-sm-2">
+                                <asp:DropDownList ID="ddlAñoDesde" runat="server" CssClass="form-control" AutoPostBack="False"></asp:DropDownList>
                             </div>
-                            <div class="col-4">
-                                <p>Año hasta : </p>
-                                <asp:DropDownList ID="ddlAñoHasta" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                            <label for="ddlAñoHasta" class="col-sm-2 col-form-label">Año desde : </label>
+                            <div class="col-sm-2">
+                                <asp:DropDownList ID="ddlAñoHasta" runat="server" CssClass="form-control" AutoPostBack="False"></asp:DropDownList>
                             </div>
-                            <div class="col-4">
-                                <asp:Button ID="btnFiltrarAnual" CssClass="btn btn-success vertical-bottom" runat="server" Text="Filtrar" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                
-                            </div>
+                            <asp:Button ID="btnFiltrarAnual" CssClass="btn btn-success" runat="server" Text="Filtrar" />
                         </div>
                         <hr />
                         <div class="row">
@@ -99,26 +92,21 @@
                                 <p class="h5 text-muted">Reporte mensual, semanal, diario</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>Año : </p>
-                                <asp:DropDownList ID="ddlAño" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
+                        <div class="form-group row">
+                            <label for="ddlAño" class="col-sm-2 col-form-label">Año :</label>
+                            <div class="col-sm-6">
+                                <asp:DropDownList ID="ddlAño" runat="server" CssClass="form-control" AutoPostBack="False"></asp:DropDownList>
                             </div>
+                            <asp:Button ID="btnFiltrarMensual" CssClass="btn btn-success" runat="server" Text="Reporte mensual" />
+                            <asp:Button ID="btnFiltrarSemanal" CssClass="btn btn-success" runat="server" Text="Reporte semanal" />
                         </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <asp:Button ID="btnFiltrarMensual" CssClass="btn btn-success" runat="server" Text="Reporte mensual" />
+                        <hr />
+                        <div class="form-group row">
+                            <label for="ddlMes" class="col-sm-2 col-form-label">Mes :</label>
+                            <div class="col-sm-8">                               
+                                <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control" AutoPostBack="False"></asp:DropDownList>                                
                             </div>
-                            <div class="col-4">
-                                <asp:Button ID="btnFiltrarSemanal" CssClass="btn btn-success" runat="server" Text="Reporte semanal" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>Mes : </p>
-                                <asp:DropDownList ID="ddlMes" runat="server" CssClass="ml-3 form-control" AutoPostBack="False"></asp:DropDownList>
-                                <asp:Button ID="btnFiltrarDiario" CssClass="btn btn-success" runat="server" Text="Reporte diario" />
-                            </div>
+                            <asp:Button ID="btnFiltrarDiario" CssClass="btn btn-success" runat="server" Text="Reporte diario" />
                         </div>
                         <hr />
                         <div class="row">
