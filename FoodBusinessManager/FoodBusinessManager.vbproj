@@ -161,6 +161,7 @@
     <Content Include="IconosSVG\hdd-regular.svg" />
     <Content Include="IconosSVG\info-circle-solid.svg" />
     <Content Include="IconosSVG\play-circle-regular.svg" />
+    <Content Include="IconosSVG\reply-solid.svg" />
     <Content Include="IconosSVG\search-solid.svg" />
     <Content Include="IconosSVG\window-close-solid.svg" />
     <Content Include="MisMovimientos.aspx" />
@@ -173,6 +174,7 @@
     <Content Include="PublicidadBack.aspx" />
     <Content Include="Publicidad\Publicidad.xml" />
     <Content Include="Reportes.aspx" />
+    <Content Include="ResponderChat.aspx" />
     <Content Include="Respuestas.aspx" />
     <Content Include="TemplateFactura.html" />
     <Content Include="VistaServicios.aspx" />
@@ -487,6 +489,13 @@
     </Compile>
     <Compile Include="Reportes.aspx.vb">
       <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ResponderChat.aspx.designer.vb">
+      <DependentUpon>ResponderChat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResponderChat.aspx.vb">
+      <DependentUpon>ResponderChat.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Respuestas.aspx.designer.vb">

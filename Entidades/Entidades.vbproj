@@ -70,6 +70,8 @@
     <Compile Include="Negocio\CaracteristicaDTO.vb" />
     <Compile Include="Negocio\CatalogoDTO.vb" />
     <Compile Include="Negocio\CategoriaDTO.vb" />
+    <Compile Include="Negocio\ChatSesionDTO.vb" />
+    <Compile Include="Negocio\ChatMensajeDTO.vb" />
     <Compile Include="Negocio\CompraDTO.vb" />
     <Compile Include="Negocio\EncuestaDTO.vb" />
     <Compile Include="Negocio\EstadoCompraDTO.vb" />

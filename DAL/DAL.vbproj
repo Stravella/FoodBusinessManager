@@ -89,6 +89,7 @@
     <Compile Include="DAL\Negocio\CaracteristicasDAL.vb" />
     <Compile Include="DAL\Negocio\CatalogoDAL.vb" />
     <Compile Include="DAL\Negocio\CategoriaDAL.vb" />
+    <Compile Include="DAL\Negocio\ChatDAL.vb" />
     <Compile Include="DAL\Negocio\CompraDAL.vb" />
     <Compile Include="DAL\Negocio\EncuestaDAL.vb" />
     <Compile Include="DAL\Negocio\EstadoDAL.vb" />
