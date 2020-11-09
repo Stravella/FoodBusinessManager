@@ -51,9 +51,18 @@ Public Class ChatBLL
         End Try
     End Function
 
+    Public Function ObtenerChatActivo(cliente As ClienteDTO) As ChatSesionDTO
+        Try
+            Return ChatDAL.ObtenerInstancia.ObtenerChatActivo(cliente)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
     Public Sub CrearMensaje(mensaje As ChatMensajeDTO, chat As ChatSesionDTO)
         Try
-            chat.id = ChatDAL.ObtenerInstancia.GetNextMensajeID
+            mensaje.id = ChatDAL.ObtenerInstancia.GetNextMensajeID
             ChatDAL.ObtenerInstancia.AgregarMensaje(mensaje, chat)
         Catch ex As Exception
             Throw ex

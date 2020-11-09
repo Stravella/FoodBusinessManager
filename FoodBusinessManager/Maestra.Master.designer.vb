@@ -158,6 +158,15 @@ Partial Public Class Maestra
     Protected WithEvents linkModificarDatos As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''Control linkChat.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents linkChat As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''Control linkLogOut.
     '''</summary>
     '''<remarks>
@@ -300,6 +309,69 @@ Partial Public Class Maestra
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents cancelar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control panelChat.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents panelChat As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Control lblTitulo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTitulo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control grdChatMensajes.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents grdChatMensajes As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control txtMensaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMensaje As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control btnEnviarChat.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnEnviarChat As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnCerrarModalChat.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCerrarModalChat As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnFinalizarChat.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnFinalizarChat As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control Contenido.

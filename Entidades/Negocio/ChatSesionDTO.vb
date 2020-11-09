@@ -50,7 +50,7 @@
         End Set
     End Property
 
-    Private _mensajes As List(Of ChatMensajeDTO)
+    Private _mensajes As New List(Of ChatMensajeDTO)
     Public Property mensajes() As List(Of ChatMensajeDTO)
         Get
             Return _mensajes

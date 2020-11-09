@@ -22,13 +22,9 @@ Public Class ResponderChat
 
     'Acá le doy el comportamiento según mis entidades.
     Private Sub modalAceptar_Click(ByVal sender As Object, ByVal e As CommandEventArgs)
-        If Current.Session("accion") = "Eliminar" Then
-
-        End If
-
         'Acá tengo que hidear el modal
         ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
-
+        Response.Redirect("/ResponderChat.aspx")
     End Sub
 
     Public Sub MostrarModal(titulo As String, body As String, Optional grd As GridView = Nothing, Optional cancelar As Boolean = False)
@@ -69,15 +65,19 @@ Public Class ResponderChat
         gv_Mensajes.Visible = True
     End Sub
 
-    Protected Sub gv_Caracteristicas_RowCommand(sender As Object, e As GridViewCommandEventArgs)
+    Protected Sub gv_Chat_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles gv_Chat.RowCommand
         Dim chat As New ChatSesionDTO
         Dim id As Int16 = Integer.Parse(e.CommandArgument)
         chat = ChatBLL.ObtenerInstancia.Obtener(id)
         If e.CommandName = "Responder" Then
-            btnCancelar.Visible = True
-            btnResponder.Visible = True
-            Session("chat") = chat
-            CargarRespuestas(chat)
+            If chat.fechaFin = "1/1/1900 12:00:00 AM" Then
+                btnCancelar.Visible = True
+                btnResponder.Visible = True
+                Session("chat") = chat
+                CargarRespuestas(chat)
+            Else
+                MostrarModal("Chat finalizado", "Este chat ya fue finalizado por el cliente",,)
+            End If
         End If
     End Sub
 
@@ -95,6 +95,8 @@ Public Class ResponderChat
             Dim cliente As New ClienteDTO
             cliente = Session("cliente")
             chat = Session("chat")
+            chat.usuarioAtendio = cliente.usuario
+            ChatBLL.ObtenerInstancia.Modificar(chat)
             Dim mensaje As New ChatMensajeDTO With {
                 .mensaje = txtMensaje.Text,
                 .fecha = DateTime.Now,
@@ -110,6 +112,7 @@ Public Class ResponderChat
         }
             BitacoraBLL.ObtenerInstancia.Agregar(bitacora)
             MostrarModal("Respuesta a mensaje", "Se respondio el mensaje correctamente",,)
+
         Catch ex As Exception
             Dim cliente As New ClienteDTO
             cliente = Session("cliente")

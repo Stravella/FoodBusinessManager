@@ -45,7 +45,6 @@ Public Class ChatDAL
                 params.Add(.CrearParametro("@id", chatSesion.id))
                 params.Add(.CrearParametro("@fecha_inicio", chatSesion.fechaInicio))
                 params.Add(.CrearParametro("@id_cliente", chatSesion.cliente.id))
-                params.Add(.CrearParametro("@id_usuario_atendio", chatSesion.usuarioAtendio.id))
             End With
             AccesoDAL.ObtenerInstancia.EjecutarSP("Chat_sesion_crear", params)
         Catch ex As Exception
@@ -90,14 +89,40 @@ Public Class ChatDAL
             Next
             Return resultado
         Catch ex As Exception
-
+            Throw ex
         End Try
     End Function
+
+    Public Function ObtenerChatActivo(cliente As ClienteDTO) As ChatSesionDTO
+        Dim params As New List(Of SqlParameter)
+        Try
+            With AccesoDAL.ObtenerInstancia()
+                params.Add(.CrearParametro("@id_cliente", cliente.id))
+            End With
+            Dim chat As New ChatSesionDTO
+            For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Chat_obtenerActivo", params).Rows
+                With chat
+                    .id = row("id")
+                    .fechaInicio = row("fecha_inicio")
+                    .fechaFin = row("fecha_fin")
+                    .cliente = ClienteDAL.ObtenerInstancia.Obtener(New ClienteDTO With {.id = row("id_cliente")})
+                    .usuarioAtendio = UsuarioDAL.ObtenerInstancia.ObtenerPorId(row("id_usuario_atendio"))
+                    .mensajes = ListarPorSesion(row("id"))
+                End With
+                Exit For
+            Next
+            Return chat
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 
 #Region "Mensajes"
 
     Public Function GetNextMensajeID() As Integer
-        Return AccesoDAL.ObtenerInstancia.GetNextID("id", "Chat_mensaje")
+        Return AccesoDAL.ObtenerInstancia.GetNextID("id", "Chat_mensajes")
     End Function
     Public Sub AgregarMensaje(ByVal mensaje As ChatMensajeDTO, sesion As ChatSesionDTO)
         Try
@@ -121,7 +146,7 @@ Public Class ChatDAL
             params.Add(.CrearParametro("@id_sesion", id))
         End With
         Dim ls As New List(Of ChatMensajeDTO)
-        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Chat_mensaje_listarPorSesion").Rows
+        For Each row As DataRow In AccesoDAL.ObtenerInstancia.LeerBD("Chat_mensaje_listarPorSesion", params).Rows
             Dim mensaje As New ChatMensajeDTO With {.id = row("id"),
                                               .fecha = row("fecha"),
                                               .mensaje = row("mensaje"),

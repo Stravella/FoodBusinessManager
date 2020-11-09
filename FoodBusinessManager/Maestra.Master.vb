@@ -305,9 +305,71 @@ Public Class Maestra
         ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "myModal", "$('#myModal').modal();", True)
     End Sub
 
+
 #End Region
 
+#Region "Chat"
+    Private Sub linkChat_Click(sender As Object, e As EventArgs) Handles linkChat.Click
+        Dim panelMensaje As UpdatePanel = Me.FindControl("panelChat")
+        Dim tituloModal As Label = panelMensaje.FindControl("lblTitulo")
+        'Dim bodyModal As Label = panelMensaje.FindControl("lblTitulo")
+        grdChatMensajes.DataSource = Nothing
 
+        Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
+        Dim chat As New ChatSesionDTO
+        chat = ChatBLL.ObtenerInstancia.ObtenerChatActivo(cliente)
+        If chat.id = 0 Then 'Nuevo chat
+            chat.fechaInicio = DateTime.Now
+            chat.cliente = cliente
+            tituloModal.Text = "Nuevo chat - " & DateTime.Now
+            grdChatMensajes.DataSource = chat.mensajes
+            grdChatMensajes.DataBind()
+            btnFinalizarChat.Visible = False
+        Else
+            tituloModal.Text = "Chat iniciado el - " & chat.fechaInicio
+            grdChatMensajes.DataSource = chat.mensajes
+            grdChatMensajes.DataBind()
+            btnFinalizarChat.Visible = True
+        End If
+        Session("chat") = chat
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
+        panelMensaje.Update()
+    End Sub
+
+    Private Sub btnFinalizarChat_Click(sender As Object, e As EventArgs) Handles btnFinalizarChat.Click
+        Dim chat As ChatSesionDTO = DirectCast(Session("chat"), ChatSesionDTO)
+        chat.fechaFin = DateTime.Now
+        ChatBLL.ObtenerInstancia.Modificar(chat)
+
+        Session("chat") = Nothing
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
+    End Sub
+
+    Private Sub btnEnviarChat_Click(sender As Object, e As EventArgs) Handles btnEnviarChat.Click
+        Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
+        Dim chat As ChatSesionDTO = DirectCast(Session("chat"), ChatSesionDTO)
+        Dim mensaje As New ChatMensajeDTO With {
+            .fecha = DateTime.Now,
+            .mensaje = txtMensaje.Text,
+            .username = cliente.usuario.username
+        }
+        If chat.id = "0" Then 'Nuevo chat
+            chat.mensajes.Add(mensaje)
+            ChatBLL.ObtenerInstancia.Crear(chat)
+        Else
+            ChatBLL.ObtenerInstancia.CrearMensaje(mensaje, chat)
+        End If
+
+        Session("chat") = Nothing
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
+    End Sub
+
+    Private Sub btnCerrarModalChat_Click(sender As Object, e As EventArgs) Handles btnCerrarModalChat.Click
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
+    End Sub
+
+#End Region
 
 
 End Class

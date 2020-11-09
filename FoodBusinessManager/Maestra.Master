@@ -128,7 +128,7 @@
                                 <asp:Button ID="linkUsuario" runat="server" data-toggle="dropdown" class="btn  btn-md dropdown-toggle btn-info" CausesValidation="false" />
                                 <div class="dropdown-menu" aria-labelledby="linkUsuario">
                                     <asp:LinkButton ID="linkModificarDatos" class="nav-link" CausesValidation="false" runat="server">Modificar datos</asp:LinkButton>
-                                    <%--                                    <a class="dropdown-item" href="/ModificarDatosUsuario.aspx">Modificar datos</a>--%>
+                                    <asp:LinkButton ID="linkChat" class="nav-link" CausesValidation="false" runat="server">Chat</asp:LinkButton>
                                     <asp:LinkButton class="nav-link" ID="linkLogOut" runat="server" CausesValidation="false">  Log out <i class="fas fa-sign-out-alt"></i></asp:LinkButton>
                                 </div>
                             </li>
@@ -230,7 +230,38 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
-
+                <!-- Modal Chat-->
+                <div class="modal fade" id="modalChat" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="panelChat" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="lblTitulo" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:GridView ID="grdChatMensajes" runat="server" EmptyDataText="Este es el inicio del chat" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center">
+                                            <Columns>
+                                                <asp:BoundField DataField="id" HeaderText="ID" />
+                                                <asp:BoundField DataField="fecha" HeaderText="fecha" />
+                                                <asp:BoundField DataField="username" HeaderText="Usuario" />
+                                                <asp:BoundField DataField="mensaje" HeaderText="mensaje" />
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:TextBox ID="txtMensaje" runat="server" placeholder="Escriba su mensaje aqui..."></asp:TextBox>
+                                        <asp:Button ID="btnEnviarChat" CssClass="btn btn-success" runat="server" Text="Enviar" CausesValidation="false" />
+                                        <asp:Button ID="btnCerrarModalChat" CssClass="btn btn-danger" runat="server" Text="Cerrar" data-dismiss="modal" CausesValidation="false" />
+                                        <asp:Button ID="btnFinalizarChat" CssClass="btn btn-warning" runat="server" Text="Finalizar chat" CausesValidation="false" />
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
                 <%--Contenido--%>
                 <asp:ContentPlaceHolder ID="Contenido" runat="server">
                 </asp:ContentPlaceHolder>

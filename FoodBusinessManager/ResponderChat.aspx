@@ -35,16 +35,17 @@
                             <div class="col">
                                 <label>Mensaje</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtMensaje" runat="server" ValidationGroup="categorias" MaxLength="200" TextMode="MultiLine" Rows="2" ></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Complete este campo" ControlToValidate="txtMensaje"></asp:RequiredFieldValidator>
+                                    <asp:TextBox CssClass="form-control" ID="txtMensaje" runat="server"  MaxLength="200" TextMode="MultiLine" Rows="2" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Complete este campo" ValidationGroup="respuesta" ControlToValidate="txtMensaje"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:Button ID="btnResponder" class="btn btn-lg btn-block btn-success" runat="server" Text="responder" ValidationGroup="categorias" Visible="false" />
+                                <asp:Button ID="btnResponder" class="btn btn-lg btn-block btn-success" runat="server" Text="Responder" ValidationGroup="respuesta" Visible="false" />
                             </div>
                         </div>
+                        <hr />
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false"/>
@@ -73,10 +74,10 @@
                             <HeaderStyle CssClass="thead-dark" />
                             <Columns>
                                 <asp:BoundField DataField="id" HeaderText="ID" />
-                                <asp:BoundField DataField="cliente.razon_social" HeaderText="Cliente" />
+                                <asp:BoundField DataField="cliente.RazonSocial" HeaderText="Cliente" />
                                 <asp:BoundField DataField="usuarioAtendio.username" HeaderText="Usuario que lo atendió" />
-                                <asp:BoundField DataField="fecha_inicio" HeaderText="Fecha inicio" />
-                                <asp:BoundField DataField="fecha_fin" HeaderText="Fecha fin" />
+                                <asp:BoundField DataField="fechaInicio" HeaderText="Fecha inicio" />
+                                <asp:BoundField DataField="fechaFin" HeaderText="Fecha fin" />
                                 <asp:TemplateField HeaderText="Responder" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgResponder" ImageUrl="~/IconosSVG/reply-solid.svg" Text="Responder" runat="server" CommandName="Responder" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
