@@ -48,8 +48,8 @@
                             <div class="col-12">
                                 <label>Caracteristica</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtCaracteristica" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2" ValidationGroup="catacteristicas"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtCaracteristica"></asp:RequiredFieldValidator>
+                                    <asp:TextBox CssClass="form-control" ID="txtCaracteristica" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtCaracteristica" ValidationGroup="catacteristicas"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>

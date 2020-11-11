@@ -58,7 +58,11 @@ Public Class PostCompra
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            CargarEncuestas()
+            If Session("cliente") IsNot Nothing Then
+                CargarEncuestas()
+            Else
+                Response.Redirect("/Home.aspx")
+            End If
         End If
     End Sub
 

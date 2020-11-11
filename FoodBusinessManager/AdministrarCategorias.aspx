@@ -41,14 +41,14 @@
                             <div class="col-9">
                                 <label>Nombre</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" ValidationGroup="categorias"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
+                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtNombre" ValidationGroup="categorias"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" ValidationGroup="categorias" />
+                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" ValidationGroup="categorias"/>
                             </div>
                         </div>
                         <div class="row">

@@ -55,8 +55,8 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtMail" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="reqMail" runat="server" ErrorMessage="*" ControlToValidate="txtMail" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatMail" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ForeColor="Red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" ControlToValidate="txtMail" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="reqMail" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtMail" ForeColor="Red" ValidationGroup="usuario"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="formatMail" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ForeColor="Red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" ControlToValidate="txtMail" ValidationGroup="Usuario" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -67,8 +67,8 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="reqNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="cantNombre" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="reqNombre" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="usuario"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="cantNombre" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -77,7 +77,7 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="reqApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="reqApellido" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtApellido" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="cantApellido" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtUsuario" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="reqUsuario" runat="server" ErrorMessage="*" ControlToValidate="txtUsuario" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="reqUsuario" runat="server" ErrorMessage="* Este campo es requerido" ControlToValidate="txtUsuario" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="cantUsuario" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtUsuario" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtContraseña" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqContraseña" runat="server" ErrorMessage="*" ControlToValidate="txtContraseña" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="cantContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtContraseña" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="cantContraseña" runat="server" ErrorMessage="Formato incorrecto" Display="Dynamic" ValidationExpression="^([\S\s]{0,100})$" ControlToValidate="txtContraseña" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtDNI" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDNI" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatDNI" runat="server" ValidationExpression="[0-9]{8}" ErrorMessage="Formato invalido" ControlToValidate="txtDNI" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="formatDNI" runat="server" ValidationExpression="[0-9]{8}" ErrorMessage="Formato invalido" ControlToValidate="txtDNI" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -130,7 +130,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtCUIT" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqCUIT" runat="server" ErrorMessage="*" ControlToValidate="txtCUIT" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatCUIT" runat="server" ValidationExpression="\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" ErrorMessage="Formato invalido" ControlToValidate="txtCUIT" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="formatCUIT" runat="server" ValidationExpression="\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" ErrorMessage="Formato invalido" ControlToValidate="txtCUIT" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtRazonSocial" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtRazonSocial" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^([\S\s]{0,100})$" ErrorMessage="Formato invalido" ControlToValidate="txtRazonSocial" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^([\S\s]{0,100})$" ErrorMessage="Formato invalido" ControlToValidate="txtRazonSocial" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                 <div class="form-group">
                                     <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="Usuario"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="formatTelefono" runat="server" ErrorMessage="Formato inválido" ValidationExpression="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="Usuario"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="formatTelefono" runat="server" ErrorMessage="Formato inválido" ValidationExpression="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="usuario"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="reqLocalidad" runat="server" ErrorMessage="*" ControlToValidate="txtLocalidad" ForeColor="Red" ValidationGroup="Usuario"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="reqLocalidad" runat="server" ErrorMessage="*" ControlToValidate="txtLocalidad" ForeColor="Red" ValidationGroup="usuario"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-md-4">

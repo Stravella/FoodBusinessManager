@@ -66,8 +66,8 @@
                             <div class="col-md-9">
                                 <label>Nombre</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" placeholder="Nombre" ValidationGroup="Servicio"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtNombre" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" placeholder="Nombre" ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="Servicio"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                 <label>Precio (Mensual)</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtPrecio" runat="server" placeholder="Precio" TextMode="Number" ValidationGroup="Servicio" MaxLength="8"  min="1" max="99999" value="1" step="0.01"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecio" runat="server" ErrorMessage="Solo se aceptan valores numericos y comas" ForeColor="Red" ValidationExpression="^(\d*\,)?\d+$"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtPrecio" runat="server" ErrorMessage="Solo se aceptan 6 valores numericos enteros y 2 decimales seperados con coma" ForeColor="Red" ValidationExpression="^[0-9]\d{0,5}(\,\d{1,2})?%?$"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -84,8 +84,8 @@
                             <div class="col-12">
                                 <label>Descripcion</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2" ValidationGroup="Servicio"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtDescripcion" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Campo requerido" ControlToValidate="txtDescripcion" ForeColor="Red" ValidationGroup="Servicio"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>

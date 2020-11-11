@@ -6,9 +6,17 @@ Public Class ModificarDatosUsuario
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack() Then
-            Dim cliente As ClienteDTO = Current.Session("Cliente")
-            CargarDatos(cliente)
+        If Not IsPostBack Then
+            If Not IsPostBack() Then
+                If Not IsPostBack() Then
+                    If Session("cliente") IsNot Nothing Then
+                        Dim cliente As ClienteDTO = DirectCast(Session("cliente"), ClienteDTO)
+                        CargarDatos(cliente)
+                    Else
+                        Response.Redirect("/Home.aspx")
+                    End If
+                End If
+            End If
         End If
     End Sub
 

@@ -128,9 +128,13 @@ Public Class Pago
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            CargarCarrito()
-            CargarCliente()
-            CargarNotaCredito()
+            If Session("cliente") IsNot Nothing Then
+                CargarCarrito()
+                CargarCliente()
+                CargarNotaCredito()
+            Else
+                Response.Redirect("/Home.aspx")
+            End If
         End If
     End Sub
 

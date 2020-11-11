@@ -46,6 +46,7 @@
                                 <label>Nombre</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtNombre" runat="server" placeholder="Nombre"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtNombre" ValidationGroup="catalogo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -54,6 +55,7 @@
                                 <label>Descripcion</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtDescripcion" runat="server" placeholder="Descripcion" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtDescripcion" ValidationGroup="catalogo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -71,9 +73,9 @@
                         </div>
                         <div class="row ">
                             <div class="col">
-                                <asp:GridView ID="grdServicios" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center"  RowStyle-Height="40px">
+                                <asp:GridView ID="grdServicios" runat="server" CssClass="table table-hover table-bordered table-info" AutoGenerateColumns="false" HorizontalAlign="Center" RowStyle-Height="40px">
                                     <HeaderStyle CssClass="thead-dark" />
-                                   
+
                                     <Columns>
                                         <asp:TemplateField HeaderText="Seleccionar">
                                             <EditItemTemplate>
@@ -100,7 +102,7 @@
                                                     Text='<%# Eval("orden_catalogo") %>' Width="175px"
                                                     Visible="false"></asp:TextBox>
                                             </ItemTemplate>
-                                        </asp:TemplateField>                                       
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Editar orden" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="ImgEditar" ImageUrl="~/IconosSVG/edit-solid.svg" Text="Editar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("id") %>' Height="20px" Width="20px" CausesValidation="false" />
@@ -117,12 +119,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" />
+                                <asp:Button ID="btnAgregar" class="btn btn-lg btn-block btn-success" runat="server" Text="Agregar" ValidationGroup="catalogo" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" />
+                                <asp:Button ID="btnModificar" class="btn btn-lg btn-block btn-warning" runat="server" Text="Modificar" Visible="false" ValidationGroup="catalogo" />
                             </div>
                             <div class="col-6">
                                 <asp:Button ID="btnCancelar" class="btn btn-lg btn-block btn-danger" runat="server" Text="Cancelar" Visible="false" />

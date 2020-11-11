@@ -1,9 +1,24 @@
 ﻿Imports System.Web.HttpContext
+Imports Entidades
 Public Class PublicidadBack
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not (Page.IsPostBack) Then
-            cargarXML()
+        If Not IsPostBack Then
+            If Session("cliente") IsNot Nothing Then
+                Dim cliente As ClienteDTO = DirectCast(Session("cliente"), ClienteDTO)
+                Dim puedeUsar As Boolean = False
+                For Each permiso In cliente.usuario.perfil.Hijos
+                    If permiso.PuedeUsar(Request.Url.AbsolutePath) = True Then
+                        puedeUsar = True
+                    End If
+                Next
+                If puedeUsar = False Then
+                    Response.Redirect("/Home.aspx")
+                End If
+                cargarXML()
+            Else
+                Response.Redirect("/Home.aspx")
+            End If
         End If
     End Sub
 

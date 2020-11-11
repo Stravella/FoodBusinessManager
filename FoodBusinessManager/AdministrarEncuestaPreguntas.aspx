@@ -42,7 +42,7 @@
                                 <label>Pregunta</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtOpinion" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtOpinion" ValidationGroup="Opinion"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtOpinion" ValidationGroup="Opinion"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtVencimiento" CssClass="form-control" placeholder="Date" TextMode="Date" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtVencimiento" ValidationGroup="Opinion"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtVencimiento" ValidationGroup="Opinion"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-md-9">

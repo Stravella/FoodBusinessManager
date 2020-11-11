@@ -42,7 +42,7 @@
                                 <label>Respuesta</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="txtRespuesta" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtRespuesta" ValidationGroup="Respuesta"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtRespuesta" ValidationGroup="Respuesta"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>                       

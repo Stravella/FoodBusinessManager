@@ -35,6 +35,7 @@
                                 </label>
                                 <div class="form-group">
                                     <asp:TextBox ID="txtNombrePerfil" runat="server" CssClass="form-control" AutoPostBack="True"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="* Falta completar este campo" ForeColor="Red" ControlToValidate="txtNombrePerfil" ValidationGroup="Perfil"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <asp:Button ID="btnAgregarPerfill" runat="server" Text="Agregar Perfil" CssClass="btn btn-block btn-success" />
+                                    <asp:Button ID="btnAgregarPerfill" runat="server" Text="Agregar Perfil" CssClass="btn btn-block btn-success" ValidationGroup="Perfil" />
                                 </div>
                             </div>
                         </div>

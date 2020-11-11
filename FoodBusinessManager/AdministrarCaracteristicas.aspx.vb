@@ -10,7 +10,21 @@ Public Class AdministrarCaracteristicas
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            CargarCaracteristicas()
+            If Session("cliente") IsNot Nothing Then
+                Dim cliente As ClienteDTO = DirectCast(Session("cliente"), ClienteDTO)
+                Dim puedeUsar As Boolean = False
+                For Each permiso In cliente.usuario.perfil.Hijos
+                    If permiso.PuedeUsar(Request.Url.AbsolutePath) = True Then
+                        puedeUsar = True
+                    End If
+                Next
+                If puedeUsar = False Then
+                    Response.Redirect("/Home.aspx")
+                End If
+                CargarCaracteristicas()
+            Else
+                Response.Redirect("/Home.aspx")
+            End If
         End If
     End Sub
 
