@@ -126,11 +126,10 @@ Public Class Compra
                 cantidadItemsCarrito = cantidadItemsCarrito + serv.cantidad
             Next
 
-            'TODO: En el badge muestro el count de items en el carrito, y no las cantidades.
             Current.Session("CantidadItemsCarrito") = cantidadItemsCarrito
 
             Current.Session("Carrito") = carrito
-            CargarCarrito()
+            Response.Redirect("/Compra.aspx")
         Catch ex As Exception
             MostrarModal("Error", "Lo siento! Ocurrio un error al cargar su carrito",, True)
         End Try

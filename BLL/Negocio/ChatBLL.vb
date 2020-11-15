@@ -18,7 +18,7 @@ Public Class ChatBLL
             chat.id = ChatDAL.ObtenerInstancia.GetNextID
             ChatDAL.ObtenerInstancia.Agregar(chat)
             For Each mensaje In chat.mensajes
-                chat.id = ChatDAL.ObtenerInstancia.GetNextMensajeID
+                mensaje.id = ChatDAL.ObtenerInstancia.GetNextMensajeID
                 ChatDAL.ObtenerInstancia.AgregarMensaje(mensaje, chat)
             Next
         Catch ex As Exception

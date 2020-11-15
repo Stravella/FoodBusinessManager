@@ -333,17 +333,21 @@ Public Class Maestra
         End If
         Session("chat") = chat
 
-        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
         panelMensaje.Update()
+        CerrarModalChat()
     End Sub
 
     Private Sub btnFinalizarChat_Click(sender As Object, e As EventArgs) Handles btnFinalizarChat.Click
         Dim chat As ChatSesionDTO = DirectCast(Session("chat"), ChatSesionDTO)
         chat.fechaFin = DateTime.Now
+        If chat.usuarioAtendio Is Nothing Then
+            Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
+            chat.usuarioAtendio = cliente.usuario
+        End If
         ChatBLL.ObtenerInstancia.Modificar(chat)
 
         Session("chat") = Nothing
-        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
+        CerrarModalChat()
     End Sub
 
     Private Sub btnEnviarChat_Click(sender As Object, e As EventArgs) Handles btnEnviarChat.Click
@@ -362,10 +366,16 @@ Public Class Maestra
         End If
 
         Session("chat") = Nothing
+        CerrarModalChat()
+    End Sub
+
+    Private Sub CerrarModalChat()
+        txtMensaje.Text = ""
         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
     End Sub
 
     Private Sub btnCerrarModalChat_Click(sender As Object, e As EventArgs) Handles btnCerrarModalChat.Click
+        txtMensaje.Text = ""
         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
     End Sub
 

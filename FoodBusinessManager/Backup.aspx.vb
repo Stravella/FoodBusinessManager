@@ -19,7 +19,7 @@ Public Class Backup
         Try
             If Session("Restore") = Nothing Then
                 ScriptManager.RegisterStartupScript(Me.Master.Page, Me.Master.GetType(), "HideModal", "$('#myModal').modal('hide')", True)
-                Response.Redirect("/Backup.aspx")
+                'Response.Redirect("/Backup.aspx")
             Else
                 If Session("Restore") = True Then
                     Clear()

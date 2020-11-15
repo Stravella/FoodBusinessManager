@@ -95,7 +95,7 @@ Public Class ClienteDAL
         Try
             Dim oCliente As New ClienteDTO
             For Each clie As ClienteDTO In ListarClientes()
-                If clie.id = oCliente.id Then
+                If clie.id = cliente.id Then
                     oCliente = clie
                 End If
             Next
