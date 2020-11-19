@@ -312,7 +312,6 @@ Public Class Maestra
     Private Sub linkChat_Click(sender As Object, e As EventArgs) Handles linkChat.Click
         Dim panelMensaje As UpdatePanel = Me.FindControl("panelChat")
         Dim tituloModal As Label = panelMensaje.FindControl("lblTitulo")
-        'Dim bodyModal As Label = panelMensaje.FindControl("lblTitulo")
         grdChatMensajes.DataSource = Nothing
 
         Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
@@ -339,15 +338,17 @@ Public Class Maestra
 
     Private Sub btnFinalizarChat_Click(sender As Object, e As EventArgs) Handles btnFinalizarChat.Click
         Dim chat As ChatSesionDTO = DirectCast(Session("chat"), ChatSesionDTO)
-        chat.fechaFin = DateTime.Now
-        If chat.usuarioAtendio Is Nothing Then
-            Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
-            chat.usuarioAtendio = cliente.usuario
-        End If
-        ChatBLL.ObtenerInstancia.Modificar(chat)
+        If chat IsNot Nothing Then
+            chat.fechaFin = DateTime.Now
+            If chat.usuarioAtendio Is Nothing Then
+                Dim cliente As ClienteDTO = DirectCast(Session("Cliente"), ClienteDTO)
+                chat.usuarioAtendio = cliente.usuario
+            End If
+            ChatBLL.ObtenerInstancia.Modificar(chat)
 
-        Session("chat") = Nothing
-        CerrarModalChat()
+            Session("chat") = Nothing
+            CerrarModalChat()
+        End If
     End Sub
 
     Private Sub btnEnviarChat_Click(sender As Object, e As EventArgs) Handles btnEnviarChat.Click
@@ -362,15 +363,22 @@ Public Class Maestra
             chat.mensajes.Add(mensaje)
             ChatBLL.ObtenerInstancia.Crear(chat)
         Else
+            chat.mensajes.Add(mensaje)
             ChatBLL.ObtenerInstancia.CrearMensaje(mensaje, chat)
         End If
+        grdChatMensajes.DataSource = Nothing
+        grdChatMensajes.DataSource = chat.mensajes
+        grdChatMensajes.DataBind()
 
+        panelChat.Update()
         Session("chat") = Nothing
         CerrarModalChat()
     End Sub
 
     Private Sub CerrarModalChat()
         txtMensaje.Text = ""
+
+        'ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalChat", "$('#modalChat').modal();", True)
         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "modalChat", "$('#modalChat').modal();", True)
     End Sub
 
